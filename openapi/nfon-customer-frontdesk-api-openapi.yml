@@ -1,0 +1,825 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts Customer Frontdesk API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- name: Customer Frontdesk
+paths:
+  /tenants/{participantExternalIdentifier}/targets/frontdesk-services/{serviceNumber}/target/{targetServiceNumber}:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/FrontdeskTargetDto'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          format: int32
+          type: integer
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: targetServiceNumber
+      tags:
+      - Customer Frontdesk
+      operationId: updateTargetByTargetId
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          format: int32
+          type: integer
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: targetServiceNumber
+      tags:
+      - Customer Frontdesk
+      operationId: deleteTarget
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          format: int32
+          type: integer
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: targetServiceNumber
+      tags:
+      - Customer Frontdesk
+      operationId: getTargetByTargetId
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/frontdesk-services/{serviceNumber}/inbound-trunk-numbers:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Frontdesk
+      operationId: get_99
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                type: object
+              example:
+                links: {}
+                data:
+                - value: '123456'
+                  name: didExtension
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/InboundTrunkNumberRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Frontdesk
+      operationId: post_28
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/frontdesk-services/{serviceNumber}/target:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Frontdesk
+      operationId: getAllTargets
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+              example:
+                links:
+                - href: /api/customers/K1234/targets/services/42
+                  rel: targetService
+                data:
+                - value: sales-department
+                  name: context
+                href: /api/customers/example-id/targets/frontdesk-services/example-id/target
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/FrontdeskTargetDto'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Frontdesk
+      operationId: createFrontdeskTarget
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/frontdesk-services/{serviceNumber}:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/FrontdeskServiceRequest'
+      parameters:
+      - schema:
+          format: int32
+          type: integer
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Frontdesk
+      operationId: put_31
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+    delete:
+      parameters:
+      - schema:
+          format: int32
+          type: integer
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Frontdesk
+      operationId: delete_26
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          format: int32
+          type: integer
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Frontdesk
+      operationId: get_98
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K1234/targets/services/42/fallback
+                  rel: fallbackTarget
+                - href: /api/customers/K1234/frontdesks/1/inbound-trunk-numbers
+                  rel: inboundTrunkNumbers
+                data:
+                - value: office-hours
+                  name: context
+                - value: Welcome to our front desk. How can I help you?
+                  name: introText
+                - value: female-en-US
+                  name: voice
+                - value: Main reception desk
+                  name: description
+                - value: en
+                  name: language
+                - value: 'true'
+                  name: active
+                - value: 2026-05-25T10:15:30+0000
+                  name: notActiveSince
+                href: /api/customers/example-id/targets/frontdesk-services/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/frontdesk-services:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: boolean
+        name: active
+        description: Filter Frontdesk services by activation state. true returns services with notActiveSince null; false returns services with notActiveSince set.
+        in: query
+      tags:
+      - Customer Frontdesk
+      operationId: get_97
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/FrontdeskServiceRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Frontdesk
+      operationId: post_27
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/frontdesk-services/{serviceNumber}/inbound-trunk-numbers/{didNumber}:
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: didNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Frontdesk
+      operationId: delete_27
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: didNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Frontdesk
+      operationId: get_100
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links: {}
+                data:
+                - value: '123456'
+                  name: didExtension
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+components:
+  schemas:
+    Integer:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
+      type: object
+      description: Subscribers soft limit
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    FrontdeskTargetData:
+      properties:
+        context:
+          $ref: '#/components/schemas/String'
+      type: object
+    FrontdeskServiceLinks:
+      properties:
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+        fallbackTarget:
+          $ref: '#/components/schemas/String'
+      type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    FrontdeskServiceData:
+      properties:
+        language:
+          $ref: '#/components/schemas/String'
+        description:
+          $ref: '#/components/schemas/String'
+        active:
+          $ref: '#/components/schemas/Boolean'
+        extensionNumber:
+          $ref: '#/components/schemas/String'
+        type:
+          $ref: '#/components/schemas/String'
+        voice:
+          $ref: '#/components/schemas/String'
+        serviceNumber:
+          $ref: '#/components/schemas/Integer'
+        serviceCode:
+          $ref: '#/components/schemas/String'
+        notActiveSince:
+          $ref: '#/components/schemas/Date'
+        displayName:
+          $ref: '#/components/schemas/String'
+        context:
+          $ref: '#/components/schemas/String'
+        introText:
+          $ref: '#/components/schemas/String'
+        name:
+          $ref: '#/components/schemas/String'
+      type: object
+    FrontdeskTargetDto:
+      properties:
+        links:
+          $ref: '#/components/schemas/FrontdeskTargetLinks'
+        data:
+          $ref: '#/components/schemas/FrontdeskTargetData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    InboundTrunkNumberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/InboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    FrontdeskServiceRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/FrontdeskServiceLinks'
+        data:
+          $ref: '#/components/schemas/FrontdeskServiceData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    InboundTrunkNumberData:
+      properties:
+        didExtension:
+          example: '123456'
+          type: string
+      type: object
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    Date:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: date-time
+          type: string
+      type: object
+    FrontdeskTargetLinks:
+      properties:
+        targetService:
+          $ref: '#/components/schemas/String'
+      type: object
+    Links:
+      description: Related resource links
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
+      type: object
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

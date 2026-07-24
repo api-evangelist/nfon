@@ -1,0 +1,716 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts sites API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- x-displayName: Sites
+  description: Site management operations
+  name: sites
+paths:
+  /sites/{oldID}/replace/{newID}:
+    put:
+      summary: Replace site
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: oldID
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: newID
+      tags:
+      - sites
+      description: Replaces an old site with a new site
+      operationId: replaceSite
+      security:
+      - OAuth2:
+        - bss.license-manage
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Site not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '204':
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Site replaced
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+  /sites/{siteId}:
+    delete:
+      summary: Delete site
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: siteId
+      tags:
+      - sites
+      description: Deletes a site by Salesforce ID. The site must have no active dependencies (trunks, phones, virtual faxes, or emergency site references). Mobile sites cannot be deleted via this endpoint.
+      operationId: deleteSite
+      security:
+      - OAuth2:
+        - bss.license-manage
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Site not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '401':
+          content:
+            application/json:
+              examples:
+                missingToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: JWT missing from the Authorization header.
+                    code: authorization
+                  summary: Missing token
+                invalidToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid JWT in the Authorization header.
+                    code: authorization
+                  summary: Invalid token
+                expiredToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: There was an issue validating your authorization token.
+                    code: authorization
+                  summary: Expired token
+                accessingAnotherTenant:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: user is not allowed to perform actions in this access scope
+                    code: authorization
+                  summary: Accessing another Tenant
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Unauthorized
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '204':
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Site deleted
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+        '409':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: A resource with this identifier already exists
+                    code: conflict
+                  summary: Conflict
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Site has active dependencies
+  /sites/{id}:
+    put:
+      tags:
+      - sites
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSiteRequest'
+        required: true
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: id
+      summary: Update site
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Site not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '204':
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Site updated
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+      operationId: updateSite
+      security:
+      - OAuth2:
+        - bss.license-manage
+      description: Updates an existing site
+  /sites:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSiteRequest'
+        required: true
+      tags:
+      - sites
+      summary: Create site
+      description: Creates a new site configuration
+      operationId: createSite
+      security:
+      - OAuth2:
+        - bss.license-manage
+      responses:
+        '400':
+          content:
+            application/json:
+              examples:
+                required_name:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: name field is required
+                    code: required_name
+                  summary: Missing site name
+                required_country:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: country field is required
+                    code: required_country
+                  summary: Missing country
+                invalid_country:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: country must be a valid ISO 3166-2 code (2 characters)
+                    code: invalid_country
+                  summary: Invalid country code
+                required_salesforce_id:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: salesforce_id field is required
+                    code: required_salesforce_id
+                  summary: Missing salesforce ID
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Bad Request - Validation error
+        '409':
+          content:
+            application/json:
+              examples:
+                site_already_exists:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: site already exists
+                    code: site_already_exists
+                  summary: Site already exists
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Conflict - Site already exists
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SiteCreated'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Site created successfully
+        '401':
+          content:
+            application/json:
+              examples:
+                missingToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: JWT missing from the Authorization header.
+                    code: authorization
+                  summary: Missing token
+                invalidToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid JWT in the Authorization header.
+                    code: authorization
+                  summary: Invalid token
+                expiredToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: There was an issue validating your authorization token.
+                    code: authorization
+                  summary: Expired token
+                accessingAnotherTenant:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: user is not allowed to perform actions in this access scope
+                    code: authorization
+                  summary: Accessing another Tenant
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Unauthorized
+components:
+  schemas:
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    SiteCreated:
+      properties:
+        site_salesforce_id:
+          deprecated: true
+          type: string
+          example: a06D000000kIkHq
+          maxLength: 50
+          description: 'Deprecated: use SiteID instead.'
+        site_id:
+          type: string
+          description: BSS-provided site identifier.
+          maxLength: 50
+          example: a06D000000kIkHq
+      type: object
+      description: CreateSiteResponse represents the Create Customer Site response structure. This is named SiteCreated in the OpenAPI spec.
+    UpdateSiteRequest:
+      properties:
+        country:
+          example: DE
+          type: string
+          minLength: 2
+          maxLength: 2
+          description: ISO 3166-2 country code
+        zip:
+          type: string
+          description: ZIP code
+          maxLength: 50
+          example: '12345'
+        name:
+          type: string
+          description: Site name
+          maxLength: 100
+          example: NFON HQ
+        account_salesforce_id:
+          deprecated: true
+          type: string
+          example: a06D000000kIkHr
+          maxLength: 50
+          description: 'BSS-provided account identifier. Use account_id for new integrations. Deprecated: use AccountID instead.'
+        account_id:
+          type: string
+          description: BSS-provided account identifier (preferred over account_salesforce_id).
+          maxLength: 50
+          example: a06D000000kIkHr
+        state:
+          type: string
+          description: State
+          maxLength: 100
+          example: Berlin
+        street:
+          type: string
+          description: Street address
+          maxLength: 100
+          example: Main Street 123
+        city:
+          type: string
+          description: City
+          maxLength: 100
+          example: Berlin
+      type: object
+      required:
+      - name
+      - street
+      - zip
+      - country
+      - city
+      description: UpdateSiteRequest represents the update site request.
+    CreateSiteRequest:
+      properties:
+        salesforce_id:
+          type: string
+          deprecated: true
+          maxLength: 50
+          description: 'BSS-provided site identifier. Use site_id for new integrations. Deprecated: use SiteID instead.'
+        site_id:
+          type: string
+          maxLength: 50
+          description: BSS-provided site identifier (preferred over salesforce_id).
+        state:
+          type: string
+          maxLength: 100
+          description: State
+        street:
+          type: string
+          description: Street address
+          maxLength: 100
+          example: Main Street 123
+        city:
+          type: string
+          description: City
+          maxLength: 100
+          example: Berlin
+        country:
+          example: DE
+          type: string
+          minLength: 2
+          maxLength: 2
+          description: ISO 3166-2 country code
+        account_salesforce_id:
+          type: string
+          deprecated: true
+          maxLength: 50
+          description: 'BSS-provided account identifier. Use account_id for new integrations. Deprecated: use AccountID instead.'
+        account_id:
+          type: string
+          maxLength: 50
+          description: BSS-provided account identifier (preferred over account_salesforce_id).
+        zip:
+          type: string
+          description: ZIP code
+          maxLength: 50
+          example: '12345'
+        name:
+          type: string
+          description: Site name
+          maxLength: 100
+          example: NFON HQ
+      type: object
+      required:
+      - name
+      - street
+      - zip
+      - country
+      - city
+      description: CreateSiteRequest represents the Create Customer Site request structure.
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

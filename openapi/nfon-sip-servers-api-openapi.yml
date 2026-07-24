@@ -1,0 +1,382 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts SIP Servers API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- name: SIP Servers
+  description: Manage SIP server infrastructure
+paths:
+  /sip-servers:
+    get:
+      summary: List SIP servers
+      tags:
+      - SIP Servers
+      description: Returns a paginated list of all SIP servers
+      operationId: get_220
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Paginated list of SIP servers
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/SipServerPOSTRequest'
+      tags:
+      - SIP Servers
+      summary: Create SIP server
+      description: Creates a new SIP server
+      operationId: post_56
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '400':
+          description: Validation error (e.g. duplicate name, missing required fields)
+        '201':
+          content:
+            application/vnd.collection.next+json:
+              example:
+                href: /api/sip-servers/200
+          description: SIP server created
+  /sip-servers/{sipServerId}:
+    put:
+      tags:
+      - SIP Servers
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/SipServerPUTRequest'
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        example: 100
+        required: true
+        description: SIP server ID
+        in: path
+        name: sipServerId
+      summary: Update SIP server
+      responses:
+        '404':
+          description: SIP server not found
+        '204':
+          description: SIP server updated
+        '400':
+          description: Validation error
+      operationId: put_58
+      security:
+      - oauth2:
+        - tenant.admin
+      description: Updates an existing SIP server. Only provided fields are updated.
+    delete:
+      summary: Delete SIP server
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        example: 100
+        required: true
+        description: SIP server ID
+        in: path
+        name: sipServerId
+      tags:
+      - SIP Servers
+      description: Deletes a SIP server. Fails if the server still has assigned customers.
+      operationId: delete_58
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: SIP server not found
+        '204':
+          description: SIP server deleted
+        '400':
+          description: SIP server cannot be deleted (still in use)
+    get:
+      summary: Get SIP server
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        example: 100
+        required: true
+        description: SIP server ID
+        in: path
+        name: sipServerId
+      tags:
+      - SIP Servers
+      description: Returns details of a single SIP server
+      operationId: get_221
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              example:
+                links:
+                - href: /api/pbx-groups/Pbx1
+                  rel: pbxGroup
+                - href: /api/pbx-groups
+                  rel: availablePbxGroup
+                data:
+                - value: sipServerName
+                  name: name
+                - value: 192.168.1.1
+                  name: externalIp
+                - value: 192.168.1.2
+                  name: internalIp
+                - value: 1000
+                  name: maxSubscribers
+                - value: 500
+                  name: subscribersLimit
+                - value: Frankfurt
+                  name: location
+                - value: P01
+                  name: partition
+                - value: 4xE5504-2GHZ;4GB
+                  name: description
+                href: /api/sip-servers/100
+          description: SIP server details
+        '404':
+          description: SIP server not found
+        '403':
+          description: Insufficient permissions
+        '401':
+          description: Authentication required
+components:
+  schemas:
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    SipServerPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/SipServerPUTLinks'
+        data:
+          $ref: '#/components/schemas/SipServerPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    SipServerPOSTLinks:
+      properties:
+        pbxGroup:
+          example: /api/pbx-groups/Pbx1
+          type: string
+          description: Link to the PBX group
+      type: object
+    SipServerPUTLinks:
+      properties:
+        pbxGroup:
+          $ref: '#/components/schemas/String'
+      type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    SipServerPOSTData:
+      properties:
+        internalIp:
+          example: 10.0.0.1
+          type: string
+          description: Internal IP address
+        partition:
+          example: P01
+          type: string
+          description: Server partition identifier
+        maxSubscribers:
+          $ref: '#/components/schemas/Integer'
+        subscribersLimit:
+          example: 500
+          description: Maximum subscribers allowed (soft limit)
+          format: int32
+          type: integer
+        name:
+          example: sip-server-01
+          type: string
+          description: Unique name of the SIP server
+        location:
+          $ref: '#/components/schemas/String'
+        externalIp:
+          example: 192.168.1.1
+          type: string
+          description: External IP address
+        description:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: SIP server creation data
+    SipServerPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/SipServerPOSTLinks'
+        data:
+          $ref: '#/components/schemas/SipServerPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    Links:
+      description: Related resource links
+      type: object
+    SipServerPUTData:
+      properties:
+        internalIp:
+          $ref: '#/components/schemas/String'
+        partition:
+          $ref: '#/components/schemas/String'
+        maxSubscribers:
+          $ref: '#/components/schemas/Integer'
+        subscribersLimit:
+          $ref: '#/components/schemas/Integer'
+        name:
+          $ref: '#/components/schemas/String'
+        location:
+          $ref: '#/components/schemas/String'
+        externalIp:
+          $ref: '#/components/schemas/String'
+        description:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: SIP server update data (all fields optional)
+    Integer:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
+      type: object
+      description: Subscribers soft limit
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

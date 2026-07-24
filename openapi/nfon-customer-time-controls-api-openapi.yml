@@ -1,0 +1,570 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts Customer Time Controls API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- name: Customer Time Controls
+paths:
+  /tenants/{participantExternalIdentifier}/targets/time-control-services:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Time Controls
+      operationId: get_185
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Request'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Time Controls
+      operationId: post_50
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/time-control-services/available-destinations:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Time Controls
+      operationId: get_184
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/time-control-services/{serviceNumber}:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Request'
+      parameters:
+      - schema:
+          format: int32
+          type: integer
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Time Controls
+      operationId: put_54
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+    delete:
+      parameters:
+      - schema:
+          format: int32
+          type: integer
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Time Controls
+      operationId: delete_54
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          format: int32
+          type: integer
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Time Controls
+      operationId: get_186
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K1234/targets/services/5/destination-if-allowed
+                  rel: destinationIfAllowed
+                - href: /api/customers/K1234/targets/services/5/destination-if-denied
+                  rel: destinationIfDenied
+                - href: /api/customers/K1234/time-controls/5/inbound-trunk-numbers
+                  rel: inboundTrunkNumbers
+                - href: /api/timezones/Europe%2FBerlin
+                  rel: timezone
+                data:
+                - value: ALLOW_WITHIN_RANGE
+                  name: evaluationStrategy
+                - value: MONDAY
+                  name: fromDay
+                - value: 08:00 AM
+                  name: fromTimeOfDay
+                - value: FRIDAY
+                  name: toDay
+                - value: 06:00 PM
+                  name: toTimeOfDay
+                - value: '["Dec 25, 2025", "Jan 01, 2026"]'
+                  name: referralAllowed
+                - value: '["Dec 24, 2025"]'
+                  name: referralDenied
+                href: /api/customers/example-id/targets/time-control-services/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/time-control-services/{serviceNumber}/inbound-trunk-numbers:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Time Controls
+      operationId: get_187
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                type: object
+              example:
+                links: {}
+                data:
+                - value: '123456'
+                  name: didExtension
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/InboundTrunkNumberRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Time Controls
+      operationId: post_51
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/time-control-services/{serviceNumber}/inbound-trunk-numbers/{didNumber}:
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: didNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Time Controls
+      operationId: delete_55
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: didNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: serviceNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Time Controls
+      operationId: get_188
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links: {}
+                data:
+                - value: '123456'
+                  name: didExtension
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+components:
+  schemas:
+    Request:
+      properties:
+        links:
+          $ref: '#/components/schemas/TimeControlServiceLinks'
+        data:
+          $ref: '#/components/schemas/Data'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
+      type: object
+    TimeControlServiceLinks:
+      properties:
+        destinationIfDenied:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+        destinationIfAllowed:
+          $ref: '#/components/schemas/String'
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    Links:
+      description: Related resource links
+      type: object
+    InboundTrunkNumberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/InboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    Data:
+      properties:
+        key:
+          type: string
+          description: Metadata key.
+          example: function_key_number
+        value:
+          type: string
+          description: Metadata value.
+          example: '5'
+      type: object
+      required:
+      - key
+      - value
+      description: Data represents key-value pair for additional reference metadata.
+    InboundTrunkNumberData:
+      properties:
+        didExtension:
+          example: '123456'
+          type: string
+      type: object
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

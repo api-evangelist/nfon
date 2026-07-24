@@ -1,0 +1,2391 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts Customers API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- name: Customers
+  description: Customer management
+paths:
+  /tenants/{participantExternalIdentifier}/codec-profiles:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_26
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/default-system-integrator:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_11
+      security:
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/system-integrators/SI001
+                  rel: defaultSystemIntegrator
+                data:
+                - value: SI001 - Default System Integrator
+                  name: defaultSystemIntegrator
+                href: /api/customers/example-id/default-system-integrator
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CustomerDefaultSystemIntegratorPUTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: put_1
+      security:
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}:
+    get:
+      summary: Get customer
+      parameters:
+      - schema:
+          type: string
+        example: K0611
+        required: true
+        description: Customer external identifier
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      description: Returns customer details including options, links to operator, SIP server, and PBX group
+      operationId: get_13
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Customer details
+        '404':
+          description: Customer not found
+  /tenants/{participantExternalIdentifier}/integrations/{customerIntegrationId}:
+    put:
+      tags:
+      - Customers
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/IntegrationTenantPUTRequest'
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: customerIntegrationId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      summary: Update an integration tenant
+      responses:
+        '404':
+          description: Integration tenant not found
+        '204':
+          description: Integration tenant updated successfully
+        '400':
+          description: Validation error
+        '409':
+          description: Duplicate STANDARD integration tenant for same customer and provider
+      operationId: put_33
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      description: 'Updates an existing integration tenant. The status field can be changed. Allowed values: VALID, INVALID, PENDING. Uniqueness constraint: STANDARD integrations are limited to one per customer per provider. CUSTOM and MCP integrations have no uniqueness restriction.'
+    delete:
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: customerIntegrationId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: delete_31
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: customerIntegrationId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_107
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/integrations/{customerIntegrationId}/targets:
+    get:
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: customerIntegrationId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_108
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/IntegrationTargetPOSTRequest'
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: customerIntegrationId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: post_33
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/license-status:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_16
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/monitoring-levels:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_125
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/nmeeting-options:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_126
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/operator-details:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_14
+      security:
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/operators/O1234/pbx-groups/pbx-group-01
+                  rel: pbxGroup
+                data:
+                - value: O1234
+                  name: operator
+                - value: NFON AG
+                  name: operatorName
+                - value: SI5678
+                  name: systemIntegrator
+                - value: Partner GmbH
+                  name: systemIntegratorName
+                - value: pbx-group-01
+                  name: pbxGroupName
+                - value: sip-server-01
+                  name: sipServerName
+                href: /api/customers/example-id/operator-details
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CustomerOperatorDetailPUTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: put_2
+      security:
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/options:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_127
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/operators/O1234/rating-profiles/default
+                  rel: ratingProfile
+                - href: /api/operators/O1234/rating-profiles/available
+                  rel: availableRatingProfiles
+                - href: /api/customers/K0611/count-of-trunks
+                  rel: availableCountOfTrunks
+                - href: /api/customers/K0611/evn-modes
+                  rel: availableEvnModes
+                - href: /api/customers/K0611/contract-types
+                  rel: availableContractTypes
+                - href: /api/customers/K0611/cti-billing-modes
+                  rel: availableCtiBillingModes
+                - href: /api/customers/K0611/click-to-dial-states
+                  rel: availableClickToDialStates
+                - href: /api/customers/K0611/nmeeting-options
+                  rel: availableNmeetingOptions
+                - href: /api/timezones/Europe%2FBerlin
+                  rel: timezone
+                data:
+                - value: TRUNKS_2
+                  name: countOfTrunks
+                - value: 3
+                  name: speedDialLength
+                - value: '***'
+                  name: deviceCreationPassword
+                - value: FULL
+                  name: evnMode
+                - value: 4
+                  name: projectNumberLength
+                - value: STANDARD
+                  name: contractType
+                - value: 'OFF'
+                  name: ctiBillingMode
+                - value: ENABLED
+                  name: clickToDialState
+                - value: 'OFF'
+                  name: nmeeting
+                - value: 4
+                  name: vmPasswordLengthMin
+                - value: 8
+                  name: vmPasswordLengthMax
+                - value: 4
+                  name: operatorVmPasswordLengthMin
+                - value: 8
+                  name: operatorVmPasswordLengthMax
+                - value: UDP
+                  name: sipTransport
+                - value: false
+                  name: lockDeviceWebserver
+                - value: false
+                  name: portLock
+                - value: true
+                  name: intercomEnabled
+                - value: 'false'
+                  name: betaTester
+                - value: 'false'
+                  name: betaDeviceTester
+                - value: 'false'
+                  name: aastra31NewLayout
+                - value: 'false'
+                  name: sipCustomPort
+                - value: true
+                  name: ccbs
+                - value: false
+                  name: mediaGatewayEmergencyDialplanEnabled
+                - value: false
+                  name: nmqEnabled
+                - value: false
+                  name: vlanProvisioning
+                - value: 'false'
+                  name: acureusBilling
+                - value: 'false'
+                  name: blockedOutbound
+                - value: 'false'
+                  name: trialPeriod
+                - value: 'false'
+                  name: trialPermanent
+                - value: 'false'
+                  name: newBss
+                - value: '2024-01-15'
+                  name: blockedAt
+                - value: default
+                  name: ratingProfileName
+                - value: 'false'
+                  name: dialWithoutPrefix
+                - value: '0'
+                  name: dialPrefix
+                - value: false
+                  name: disableT38
+                - value: 'true'
+                  name: previewFeatureEnabled
+                - value: 'false'
+                  name: coachingEnabled
+                - value: de
+                  name: language
+                - value: 'true'
+                  name: voicemailTranscriptionEnabled
+                - value: 'true'
+                  name: presenceTeamsConnectorEnabled
+                - value: EMAIL
+                  name: voicemailNotificationMode
+                - value: 'false'
+                  name: callTranscriptionConsentRequired
+                - value: 'false'
+                  name: aiEssentialsEnabled
+                - value: true
+                  name: operatorTPSAvailable
+                - value: false
+                  name: operatorLdapVisible
+                - value: false
+                  name: operatorNmqEnabled
+                href: /api/customers/example-id/options
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CustomerOptionsRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: put_39
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/directcall-numbers:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_55
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CustomerDirectcallRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: post_9
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/directcall-numbers/{number}:
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: number
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: delete_10
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: number
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_56
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/emergency-sites:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_12
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/evn-modes:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_57
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+              example:
+                links: {}
+                data:
+                - value: ENABLED
+                  name: evnMode
+                href: /api/customers/example-id/evn-modes
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/feature-status:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_15
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/forward-destinations/direct-dial/{directDialNumber}:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: directDialNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: getDirectDialDetails
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json: {}
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/options/external-numbers:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/ExternalNumbersRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: put_30
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/ownVoicemail:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_17
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/available-record-start-message-recipients:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_154
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/available-recording-audio-types:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_155
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/basic-data:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_20
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CustomerBasicDataRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: put_3
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/blacklist-global-profiles:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_8
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/blacklist-global-profiles/{profileName}:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: profileName
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_9
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/blacklist-profiles:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_21
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+              example:
+                links: {}
+                data:
+                - value: Default Blacklist
+                  name: name
+                href: /api/customers/example-id/blacklist-profiles
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/call-recording:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_23
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K1234/announcements/42
+                  rel: recordStartAnnouncement
+                data:
+                - value: 'true'
+                  name: callRecordingEnabled
+                - value: MONO
+                  name: recordingAudioType
+                - value: ALL
+                  name: recordStartMessageRecipients
+                href: /api/customers/example-id/call-recording
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CustomerCallRecordingRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: put_4
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/snom-transfer:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_161
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/category:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_24
+      security:
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+              example:
+                links: {}
+                data:
+                - value: STANDARD
+                  name: category
+                href: /api/customers/example-id/category
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/click-to-dial-states:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_25
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+              example:
+                links: {}
+                data:
+                - value: 'ON'
+                  name: clickToDialState
+                href: /api/customers/example-id/click-to-dial-states
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/count-of-trunks:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_33
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+              example:
+                links: {}
+                data:
+                - value: TWO
+                  name: countOfTrunks
+                - value: 2
+                  name: numberOfDigits
+                href: /api/customers/example-id/count-of-trunks
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/cti-billing-modes:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_34
+      security:
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+              example:
+                links: {}
+                data:
+                - value: FLAT
+                  name: ctiBillingMode
+                href: /api/customers/example-id/cti-billing-modes
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/contract-information:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_6
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K1234/contracts
+                  rel: subcontracts
+                - href: /api/customers/K1234/features
+                  rel: features
+                - href: /api/customers/K1234/subscriptions
+                  rel: subscriptions
+                data:
+                - value: true
+                  name: nmqEnabled
+                href: /api/customers/example-id/contract-information
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/subscriptions:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_18
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/uacsta-protocols:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_192
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants:
+    get:
+      summary: List customers
+      tags:
+      - Customers
+      description: Returns a paginated list of customers. Supports filtering by query parameter and sorting.
+      operationId: get_10
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Paginated list of customers
+  /tenants/{participantExternalIdentifier}/integrations:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_106
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      tags:
+      - Customers
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/IntegrationTenantPOSTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      summary: Create an integration tenant
+      responses:
+        '409':
+          description: Duplicate STANDARD integration tenant for same customer and provider
+        '400':
+          description: Validation error
+        '201':
+          description: Integration tenant created successfully
+      operationId: post_32
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      description: 'Creates a new integration tenant for the customer. The status field defaults to VALID if not provided. Allowed values: VALID, INVALID, PENDING. Uniqueness constraint: STANDARD integrations are limited to one per customer per provider. CUSTOM and MCP integrations have no uniqueness restriction.'
+  /tenants/{participantExternalIdentifier}/integrations/{customerIntegrationId}/targets/{targetId}:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/IntegrationTargetPUTRequest'
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: customerIntegrationId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: targetId
+      tags:
+      - Customers
+      operationId: put_34
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+    delete:
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: customerIntegrationId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: targetId
+      tags:
+      - Customers
+      operationId: delete_32
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: customerIntegrationId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: targetId
+      tags:
+      - Customers
+      operationId: get_109
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/port-speeds:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_133
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/blacklist-profiles/{blacklistProfileId}:
+    get:
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: blacklistProfileId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_22
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/available-pbx-groups:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customers
+      operationId: get_7
+      security:
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+components:
+  schemas:
+    NoLinks:
+      type: object
+    CustomerDefaultSystemIntegratorPUTLinks:
+      properties:
+        defaultSystemIntegrator:
+          example: /api/system-integrators/SI001
+          type: string
+      type: object
+    Integer:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
+      type: object
+      description: Subscribers soft limit
+    IntegrationTenantPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/IntegrationTenantPUTLinks'
+        data:
+          $ref: '#/components/schemas/IntegrationTenantPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    IntegrationTenantPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/IntegrationTenantPOSTLinks'
+        data:
+          $ref: '#/components/schemas/IntegrationTenantPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    CustomerBasicDataRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/CustomerBasicDataPUT'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    IntegrationTenantPUTLinks:
+      properties:
+        integrationType:
+          $ref: '#/components/schemas/String'
+      type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    CustomerOptionsRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/CustomerOptionsLinks'
+        data:
+          $ref: '#/components/schemas/CustomerOptionsPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    IntegrationTargetPOSTData:
+      properties:
+        active:
+          type: boolean
+        connectionConfig:
+          $ref: '#/components/schemas/JsonNode'
+        context:
+          type: string
+      type: object
+    DirectcallData:
+      properties:
+        number:
+          example: '+4989123456'
+          type: string
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    NoData:
+      type: object
+    IntegrationTenantPOSTData:
+      properties:
+        status:
+          $ref: '#/components/schemas/Enum'
+        connectionConfig:
+          $ref: '#/components/schemas/JsonNode'
+        authConfig:
+          $ref: '#/components/schemas/JsonNode'
+        active:
+          $ref: '#/components/schemas/Boolean'
+        context:
+          $ref: '#/components/schemas/String'
+        name:
+          type: string
+      type: object
+    CustomerOptionsLinks:
+      properties:
+        availableRatingProfiles:
+          $ref: '#/components/schemas/String'
+        availableCountOfTrunks:
+          $ref: '#/components/schemas/String'
+        availableEvnModes:
+          $ref: '#/components/schemas/String'
+        availableContractTypes:
+          $ref: '#/components/schemas/String'
+        availableCtiBillingModes:
+          $ref: '#/components/schemas/String'
+        availableClickToDialStates:
+          $ref: '#/components/schemas/String'
+        availableNmeetingOptions:
+          $ref: '#/components/schemas/String'
+        ratingProfile:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+      type: object
+    ExternalNumbersHrefData:
+      properties:
+        allowed:
+          type: boolean
+      type: object
+    IntegrationTargetPUTData:
+      properties:
+        active:
+          $ref: '#/components/schemas/Boolean'
+        connectionConfig:
+          $ref: '#/components/schemas/JsonNode'
+        context:
+          $ref: '#/components/schemas/String'
+      type: object
+    IntegrationTargetPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/IntegrationTargetPOSTLinks'
+        data:
+          $ref: '#/components/schemas/IntegrationTargetPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    IntegrationTargetPOSTLinks:
+      properties:
+        target:
+          type: string
+      type: object
+    Enum:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: object
+      type: object
+      example: 'OFF'
+    CustomerOperatorDetailsPUTLinks:
+      properties:
+        pbxGroup:
+          example: /api/operators/O1234/pbx-groups/pbx-group-01
+          type: string
+      type: object
+    CustomerCallRecordingPUTLinks:
+      properties:
+        recordStartAnnouncement:
+          $ref: '#/components/schemas/String'
+      type: object
+    CustomerDirectcallRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/DirectcallData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    ExternalNumbersRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/ExternalNumbersHrefData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CustomerCallRecordingPUTData:
+      properties:
+        callRecordingEnabled:
+          $ref: '#/components/schemas/Boolean'
+        recordingAudioType:
+          $ref: '#/components/schemas/Enum'
+        recordStartMessageRecipients:
+          $ref: '#/components/schemas/Enum'
+      type: object
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    IntegrationTenantPUTData:
+      properties:
+        status:
+          $ref: '#/components/schemas/Enum'
+        connectionConfig:
+          $ref: '#/components/schemas/JsonNode'
+        authConfig:
+          $ref: '#/components/schemas/JsonNode'
+        active:
+          $ref: '#/components/schemas/Boolean'
+        context:
+          $ref: '#/components/schemas/String'
+        name:
+          $ref: '#/components/schemas/String'
+      type: object
+    CustomerOptionsPUTData:
+      properties:
+        dialWithoutPrefix:
+          $ref: '#/components/schemas/Boolean'
+        dialPrefix:
+          $ref: '#/components/schemas/String'
+        language:
+          $ref: '#/components/schemas/String'
+        callTranscriptionConsentRequired:
+          $ref: '#/components/schemas/Boolean'
+        aiEssentialsEnabled:
+          $ref: '#/components/schemas/Boolean'
+        voicemailNotificationMode:
+          $ref: '#/components/schemas/String'
+        sipTransport:
+          $ref: '#/components/schemas/Enum'
+        nmqEnabled:
+          $ref: '#/components/schemas/Boolean'
+        disableT38:
+          $ref: '#/components/schemas/Boolean'
+        previewFeatureEnabled:
+          $ref: '#/components/schemas/Boolean'
+        betaTester:
+          $ref: '#/components/schemas/Boolean'
+        betaDeviceTester:
+          $ref: '#/components/schemas/Boolean'
+        aastra31NewLayout:
+          $ref: '#/components/schemas/Boolean'
+        sipCustomPort:
+          $ref: '#/components/schemas/Boolean'
+        blockedOutbound:
+          $ref: '#/components/schemas/Boolean'
+        contractType:
+          $ref: '#/components/schemas/Enum'
+        countOfTrunks:
+          $ref: '#/components/schemas/Enum'
+        coachingEnabled:
+          $ref: '#/components/schemas/Boolean'
+        speedDialLength:
+          $ref: '#/components/schemas/Integer'
+        deviceCreationPassword:
+          $ref: '#/components/schemas/String'
+        evnMode:
+          $ref: '#/components/schemas/Enum'
+        projectNumberLength:
+          $ref: '#/components/schemas/Integer'
+        ctiBillingMode:
+          $ref: '#/components/schemas/Enum'
+        clickToDialState:
+          $ref: '#/components/schemas/Enum'
+        nmeeting:
+          $ref: '#/components/schemas/Enum'
+        vmPasswordLengthMin:
+          $ref: '#/components/schemas/Integer'
+        vmPasswordLengthMax:
+          $ref: '#/components/schemas/Integer'
+        lockDeviceWebserver:
+          $ref: '#/components/schemas/Boolean'
+        portLock:
+          $ref: '#/components/schemas/Boolean'
+        intercomEnabled:
+          $ref: '#/components/schemas/Boolean'
+        ccbs:
+          $ref: '#/components/schemas/Boolean'
+        mediaGatewayEmergencyDialplanEnabled:
+          $ref: '#/components/schemas/Boolean'
+        voicemailTranscriptionEnabled:
+          $ref: '#/components/schemas/Boolean'
+        vlanProvisioning:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    CustomerBasicDataPUT:
+      properties:
+        maxExtensionsCount:
+          $ref: '#/components/schemas/Integer'
+        mobileNumber:
+          $ref: '#/components/schemas/String'
+        passwordCurrent:
+          $ref: '#/components/schemas/String'
+        category:
+          $ref: '#/components/schemas/Enum'
+        securityQuestion:
+          $ref: '#/components/schemas/String'
+        securityAnswer:
+          $ref: '#/components/schemas/String'
+        password:
+          $ref: '#/components/schemas/String'
+        customCrAnn:
+          $ref: '#/components/schemas/Boolean'
+        supportPin:
+          $ref: '#/components/schemas/String'
+        snomTransfer:
+          $ref: '#/components/schemas/Enum'
+        email:
+          $ref: '#/components/schemas/String'
+        maxeFaxCount:
+          $ref: '#/components/schemas/Integer'
+        name:
+          $ref: '#/components/schemas/String'
+      type: object
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    JsonNode:
+      type: object
+    IntegrationTargetPUTLinks:
+      type: object
+    IntegrationTargetPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/IntegrationTargetPUTLinks'
+        data:
+          $ref: '#/components/schemas/IntegrationTargetPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    IntegrationTenantPOSTLinks:
+      properties:
+        integrationType:
+          type: string
+      type: object
+    CustomerDefaultSystemIntegratorPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/CustomerDefaultSystemIntegratorPUTLinks'
+        data:
+          $ref: '#/components/schemas/NoData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Links:
+      description: Related resource links
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    CustomerOperatorDetailPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/CustomerOperatorDetailsPUTLinks'
+        data:
+          $ref: '#/components/schemas/NoData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CustomerCallRecordingRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/CustomerCallRecordingPUTLinks'
+        data:
+          $ref: '#/components/schemas/CustomerCallRecordingPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

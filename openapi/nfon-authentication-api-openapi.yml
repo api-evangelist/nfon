@@ -1,0 +1,138 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts authentication API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- name: authentication
+  description: Everything about authentication
+paths:
+  /login:
+    post:
+      tags:
+      - authentication
+      summary: Creates a new Token with provided user credentials.
+      operationId: createToken
+      requestBody:
+        description: The Credentials to authenticate the User.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: Valid User, returning tokens.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tokens'
+        '400':
+          description: Bad Request Body.
+          content: {}
+        '401':
+          description: Invalid User-Credentials.
+          content: {}
+    put:
+      tags:
+      - authentication
+      summary: Refreshes the Token.
+      operationId: refreshAccessToken
+      responses:
+        '200':
+          description: Valid User, returns tokens.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tokens'
+        '400':
+          description: Bad Request Body.
+          content: {}
+        '401':
+          description: Invalid Tokens.
+          content: {}
+      security:
+      - refresh_token_auth: []
+  /.well-known/jwks.json:
+    get:
+      tags:
+      - authentication
+      description: Provides the public keys to validate the signing of the JWTs.
+      operationId: publicKeyWellKnown
+      responses:
+        '200':
+          description: The JWKS as JSON.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/publicKey'
+components:
+  schemas:
+    tokens:
+      type: object
+      properties:
+        access-token:
+          type: string
+          format: jwt
+        refresh-token:
+          type: string
+          format: jwt
+    publicKey:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/jwksData'
+    jwksData:
+      type: object
+      properties:
+        alg:
+          type: string
+          description: Algorithm
+          example: RS512
+        e:
+          type: string
+          description: Public exponent
+          example: AQAB
+        kid:
+          type: string
+          description: Key ID
+          example: 5813fce7f8e942128a1f324cd5d78c4b
+        kty:
+          type: string
+          description: Key Type
+          example: RSA
+        n:
+          type: string
+          description: Public modulus
+          example: 0vx7agoebGcQSuuPiLJXZptN9nndrQmbXEps2aiAFbWhM78LhWx4cbbfAAtVT86zwu1RK7aPFFxuhDR1L6tSoc_BJECPebWKRXjBZCiFV4n3oknjhMstn64tZ_2W-5JsGY4Hc5n9yBXArwl93lqt7_RN5w6Cf0h4QyQ5v-65YGjQR0_FDW2QvzqY368QQMicAtaSqzs8KJZgnYb9c7d0zgdAZHzu6qMQvRL5hajrn1n91CbOpbISD08qNLyrdkt-bFTWhAI4vMQFh6WeZu0fM4lFd2NcRwr3XPksINHaQ-G_xBniIqbw0Ls1jF44-csFCur-kEgU8awapJzKnqDKgw
+        use:
+          type: string
+          description: Public key use
+          example: sig
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

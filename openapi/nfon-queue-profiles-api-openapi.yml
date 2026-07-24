@@ -1,0 +1,1155 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts queue-profiles API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- name: queue-profiles
+paths:
+  /tenants/{tenant}/extensions/{extension}/queue-profiles:
+    get:
+      summary: Get tenant queue profiles
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: extension
+      tags:
+      - queue-profiles
+      description: Returns all queue profiles for the specified tenant and extension
+      operationId: getTenantQueueProfiles
+      security:
+      - OAuth2:
+        - tenant.admin
+        - tenant.operator
+        - tenant.system-integrator
+        - tenant.manager
+        - tenant.user
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant or extension not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '200':
+          content:
+            application/json:
+              examples:
+                tenantProfiles:
+                  value:
+                  - profile_id: 550e8400-e29b-41d4-a716-446655440000
+                    queue_service_numbers:
+                    - 100
+                    - 101
+                    visibilities:
+                    - extension: '1001'
+                      name: Support Team
+                    - extension: '1002'
+                      name: Sales Team
+                    color: '#FF5733'
+                    name: SupportQueue
+                  - profile_id: 660e8400-e29b-41d4-a716-446655440001
+                    queue_service_numbers: {}
+                    visibilities: {}
+                    color: '#00FF00'
+                    name: EmptyProfile
+                  summary: Tenant queue profiles
+              schema:
+                $ref: '#/components/schemas/QueueProfileList'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: List of queue profiles
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Payment required
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+  /tenants/{tenant}/extensions/{extension}/queue-profiles/{queueProfileId}/activate:
+    put:
+      summary: Activate queue profile
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: extension
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: queueProfileId
+      tags:
+      - queue-profiles
+      description: Activates a queue profile for the specified extension
+      operationId: activateExtensionQueueProfile
+      security:
+      - OAuth2:
+        - tenant.admin
+        - tenant.operator
+        - tenant.system-integrator
+        - tenant.manager
+        - tenant.user
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Queue profile or extension not found
+        '400':
+          content:
+            application/json:
+              examples:
+                emptyProfile:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: cannot activate an empty queue profile
+                    code: bad_request
+                  summary: Empty queue profile
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '204':
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Queue profile activated
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Payment required
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+  /tenants/{tenant}/extensions/{extension}/queue/logout:
+    put:
+      summary: Logout from all queues
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: extension
+      tags:
+      - queue-profiles
+      description: Logs out the specified extension from all queues
+      operationId: logoutFromAllQueues
+      security:
+      - OAuth2:
+        - tenant.admin
+        - tenant.operator
+        - tenant.system-integrator
+        - tenant.manager
+        - tenant.user
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Extension not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '204':
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Logged out from all queues
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Payment required
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+  /tenants/{tenant}/queue-profiles:
+    get:
+      summary: Get queue profiles
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      tags:
+      - queue-profiles
+      description: Returns all queue profiles for the specified tenant
+      operationId: getExtensionQueueProfiles
+      security:
+      - OAuth2:
+        - tenant.admin
+        - tenant.operator
+        - tenant.system-integrator
+        - tenant.manager
+        - tenant.user
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant not found
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+        '200':
+          content:
+            application/json:
+              examples:
+                extensionProfiles:
+                  value:
+                  - profile_id: 550e8400-e29b-41d4-a716-446655440000
+                    queue_service_numbers:
+                    - 100
+                    - 101
+                    color: '#FF5733'
+                    status: active
+                    name: SupportQueue
+                  - profile_id: 660e8400-e29b-41d4-a716-446655440001
+                    queue_service_numbers: {}
+                    color: '#00FF00'
+                    status: inactive
+                    name: EmptyProfile
+                  summary: Extension queue profiles
+              schema:
+                $ref: '#/components/schemas/QueueProfileList'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: List of queue profiles
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+    post:
+      tags:
+      - queue-profiles
+      requestBody:
+        content:
+          application/json:
+            examples:
+              createProfile:
+                value:
+                  queue_service_numbers:
+                  - 100
+                  - 101
+                  color: '#FF5733'
+                  visibilities:
+                  - extension: '1001'
+                    name: Support Team
+                  - extension: '1002'
+                    name: Sales Team
+                  name: SupportQueue
+                summary: Create queue profile
+            schema:
+              $ref: '#/components/schemas/QueueProfileRequest'
+        required: true
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      summary: Create queue profile
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '201':
+          content:
+            application/json:
+              examples:
+                created:
+                  value:
+                    profile_id: 550e8400-e29b-41d4-a716-446655440000
+                    queue_service_numbers:
+                    - 100
+                    - 101
+                    visibilities:
+                    - extension: '1001'
+                      name: Support Team
+                    - extension: '1002'
+                      name: Sales Team
+                    color: '#FF5733'
+                    name: SupportQueue
+                  summary: Queue profile created
+              schema:
+                $ref: '#/components/schemas/QueueProfile'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Queue profile created
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Payment required
+        '409':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: A resource with this identifier already exists
+                    code: conflict
+                  summary: Conflict
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Queue profile already exists
+      operationId: createTenantQueueProfile
+      security:
+      - OAuth2:
+        - tenant.admin
+        - tenant.operator
+        - tenant.system-integrator
+        - tenant.manager
+      description: Creates a new queue profile for the specified tenant
+  /tenants/{tenant}/queue-profiles/{queueProfileId}:
+    delete:
+      summary: Delete queue profile
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: queueProfileId
+      tags:
+      - queue-profiles
+      description: Deletes a queue profile for the specified tenant
+      operationId: deleteTenantQueueProfile
+      security:
+      - OAuth2:
+        - tenant.admin
+        - tenant.operator
+        - tenant.system-integrator
+        - tenant.manager
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Queue profile not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '204':
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Queue profile deleted
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Payment required
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+    patch:
+      tags:
+      - queue-profiles
+      requestBody:
+        content:
+          application/json:
+            examples:
+              updateProfile:
+                value:
+                  queue_service_numbers:
+                  - 200
+                  - 201
+                  color: '#00FF00'
+                  visibilities:
+                  - extension: '2001'
+                    name: Support Team
+                  name: UpdatedQueue
+                summary: Update queue profile
+            schema:
+              $ref: '#/components/schemas/QueueProfilePatchRequest'
+        required: true
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: queueProfileId
+      summary: Update queue profile
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Queue profile not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '200':
+          content:
+            application/json:
+              examples:
+                updated:
+                  value:
+                    profile_id: 550e8400-e29b-41d4-a716-446655440000
+                    queue_service_numbers:
+                    - 200
+                    - 201
+                    visibilities:
+                    - extension: '2001'
+                      name: Support Team
+                    color: '#00FF00'
+                    name: UpdatedQueue
+                  summary: Queue profile updated
+              schema:
+                $ref: '#/components/schemas/QueueProfile'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Queue profile updated
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Payment required
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+      operationId: updateTenantQueueProfile
+      security:
+      - OAuth2:
+        - tenant.admin
+        - tenant.operator
+        - tenant.system-integrator
+        - tenant.manager
+      description: Updates an existing queue profile for the specified tenant
+components:
+  schemas:
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
+    Visibility:
+      properties:
+        extension:
+          type: string
+          minLength: 1
+          maxLength: 50
+          description: Extension associated with this visibility (1-50 characters)
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Name of the visibility entry (1-255 characters)
+      type: object
+      required:
+      - name
+      - extension
+      description: Visibility represents a single visibility entry with name and extension.
+    QueueProfilePatchRequest:
+      properties:
+        queue_service_numbers:
+          type: array
+          items:
+            type: string
+          description: QueueServiceNumbers is the list of queue service numbers (optional, if empty all queues are removed)
+        color:
+          type: string
+          pattern: ^#[0-9A-Fa-f]{6}$
+          description: Color in hex format (e.g., \"#FF5733\", optional)
+          example: '#FF0000'
+        visibilities:
+          $ref: '#/components/schemas/Visibilities'
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Name of the queue profile (1-255 characters, optional)
+      type: object
+      description: QueueProfilePatchRequest represents a partial update request. All fields are optional, but at least one must be provided.
+    QueueProfile:
+      properties:
+        profile_id:
+          type: string
+          description: Unique identifier of the queue profile.
+        queue_service_numbers:
+          type: array
+          items:
+            type: string
+          description: Array of queue service numbers associated with this profile.
+        visibilities:
+          $ref: '#/components/schemas/Visibilities'
+        color:
+          type: string
+          description: Hex color code for the queue profile.
+          example: '#FF0000'
+        name:
+          type: string
+          maxLength: 255
+          description: Display name of the queue profile.
+      type: object
+      description: QueueProfileResponse represents the response when creating/updating a queue profile. This is named QueueProfile in the OpenAPI spec.
+    QueueProfileRequest:
+      properties:
+        queue_service_numbers:
+          type: array
+          items:
+            type: string
+          description: QueueServiceNumbers is the list of queue service numbers (optional, if empty the profile has no queues)
+        color:
+          type: string
+          pattern: ^#[0-9A-Fa-f]{6}$
+          description: Color in hex format (e.g., \"#FF5733\")
+          example: '#FF0000'
+        visibilities:
+          $ref: '#/components/schemas/Visibilities'
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Name of the queue profile (1-255 characters)
+      type: object
+      required:
+      - name
+      - color
+      description: QueueProfilesRequest represents the request body for creating a queue profile. Name and Color are required. Visibilities and QueueServiceNumbers are optional.
+    QueueProfileList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GetQueueProfilesExtensionResponse'
+      description: QueueProfileList is a list of queue profiles.
+    GetQueueProfilesExtensionResponse:
+      properties:
+        profile_id:
+          type: string
+          description: ProfileId Unique identifier of the queue profile.
+        queue_service_numbers:
+          type: array
+          items:
+            type: string
+          description: Array of queue service numbers associated with this profile.
+        color:
+          type: string
+          description: Hex color code for the queue profile.
+          example: '#FF0000'
+        status:
+          $ref: '#/components/schemas/Status'
+        name:
+          type: string
+          description: Display name of the queue profile.
+      type: object
+      description: GetQueueProfilesExtensionResponse represents extension queue profiles response.
+    Status:
+      type: string
+      description: Status represents an active/inactive status.
+    Visibilities:
+      type: array
+      items:
+        $ref: '#/components/schemas/Visibility'
+      description: Visibilities is a list of visibility entries.
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

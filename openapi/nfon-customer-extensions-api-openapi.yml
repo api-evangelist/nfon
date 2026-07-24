@@ -1,0 +1,3654 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts Customer Extensions API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- name: Customer Extensions
+paths:
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Extensions
+      operationId: get_66
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                type: object
+              example:
+                links:
+                - href: /api/sip-servers?_pageSize=20&_offset=0
+                  rel: first
+                data:
+                - value: 'true'
+                  name: accessCentralPhoneBook
+                - value: '5'
+                  name: autodialTimeout
+                - value: 'false'
+                  name: intercomEnabled
+                - value: '3'
+                  name: numberguessingLength
+                - value: 'true'
+                  name: callWaitingIndication
+                - value: 'false'
+                  name: replicateAgent
+                - value: NETWORK
+                  name: clirEnabled
+                - value: DE
+                  name: language
+                - value: 'true'
+                  name: ncontrolEnabled
+                - value: 'false'
+                  name: ccbs
+                - value: 'false'
+                  name: phoneBookHide
+                - value: '10'
+                  name: timeoutAfterSipTransfer
+                - value: Sales
+                  name: costCenter
+                - value: 'false'
+                  name: abandonOtherSoftphones
+                - value: 'ON'
+                  name: clickToDialState
+                - value: NORMAL
+                  name: mediaGatewayEmergencyDialplanPriority
+                - value: 'OFF'
+                  name: recordingMode
+                - value: '0'
+                  name: dialPrefix
+                - value: 'false'
+                  name: nMeeting
+                - value: 'false'
+                  name: useTps
+                - value: 'false'
+                  name: nhospitalityRoom
+                - value: NONE
+                  name: ctiInfo
+                - value: 'false'
+                  name: isCoach
+                - value: 'false'
+                  name: isCoachee
+                - value: 'false'
+                  name: isFraudBlocked
+                - value: 'false'
+                  name: authorizeExternalByPin
+                href: /api/customers/example-id/targets/phone-extensions
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/PhoneExtensionPOSTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Extensions
+      operationId: post_15
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/available-internal-outgoings:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_64
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/call-forwards:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_78
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K1234/extensions/100/call-forwards/references/DEFAULT
+                  rel: defaultCallForward
+                - href: /api/customers/K1234/extensions/100/call-forwards/references/NOT_AVAILABLE
+                  rel: notAvailableCallForward
+                - href: /api/customers/K1234/extensions/100/call-forwards/references/BUSY
+                  rel: busyCallForward
+                - href: /api/customers/K1234/extensions/100/call-forwards/references/NOT_REGISTERED
+                  rel: notRegisteredCallForward
+                - href: /api/customers/K1234/extensions/100/call-forwards/references/PARALLEL_RING
+                  rel: parallelRingCallForward
+                data:
+                - value: Voicemail
+                  name: defaultCallForwardName
+                - value: Voicemail
+                  name: notAvailableCallForwardName
+                - value: No Action
+                  name: busyCallForwardName
+                - value: No Action
+                  name: notRegisteredCallForwardName
+                - value: No Action
+                  name: parallelRingCallForwardName
+                - value: 30
+                  name: callForwardTimeout
+                - value: EXTENSION
+                  name: signaledNumber
+                - value: true
+                  name: externalNumbersEnabled
+                href: /api/customers/example-id/targets/phone-extensions/example-id/call-forwards
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/PhoneExtensionCallForwardsPUTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: put_24
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-globals:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_70
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K1234/extensions/100/call-forwards/globals/references/PARALLEL_RING
+                  rel: parallelRingCallForward
+                data:
+                - value: EXTENSION
+                  name: signaledNumber
+                - value: true
+                  name: externalNumbersEnabled
+                - value: Voicemail
+                  name: parallelRingCallForwardName
+                href: /api/customers/example-id/targets/phone-extensions/example-id/callforward-globals
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CallForwardGlobalsPUTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: put_18
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-globals/{type}:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: type
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_71
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CallForwardGlobalsReferenceRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: type
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: put_19
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-globals/{type}/available:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: type
+      tags:
+      - Customer Extensions
+      operationId: getAvailable_1
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  ? /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-profiles/{profileNumber}/rules
+  : get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: profileNumber
+      tags:
+      - Customer Extensions
+      operationId: get_74
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CallForwardRulesPOSTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: profileNumber
+      tags:
+      - Customer Extensions
+      operationId: post_18
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  ? /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-profiles/{profileNumber}/rules/{sourceId}/{type}/available
+  : get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: sourceId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: profileNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: type
+      tags:
+      - Customer Extensions
+      operationId: getAvailable_2
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/devices:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_60
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/PhoneExtensionDevicesPOSTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: post_13
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/function-keys/available-targets:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_80
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/function-keys/{keyNumber}:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/FunctionKeyPUTRequest'
+      parameters:
+      - schema:
+          format: int32
+          type: integer
+        required: true
+        in: path
+        name: keyNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: put_25
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+    delete:
+      parameters:
+      - schema:
+          format: int32
+          type: integer
+        required: true
+        in: path
+        name: keyNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: delete_19
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          format: int32
+          type: integer
+        required: true
+        in: path
+        name: keyNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_82
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K1234/targets/100
+                  rel: target
+                data:
+                - value: 1
+                  name: keyNumber
+                - value: BLF
+                  name: type
+                - value: John Doe
+                  name: displayName
+                - value: '*71*200#'
+                  name: functionCode
+                href: /api/customers/example-id/targets/phone-extensions/example-id/function-keys/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/inbound-trunk-numbers:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_68
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                type: object
+              example:
+                links: {}
+                data:
+                - value: '123456'
+                  name: didExtension
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/InboundTrunkNumberRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: post_16
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/function-keys/available-targets:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Extensions
+      operationId: get_79
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/PhoneExtensionPUTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Extensions
+      operationId: put_17
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Extensions
+      operationId: delete_15
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Extensions
+      operationId: get_67
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K0001/blacklist-profiles/1
+                  rel: blacklistProfile
+                - href: /api/customers/K0001/customer-contracts/a1B2c3D4
+                  rel: customerContract
+                - href: /api/customers/K0001/targets/phone-extensions/200
+                  rel: internalOutgoing
+                - href: /api/customers/K0001/trunks/01
+                  rel: preferredOutboundTrunk
+                - href: /api/customers/K0001/sites/a1B2c3D4
+                  rel: emergencySite
+                - href: /api/customers/K0001/targets/phone-extensions/available-cti-info/NONE
+                  rel: ctiInfo
+                - href: /api/time-zones/Europe.Berlin
+                  rel: timezone
+                - href: /api/customers/K0001/voice-recording-profiles/1
+                  rel: voiceRecordingProfile
+                data:
+                - value: 'true'
+                  name: accessCentralPhoneBook
+                - value: '5'
+                  name: autodialTimeout
+                - value: 'false'
+                  name: intercomEnabled
+                - value: '3'
+                  name: numberguessingLength
+                - value: 'true'
+                  name: callWaitingIndication
+                - value: 'false'
+                  name: replicateAgent
+                - value: NETWORK
+                  name: clirEnabled
+                - value: DE
+                  name: language
+                - value: 'true'
+                  name: ncontrolEnabled
+                - value: 'false'
+                  name: ccbs
+                - value: 'false'
+                  name: phoneBookHide
+                - value: '10'
+                  name: timeoutAfterSipTransfer
+                - value: Sales
+                  name: costCenter
+                - value: 'false'
+                  name: abandonOtherSoftphones
+                - value: 'ON'
+                  name: clickToDialState
+                - value: NORMAL
+                  name: mediaGatewayEmergencyDialplanPriority
+                - value: 'OFF'
+                  name: recordingMode
+                - value: '0'
+                  name: dialPrefix
+                - value: 'false'
+                  name: nMeeting
+                - value: 'false'
+                  name: useTps
+                - value: 'false'
+                  name: nhospitalityRoom
+                - value: NONE
+                  name: ctiInfo
+                - value: 'false'
+                  name: isCoach
+                - value: 'false'
+                  name: isCoachee
+                - value: 'false'
+                  name: isFraudBlocked
+                - value: 'false'
+                  name: authorizeExternalByPin
+                href: /api/customers/example-id/targets/phone-extensions/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  ? /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/outbound-trunk-numbers/available-trunks
+  : get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Extensions
+      operationId: getAvailableTrunks
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                type: object
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  ? /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-profiles/{profileNumber}/rules/{sourceId}
+  : put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CallForwardRulePUTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: sourceId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: profileNumber
+      tags:
+      - Customer Extensions
+      operationId: put_21
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: sourceId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: profileNumber
+      tags:
+      - Customer Extensions
+      operationId: delete_18
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: sourceId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: profileNumber
+      tags:
+      - Customer Extensions
+      operationId: get_75
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K1234/extensions/100/call-forwards/profiles/0/rules/ANY/references/SOURCE
+                  rel: source
+                - href: /api/customers/K1234/extensions/100/call-forwards/profiles/0/rules/ANY/references/UNCONDITIONAL
+                  rel: unconditionalCallForward
+                - href: /api/customers/K1234/extensions/100/call-forwards/profiles/0/rules/ANY/references/NOT_AVAILABLE
+                  rel: notAvailableCallForward
+                - href: /api/customers/K1234/extensions/100/call-forwards/profiles/0/rules/ANY/references/NOT_REGISTERED
+                  rel: notRegisteredCallForward
+                - href: /api/customers/K1234/extensions/100/call-forwards/profiles/0/rules/ANY/references/BUSY
+                  rel: busyCallForward
+                data:
+                - value: ANY
+                  name: sourceName
+                - value: Voicemail
+                  name: unconditionalCallForwardName
+                - value: true
+                  name: unconditionalCallForwardActive
+                - value: Voicemail
+                  name: busyCallForwardName
+                - value: false
+                  name: busyCallForwardActive
+                - value: No Action
+                  name: notRegisteredCallForwardName
+                - value: false
+                  name: notRegisteredCallForwardActive
+                - value: Voicemail
+                  name: notAvailableCallForwardName
+                - value: true
+                  name: notAvailableCallForwardActive
+                - value: 30
+                  name: callForwardTimeout
+                href: /api/customers/example-id/targets/phone-extensions/example-id/callforward-profiles/example-id/rules/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/voice-mail:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_87
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K1234/extensions/100/voicemail/announcements
+                  rel: announcements
+                - href: /api/customers/K1234/extensions/100/voicemail/announcements/NAME
+                  rel: name
+                - href: /api/customers/K1234/extensions/100/voicemail/announcements/BUSY
+                  rel: busy
+                - href: /api/customers/K1234/extensions/100/voicemail/announcements/UNAVAILABLE
+                  rel: unavailable
+                - href: /api/customers/K1234/extensions/100/voicemail/announcements/TEMPORARY
+                  rel: temporary
+                data:
+                - value: '***'
+                  name: password
+                - value: 'true'
+                  name: announceCID
+                - value: 'true'
+                  name: announceDateTime
+                - value: user@example.com
+                  name: voicemailEmail
+                - value: 'true'
+                  name: sendEmail
+                - value: 'false'
+                  name: deleteAfterSending
+                - value: 'true'
+                  name: voicemailTranscriptionEnabled
+                href: /api/customers/example-id/targets/phone-extensions/example-id/voice-mail
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/VoicemailRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: put_26
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/voice-mail/announcements:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_86
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{specification}/available:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: specification
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Extensions
+      operationId: get_65
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/call-forwards/{type}/available:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: type
+      tags:
+      - Customer Extensions
+      operationId: getAvailable
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-profiles:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_72
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      tags:
+      - Customer Extensions
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CallForwardProfilesPOSTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      summary: Create a callforward profile
+      responses:
+        '400':
+          description: Creation not permitted (e.g. maximum profile count reached, invalid or duplicate profile number, invalid or duplicate profile name, or deactivation attempt)
+        '201':
+          description: Profile created successfully
+      operationId: post_17
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      description: Creates a new callforward profile for a phone extension. A maximum of 10 profiles per extension is allowed. Profile number must be in the range 0-9 and must be unique within the extension. Profile name must be unique within the extension. The name 'Default' is reserved for profile 0 and cannot be used for other profiles. A new profile cannot be created with active=false.
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/available-cti-info:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Extensions
+      operationId: get_62
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/available-devices:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Extensions
+      operationId: get_58
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/inbound-trunk-numbers/{didNumber}:
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: didNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: delete_16
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: didNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_69
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links: {}
+                data:
+                - value: '123456'
+                  name: didExtension
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/lync:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_83
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+              example:
+                links: {}
+                data:
+                - value: '100'
+                  name: extensionNumber
+                - value: +49 89 123456
+                  name: inboundNumber
+                - value: Munich Office
+                  name: lync
+                href: /api/customers/example-id/targets/phone-extensions/example-id/lync
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/LyncOptionRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: post_20
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/lync/{lyncOptionId}:
+    delete:
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: lyncOptionId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: delete_20
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: lyncOptionId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_84
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links: {}
+                data:
+                - value: '100'
+                  name: extensionNumber
+                - value: +49 89 123456
+                  name: inboundNumber
+                - value: Munich Office
+                  name: lync
+                href: /api/customers/example-id/targets/phone-extensions/example-id/lync/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/outbound-trunk-numbers:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Extensions
+      operationId: getOutboundTrunkNumbersWithPage
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                type: object
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/OutboundTrunkNumberRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Extensions
+      operationId: postOutboundTrunkNumbers
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  ? /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/outbound-trunk-numbers/{outboundTrunkNumberId}
+  : delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: outboundTrunkNumberId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Extensions
+      operationId: deleteOutboundTrunkNumber
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: outboundTrunkNumberId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Extensions
+      operationId: getOutboundTrunkNumbers
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/skills:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_85
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                type: object
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/PhoneExtensionSkillCollectionRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: post_21
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/skills/login-status:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_92
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/LoginStatusRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: put_28
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  ? /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/voice-mail/announcements/{announcementType}
+  : post:
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                audiofile:
+                  format: byte
+                  type: string
+              type: object
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: announcementType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: post_22
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: announcementType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: delete_21
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: announcementType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: getContent_1
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            audio/x-wav: {}
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/available-internal-outgoings:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Extensions
+      operationId: get_5
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/available-cti-info/{ctiInfoName}:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: ctiInfoName
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Extensions
+      operationId: get_63
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/function-keys:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_81
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/FunctionKeyPOSTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: post_19
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/call-forwards/{type}:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: type
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_77
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CallForwardRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: type
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: put_23
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/devices/{uniqueIdentifier}:
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: uniqueIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: delete_13
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+  ? /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-profiles/{profileNumber}/rules/{sourceId}/{type}
+  : get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: type
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: sourceId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: profileNumber
+      tags:
+      - Customer Extensions
+      operationId: get_76
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CallForwardGlobalsReferenceRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: type
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: sourceId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: profileNumber
+      tags:
+      - Customer Extensions
+      operationId: put_22
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-profiles/{profileNumber}:
+    put:
+      tags:
+      - Customer Extensions
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CallForwardProfilePUTRequest'
+      parameters:
+      - schema:
+          format: int32
+          type: integer
+        required: true
+        in: path
+        name: profileNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      summary: Update a callforward profile
+      responses:
+        '404':
+          description: Profile not found
+        '204':
+          description: Profile updated successfully (or no-op if values unchanged)
+        '400':
+          description: Update not permitted (e.g. modifying the default profile's name or number, setting a profile number to 0, using a duplicate name/number, or deactivating a profile)
+      operationId: put_20
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      description: 'Updates the callforward profile of a phone extension. The default profile (profileNumber=0) cannot be modified: its name and number are immutable. However, the API is resilient to idempotent requests — sending the current unchanged values for the default profile will succeed with 204 (no-op). Any attempt to actually change the default profile''s name or number will be rejected with 400.'
+    delete:
+      summary: Delete a callforward profile
+      parameters:
+      - schema:
+          format: int32
+          type: integer
+        required: true
+        in: path
+        name: profileNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      description: Deletes a callforward profile of a phone extension. The default profile (profileNumber=0) cannot be deleted. An active profile cannot be deleted — deactivate it first by activating another profile.
+      operationId: delete_17
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Profile not found
+        '204':
+          description: Profile deleted successfully
+        '400':
+          description: Deletion not permitted (default profile or currently active profile)
+    get:
+      parameters:
+      - schema:
+          format: int32
+          type: integer
+        required: true
+        in: path
+        name: profileNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Extensions
+      operationId: get_73
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links: {}
+                data:
+                - value: 1
+                  name: profileNumber
+                - value: Business Hours
+                  name: profileName
+                - value: true
+                  name: active
+                - value: false
+                  name: immutable
+                href: /api/customers/example-id/targets/phone-extensions/example-id/callforward-profiles/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+components:
+  schemas:
+    CallForwardGlobalsReferenceLinks:
+      properties:
+        current:
+          $ref: '#/components/schemas/String'
+        available:
+          $ref: '#/components/schemas/String'
+      type: object
+    LoginStatusData:
+      type: object
+    NoLinks:
+      type: object
+    OutboundTrunkNumberData:
+      type: object
+    PhoneExtensionCallForwardsPUTData:
+      properties:
+        callForwardTimeout:
+          $ref: '#/components/schemas/Integer'
+        signaledNumber:
+          $ref: '#/components/schemas/Enum'
+        externalNumbersEnabled:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    CallForwardProfilesPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/CallForwardProfilesPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    FunctionKeyPUTLinks:
+      properties:
+        target:
+          $ref: '#/components/schemas/String'
+      type: object
+    Integer:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
+      type: object
+      description: Subscribers soft limit
+    FunctionKeyPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/FunctionKeyPUTLinks'
+        data:
+          $ref: '#/components/schemas/FunctionKeyPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CFRulesPOSTLinks:
+      properties:
+        unconditionalCallForward:
+          $ref: '#/components/schemas/String'
+        notAvailableCallForward:
+          $ref: '#/components/schemas/String'
+        source:
+          type: string
+        busyCallForward:
+          $ref: '#/components/schemas/String'
+        notRegisteredCallForward:
+          $ref: '#/components/schemas/String'
+      type: object
+    CallForwardProfilesPOSTData:
+      properties:
+        profileName:
+          $ref: '#/components/schemas/String'
+        active:
+          $ref: '#/components/schemas/Boolean'
+        profileNumber:
+          $ref: '#/components/schemas/Integer'
+      type: object
+    CallForwardGlobalsReferenceData:
+      properties:
+        type:
+          $ref: '#/components/schemas/String'
+        extensionNumber:
+          $ref: '#/components/schemas/String'
+        name:
+          $ref: '#/components/schemas/String'
+      type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    PhoneExtensionPOSTData:
+      properties:
+        useTps:
+          $ref: '#/components/schemas/Boolean'
+        nhospitalityRoom:
+          $ref: '#/components/schemas/Boolean'
+        dialPrefix:
+          $ref: '#/components/schemas/String'
+        language:
+          $ref: '#/components/schemas/String'
+        isCoachee:
+          $ref: '#/components/schemas/Boolean'
+        isFraudBlocked:
+          $ref: '#/components/schemas/Boolean'
+        authorizeExternalByPin:
+          $ref: '#/components/schemas/Boolean'
+        ccbs:
+          $ref: '#/components/schemas/Boolean'
+        isCoach:
+          $ref: '#/components/schemas/Boolean'
+        ctiInfo:
+          $ref: '#/components/schemas/String'
+        accessCentralPhoneBook:
+          $ref: '#/components/schemas/Boolean'
+        autodialTimeout:
+          $ref: '#/components/schemas/Integer'
+        clickToDialState:
+          $ref: '#/components/schemas/Enum'
+        callWaitingIndication:
+          $ref: '#/components/schemas/Boolean'
+        replicateAgent:
+          $ref: '#/components/schemas/Boolean'
+        clirEnabled:
+          $ref: '#/components/schemas/String'
+        numberguessingLength:
+          $ref: '#/components/schemas/Integer'
+        ncontrolEnabled:
+          $ref: '#/components/schemas/Boolean'
+        phoneBookHide:
+          $ref: '#/components/schemas/Boolean'
+        timeoutAfterSipTransfer:
+          $ref: '#/components/schemas/Integer'
+        costCenter:
+          $ref: '#/components/schemas/String'
+        intercomEnabled:
+          $ref: '#/components/schemas/Boolean'
+        abandonOtherSoftphones:
+          $ref: '#/components/schemas/Boolean'
+        mediaGatewayEmergencyDialplanPriority:
+          $ref: '#/components/schemas/Enum'
+        recordingMode:
+          $ref: '#/components/schemas/String'
+        nMeeting:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    CallForwardGlobalsPUTData:
+      properties:
+        externalNumbersEnabled:
+          $ref: '#/components/schemas/Boolean'
+        signaledNumber:
+          $ref: '#/components/schemas/Enum'
+      type: object
+    PhoneExtensionDevicesPOSTLinks:
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    VoicemailData:
+      properties:
+        sendEmail:
+          $ref: '#/components/schemas/Boolean'
+        deleteAfterSending:
+          $ref: '#/components/schemas/Boolean'
+        type:
+          $ref: '#/components/schemas/String'
+        voicemailTranscriptionEnabled:
+          $ref: '#/components/schemas/Boolean'
+        active:
+          $ref: '#/components/schemas/Boolean'
+        extensionNumber:
+          $ref: '#/components/schemas/String'
+        voicemailEmail:
+          $ref: '#/components/schemas/String'
+        password:
+          $ref: '#/components/schemas/String'
+        serviceNumber:
+          $ref: '#/components/schemas/Integer'
+        serviceCode:
+          $ref: '#/components/schemas/String'
+        notActiveSince:
+          $ref: '#/components/schemas/Date'
+        displayName:
+          $ref: '#/components/schemas/String'
+        announceCID:
+          $ref: '#/components/schemas/Boolean'
+        announceDateTime:
+          $ref: '#/components/schemas/Boolean'
+        name:
+          $ref: '#/components/schemas/String'
+      type: object
+    PhoneExtensionLinks:
+      properties:
+        voiceRecordingProfile:
+          $ref: '#/components/schemas/String'
+        preferredOutboundTrunk:
+          $ref: '#/components/schemas/String'
+        emergencySite:
+          $ref: '#/components/schemas/String'
+        blacklistProfile:
+          $ref: '#/components/schemas/String'
+        ctiInfo:
+          $ref: '#/components/schemas/String'
+        customerContract:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+        internalOutgoing:
+          $ref: '#/components/schemas/String'
+      type: object
+    FunctionKeyPOSTData:
+      properties:
+        keyNumber:
+          format: int32
+          type: integer
+        functionCode:
+          $ref: '#/components/schemas/String'
+        displayName:
+          $ref: '#/components/schemas/String'
+        type:
+          type: string
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    PhoneExtensionCallForwardData:
+      properties:
+        type:
+          $ref: '#/components/schemas/String'
+        extensionNumber:
+          $ref: '#/components/schemas/String'
+        name:
+          $ref: '#/components/schemas/String'
+      type: object
+    CallForwardProfilePUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/CallForwardProfilePUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NoData:
+      type: object
+    PhoneExtensionPUTData:
+      properties:
+        useTps:
+          $ref: '#/components/schemas/Boolean'
+        nhospitalityRoom:
+          $ref: '#/components/schemas/Boolean'
+        dialPrefix:
+          $ref: '#/components/schemas/String'
+        language:
+          $ref: '#/components/schemas/String'
+        isCoachee:
+          $ref: '#/components/schemas/Boolean'
+        isFraudBlocked:
+          $ref: '#/components/schemas/Boolean'
+        authorizeExternalByPin:
+          $ref: '#/components/schemas/Boolean'
+        ccbs:
+          $ref: '#/components/schemas/Boolean'
+        isCoach:
+          $ref: '#/components/schemas/Boolean'
+        ctiInfo:
+          $ref: '#/components/schemas/String'
+        accessCentralPhoneBook:
+          $ref: '#/components/schemas/Boolean'
+        autodialTimeout:
+          $ref: '#/components/schemas/Integer'
+        clickToDialState:
+          $ref: '#/components/schemas/Enum'
+        callWaitingIndication:
+          $ref: '#/components/schemas/Boolean'
+        replicateAgent:
+          $ref: '#/components/schemas/Boolean'
+        clirEnabled:
+          $ref: '#/components/schemas/String'
+        numberguessingLength:
+          $ref: '#/components/schemas/Integer'
+        ncontrolEnabled:
+          $ref: '#/components/schemas/Boolean'
+        phoneBookHide:
+          $ref: '#/components/schemas/Boolean'
+        timeoutAfterSipTransfer:
+          $ref: '#/components/schemas/Integer'
+        costCenter:
+          $ref: '#/components/schemas/String'
+        intercomEnabled:
+          $ref: '#/components/schemas/Boolean'
+        abandonOtherSoftphones:
+          $ref: '#/components/schemas/Boolean'
+        mediaGatewayEmergencyDialplanPriority:
+          $ref: '#/components/schemas/Enum'
+        recordingMode:
+          $ref: '#/components/schemas/String'
+        nMeeting:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    PhoneExtensionSkillCollectionData:
+      properties:
+        enabled:
+          $ref: '#/components/schemas/Boolean'
+        skillLevel:
+          $ref: '#/components/schemas/Integer'
+        skillServiceNumber:
+          $ref: '#/components/schemas/Integer'
+        skillDisplayName:
+          $ref: '#/components/schemas/String'
+      type: object
+    FunctionKeyPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/FunctionKeyPOSTLinks'
+        data:
+          $ref: '#/components/schemas/FunctionKeyPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    FunctionKeyPOSTLinks:
+      properties:
+        target:
+          $ref: '#/components/schemas/String'
+      type: object
+    InboundTrunkNumberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/InboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CallForwardRulePUTData:
+      properties:
+        unconditionalCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        busyCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        callForwardTimeout:
+          $ref: '#/components/schemas/Integer'
+        notAvailableCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        notRegisteredCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    OutboundTrunkNumberLinks:
+      type: object
+    PhoneExtensionPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/PhoneExtensionLinks'
+        data:
+          $ref: '#/components/schemas/PhoneExtensionPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CallForwardGlobalsPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/CallForwardGlobalsPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    PhoneExtensionPUTLinks:
+      properties:
+        voiceRecordingProfile:
+          $ref: '#/components/schemas/String'
+        preferredOutboundTrunk:
+          $ref: '#/components/schemas/String'
+        emergencySite:
+          $ref: '#/components/schemas/String'
+        blacklistProfile:
+          $ref: '#/components/schemas/String'
+        ctiInfo:
+          $ref: '#/components/schemas/String'
+        customerContract:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+        internalOutgoing:
+          $ref: '#/components/schemas/String'
+      type: object
+    Enum:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: object
+      type: object
+      example: 'OFF'
+    PhoneExtensionSkillCollectionRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/PhoneExtensionSkillCollectionLinks'
+        data:
+          $ref: '#/components/schemas/PhoneExtensionSkillCollectionData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    PhoneExtensionCallForwardsPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/PhoneExtensionCallForwardsPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CallForwardRulesPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/CFRulesPOSTLinks'
+        data:
+          $ref: '#/components/schemas/CFRulesPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    LyncOptionLinks:
+      properties:
+        deviceType:
+          $ref: '#/components/schemas/String'
+        inboundTrunkNumber:
+          type: string
+        lyncSite:
+          type: string
+      type: object
+    CallForwardProfilePUTData:
+      properties:
+        profileName:
+          $ref: '#/components/schemas/String'
+        active:
+          $ref: '#/components/schemas/Boolean'
+        profileNumber:
+          $ref: '#/components/schemas/Integer'
+      type: object
+    CFRulesPOSTData:
+      properties:
+        unconditionalCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        busyCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        callForwardTimeout:
+          $ref: '#/components/schemas/Integer'
+        notAvailableCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        notRegisteredCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    FunctionKeyPUTData:
+      properties:
+        functionCode:
+          $ref: '#/components/schemas/String'
+        displayName:
+          $ref: '#/components/schemas/String'
+        type:
+          example: BLF
+          type: string
+      type: object
+    InboundTrunkNumberData:
+      properties:
+        didExtension:
+          example: '123456'
+          type: string
+      type: object
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    PhoneExtensionPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/PhoneExtensionPUTLinks'
+        data:
+          $ref: '#/components/schemas/PhoneExtensionPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    LoginStatusRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          $ref: '#/components/schemas/LoginStatusData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    PhoneExtensionDevicesPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/PhoneExtensionDevicesPOSTLinks'
+        data:
+          $ref: '#/components/schemas/NoData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    PhoneExtensionSkillCollectionLinks:
+      properties:
+        skillService:
+          $ref: '#/components/schemas/String'
+      type: object
+    LyncOptionRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/LyncOptionLinks'
+        data:
+          $ref: '#/components/schemas/NoData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Date:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: date-time
+          type: string
+      type: object
+    CallForwardGlobalsReferenceRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/CallForwardGlobalsReferenceLinks'
+        data:
+          $ref: '#/components/schemas/CallForwardGlobalsReferenceData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    OutboundTrunkNumberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/OutboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/OutboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CallForwardRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/PhoneExtensionCallForwardLinks'
+        data:
+          $ref: '#/components/schemas/PhoneExtensionCallForwardData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CallForwardRulePUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/CallForwardRulePUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Links:
+      description: Related resource links
+      type: object
+    VoicemailRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/VoicemailData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    PhoneExtensionCallForwardLinks:
+      properties:
+        current:
+          $ref: '#/components/schemas/String'
+        available:
+          $ref: '#/components/schemas/String'
+      type: object
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
+      type: object
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

@@ -1,0 +1,633 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts trunks API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- x-displayName: Trunks
+  description: Trunk management operations
+  name: trunks
+paths:
+  /tenants/{tenant}/trunks/{trunkId}:
+    delete:
+      summary: Delete tenant trunk
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: trunkId
+      tags:
+      - trunks
+      description: Deletes a trunk for a tenant
+      operationId: deleteTenantTrunk
+      security:
+      - OAuth2:
+        - bss.license-manage
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Trunk not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '204':
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Trunk deleted
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+    put:
+      tags:
+      - trunks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTenantTrunkRequest'
+        required: true
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: trunkId
+      summary: Update tenant trunk
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Trunk not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '204':
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Trunk updated
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+      operationId: updateTenantTrunk
+      security:
+      - OAuth2:
+        - bss.license-manage
+      description: Updates an existing trunk for a tenant
+  /tenants/{tenant}/trunks:
+    post:
+      tags:
+      - trunks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenantTrunkRequest'
+        required: true
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      summary: Create tenant trunk
+      responses:
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+        '400':
+          content:
+            application/json:
+              examples:
+                country_code:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: country_code must be a number greater than 0 and have a length <= 255
+                    code: invalid_country_code
+                  summary: Invalid country code
+                required_trunk_salesforce_id:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: trunk_salesforce_id is required
+                    code: required_trunk_salesforce_id
+                  summary: Missing trunk salesforce ID
+                invalid_carrier_name:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: carrier_name must have a length <= 100
+                    code: invalid_carrier_name
+                  summary: Invalid carrier name
+                trunk_already_exists:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: trunk already exists
+                    code: trunk_already_exists
+                  summary: Trunk already exists
+                invalid_inbound_outbound_calls:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: inbound_calls_enabled and outbound_calls_enabled can not both be set to false
+                    code: invalid_inbound_outbound_calls_enabled
+                  summary: Both inbound and outbound disabled
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Bad Request - Validation error
+        '401':
+          content:
+            application/json:
+              examples:
+                missingToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: JWT missing from the Authorization header.
+                    code: authorization
+                  summary: Missing token
+                invalidToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid JWT in the Authorization header.
+                    code: authorization
+                  summary: Invalid token
+                expiredToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: There was an issue validating your authorization token.
+                    code: authorization
+                  summary: Expired token
+                accessingAnotherTenant:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: user is not allowed to perform actions in this access scope
+                    code: authorization
+                  summary: Accessing another Tenant
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Unauthorized
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '422':
+          content:
+            application/json:
+              examples:
+                trunk_limit_exceeded:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The number of trunks exceeds the maximum allowed limit of 10
+                    code: unprocessable_entity
+                  summary: Trunk limit exceeded
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Unprocessable Entity
+        '403':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: User does not have permission to perform this operation
+                    code: forbidden
+                  summary: Forbidden
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Forbidden
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrunkResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Trunk created
+      operationId: createTenantTrunk
+      security:
+      - OAuth2:
+        - bss.license-manage
+      description: Creates a new trunk for a tenant
+components:
+  schemas:
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    TrunkResponse:
+      properties:
+        trunk_salesforce_id:
+          deprecated: true
+          type: string
+          example: a06D000000kIkHs
+          maxLength: 50
+          description: 'Deprecated: use TrunkID instead.'
+        trunk_id:
+          type: string
+          description: BSS-provided trunk identifier.
+          maxLength: 50
+          example: a06D000000kIkHs
+      type: object
+      description: TrunkResponse represents the configure Trunk response structure.
+    BaseNumber:
+      properties:
+        extension:
+          type: string
+          maxLength: 255
+          description: Extension (deprecated, ignored for trunk base numbers)
+        country_code:
+          type: string
+          description: ISO country code (1-3 digits, no leading zeros)
+          maxLength: 255
+          example: '49'
+        national_destination_code:
+          type: string
+          description: National destination code
+          maxLength: 255
+          example: '30'
+        pilot:
+          type: string
+          description: Pilot number
+          maxLength: 255
+          example: '12345'
+      type: object
+      required:
+      - country_code
+      - national_destination_code
+      - pilot
+      description: BaseNumberCreateTrunkRequest represents base number for trunk creation. This is named BaseNumber in the OpenAPI spec.
+    CreateTenantTrunkRequest:
+      properties:
+        drop_extension:
+          type: string
+          example: '186'
+        number_block_end:
+          type: integer
+          description: Specifies the concluding number for a block of numbers allocated within the trunk configuration
+          format: int64
+          example: '60'
+        inbound_calls_enabled:
+          type: boolean
+          description: Inbound calls configuration. true = active inbound capability and provisioned, false = provisioned but disabled, null/omitted = not provisioned, no inbound capability.
+          example: 'true'
+        number_block_start:
+          minimum: 0
+          example: '0'
+          type: integer
+          format: int64
+          description: Designates the starting number for a block of numbers allocated within the trunk configuration
+        trunk_salesforce_id:
+          deprecated: true
+          type: string
+          example: a06D000000kIkHs
+          maxLength: 50
+          description: 'BSS-provided trunk identifier. Use trunk_id for new integrations. Deprecated: use TrunkID instead.'
+        outbound_calls_enabled:
+          type: boolean
+          description: Activates the capability to initiate outbound calls through the configured trunk
+          example: 'true'
+        pilot_reachable:
+          type: boolean
+          description: Configures the accessibility of the pilot associated with the designated number
+          example: 'false'
+        trunk_number:
+          maximum: 9
+          minimum: 0
+          example: '1'
+          type: integer
+          format: int64
+          description: Specifies the value to directly assign the number, bypassing automatic number generation
+        shorten_on_zero:
+          type: boolean
+          description: Enables truncation of leading zeros in number formatting within the trunk configuration
+          example: 'false'
+        site_id:
+          type: string
+          description: BSS-provided site identifier (preferred over site_salesforce_id).
+          maxLength: 50
+          example: a06D000000kIkHq
+        softswitch:
+          type: string
+          description: Softswitch identifier
+          maxLength: 16
+          example: BTNGN1
+        base_number:
+          $ref: '#/components/schemas/BaseNumber'
+        site_salesforce_id:
+          deprecated: true
+          type: string
+          example: a06D000000kIkHq
+          maxLength: 50
+          description: 'BSS-provided site identifier. Use site_id for new integrations. Deprecated: use SiteID instead.'
+        carrier_name:
+          type: string
+          maxLength: 100
+          example: Deutsche Telekom
+        trunk_id:
+          type: string
+          description: BSS-provided trunk identifier (preferred over trunk_salesforce_id).
+          maxLength: 50
+          example: a06D000000kIkHs
+      type: object
+      required:
+      - base_number
+      - carrier_name
+      - shorten_on_zero
+      - softswitch
+      description: CreateTenantTrunkRequest represents the request to create a trunk for a tenant. The tenant identifier is provided in the URL path /tenants/{tenant}/trunks.
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
+    UpdateTenantTrunkRequest:
+      properties:
+        softswitch:
+          type: string
+          maxLength: 16
+          example: BTNGN1
+        shorten_on_zero:
+          type: boolean
+          example: 'false'
+        inbound_calls_enabled:
+          type: boolean
+          example: 'true'
+        site_id:
+          type: string
+          description: BSS-provided site identifier (preferred over site_salesforce_id).
+          maxLength: 50
+          example: a06D000000kIkHq
+        site_salesforce_id:
+          deprecated: true
+          type: string
+          example: a06D000000kIkHq
+          maxLength: 50
+          description: 'BSS-provided site identifier. Use site_id for new integrations. Deprecated: use SiteID instead.'
+        outbound_calls_enabled:
+          type: boolean
+          example: 'true'
+        carrier_name:
+          type: string
+          maxLength: 100
+          example: Deutsche Telekom
+        pilot_reachable:
+          type: boolean
+          example: 'false'
+      type: object
+      required:
+      - carrier_name
+      - pilot_reachable
+      - inbound_calls_enabled
+      - outbound_calls_enabled
+      - shorten_on_zero
+      - softswitch
+      description: UpdateTenantTrunkRequest represents the request to update a trunk for a tenant. The tenant identifier is provided in the URL path /tenants/{tenant}/trunks/{trunkSalesforceID}.
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

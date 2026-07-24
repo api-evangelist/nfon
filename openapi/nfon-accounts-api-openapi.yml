@@ -1,0 +1,435 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- name: Accounts
+paths:
+  /accounts/{accountSalesForceId}/sites/{siteSalesforceId}:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: siteSalesforceId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: accountSalesForceId
+      tags:
+      - Accounts
+      operationId: get_2
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links: {}
+                data:
+                - value: Berlin Office
+                  name: name
+                - value: Friedrichstraße 100
+                  name: street
+                - value: '10117'
+                  name: zip
+                - value: Berlin
+                  name: city
+                - value: Berlin
+                  name: state
+                - value: DE
+                  name: country
+                - value: '030'
+                  name: azc
+                - value: '30'
+                  name: ndc
+                href: /api/accounts/example-id/sites/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/UpdateAccountSiteRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: siteSalesforceId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: accountSalesForceId
+      tags:
+      - Accounts
+      operationId: put
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  /accounts:
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/NewAccountRequest'
+      tags:
+      - Accounts
+      summary: Create account
+      operationId: post
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '400':
+          description: Validation error
+        '201':
+          description: Account created
+  /accounts/{accountSalesForceId}:
+    get:
+      summary: Get account
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: Account SalesForce ID
+        name: accountSalesForceId
+      tags:
+      - Accounts
+      operationId: get
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links: {}
+                data:
+                - value: SF-001234
+                  name: salesForceId
+                href: /api/accounts/example-id
+          description: Account found
+        '404':
+          description: Not found
+  /accounts/{accountSalesForceId}/sites:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: accountSalesForceId
+      tags:
+      - Accounts
+      operationId: get_1
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+              example:
+                links:
+                - href: /api/accounts/SF-001234/sites/SF-005678
+                  rel: siteA
+                - href: /api/accounts/SF-001234/sites/SF-009012
+                  rel: siteB
+                data:
+                - value: SF-001234
+                  name: salesForceId
+                - value: Berlin Office
+                  name: name
+                - value: Friedrichstraße 100
+                  name: street
+                - value: '10117'
+                  name: zip
+                - value: Berlin
+                  name: city
+                - value: DE
+                  name: country
+                - value: Berlin
+                  name: state
+                - value: '030'
+                  name: azc
+                - value: '30'
+                  name: ndc
+                href: /api/accounts/example-id/sites
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/NewAccountSiteRequestJson'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: accountSalesForceId
+      tags:
+      - Accounts
+      operationId: post_1
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+components:
+  schemas:
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    NoLinks:
+      type: object
+    NewAccountRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/NewAccountData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    UpdateAccountSiteRequestLinks:
+      properties:
+        siteB:
+          $ref: '#/components/schemas/String'
+        siteA:
+          $ref: '#/components/schemas/String'
+      type: object
+    UpdateAccountSiteRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/UpdateAccountSiteRequestLinks'
+        data:
+          $ref: '#/components/schemas/UpdateAccountSiteRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NewAccountSiteRequestJson:
+      properties:
+        links:
+          $ref: '#/components/schemas/NewAccountSiteLinks'
+        data:
+          $ref: '#/components/schemas/NewAccountSiteData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    UpdateAccountSiteRequestData:
+      properties:
+        country:
+          $ref: '#/components/schemas/String'
+        zip:
+          $ref: '#/components/schemas/String'
+        street:
+          $ref: '#/components/schemas/String'
+        ndc:
+          $ref: '#/components/schemas/String'
+        state:
+          $ref: '#/components/schemas/String'
+        city:
+          $ref: '#/components/schemas/String'
+        azc:
+          $ref: '#/components/schemas/String'
+        name:
+          $ref: '#/components/schemas/String'
+      type: object
+    NewAccountData:
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    Links:
+      description: Related resource links
+      type: object
+    NewAccountSiteLinks:
+      properties:
+        siteB:
+          $ref: '#/components/schemas/String'
+        siteA:
+          $ref: '#/components/schemas/String'
+      type: object
+    NewAccountSiteData:
+      properties:
+        ndc:
+          $ref: '#/components/schemas/String'
+        state:
+          $ref: '#/components/schemas/String'
+        street:
+          example: Friedrichstraße 100
+          type: string
+        city:
+          example: Berlin
+          type: string
+        country:
+          example: DE
+          type: string
+        zip:
+          example: '10117'
+          type: string
+        salesForceId:
+          example: SF-001234
+          type: string
+        azc:
+          $ref: '#/components/schemas/String'
+        name:
+          example: Berlin Office
+          type: string
+      type: object
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

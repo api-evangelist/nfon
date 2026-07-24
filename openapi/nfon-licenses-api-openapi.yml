@@ -1,0 +1,1707 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts licenses API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- x-displayName: Licenses
+  description: Unified license management operations
+  name: licenses
+paths:
+  /tenants/{tenant}/users/{userid}/licenses:
+    get:
+      summary: Get licenses assigned to the authenticated user
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: userid
+      tags:
+      - licenses
+      description: Returns all licenses assigned to the specified user. The userid must match the authenticated user's identity from the bearer token.
+      operationId: getUserLicenses
+      security:
+      - OAuth2:
+        - tenant.admin
+        - tenant.operator
+        - tenant.system-integrator
+        - tenant.manager
+        - tenant.user
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant or user not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request parameters
+        '401':
+          content:
+            application/json:
+              examples:
+                missingToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: JWT missing from the Authorization header.
+                    code: authorization
+                  summary: Missing token
+                invalidToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid JWT in the Authorization header.
+                    code: authorization
+                  summary: Invalid token
+                expiredToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: There was an issue validating your authorization token.
+                    code: authorization
+                  summary: Expired token
+                accessingAnotherTenant:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: user is not allowed to perform actions in this access scope
+                    code: authorization
+                  summary: Accessing another Tenant
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Unauthorized
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseDetails'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Licenses assigned to the user
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '403':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: User does not have permission to perform this operation
+                    code: forbidden
+                  summary: Forbidden
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Forbidden - userid does not match authenticated user
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+  /license-types:
+    get:
+      summary: Get all available license types
+      parameters:
+      - schema:
+          type: boolean
+        required: false
+        in: query
+        description: ''
+        name: metadata
+      tags:
+      - licenses
+      operationId: getLicenseTypes
+      description: Returns metadata for all available license types including their properties and constraints
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                metadata:
+                  value:
+                  - assignment_requires_extension: true
+                    assignment_requires_user: true
+                    type: MOBILITY_PER_USER
+                    is_package: false
+                    name: Mobility Per User
+                    description: Mobile access for individual users with extension assignment
+                  - assignment_requires_extension: false
+                    assignment_requires_user: false
+                    type: CONFERENCE_UNLIMITED_PER_CONTRACT
+                    is_package: false
+                    name: Conference Unlimited
+                    description: Unlimited conferencing access for the entire contract
+                  - assignment_requires_extension: true
+                    assignment_requires_user: false
+                    type: FAX_PER_EXTENSION
+                    is_package: false
+                    name: Fax Per Extension
+                    description: Fax capability assigned to a specific extension
+                  summary: Metadata format (with metadata=true)
+                simple:
+                  value:
+                  - BASIC_CTI_UNLIMITED_PER_CONTRACT
+                  - CLIENT_MIA_PER_USER
+                  - CONFERENCE_PER_SERVICE
+                  - CONFERENCE_UNLIMITED_PER_CONTRACT
+                  - FAX_UNLIMITED_PER_CONTRACT
+                  - QUEUE_UNLIMITED_PER_CONTRACT
+                  - TIMECONTROL_UNLIMITED_PER_CONTRACT
+                  - MOBILITY_PER_USER
+                  - UNITE_CTI_PER_USER
+                  - EXTENSION
+                  - GROUP_UNLIMITED_PER_CONTRACT
+                  - IVR_UNLIMITED_PER_CONTRACT
+                  - MEETING_PER_CONTRACT
+                  - MOBILITY_UNLIMITED_PER_CONTRACT
+                  - NEORECORDING_BASIC_PER_EXTENSION
+                  - NEORECORDING_ADVANCED_PER_EXTENSION
+                  - GENESYS_BYOC_PER_CONTRACT
+                  - FAX_PER_EXTENSION
+                  - FAX_UNLIMITED_PER_USER
+                  - PACKAGE_CLOUD_PBX_2025_S
+                  - PACKAGE_CLOUD_PBX_2025_M
+                  - PACKAGE_CLOUD_PBX_2025_L
+                  - PACKAGE_CLOUD_PBX_2025_XL
+                  summary: Simple format (default)
+              schema:
+                $ref: '#/components/schemas/LicenseTypeMetadata'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: List of license types
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request parameters
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+  /tenants/{tenant}/licenses:
+    post:
+      tags:
+      - licenses
+      requestBody:
+        content:
+          application/json:
+            examples:
+              nested_package:
+                value:
+                - children:
+                  - type: FAX_PER_EXTENSION
+                  - type: EXTENSION
+                  type: PACKAGE_CLOUD_PBX_2025_M
+                - type: FAX_PER_EXTENSION
+                summary: Create package with children (nested)
+              simple_licenses:
+                value:
+                - type: MOBILITY_PER_USER
+                - license_id: 7a23e4f1-840d-4917-c32g-32f0ff71c57c
+                  type: FAX_PER_EXTENSION
+                summary: Simple standalone licenses
+            schema:
+              $ref: '#/components/schemas/LicenseCreationRequest'
+        required: true
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      - schema:
+          type: boolean
+        required: false
+        in: query
+        description: ''
+        name: flatten
+      summary: Create licenses for a tenant
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Not found
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '401':
+          content:
+            application/json:
+              examples:
+                missingToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: JWT missing from the Authorization header.
+                    code: authorization
+                  summary: Missing token
+                invalidToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid JWT in the Authorization header.
+                    code: authorization
+                  summary: Invalid token
+                expiredToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: There was an issue validating your authorization token.
+                    code: authorization
+                  summary: Expired token
+                accessingAnotherTenant:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: user is not allowed to perform actions in this access scope
+                    code: authorization
+                  summary: Accessing another Tenant
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Unauthorized
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '409':
+          content:
+            application/json:
+              examples:
+                duplicate_license_id:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: License with this ID already exists
+                    code: conflict
+                  summary: Duplicate license ID
+                tenant_wide_license_exists:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: License can only exist once per tenant
+                    code: conflict
+                  summary: Tenant-wide license already exists
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Conflict - License already exists
+        '403':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: User does not have permission to perform this operation
+                    code: forbidden
+                  summary: Forbidden
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Forbidden
+        '201':
+          content:
+            application/json:
+              examples:
+                flat_format:
+                  value:
+                    licenses:
+                    - license_id: a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+                      type: PACKAGE_CLOUD_PBX_2025_M
+                    - license_id: c2d3e4f5-a6b7-5c8d-9e0f-1a2b3c4d5e6f
+                      child_of: a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+                      type: FAX_PER_EXTENSION
+                    - license_id: f6e5d4c3-b2a1-4b7a-9c8d-5e4f3a2b1c0d
+                      child_of: a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+                      type: EXTENSION
+                    created: 3
+                  summary: Flat format (flatten=true)
+                nested_format_default:
+                  value:
+                    licenses:
+                    - license_id: a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+                      children:
+                      - license_id: c2d3e4f5-a6b7-5c8d-9e0f-1a2b3c4d5e6f
+                        type: FAX_PER_EXTENSION
+                      - license_id: f6e5d4c3-b2a1-4b7a-9c8d-5e4f3a2b1c0d
+                        type: EXTENSION
+                      type: PACKAGE_CLOUD_PBX_2025_M
+                    created: 3
+                  summary: Nested format (flatten=false)
+              schema:
+                $ref: '#/components/schemas/LicenseCreationResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Licenses created successfully
+      operationId: createTenantLicenses
+      security:
+      - OAuth2:
+        - bss.license-manage
+      description: Creates one or more licenses for the specified tenant
+    delete:
+      summary: Delete licenses for a tenant
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      - schema:
+          type: string
+        required: true
+        in: query
+        description: ''
+        name: license_id
+      tags:
+      - licenses
+      description: Deletes one or more licenses for the specified tenant
+      operationId: deleteTenantLicenses
+      security:
+      - OAuth2:
+        - bss.license-manage
+      responses:
+        '207':
+          content:
+            application/json:
+              examples:
+                partial:
+                  value:
+                    total: 3
+                    failed: 1
+                    succeeded: 2
+                    results:
+                    - license_id: 377586d5-001c-4bcf-9155-4f507559240b
+                      status: success
+                    - license_id: 488697e6-112d-5ccf-a266-5f608b82361c
+                      status: success
+                    - license_id: 2a456b78-def9-4321-abcd-ef1234567890
+                      status: error
+                      error:
+                        message: Cannot delete license that is currently assigned to a user. Unassign the license first.
+                        code: license_assigned
+                  summary: Some failed
+              schema:
+                $ref: '#/components/schemas/LicenseDeletionResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Multi-Status - Some deletions succeeded some failed
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+        '200':
+          content:
+            application/json:
+              examples:
+                success:
+                  value:
+                    total: 2
+                    failed: 0
+                    succeeded: 2
+                    results:
+                    - license_id: 377586d5-001c-4bcf-9155-4f507559240b
+                      status: success
+                    - license_id: 488697e6-112d-5ccf-a266-5f608b82361c
+                      status: success
+                  summary: All deleted
+              schema:
+                $ref: '#/components/schemas/LicenseDeletionResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: All licenses deleted successfully
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+    get:
+      summary: Retrieve licenses for a tenant
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      - schema:
+          type: string
+        required: false
+        in: query
+        description: ''
+        name: user_id
+      - schema:
+          type: string
+        required: false
+        in: query
+        description: ''
+        name: license_id
+      - schema:
+          type: string
+        required: false
+        in: query
+        description: ''
+        name: type
+      - schema:
+          type: string
+        required: false
+        in: query
+        description: ''
+        name: extension
+      - schema:
+          type: boolean
+        required: false
+        in: query
+        description: ''
+        name: flatten
+      tags:
+      - licenses
+      description: 'Returns detailed license information for a tenant, including packages with their children.
+
+        Can be filtered by user_id, license_id, type, and/or extension. Filters can be combined.
+
+
+        **Filtering:**
+
+        - `license_id`, `type`, and `extension` support comma-separated values for multiple filters
+
+        - `user_id` accepts a single UUID only
+
+
+        **Response modes:**
+
+        - `flatten=false` (default): Nested structure - packages have children in a ''children'' array
+
+        - `flatten=true`: Flat structure - all licenses at top level with ''child_of'' references'
+      operationId: getTenantLicenses
+      security:
+      - OAuth2:
+        - tenant.admin
+        - tenant.operator
+        - tenant.system-integrator
+        - tenant.manager
+        - bss.license-manage
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                nested_with_package:
+                  value:
+                  - license_id: a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+                    type: PACKAGE_CLOUD_PBX_2025_M
+                    children:
+                    - extension: '409'
+                      user_id: d2897036-9eb0-4ff3-9c4f-ef387de24a7c
+                      license_id: c2d3e4f5-a6b7-5c8d-9e0f-1a2b3c4d5e6f
+                      type: FAX_PER_EXTENSION
+                    - license_id: f6e5d4c3-b2a1-4b7a-9c8d-5e4f3a2b1c0d
+                      type: EXTENSION
+                    bss_note: Munich office order (Sep 2025)
+                  - extension: '410'
+                    user_id: a4440613-af08-648d-bf3f-9f9gga98ed65
+                    license_id: 377586d5-001c-4bcf-9155-4f507559240b
+                    type: MOBILITY_PER_USER
+                  summary: Nested format with package (flatten=false)
+                flat_with_package:
+                  value:
+                  - license_id: a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+                    type: PACKAGE_CLOUD_PBX_2025_M
+                    bss_note: Munich office order (Sep 2025)
+                  - child_of: a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+                    type: FAX_PER_EXTENSION
+                    extension: '409'
+                    user_id: d2897036-9eb0-4ff3-9c4f-ef387de24a7c
+                    license_id: c2d3e4f5-a6b7-5c8d-9e0f-1a2b3c4d5e6f
+                  - license_id: f6e5d4c3-b2a1-4b7a-9c8d-5e4f3a2b1c0d
+                    child_of: a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d
+                    type: EXTENSION
+                  - extension: '410'
+                    user_id: a4440613-af08-648d-bf3f-9f9gga98ed65
+                    license_id: 377586d5-001c-4bcf-9155-4f507559240b
+                    type: MOBILITY_PER_USER
+                  summary: Flat format with package (flatten=true)
+              schema:
+                $ref: '#/components/schemas/LicenseDetails'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: List of licenses
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant not found
+  /tenants/{tenant}/licenses/assign:
+    post:
+      tags:
+      - licenses
+      requestBody:
+        content:
+          application/json:
+            examples:
+              standard-licenses:
+                value:
+                - extension: '409'
+                  user_id: e1119380-f895-415a-9c67-ad8b71675cf0
+                  type: MOBILITY_PER_USER
+                - user_id: a4440613-af08-648d-bf3f-9f9gga98ed65
+                  type: CLIENT_MIA_PER_USER
+                - extension: '410'
+                  type: FAX_PER_EXTENSION
+                summary: Standard license assignment
+              package-assignment:
+                value:
+                - license_id: 53763b37-ac19-4209-b3dc-50ca41d98913
+                  user_id: e1119380-f895-415a-9c67-ad8b71675cf0
+                  type: PACKAGE_CLOUD_PBX_2025_M
+                summary: Package license assignment
+            schema:
+              $ref: '#/components/schemas/LicenseOperations'
+        required: true
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      summary: Assign licenses to users or extensions
+      responses:
+        '207':
+          content:
+            application/json:
+              examples:
+                partial-failure:
+                  value:
+                    total: 3
+                    failed: 1
+                    succeeded: 2
+                    results:
+                    - status: success
+                      type: MOBILITY_PER_USER
+                      extension: '409'
+                      user_id: e1119380-f895-415a-9c67-ad8b71675cf0
+                      license_id: 53763b37-ac19-4209-b3dc-50ca41d98913
+                    - license_id: 8d234567-abcd-1234-ef56-789012345678
+                      user_id: a4440613-af08-648d-bf3f-9f9gga98ed65
+                      status: success
+                      type: CLIENT_MIA_PER_USER
+                    - extension: '410'
+                      type: FAX_PER_EXTENSION
+                      status: error
+                      error:
+                        message: Extension 410 is already assigned
+                        code: extension_in_use
+                  summary: Partial success - extension conflict
+              schema:
+                $ref: '#/components/schemas/LicenseOperationsResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Multi-Status - Some operations succeeded some failed
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '401':
+          content:
+            application/json:
+              examples:
+                missingToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: JWT missing from the Authorization header.
+                    code: authorization
+                  summary: Missing token
+                invalidToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid JWT in the Authorization header.
+                    code: authorization
+                  summary: Invalid token
+                expiredToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: There was an issue validating your authorization token.
+                    code: authorization
+                  summary: Expired token
+                accessingAnotherTenant:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: user is not allowed to perform actions in this access scope
+                    code: authorization
+                  summary: Accessing another Tenant
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Unauthorized
+        '200':
+          content:
+            application/json:
+              examples:
+                standard-success:
+                  value:
+                    total: 3
+                    failed: 0
+                    succeeded: 3
+                    results:
+                    - status: success
+                      type: MOBILITY_PER_USER
+                      extension: '409'
+                      user_id: e1119380-f895-415a-9c67-ad8b71675cf0
+                      license_id: 53763b37-ac19-4209-b3dc-50ca41d98913
+                    - license_id: 8d234567-abcd-1234-ef56-789012345678
+                      user_id: a4440613-af08-648d-bf3f-9f9gga98ed65
+                      status: success
+                      type: CLIENT_MIA_PER_USER
+                    - extension: '410'
+                      license_id: 7b345678-bcde-2345-fg67-890123456789
+                      status: success
+                      type: FAX_PER_EXTENSION
+                  summary: Standard licenses assigned
+              schema:
+                $ref: '#/components/schemas/LicenseOperationsResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: All operations succeeded
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Payment Required
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Not found
+      operationId: assignLicenses
+      security:
+      - OAuth2:
+        - tenant.admin
+        - tenant.operator
+        - tenant.system-integrator
+        - tenant.manager
+      description: 'Assigns available licenses to users and/or extensions. Supports batch operations.
+
+
+        **Package Licenses:**
+
+        - Package licenses require both `license_id` and `user_id`
+
+        - Cannot use FIFO (automatic selection) - must specify exact package
+
+        - Child licenses automatically inherit user assignment if they require `user_id`
+
+
+        **Package Child License Restrictions:**
+
+        - Child licenses that require `user_id` cannot be assigned independently
+
+        - Child licenses that don''t require `user_id` (e.g., FAX_PER_EXTENSION) can be assigned independently'
+  /tenants/{tenant}/licenses/unassign:
+    post:
+      tags:
+      - licenses
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LicenseUnassignRequest'
+        required: true
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      summary: Unassign licenses
+      responses:
+        '207':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseUnassignResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Multi-Status - Some operations succeeded some failed
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+        '200':
+          content:
+            application/json:
+              examples:
+                success:
+                  value:
+                    total: 3
+                    failed: 0
+                    succeeded: 3
+                    results:
+                    - license_id: 53763b37-ac19-4209-b3dc-50ca41d98913
+                      status: success
+                    - license_id: 7b345678-bcde-2345-fg67-890123456789
+                      status: success
+                    - license_id: 8d234567-abcd-1234-ef56-789012345678
+                      status: success
+                  summary: All unassigned
+              schema:
+                $ref: '#/components/schemas/LicenseUnassignResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: All operations succeeded
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+      operationId: unassignLicenses
+      security:
+      - OAuth2:
+        - tenant.admin
+        - tenant.operator
+        - tenant.system-integrator
+        - tenant.manager
+      description: Unassigns one or more licenses from users or extensions
+  /tenants/{tenant}/licenses/usage:
+    get:
+      summary: Get license usage for a tenant
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      tags:
+      - licenses
+      description: Returns usage statistics for all licenses assigned to the tenant
+      operationId: getTenantLicenseUsage
+      security:
+      - OAuth2:
+        - tenant.admin
+        - tenant.operator
+        - tenant.system-integrator
+        - tenant.manager
+        - bss.license-manage
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                usage:
+                  value:
+                  - used: 7
+                    type: MOBILITY_PER_USER
+                    amount: 10
+                    available: 3
+                  - used: 2
+                    type: CONFERENCE_PER_SERVICE
+                    amount: 5
+                    available: 3
+                  - used: 1
+                    type: FAX_UNLIMITED_PER_CONTRACT
+                    amount: 1
+                    available: 0
+                  summary: License usage statistics
+              schema:
+                $ref: '#/components/schemas/LicensesAvailable'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: License usage statistics
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant not found
+components:
+  schemas:
+    LicenseOperationsResponse:
+      properties:
+        total:
+          type: integer
+          description: Total number of operations requested in the batch
+          example: '3'
+        failed:
+          type: integer
+          description: Number of operations that failed
+          example: '1'
+        succeeded:
+          type: integer
+          description: Number of operations that completed successfully
+          example: '2'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseAssignResult'
+          description: Detailed result for each individual operation, in the same order as the request
+      type: object
+      description: LicenseAssignResponse represents the response after assigning licenses. This is named LicenseOperationsResponse in the OpenAPI spec.
+    LicenseDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/LicenseDetail'
+      description: LicenseDetails is an array of license details.
+    LicenseOperation:
+      properties:
+        extension:
+          type: string
+          description: Phone extension number. Required for extension-based license types, optional otherwise.
+          example: '409'
+        user_id:
+          type: string
+          description: Cloudya app suite user UUID for the license operation. Optional if only extension is required.
+          example: e1119380-f895-415a-9c67-ad8b71675cf0
+        license_id:
+          type: string
+          description: Specific license UUID to assign. Required for package licenses, optional for single licenses.
+          example: 53763b37-ac19-4209-b3dc-50ca41d98913
+        type:
+          $ref: '#/components/schemas/LicenseType'
+      type: object
+      required:
+      - type
+      description: LicenseOperation represents a single license operation.
+    LicenseTypeMetadata:
+      properties:
+        assignment_requires_extension:
+          type: boolean
+          description: Whether assigning this license requires an extension number
+          example: 'true'
+        assignment_requires_user:
+          type: boolean
+          description: Whether assigning this license requires user assignment
+          example: 'true'
+        type:
+          maxLength: 100
+          type: string
+        is_package:
+          type: boolean
+          description: Whether this license represents a package that can be referenced by other licenses via their child_of field.
+          example: 'true'
+        name:
+          type: string
+          description: Human-readable name of the license type
+          example: Mobility Per User
+        description:
+          type: string
+          description: Detailed description of the license and its usage
+          example: Mobile access for individual users with extension assignment
+      type: object
+      description: LicenseTypeMetadata represents detailed metadata about a license type.
+    LicenseUnassignRequest:
+      properties:
+        license_ids:
+          type: array
+          items:
+            type: string
+          description: Array of license UUIDs to unassign
+      type: object
+      required:
+      - license_ids
+      description: LicenseUnassignRequest represents the request body for unassigning licenses.
+    LicenseElement:
+      properties:
+        child_of:
+          type: string
+          description: UUID of the parent package license. Use this to add a license to an existing package.
+          example: 4d96e1e0-930c-4806-b21f-21e9ee60b46b
+        type:
+          maxLength: 100
+          type: string
+        license_id:
+          type: string
+          description: License UUID. Optional - if not provided, the server will generate one.
+          example: 4d96e1e0-930c-4806-b21f-21e9ee60b46b
+        product_license_key:
+          type: string
+          description: Commercial license key from the third-party product vendor. Optional field.
+          maxLength: 255
+          example: ABCDEF00000101727072
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseElement'
+          description: Array of child licenses to create within a package.
+        bss_note:
+          type: string
+          description: A note to help users identify which order this license belongs to.
+          maxLength: 255
+          example: My munich office order (September 2025)
+      type: object
+      required:
+      - type
+      description: LicenseElement represents a single license creation request.
+    LicenseUnassignResponse:
+      properties:
+        total:
+          type: integer
+          description: Total number of licenses requested for unassignment
+          example: '3'
+        failed:
+          type: integer
+          description: Number of licenses that could not be unassigned
+          example: '1'
+        succeeded:
+          type: integer
+          description: Number of licenses successfully unassigned
+          example: '2'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseUnassignResult'
+          description: Detailed result for each license unassignment attempt
+      type: object
+      description: LicenseUnassignResponse represents the response after unassigning licenses.
+    DeleteResult:
+      properties:
+        license_id:
+          type: string
+          description: License ID from the request
+          example: 377586d5-001c-4bcf-9155-4f507559240b
+        status:
+          type: string
+          description: Status of this deletion operation
+          enum:
+          - success
+          - error
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+      type: object
+      description: DeleteResult represents the result of a single license deletion.
+    LicenseUsageItem:
+      properties:
+        used:
+          type: integer
+          description: Number of licenses currently assigned to users
+          example: '4'
+        type:
+          maxLength: 100
+          type: string
+        amount:
+          type: integer
+          description: Total number of licenses of this type in the tenant's inventory
+          example: '10'
+        available:
+          type: integer
+          description: Number of unassigned licenses available for assignment (calculated as amount - used)
+          example: '6'
+      type: object
+      description: LicenseUsageItem represents usage statistics for a single license type.
+    ProductLicenseKey:
+      type: string
+      description: ProductLicenseKey represents a commercial license key from a third-party vendor.
+    LicenseDeletionResponse:
+      properties:
+        total:
+          type: integer
+          description: Total number of licenses requested for deletion
+          example: '3'
+        failed:
+          type: integer
+          description: Number of licenses that could not be deleted
+          example: '1'
+        succeeded:
+          type: integer
+          description: Number of licenses successfully deleted from inventory
+          example: '2'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeleteResult'
+          description: Detailed result for each license deletion attempt, in the same order as the request
+      type: object
+      description: BatchDeleteResponse represents the response after batch deletion. This is named LicenseDeletionResponse in the OpenAPI spec.
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
+    LicenseUnassignResult:
+      properties:
+        license_id:
+          type: string
+          description: License UUID from the request
+          example: 53763b37-ac19-4209-b3dc-50ca41d98913
+        status:
+          type: string
+          description: Status of this unassignment operation
+          enum:
+          - success
+          - error
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+      type: object
+      description: LicenseUnassignResult represents the result of a single license unassignment.
+    LicensesAvailable:
+      type: array
+      items:
+        $ref: '#/components/schemas/LicenseUsageItem'
+      description: LicensesAvailable is an array of license usage statistics.
+    LicenseCreationResponse:
+      properties:
+        licenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseCreationResponseItem'
+          description: Array of created licenses with their final license_id values
+        created:
+          type: integer
+          description: Total number of licenses successfully created
+          example: '2'
+      type: object
+      description: LicenseCreationResponse represents the response after creating licenses.
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    LicenseCreationRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/LicenseElement'
+      description: LicenseCreationRequest is a list of license elements for creating licenses.
+    LicenseAssignResult:
+      properties:
+        status:
+          type: string
+          description: Status of this individual operation
+          enum:
+          - success
+          - error
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        extension:
+          type: string
+          description: Extension number if provided in the request
+          example: '409'
+        user_id:
+          type: string
+          description: User ID from the request (only present if user was specified)
+          example: e1119380-f895-415a-9c67-ad8b71675cf0
+        type:
+          maxLength: 100
+          type: string
+        license_id:
+          type: string
+          description: Assigned license ID (only present when status is success)
+          example: 53763b37-ac19-4209-b3dc-50ca41d98913
+      type: object
+      description: LicenseAssignResult represents the result of a single license assignment.
+    LicenseOperations:
+      type: array
+      items:
+        $ref: '#/components/schemas/LicenseOperation'
+      description: LicenseOperations is an array of license operations.
+    LicenseType:
+      type: string
+      description: LicenseTypeValue represents valid license type identifiers.
+    LicenseDetail:
+      properties:
+        user_id:
+          type: string
+          description: Cloudya app suite user id if the license is assigned to a user
+        product_license_key:
+          $ref: '#/components/schemas/ProductLicenseKey'
+        child_of:
+          type: string
+          description: UUID of parent package
+        type:
+          $ref: '#/components/schemas/LicenseType'
+        extension:
+          type: string
+          description: Phone extension number if applicable
+        license_id:
+          type: string
+          description: Unique license identifier
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseDetail'
+          description: Nested child licenses (present for packages when flatten=false)
+        bss_note:
+          type: string
+          maxLength: 255
+          description: A note set by the business support system (BSS) to help users identify which order this license belongs to
+      type: object
+      description: LicenseDetail represents a single license with all its details for the API response. This matches the OpenAPI spec where user_id and extension can be null.
+    LicenseCreationResponseItem:
+      properties:
+        product_license_key:
+          $ref: '#/components/schemas/ProductLicenseKey'
+        type:
+          maxLength: 100
+          type: string
+        license_id:
+          type: string
+          description: License UUID (either provided by client or generated by server)
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseCreationResponseItem'
+          description: Nested child licenses (present for packages when flatten=false)
+        child_of:
+          type: string
+          description: UUID of parent package license (present when flatten=true or for child licenses)
+      type: object
+      description: LicenseCreationResponseItem represents a single created license in the response.
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

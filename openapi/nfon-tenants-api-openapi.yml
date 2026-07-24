@@ -1,0 +1,1229 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts Tenants API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- name: Tenants
+paths:
+  /tenants/{participantExternalIdentifier}/audit:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Tenants
+      operationId: get_224
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/audit/type:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Tenants
+      operationId: get_225
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{tenant}:
+    patch:
+      tags:
+      - Tenants
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTenantRequest'
+        required: true
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      summary: Update tenant
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '204':
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant updated
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+      operationId: updateTenant
+      security:
+      - OAuth2:
+        - bss.license-manage
+      description: Updates an existing tenant (customer)
+  /tenants/{tenant}/billing-extensions:
+    post:
+      tags:
+      - Tenants
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBillingExtensionsRequest'
+        required: true
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      summary: Create billing extensions
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: No free number block available
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingExtensionsCreated'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Billing extensions created
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+      operationId: createBillingExtensions
+      security:
+      - OAuth2:
+        - bss.license-manage
+      description: Creates spare phone extensions for billing purposes
+  /tenants/{tenant}/unlock:
+    put:
+      summary: Unlock tenant
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      tags:
+      - Tenants
+      description: Unlocks a tenant (customer)
+      operationId: unlockTenant
+      security:
+      - OAuth2:
+        - bss.license-manage
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '204':
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant unlocked
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+  /tenants:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenantRequest'
+        required: true
+      tags:
+      - Tenants
+      summary: Create tenant
+      description: Creates a new tenant (customer)
+      operationId: createTenant
+      security:
+      - OAuth2:
+        - bss.license-manage
+      responses:
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+        '409':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: A resource with this identifier already exists
+                    code: conflict
+                  summary: Conflict
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant already exists
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantCreated'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant created
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+  /tenants/{tenant}/stop-trial-period:
+    put:
+      summary: Stop tenant trial period
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      tags:
+      - Tenants
+      description: Stops the trial period for a tenant
+      operationId: stopTenantTrialPeriod
+      security:
+      - OAuth2:
+        - bss.license-manage
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '204':
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Trial period stopped
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+  /tenants/{tenant}/purge:
+    delete:
+      summary: Purge tenant
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      tags:
+      - Tenants
+      description: Purges a tenant (customer) and all associated data
+      operationId: purgeTenant
+      security:
+      - OAuth2:
+        - bss.license-manage
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '204':
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant purged
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+  /tenants/{tenant}/lock:
+    put:
+      summary: Lock tenant
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      tags:
+      - Tenants
+      description: Locks a tenant (customer)
+      operationId: lockTenant
+      security:
+      - OAuth2:
+        - bss.license-manage
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '204':
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant locked
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+components:
+  schemas:
+    PrimaryContact:
+      description: PrimaryContactParams represents primary contact with address. This is named PrimaryContact in the OpenAPI spec.
+      allOf:
+      - $ref: '#/components/schemas/Contact'
+      - properties:
+          address:
+            $ref: '#/components/schemas/Address'
+        type: object
+    TenantOptions:
+      properties:
+        element_creation_popup:
+          type: boolean
+          example: 'true'
+        port_lock:
+          type: boolean
+          example: 'true'
+        project_number_length:
+          maximum: 6
+          minimum: 0
+          example: '4'
+          format: int32
+          type: integer
+        queuemetrics_enabled:
+          type: boolean
+          example: 'false'
+        speed_dial_length:
+          maximum: 4
+          minimum: 0
+          example: '3'
+          format: int64
+          type: integer
+        acureus_billing:
+          type: boolean
+          example: 'false'
+      type: object
+      required:
+      - project_number_length
+      description: OptionsRequestParams represents tenant options. This is named TenantOptions in the OpenAPI spec.
+    Contact:
+      properties:
+        email:
+          type: string
+          description: Email address
+          maxLength: 75
+          example: max.mustermann@example.com
+        mobile_number:
+          type: string
+          description: Mobile number
+          maxLength: 32
+          example: +49 170 1234567
+        phone_number:
+          example: +49 89 45300400
+          type: string
+          minLength: 3
+          maxLength: 100
+          description: Phone number
+        job_title:
+          type: string
+          description: Job title
+          maxLength: 100
+          example: IT Administrator
+        name:
+          type: string
+          description: Contact name
+          maxLength: 100
+          example: Max Mustermann
+      type: object
+      required:
+      - name
+      - email
+      description: Contact is the struct that holds the contact in a request.
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    ErrorResponse:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        message:
+          type: string
+          example: Invalid request
+        code:
+          type: string
+          example: bad_request
+      type: object
+      description: ErrorResponse represents the standard error response format.
+    TenantOptionsUpdate:
+      properties:
+        acureus_billing:
+          type: boolean
+      type: object
+      description: OptionsUpdateParams represents tenant options update. This is named TenantOptionsUpdate in the OpenAPI spec.
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    UpdateTenantRequest:
+      properties:
+        contract_duration_months:
+          type: integer
+          minimum: 0
+          format: int64
+          example: '24'
+        system_integrator:
+          type: string
+          example: S0001
+        contract_type:
+          type: string
+          example: pbx
+        primary_contact:
+          $ref: '#/components/schemas/UpdateContact'
+        partner_ref_number:
+          type: string
+          maxLength: 100
+          example: REF-2024-001
+        commission_non_recurring:
+          type: number
+          minimum: 0
+          format: double
+          example: '100.50'
+        options:
+          $ref: '#/components/schemas/TenantOptionsUpdate'
+      type: object
+      description: PartialUpdateRequest represents tenant partial update request. This is named UpdateTenantRequest in the OpenAPI spec.
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
+    Address:
+      properties:
+        country:
+          type: string
+          description: Country code
+          maxLength: 100
+          example: DE
+        postal_code:
+          type: string
+          description: Postal code
+          maxLength: 10
+          example: '81379'
+        street:
+          type: string
+          description: Street address
+          maxLength: 100
+          example: Machtlfinger Str. 7
+        city:
+          type: string
+          description: City name
+          maxLength: 100
+          example: München
+      type: object
+      required:
+      - country
+      - city
+      - street
+      - postal_code
+      description: Address is the struct that holds the address in a request. nolint:recvcheck // mixed receivers for zerolog/validation compatibility
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    UpdateContact:
+      properties:
+        phone_number:
+          type: string
+          minLength: 3
+          maxLength: 100
+          example: +49 89 45300400
+        mobile_number:
+          type: string
+          maxLength: 32
+          example: +49 170 1234567
+        name:
+          type: string
+          maxLength: 100
+          example: Max Mustermann
+      type: object
+      description: UpdateContact represents partial update for contact information.
+    CreateTenantRequest:
+      properties:
+        partner_ref_number:
+          type: string
+          description: Partner reference number
+          maxLength: 100
+          example: REF-2024-001
+        rating_profile:
+          type: string
+        security_question:
+          example: What is your company name?
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Security question
+        category:
+          type: string
+          example: A
+          description: Tenant category
+          enum:
+          - A
+          - B
+          - C
+          - D
+        security_answer:
+          example: NFON
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Security answer
+        commission_non_recurring:
+          type: number
+          description: Non-recurring commission
+          format: double
+          example: '100.50'
+        system_integrator:
+          type: string
+          description: System integrator identifier
+          example: S0001
+        password:
+          type: string
+          minLength: 12
+          description: Tenant password (min 12 characters)
+          example: SecurePass123!
+        contract_duration_months:
+          type: integer
+          description: Contract duration in months
+          format: int64
+          example: '24'
+        primary_contact:
+          $ref: '#/components/schemas/PrimaryContact'
+        contract_type:
+          type: string
+          description: Contract type
+          example: pbx
+        account_id:
+          type: string
+          description: BSS-provided account identifier (preferred over account_sales_force_id).
+          example: a06D000000kIkHr
+        account_sales_force_id:
+          type: string
+          example: a06D000000kIkHr
+          deprecated: true
+          description: 'BSS-provided account identifier. Use account_id for new integrations. Deprecated: use AccountID instead.'
+        name:
+          type: string
+          description: Tenant name
+          maxLength: 100
+          example: NFON GmbH
+        options:
+          $ref: '#/components/schemas/TenantOptions'
+      type: object
+      required:
+      - system_integrator
+      - name
+      - password
+      - security_question
+      - security_answer
+      - contract_type
+      description: CreateCustomerParams wraps needed fields to create a customer. This is named CreateTenantRequest in the OpenAPI spec.
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    TenantCreated:
+      properties:
+        external_identifier:
+          type: string
+          example: K1234
+      type: object
+      description: CreateCustomerResponse represents the Create Customer response structure. This is named TenantCreated in the OpenAPI spec.
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    BillingExtensionsCreated:
+      properties:
+        extension_numbers:
+          type: array
+          description: The extension numbers that were created
+          items:
+            type: string
+          example: '["999999","999998","999997"]'
+      type: object
+      required:
+      - extension_numbers
+      description: BillingExtensionsCreated represents the response after creating billing extensions.
+    CreateBillingExtensionsRequest:
+      properties:
+        quantity:
+          type: integer
+          minimum: 1
+          description: Number of billing extensions to create
+          example: '3'
+      type: object
+      required:
+      - quantity
+      description: CreateBillingExtensionsRequest represents the request to create billing extensions.
+    Links:
+      description: Related resource links
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

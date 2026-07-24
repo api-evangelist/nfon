@@ -1,0 +1,323 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts references API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- x-displayName: References
+  description: Find references to identifiers (extensions and service codes)
+  name: references
+paths:
+  /tenants/{tenant}/references:
+    get:
+      summary: Find references to an identifier
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      - schema:
+          type: string
+        required: true
+        description: One or more identifiers to search for (comma-separated
+        in: query
+        examples:
+          multiple:
+            value: 100,200,*721234
+            summary: Multiple identifiers
+          single:
+            value: '100'
+            summary: Single identifier
+        name: identifier
+      - schema:
+          type: boolean
+        required: false
+        in: query
+        description: Controls the response structure. true (default) returns flat array
+        name: flatten
+      tags:
+      - references
+      description: Find all places where a given identifier (extension number or service code) is referenced within the tenant's configuration.
+      operationId: findReferences
+      security:
+      - OAuth2:
+        - tenant.admin
+        - tenant.operator
+        - tenant.system-integrator
+        - tenant.manager
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '401':
+          content:
+            application/json:
+              examples:
+                missingToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: JWT missing from the Authorization header.
+                    code: authorization
+                  summary: Missing token
+                invalidToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid JWT in the Authorization header.
+                    code: authorization
+                  summary: Invalid token
+                expiredToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: There was an issue validating your authorization token.
+                    code: authorization
+                  summary: Expired token
+                accessingAnotherTenant:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: user is not allowed to perform actions in this access scope
+                    code: authorization
+                  summary: Accessing another Tenant
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Unauthorized
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/References'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: References found successfully
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+components:
+  schemas:
+    IdentifierReferences:
+      properties:
+        references:
+          items:
+            $ref: '#/components/schemas/ReferenceItem'
+          type: array
+        identifier:
+          type: string
+      type: object
+      required:
+      - identifier
+      - references
+      description: IdentifierReferences groups references for a single identifier.
+    ReferenceItem:
+      properties:
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+          description: List of fields within the entity that reference the identifier.
+        identifier:
+          type: string
+          description: The identifier this reference is for (only present in flat response).
+          example: '100'
+        type:
+          $ref: '#/components/schemas/ReferenceType'
+        service_code:
+          type: string
+          description: Service code of the entity (if applicable).
+          example: '*721234'
+        extension_number:
+          type: string
+          description: Extension number of the entity (if applicable).
+          example: '100'
+        display_name:
+          type: string
+          description: Human-readable name of the entity containing the reference.
+          example: John Doe
+      type: object
+      required:
+      - type
+      - display_name
+      description: ReferenceItem represents a single reference to an identifier within the tenant's configuration.
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    ReferenceType:
+      type: string
+      description: ReferenceType represents the type of entity that contains the reference.
+    HierarchicalReferences:
+      properties:
+        identifiers:
+          items:
+            $ref: '#/components/schemas/IdentifierReferences'
+          type: array
+      type: object
+      required:
+      - identifiers
+      description: HierarchicalReferencesResponse represents references grouped by identifier. This is returned when flatten=false.
+    FlatReferences:
+      properties:
+        references:
+          items:
+            $ref: '#/components/schemas/ReferenceItem'
+          type: array
+      type: object
+      required:
+      - references
+      description: FlatReferencesResponse represents a flat array of references with identifier field on each item. This is returned when flatten=true (default).
+    Field:
+      properties:
+        name:
+          type: string
+          description: Translation key or name of the field.
+          example: phoneextension.callforward.busy
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Data'
+          description: Additional metadata about the reference.
+      type: object
+      required:
+      - name
+      description: Field represents a field within an entity that references the identifier.
+    References:
+      oneOf:
+      - $ref: '#/components/schemas/FlatReferences'
+      - $ref: '#/components/schemas/HierarchicalReferences'
+      description: 'FindReferencesResponse represents the response from the findReferences endpoint. The response structure depends on the ''flatten'' parameter: - flatten=true: FlatReferencesResponse (flat array with identifier field on each item) - flatten=false: HierarchicalReferencesResponse (grouped by identifier).'
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
+    Data:
+      properties:
+        key:
+          type: string
+          description: Metadata key.
+          example: function_key_number
+        value:
+          type: string
+          description: Metadata value.
+          example: '5'
+      type: object
+      required:
+      - key
+      - value
+      description: Data represents key-value pair for additional reference metadata.
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

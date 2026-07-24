@@ -1,0 +1,1919 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts Customer Targets API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- name: Customer Targets
+paths:
+  /tenants/{participantExternalIdentifier}/targets/virtual-fax-extensions/{extensionNumber}/inbound-trunk-numbers:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Targets
+      operationId: get_95
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                type: object
+              example:
+                links: {}
+                data:
+                - value: '123456'
+                  name: didExtension
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/InboundTrunkNumberRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Targets
+      operationId: post_26
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/routing-prefix:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_88
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                type: object
+              example:
+                links:
+                - href: /api/sip-servers?_pageSize=20&_offset=0
+                  rel: first
+                data:
+                - value: '500'
+                  name: extensionNumber
+                - value: Routing Prefix 1
+                  name: displayName
+                - value: '3'
+                  name: prefixMinimumLength
+                - value: '6'
+                  name: prefixMaximumLength
+                - value: DE
+                  name: language
+                - value: Sales
+                  name: costCenter
+                - value: '0'
+                  name: dialPrefix
+                href: /api/customers/example-id/targets/routing-prefix
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/POSTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: post_23
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/routing-prefix/{extensionNumber}:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/PUTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: put_27
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: delete_22
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_89
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K0001/blacklist-profiles/1
+                  rel: blacklistProfile
+                - href: /api/time-zones/Europe.Berlin
+                  rel: timezone
+                data:
+                - value: DE
+                  name: language
+                - value: Sales
+                  name: costCenter
+                - value: '0'
+                  name: dialPrefix
+                href: /api/customers/example-id/targets/routing-prefix/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/routing-prefix/{extensionNumber}/devices:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Targets
+      operationId: get_61
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/POSTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Targets
+      operationId: post_14
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/routing-prefix/{extensionNumber}/devices/{uniqueIdentifier}:
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: uniqueIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Targets
+      operationId: delete_14
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/targets/routing-prefix/{extensionNumber}/inbound-trunk-numbers/{didNumber}:
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: didNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Targets
+      operationId: delete_23
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: didNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Targets
+      operationId: get_91
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links: {}
+                data:
+                - value: '123456'
+                  name: didExtension
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/routing-prefix/{extensionNumber}/outbound-trunk-numbers:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: getOutboundTrunkNumbersWithPage_1
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                type: object
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/OutboundTrunkNumberRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: postOutboundTrunkNumbers_1
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/routing-prefix/{extensionNumber}/outbound-trunk-numbers/available-trunks:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: getAvailableTrunks_1
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                type: object
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  ? /tenants/{participantExternalIdentifier}/targets/routing-prefix/{extensionNumber}/outbound-trunk-numbers/{outboundTrunkNumberId}
+  : delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: outboundTrunkNumberId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: deleteOutboundTrunkNumber_1
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: outboundTrunkNumberId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: getOutboundTrunkNumbers_1
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_174
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/targets/BUSY:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_166
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/HANGUP:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_169
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/INTERNAL_SOURCE:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_170
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/OWN_VOICEMAIL:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_172
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/REPEAT:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_173
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/VOICEMAILSERVICE:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_175
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/virtual-fax-extensions:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_93
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/VirtualFaxExtensionRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: post_25
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/NO_ACTION:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_171
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/virtual-fax-extensions/{extensionNumber}:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/VirtualFaxExtensionRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: put_29
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: delete_24
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_94
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links: {}
+                data:
+                - value: fax_user01
+                  name: login
+                - value: '***'
+                  name: password
+                - value: fax.nfon.net
+                  name: server
+                - value: DE
+                  name: language
+                - value: '0'
+                  name: dialPrefix
+                - value: '+498912345678'
+                  name: t30CalledSubscriberId
+                - value: fax@example.com
+                  name: email
+                - value: Sales
+                  name: costCenter
+                - value: ENABLED
+                  name: clirEnabled
+                - value: Company Fax Header
+                  name: customTagline
+                - value: false
+                  name: deleteAfterSent
+                href: /api/customers/example-id/targets/virtual-fax-extensions/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/direct-dial/{directDialNumber}:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: directDialNumber
+      - schema:
+          format: int64
+          type: integer
+        in: query
+        name: id
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_167
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  ? /tenants/{participantExternalIdentifier}/targets/virtual-fax-extensions/{extensionNumber}/inbound-trunk-numbers/{didNumber}
+  : delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: didNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Targets
+      operationId: delete_25
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: didNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Targets
+      operationId: get_96
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links: {}
+                data:
+                - value: '123456'
+                  name: didExtension
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/routing-prefix/available-devices:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_59
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/virtual-fax-extensions/{extensionNumber}/outbound-trunk-numbers:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: getOutboundTrunkNumbersWithPage_2
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                type: object
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/OutboundTrunkNumberRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: postOutboundTrunkNumbers_2
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  ? /tenants/{participantExternalIdentifier}/targets/virtual-fax-extensions/{extensionNumber}/outbound-trunk-numbers/available-trunks
+  : get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: getAvailableTrunks_2
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                type: object
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  ? /tenants/{participantExternalIdentifier}/targets/virtual-fax-extensions/{extensionNumber}/outbound-trunk-numbers/{outboundTrunkNumberId}
+  : delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: outboundTrunkNumberId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: deleteOutboundTrunkNumber_2
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: outboundTrunkNumberId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: getOutboundTrunkNumbers_2
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/external/{externalNumber}:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: externalNumber
+      - schema:
+          format: int64
+          type: integer
+        in: query
+        name: id
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_168
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/routing-prefix/{extensionNumber}/inbound-trunk-numbers:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Targets
+      operationId: get_90
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                type: object
+              example:
+                links: {}
+                data:
+                - value: '123456'
+                  name: didExtension
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/InboundTrunkNumberRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: extensionNumber
+      tags:
+      - Customer Targets
+      operationId: post_24
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/targets/ANY_SOURCE:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_165
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/targets/ANONYMOUS_SOURCE:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Targets
+      operationId: get_164
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+components:
+  schemas:
+    OutboundTrunkNumberData:
+      type: object
+    VirtualFaxExtensionData:
+      properties:
+        email:
+          $ref: '#/components/schemas/String'
+        dialPrefix:
+          $ref: '#/components/schemas/String'
+        language:
+          $ref: '#/components/schemas/String'
+        deleteAfterSent:
+          $ref: '#/components/schemas/Boolean'
+        clirEnabled:
+          $ref: '#/components/schemas/String'
+        extensionNumber:
+          $ref: '#/components/schemas/String'
+        password:
+          $ref: '#/components/schemas/String'
+        costCenter:
+          $ref: '#/components/schemas/String'
+        displayName:
+          $ref: '#/components/schemas/String'
+        customTagline:
+          $ref: '#/components/schemas/String'
+        t30CalledSubscriberId:
+          $ref: '#/components/schemas/String'
+      type: object
+    PUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/PUTLinks'
+        data:
+          $ref: '#/components/schemas/PUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    POSTData:
+      properties:
+        prefixMinimumLength:
+          $ref: '#/components/schemas/Short'
+        costCenter:
+          $ref: '#/components/schemas/String'
+        language:
+          $ref: '#/components/schemas/String'
+        prefixMaximumLength:
+          $ref: '#/components/schemas/Short'
+        dialPrefix:
+          $ref: '#/components/schemas/String'
+        extensionNumber:
+          example: '500'
+          type: string
+        displayName:
+          example: Routing Prefix 1
+          type: string
+      type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    VirtualFaxExtensionLinks:
+      properties:
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+        preferredOutboundTrunk:
+          $ref: '#/components/schemas/String'
+        blacklistProfile:
+          $ref: '#/components/schemas/String'
+        outboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    VirtualFaxExtensionRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/VirtualFaxExtensionLinks'
+        data:
+          $ref: '#/components/schemas/VirtualFaxExtensionData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    InboundTrunkNumberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/InboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    PUTLinks:
+      properties:
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+        members:
+          $ref: '#/components/schemas/String'
+      type: object
+    OutboundTrunkNumberLinks:
+      type: object
+    Short:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      type: object
+      example: 6
+    RoutingPrefixExtensionLinks:
+      properties:
+        timezone:
+          $ref: '#/components/schemas/String'
+        blacklistProfile:
+          $ref: '#/components/schemas/String'
+      type: object
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    InboundTrunkNumberData:
+      properties:
+        didExtension:
+          example: '123456'
+          type: string
+      type: object
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    OutboundTrunkNumberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/OutboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/OutboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    PUTData:
+      properties:
+        dialPrefix:
+          $ref: '#/components/schemas/String'
+        costCenter:
+          $ref: '#/components/schemas/String'
+        language:
+          $ref: '#/components/schemas/String'
+      type: object
+    POSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/RoutingPrefixExtensionLinks'
+        data:
+          $ref: '#/components/schemas/POSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Links:
+      description: Related resource links
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
+      type: object
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

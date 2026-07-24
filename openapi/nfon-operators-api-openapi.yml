@@ -1,0 +1,892 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts Operators API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- name: Operators
+  description: Operator management
+paths:
+  /operators/{operatorId}:
+    get:
+      summary: Get operator
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: Operator external identifier
+        name: operatorId
+      tags:
+      - Operators
+      operationId: get_206
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/system-integrators/SI-001
+                  rel: defaultSystemIntegrator
+                - href: /api/operators/OP-12345/blacklist-profiles/1
+                  rel: defaultBlacklistProfile
+                - href: /api/operators/OP-12345/rating-profiles/default
+                  rel: defaultRatingProfile
+                - href: /api/operators/OP-12345/pbx-groups/default
+                  rel: defaultPbxGroup
+                - href: /api/timezones/Europe%2FBerlin
+                  rel: timezone
+                data:
+                - value: NFON AG
+                  name: name
+                - value: John Doe
+                  name: contactName
+                - value: john.doe@nfon.com
+                  name: contactEmail
+                - value: '+49891234567'
+                  name: contactPhone
+                - value: '+491701234567'
+                  name: mobileNumber
+                - value: Premium partner operator
+                  name: notes
+                - value: 'false'
+                  name: offlineBilling
+                - value: 'true'
+                  name: generateCdrs
+                - value: 'false'
+                  name: ldapVisible
+                - value: 'true'
+                  name: enableTps
+                - value: operator.nfon.net
+                  name: domainName
+                - value: snom-admin
+                  name: snomLoginName
+                - value: aastra-admin
+                  name: aastraLoginName
+                - value: secret123
+                  name: snomLoginPassword
+                - value: secret456
+                  name: aastraLoginPassword
+                - value: ENABLED
+                  name: nmeeting
+                - value: ENABLED
+                  name: nmeetingCustomerDefault
+                - value: 'false'
+                  name: nmeetingAfdDefault
+                - value: '4'
+                  name: minimumPasswordLength
+                - value: '8'
+                  name: maximumPasswordLength
+                - value: 'true'
+                  name: voiceTrafficEncryption
+                - value: rds.nfon.net
+                  name: rdsHost
+                - value: de
+                  name: language
+                - value: 'true'
+                  name: nqmEnabled
+                href: /api/operators/example-id
+          description: Operator found
+        '404':
+          description: Not found
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/OperatorPUTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: Operator external identifier
+        name: operatorId
+      tags:
+      - Operators
+      summary: Update operator
+      operationId: put_57
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Operator updated
+        '400':
+          description: Validation error
+  /operators/{operatorId}/rating-profiles:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: operatorId
+      tags:
+      - Operators
+      operationId: get_213
+      security:
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+              example:
+                links: {}
+                data:
+                - value: standard-rate
+                  name: name
+                href: /api/operators/example-id/rating-profiles
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/RatingProfilePOSTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: operatorId
+      tags:
+      - Operators
+      operationId: post_55
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /operators/{operatorId}/rating-profiles/available:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: operatorId
+      tags:
+      - Operators
+      operationId: get_212
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /operators/{operatorId}/tenants:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: operatorId
+      tags:
+      - Operators
+      operationId: get_209
+      security:
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /operators/{operatorId}/system-integrators:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: operatorId
+      tags:
+      - Operators
+      operationId: get_217
+      security:
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /operators/{operatorId}/blacklist-profiles:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: operatorId
+      tags:
+      - Operators
+      operationId: get_207
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /operators:
+    get:
+      summary: List operators
+      tags:
+      - Operators
+      operationId: get_205
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Operator list retrieved
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOperatorRequest'
+        required: true
+      tags:
+      - Operators
+      summary: Create operator
+      description: Creates a new operator
+      operationId: createOperator
+      security:
+      - OAuth2:
+        - bss.license-manage
+      responses:
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+        '409':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: A resource with this identifier already exists
+                    code: conflict
+                  summary: Conflict
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Operator already exists
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperatorCreated'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Operator created
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+  /operators/{operatorId}/pbx-groups:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: operatorId
+      tags:
+      - Operators
+      operationId: get_210
+      security:
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+components:
+  schemas:
+    NoLinks:
+      type: object
+    OperatorPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/OperatorPUTLinks'
+        data:
+          $ref: '#/components/schemas/OperatorPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CreateOperatorRating:
+      properties:
+        rate_description:
+          example: Standard rate plan
+          type: string
+          minLength: 2
+          maxLength: 255
+          description: Rate description.
+        rate_name:
+          maximum: 9999
+          minimum: 1
+          example: '1234'
+          type: integer
+          description: Rate name as a numeric identifier (1-4 digits, 0 not allowed).
+      type: object
+      required:
+      - rate_name
+      - rate_description
+      description: CreateOperatorRating represents rating configuration for operator.
+    PrimaryContact:
+      description: PrimaryContactParams represents primary contact with address. This is named PrimaryContact in the OpenAPI spec.
+      allOf:
+      - $ref: '#/components/schemas/Contact'
+      - properties:
+          address:
+            $ref: '#/components/schemas/Address'
+        type: object
+    Integer:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
+      type: object
+      description: Subscribers soft limit
+    CreateOperatorRequest:
+      properties:
+        subsidiary:
+          type: string
+          description: Subsidiary operator external identifier. Only active operators that are marked as subsidiary can be used. Returns 400 if the provided value is not a valid subsidiary operator.
+          maxLength: 5
+          example: C0001
+        external_identifier:
+          type: string
+          description: Operator external identifier.
+          example: C1000
+        time_zone_id:
+          type: integer
+          description: Time zone identifier.
+          format: int32
+          example: '1'
+        password:
+          example: SecurePass123!
+          type: string
+          minLength: 12
+          maxLength: 50
+          description: Operator password (min 12 characters).
+        voice_traffic_encryption:
+          type: boolean
+          description: Voice traffic encryption enabled.
+          example: 'true'
+        security_question:
+          example: What is your company name?
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Security question.
+        country:
+          type: string
+          description: ISO 3166-2 country code.
+          maxLength: 2
+          example: DE
+        primary_contact:
+          $ref: '#/components/schemas/PrimaryContactOperator'
+        security_answer:
+          example: NFON
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Security answer.
+        ratings:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateOperatorRating'
+          description: Rating configurations for the operator.
+        account_id:
+          type: string
+          description: BSS-provided account identifier (preferred over account_sales_force_id).
+          maxLength: 50
+          example: a06D000000kIkHr
+        account_sales_force_id:
+          deprecated: true
+          type: string
+          example: a06D000000kIkHr
+          maxLength: 50
+          description: 'BSS-provided account identifier. Use account_id for new integrations. Deprecated: use AccountID instead.'
+        softswitch:
+          type: string
+          description: Softswitch identifier.
+          maxLength: 16
+          example: BTNGN1
+        name:
+          type: string
+          description: Operator name.
+          maxLength: 100
+          example: NFON AG
+      type: object
+      required:
+      - external_identifier
+      - name
+      - primary_contact
+      - ratings
+      - security_question
+      - security_answer
+      - time_zone_id
+      description: CreateOperatorRequest represents the request body for creating an operator.
+    Contact:
+      properties:
+        email:
+          type: string
+          description: Email address
+          maxLength: 75
+          example: max.mustermann@example.com
+        mobile_number:
+          type: string
+          description: Mobile number
+          maxLength: 32
+          example: +49 170 1234567
+        phone_number:
+          example: +49 89 45300400
+          type: string
+          minLength: 3
+          maxLength: 100
+          description: Phone number
+        job_title:
+          type: string
+          description: Job title
+          maxLength: 100
+          example: IT Administrator
+        name:
+          type: string
+          description: Contact name
+          maxLength: 100
+          example: Max Mustermann
+      type: object
+      required:
+      - name
+      - email
+      description: Contact is the struct that holds the contact in a request.
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    OperatorCreated:
+      properties:
+        password:
+          type: string
+          description: Generated password for the operator.
+          example: GeneratedP@ss1
+        system_integrator_ext_id:
+          type: string
+          description: System integrator external identifier.
+          example: S0001
+      type: object
+      description: CreateOperatorResponse represents the response structure for creating an operator. This is named OperatorCreated in the OpenAPI spec.
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    RatingProfilePOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/RatingProfilePOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    OperatorPUTData:
+      properties:
+        mobileNumber:
+          $ref: '#/components/schemas/String'
+        language:
+          $ref: '#/components/schemas/String'
+        contactName:
+          $ref: '#/components/schemas/String'
+        contactEmail:
+          $ref: '#/components/schemas/String'
+        contactPhone:
+          $ref: '#/components/schemas/String'
+        notes:
+          $ref: '#/components/schemas/String'
+        offlineBilling:
+          $ref: '#/components/schemas/Boolean'
+        generateCdrs:
+          $ref: '#/components/schemas/Boolean'
+        ldapVisible:
+          $ref: '#/components/schemas/Boolean'
+        enableTps:
+          $ref: '#/components/schemas/Boolean'
+        name:
+          $ref: '#/components/schemas/String'
+        snomLoginName:
+          $ref: '#/components/schemas/String'
+        aastraLoginName:
+          $ref: '#/components/schemas/String'
+        nmeeting:
+          $ref: '#/components/schemas/String'
+        snomLoginPassword:
+          $ref: '#/components/schemas/String'
+        aastraLoginPassword:
+          $ref: '#/components/schemas/String'
+        nmeetingCustomerDefault:
+          $ref: '#/components/schemas/String'
+        nmeetingAfdDefault:
+          $ref: '#/components/schemas/Boolean'
+        minimumPasswordLength:
+          $ref: '#/components/schemas/Integer'
+        maximumPasswordLength:
+          $ref: '#/components/schemas/Integer'
+        voiceTrafficEncryption:
+          $ref: '#/components/schemas/Boolean'
+        rdsHost:
+          $ref: '#/components/schemas/String'
+        domainName:
+          $ref: '#/components/schemas/String'
+        nqmEnabled:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
+    PrimaryContactOperator:
+      description: PrimaryContactOperator represents primary contact for operator.
+      allOf:
+      - $ref: '#/components/schemas/PrimaryContact'
+      - properties:
+          phone_number:
+            example: +49 89 45300402
+            type: string
+            minLength: 3
+            maxLength: 100
+            description: Phone number of the primary contact.
+        type: object
+        required:
+        - phone_number
+    RatingProfilePOSTData:
+      properties:
+        name:
+          example: standard-rate
+          type: string
+      type: object
+    OperatorPUTLinks:
+      properties:
+        defaultBlacklistProfile:
+          $ref: '#/components/schemas/String'
+        defaultRatingProfile:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+        defaultPbxGroup:
+          $ref: '#/components/schemas/String'
+        defaultSystemIntegrator:
+          $ref: '#/components/schemas/String'
+      type: object
+    Address:
+      properties:
+        country:
+          type: string
+          description: Country code
+          maxLength: 100
+          example: DE
+        postal_code:
+          type: string
+          description: Postal code
+          maxLength: 10
+          example: '81379'
+        street:
+          type: string
+          description: Street address
+          maxLength: 100
+          example: Machtlfinger Str. 7
+        city:
+          type: string
+          description: City name
+          maxLength: 100
+          example: München
+      type: object
+      required:
+      - country
+      - city
+      - street
+      - postal_code
+      description: Address is the struct that holds the address in a request. nolint:recvcheck // mixed receivers for zerolog/validation compatibility
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    Links:
+      description: Related resource links
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

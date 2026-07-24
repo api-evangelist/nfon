@@ -1,0 +1,1084 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts Devices API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- name: Devices
+paths:
+  /devices:
+    get:
+      summary: List devices
+      tags:
+      - Devices
+      operationId: get_200
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+              example:
+                links:
+                - href: /api/customers/K1234
+                  rel: customer
+                - href: /api/device-types/Yealink%20T46U
+                  rel: deviceType
+                data:
+                - value: 00:15:65:A1:B2:C3
+                  name: deviceId
+                - value: Yealink
+                  name: manufacturer
+                - value: REGISTERED
+                  name: registrationStatus
+                - value: true
+                  name: phoneExists
+                href: /api/devices
+          description: Devices retrieved
+  /devices/validate-deviceid:
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/DeviceIdPOSTRequest'
+      tags:
+      - Devices
+      summary: Validate device IDs
+      operationId: post_53
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          description: Validation results returned
+        '400':
+          description: Validation error
+  /tenants/{tenant}/devices/bulk:
+    get:
+      summary: Bulk Export Devices
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      - schema:
+          type: boolean
+        required: false
+        in: query
+        description: ''
+        name: sanitize
+      tags:
+      - Devices
+      description: Export all devices for a tenant as CSV or Excel file (synchronous)
+      operationId: bulkExportDevices
+      security:
+      - jwt: {}
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Tenant not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '401':
+          content:
+            application/json:
+              examples:
+                missingToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: JWT missing from the Authorization header.
+                    code: authorization
+                  summary: Missing token
+                invalidToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid JWT in the Authorization header.
+                    code: authorization
+                  summary: Invalid token
+                expiredToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: There was an issue validating your authorization token.
+                    code: authorization
+                  summary: Expired token
+                accessingAnotherTenant:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: user is not allowed to perform actions in this access scope
+                    code: authorization
+                  summary: Accessing another Tenant
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Unauthorized
+        '200':
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Export file
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '403':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: User does not have permission to perform this operation
+                    code: forbidden
+                  summary: Forbidden
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Forbidden
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+    post:
+      tags:
+      - Devices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceBulkImportRequest'
+        required: true
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      summary: Submit Device Bulk Import
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatusResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Import job accepted
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '401':
+          content:
+            application/json:
+              examples:
+                missingToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: JWT missing from the Authorization header.
+                    code: authorization
+                  summary: Missing token
+                invalidToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid JWT in the Authorization header.
+                    code: authorization
+                  summary: Invalid token
+                expiredToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: There was an issue validating your authorization token.
+                    code: authorization
+                  summary: Expired token
+                accessingAnotherTenant:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: user is not allowed to perform actions in this access scope
+                    code: authorization
+                  summary: Accessing another Tenant
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Unauthorized
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+        '403':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: User does not have permission to perform this operation
+                    code: forbidden
+                  summary: Forbidden
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Forbidden
+        '413':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: File too large
+      operationId: submitDeviceBulkImport
+      security:
+      - OAuth2:
+        - tenant.admin
+        - tenant.operator
+        - tenant.system-integrator
+        - tenant.manager
+      description: 'Submit a device bulk import job for asynchronous processing.
+
+        Returns immediately with a job ID that can be used to poll for status.
+
+
+        **Supported Device Categories:**
+
+        - `STANDARD`: Standard phones (single port)
+
+        - `BASE`: Base phones (multi-port creation is automatic)
+
+        - `HANDSET`: Handsets (must reference a base device via base_device_id)
+
+
+        **Features:**
+
+        - Automatic base-handset relationship handling
+
+        - Best-effort import (continues on errors, reports per-device failures)
+
+        - Device registration with RDS for eligible manufacturers
+
+
+        **Workflow:**
+
+        1. Call POST /devices/bulk/validate first to check for errors
+
+        2. Submit import with POST /devices/bulk
+
+        3. Poll GET /jobs/{eventId} until status is "completed" or "failed"'
+  /tenants/{tenant}/devices/bulk/validate:
+    post:
+      tags:
+      - Devices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceValidationRequest'
+        required: true
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      summary: Validate Device Bulk Import
+      responses:
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '401':
+          content:
+            application/json:
+              examples:
+                missingToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: JWT missing from the Authorization header.
+                    code: authorization
+                  summary: Missing token
+                invalidToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid JWT in the Authorization header.
+                    code: authorization
+                  summary: Invalid token
+                expiredToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: There was an issue validating your authorization token.
+                    code: authorization
+                  summary: Expired token
+                accessingAnotherTenant:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: user is not allowed to perform actions in this access scope
+                    code: authorization
+                  summary: Accessing another Tenant
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Unauthorized
+        '200':
+          content:
+            application/json:
+              examples:
+                validation_results:
+                  value:
+                    devices:
+                    - device_type_info:
+                        ports: 1
+                        device_master_category: STANDARD
+                        port_type: PORT
+                        name: DEVICE001
+                      device_type: DEVICE001
+                      errors: {}
+                      device_id: '001122334455'
+                    - errors:
+                      - 'Device type not found: INVALID-TYPE'
+                      device_type: INVALID-TYPE
+                      device_id: '001122334466'
+                    - errors:
+                      - duplicate device_id in request
+                      device_type: DEVICE001
+                      device_id: '001122334455'
+                  summary: Validation results
+              schema:
+                $ref: '#/components/schemas/DeviceValidationResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Validation results with enriched device information
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '403':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: User does not have permission to perform this operation
+                    code: forbidden
+                  summary: Forbidden
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Forbidden
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+      operationId: validateDeviceBulkImport
+      security:
+      - OAuth2:
+        - tenant.admin
+        - tenant.operator
+        - tenant.system-integrator
+        - tenant.manager
+      description: 'Validates device data for bulk import and returns enriched information.
+
+        Does not perform actual import - allows UI to review and filter devices before importing.
+
+
+        **Validation Checks:**
+
+        - Required fields: device_id, device_type
+
+        - Duplicate device_id within the request
+
+        - Device already exists in system (unique across all tenants)
+
+        - Device type exists and is valid
+
+        - Device category is STANDARD, BASE, or HANDSET
+
+
+        **Recommended Workflow:**
+
+        1. Call this endpoint to validate devices
+
+        2. Review errors in the response
+
+        3. Filter out devices with errors
+
+        4. Submit valid devices to POST /devices/bulk'
+  /tenants/{tenant}/jobs/{eventId}:
+    get:
+      summary: Get Import Job Status
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: tenant
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: ''
+        name: eventId
+      tags:
+      - Devices
+      description: Poll the status of an import job
+      operationId: getJobStatus
+      security:
+      - OAuth2:
+        - tenant.admin
+        - tenant.operator
+        - tenant.system-integrator
+        - tenant.manager
+      responses:
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Job not found
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Invalid request
+        '401':
+          content:
+            application/json:
+              examples:
+                missingToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: JWT missing from the Authorization header.
+                    code: authorization
+                  summary: Missing token
+                invalidToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid JWT in the Authorization header.
+                    code: authorization
+                  summary: Invalid token
+                expiredToken:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: There was an issue validating your authorization token.
+                    code: authorization
+                  summary: Expired token
+                accessingAnotherTenant:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: user is not allowed to perform actions in this access scope
+                    code: authorization
+                  summary: Accessing another Tenant
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Unauthorized
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatusResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Job status retrieved successfully
+        '503':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The service is temporarily unavailable. Please try again later.
+                    code: upstream_unavailable
+                  summary: Service unavailable
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Service temporarily unavailable
+        '403':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: User does not have permission to perform this operation
+                    code: forbidden
+                  summary: Forbidden
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Forbidden
+        '500':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Internal server error
+                    code: internal_error
+                  summary: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Internal server error
+components:
+  schemas:
+    DeviceImportItem:
+      properties:
+        base_device_id:
+          type: string
+          description: Device ID of the base phone (required for HANDSET devices)
+          example: '001122334400'
+        site_id:
+          type: string
+          description: BSS-provided site identifier. If not provided, the device will be assigned to the customer's mobile site.
+          example: a06D000000kIkHp
+        site_salesforce_id:
+          type: string
+          example: a06D000000kIkHp
+          deprecated: true
+          description: 'Deprecated: use SiteID instead.'
+        device_id:
+          type: string
+          description: Unique device identifier (MAC address, IPEI, etc.)
+          example: '001122334455'
+        device_type:
+          type: string
+          description: Device type identifier
+          example: DEVICE001
+      type: object
+      description: DeviceImportRequest represents a single device for import (API type).
+    NoLinks:
+      type: object
+    DeviceValidationResponse:
+      properties:
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeviceValidationItem'
+          description: Array of validated devices with enriched information
+      type: object
+      description: DeviceValidationResponse represents the validation response.
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    JobStatusResponse:
+      properties:
+        status:
+          type: string
+          description: Current job status
+          enum:
+          - pending
+          - processing
+          - completed
+          - failed
+        event_id:
+          type: string
+          description: Unique job identifier
+        details:
+          $ref: '#/components/schemas/JobDetails'
+        type:
+          type: string
+          description: Type of entity imported
+          enum:
+          - contact
+          - speeddial
+          - phone_extension
+          - device
+        created:
+          type: string
+          description: Job creation timestamp
+        filename:
+          type: string
+          description: Original filename
+      type: object
+      description: JobReport represents the status of an import job. This is named JobStatusResponse in the OpenAPI spec.
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    JobDetails:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/JobError'
+          type: array
+        rows:
+          type: integer
+          description: Number of rows processed
+      type: object
+      description: JobDetails contains details about a job.
+    DeviceIdPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/DeviceIdPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    DeviceTypeInfo:
+      properties:
+        ports:
+          type: integer
+          example: '3'
+        device_master_category:
+          type: string
+          example: STANDARD
+        port_type:
+          type: string
+          example: IPEI
+        name:
+          type: string
+          example: Yealink T46S
+      type: object
+      description: DeviceTypeInfo contains device type metadata.
+    JobError:
+      properties:
+        row:
+          type: integer
+        message:
+          type: string
+        type:
+          type: string
+      type: object
+      description: JobError represents an error that occurred during processing.
+    DeviceBulkImportRequest:
+      properties:
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeviceImportItem'
+          description: Array of devices to import
+      type: object
+      description: DeviceBulkImportRequest represents the request body for device bulk import.
+    DeviceIdPOSTData:
+      properties:
+        deviceIds:
+          type: array
+          items:
+            example: '["00:15:65:A1:B2:C3","00:15:65:D4:E5:F6"]'
+            type: string
+          example:
+          - 00:15:65:A1:B2:C3
+          - 00:15:65:D4:E5:F6
+      type: object
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    DeviceValidationItem:
+      properties:
+        device_type_info:
+          $ref: '#/components/schemas/DeviceTypeInfo'
+        device_type:
+          type: string
+          example: DEVICE001
+        errors:
+          items:
+            type: string
+          type: array
+        device_id:
+          type: string
+          example: '001122334455'
+      type: object
+      description: DeviceValidationItem represents a device in validation response.
+    Links:
+      description: Related resource links
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

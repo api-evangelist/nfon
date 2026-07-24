@@ -1,0 +1,177 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts address API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- name: address
+paths:
+  /address/onkz/{countrycode}/{postalcode}/{city}/{street}:
+    get:
+      summary: Lookup ONKZ for an address
+      tags:
+      - address
+      description: Geocodes the given address via OpenStreetMap Nominatim and determines the German ONKZ (Ortsnetzkennzahl / area code). Only German addresses (countrycode=de) are supported.
+      operationId: lookupAddressOnkz
+      security:
+      - OAuth2:
+        - bss.license-manage
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressOnkzResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: ONKZ found
+        '502':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressOnkzResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Geocoding service unavailable
+        '400':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: Invalid request parameters
+                    code: validation_error
+                  summary: Validation error
+              schema:
+                $ref: '#/components/schemas/AddressOnkzResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Validation error
+        '404':
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    request_id: 550e8400-e29b-41d4-a716-446655440000
+                    message: The requested resource was not found
+                    code: not_found
+                  summary: Not found
+              schema:
+                $ref: '#/components/schemas/AddressOnkzResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                format: uuid
+                type: string
+              description: Unique request identifier
+          description: Address or ONKZ not found
+components:
+  schemas:
+    AddressCoordinates:
+      properties:
+        longitude:
+          type: number
+          description: Longitude in WGS84
+          format: double
+          example: '11.57549'
+        latitude:
+          type: number
+          description: Latitude in WGS84
+          format: double
+          example: '48.137154'
+      type: object
+      description: AddressCoordinates holds latitude and longitude.
+    AddressOnkzResponse:
+      properties:
+        status:
+          $ref: '#/components/schemas/AddressStatus'
+        address:
+          $ref: '#/components/schemas/AddressDetail'
+        onkz:
+          nullable: true
+          type: string
+          description: German area code (Ortsnetzkennzahl), null if not found
+          example: 089
+        coordinates:
+          $ref: '#/components/schemas/AddressCoordinates'
+      type: object
+      required:
+      - status
+      description: AddressOnkzResponse represents the response for an address ONKZ lookup.
+    AddressDetail:
+      properties:
+        country:
+          type: string
+          description: Country name
+          example: Deutschland
+        country_code:
+          type: string
+          description: ISO country code
+          example: de
+        house_number:
+          type: string
+          description: House number
+          example: '1'
+        postcode:
+          type: string
+          description: Postal code
+          example: '80331'
+        street:
+          type: string
+          description: Street name
+          example: Marienplatz
+        city:
+          type: string
+          description: City name
+          example: München
+      type: object
+      description: AddressDetail holds the resolved address fields.
+    AddressStatus:
+      properties:
+        detail:
+          type: string
+          description: Human-readable status message
+          example: ONKZ found
+        code:
+          type: integer
+          description: Status code (200=found, 400=validation error, 404=not found, 500=server error)
+          example: '200'
+      type: object
+      required:
+      - code
+      - detail
+      description: AddressStatus holds the status of the lookup.
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

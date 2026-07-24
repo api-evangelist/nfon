@@ -1,0 +1,407 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts Customer Sites API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- name: Customer Sites
+paths:
+  /tenants/{participantExternalIdentifier}/sites:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Sites
+      operationId: get_158
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                type: object
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/sites/{siteId}:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: siteId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Sites
+      operationId: get_159
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K0001/sites/a1B2c3D4
+                  rel: siteA
+                - href: /api/customers/K0001/sites/e5F6g7H8
+                  rel: siteB
+                - href: /api/customers/K0001/sites/a1B2c3D4/options
+                  rel: siteOptions
+                data:
+                - value: Munich Office
+                  name: name
+                - value: a1B2c3D4e5F6
+                  name: salesforceId
+                - value: Machtlfinger Str. 7
+                  name: street
+                - value: '81379'
+                  name: zip
+                - value: Munich
+                  name: city
+                - value: DE
+                  name: country
+                - value: 089
+                  name: azc
+                - value: '89'
+                  name: ndc
+                - value: 2024-01-15 10:30
+                  name: obsoleteSince
+                href: /api/customers/example-id/sites/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/sites/{siteId}/site-options:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: siteId
+      tags:
+      - Customer Sites
+      operationId: get_160
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links: {}
+                data:
+                - value: '0'
+                  name: dialPrefix
+                - value: DE
+                  name: language
+                - value: 'false'
+                  name: publicSpace
+                - value: true
+                  name: canReinvite
+                - value: false
+                  name: nat
+                - value: UDP
+                  name: sipTransport
+                - value: false
+                  name: vlanTagging
+                - value: 100
+                  name: voiceVlan
+                - value: 200
+                  name: dataVlan
+                - value: AUTO
+                  name: portSpeed
+                - value: pool.ntp.org
+                  name: ntpServer
+                - value: false
+                  name: autoHotDesking
+                - value: syslog.example.com
+                  name: monitoringServer
+                - value: STANDARD
+                  name: monitoringLevel
+                - value: '2025-12-31'
+                  name: monitoringUntil
+                - value: G711
+                  name: codecProfile
+                - value: false
+                  name: uacstaActive
+                - value: csta.example.com
+                  name: uacstaServer
+                - value: 7001
+                  name: uacstaPort
+                - value: TCP
+                  name: uacstaProtocol
+                - value: 'false'
+                  name: ldapActive
+                - value: ldap.example.com
+                  name: ldapServer
+                - value: '389'
+                  name: ldapPort
+                - value: cn=admin,dc=example,dc=com
+                  name: ldapUsername
+                href: /api/customers/example-id/sites/example-id/site-options
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/SiteOptionsPUTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: siteId
+      tags:
+      - Customer Sites
+      operationId: put_48
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+components:
+  schemas:
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    SiteOptionsPUTLinks:
+      properties:
+        mediaGateway:
+          $ref: '#/components/schemas/String'
+        fmcNumberSet:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+      type: object
+    SiteOptionsPUTData:
+      properties:
+        ldapUsername:
+          $ref: '#/components/schemas/String'
+        dialPrefix:
+          $ref: '#/components/schemas/String'
+        language:
+          $ref: '#/components/schemas/Enum'
+        publicSpace:
+          $ref: '#/components/schemas/Boolean'
+        canReinvite:
+          $ref: '#/components/schemas/Boolean'
+        nat:
+          $ref: '#/components/schemas/Boolean'
+        ldapPassword:
+          $ref: '#/components/schemas/String'
+        uacstaPassword:
+          $ref: '#/components/schemas/String'
+        dataVlan:
+          $ref: '#/components/schemas/Integer'
+        portSpeed:
+          $ref: '#/components/schemas/String'
+        ntpServer:
+          $ref: '#/components/schemas/String'
+        autoHotDesking:
+          $ref: '#/components/schemas/Boolean'
+        monitoringServer:
+          $ref: '#/components/schemas/String'
+        monitoringLevel:
+          $ref: '#/components/schemas/String'
+        codecProfile:
+          $ref: '#/components/schemas/String'
+        uacstaActive:
+          $ref: '#/components/schemas/Boolean'
+        uacstaServer:
+          $ref: '#/components/schemas/String'
+        voiceVlan:
+          $ref: '#/components/schemas/Integer'
+        uacstaPort:
+          $ref: '#/components/schemas/Integer'
+        sipTransport:
+          $ref: '#/components/schemas/Enum'
+        ldapActive:
+          $ref: '#/components/schemas/Boolean'
+        ldapServer:
+          $ref: '#/components/schemas/String'
+        vlanTagging:
+          $ref: '#/components/schemas/Boolean'
+        ldapPort:
+          $ref: '#/components/schemas/Integer'
+        uacstaProtocol:
+          $ref: '#/components/schemas/Enum'
+      type: object
+    Enum:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: object
+      type: object
+      example: 'OFF'
+    Integer:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
+      type: object
+      description: Subscribers soft limit
+    Links:
+      description: Related resource links
+      type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    SiteOptionsPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/SiteOptionsPUTLinks'
+        data:
+          $ref: '#/components/schemas/SiteOptionsPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token

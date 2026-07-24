@@ -1,0 +1,2510 @@
+openapi: 3.1.0
+info:
+  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
+
+
+    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
+
+
+    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
+  title: NFON Call History Accounts Customer Devices API
+  version: 2.0-early-access
+  termsOfService: https://www.nfon.com/en/legal/gtc
+  contact:
+    name: NFON
+    email: integration@nfon.com
+  license:
+    name: NFON proprietary
+servers:
+- url: https://api.nfon.com/call-history
+tags:
+- name: Customer Devices
+paths:
+  /tenants/{participantExternalIdentifier}/devices/{deviceType}/{baseId}/license-keys:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: baseId
+      tags:
+      - Customer Devices
+      operationId: get_40
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/BaseLicenseCreateRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: baseId
+      tags:
+      - Customer Devices
+      operationId: post_11
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/devices/{deviceType}/{deviceId}:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/ExternalLineDevicePUTRequest'
+              - $ref: '#/components/schemas/StandardDevicePUTRequest'
+              - $ref: '#/components/schemas/UnprovisionedSipDevicePUTRequest'
+              - $ref: '#/components/schemas/UpdateOperatorPanelRequest'
+              - $ref: '#/components/schemas/XCAPIDevicePUTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      tags:
+      - Customer Devices
+      operationId: put_16
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      tags:
+      - Customer Devices
+      operationId: delete_12
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      tags:
+      - Customer Devices
+      operationId: get_47
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K1234/device-types/XCAPI
+                  rel: deviceType
+                - href: /api/customers/K1234/sites/SF-001
+                  rel: site
+                - href: /api/customers/K1234
+                  rel: customer
+                - href: /api/customers/K1234/devices/activation/XCAPI-001
+                  rel: activation
+                - href: /api/customers/K1234/devices/xcapi/XCAPI-001/site-options
+                  rel: siteOptions
+                data:
+                - value: 2
+                  name: concurrentLines
+                - value: 'true'
+                  name: setE164DidInTo
+                - value: ALLOW
+                  name: cidScreening
+                - value: true
+                  name: useSiteOptionsFromSite
+                href: /api/customers/example-id/devices/example-id/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/devices/{deviceType}/{deviceId}/site-options:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/DeviceSiteOptionsPUTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: put_13
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: delete_8
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: get_44
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/devices/{deviceType}/{uniqueIdentifier}/activate:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/DeviceActivationRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: uniqueIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: post_6
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/devices/{deviceType}/{uniqueIdentifier}/activation-credentials-renewal:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/DeviceActivationCredentialsRenewalRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: uniqueIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: put_7
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/devices/{deviceType}/{uniqueIdentifier}/activation-pin-renewal:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/DeviceActivationPinRenewalRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: uniqueIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: put_8
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/devices/{uniqueIdentifier}:
+    delete:
+      summary: Delete device by unique identifier
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        description: Unique identifier of the device (MAC address or softphone identifier)
+        name: uniqueIdentifier
+      tags:
+      - Customer Devices
+      description: Deactivates and deletes a device identified by its unique identifier (e.g. MAC address) for the given customer. Handles phone-extension unbinding and logs the deletion to PORTAL_LOG.
+      operationId: delete_4
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Device not found for the given unique identifier and customer
+        '204':
+          description: Device successfully deleted
+        '400':
+          description: Device cannot be deleted (e.g. same-month deactivation rule)
+  /tenants/{participantExternalIdentifier}/devices/{uniqueIdentifier}/bypass-authentication:
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/DeviceBypassAuthenticationRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: uniqueIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: post_7
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/devices/{deviceType}/{baseId}/license-keys/{licenseId}:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/BaseLicenseUpdateRequest'
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: licenseId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: baseId
+      tags:
+      - Customer Devices
+      operationId: put_12
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+    delete:
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: licenseId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: baseId
+      tags:
+      - Customer Devices
+      operationId: delete_7
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          format: int64
+          type: integer
+        required: true
+        in: path
+        name: licenseId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: baseId
+      tags:
+      - Customer Devices
+      operationId: get_41
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links: {}
+                data:
+                - value: ABCD-1234-EFGH-5678
+                  name: licenseKey
+                - value: Premium License
+                  name: licenseType
+                href: /api/customers/example-id/devices/example-id/example-id/license-keys/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/devices/{uniqueIdentifier}/reset-authentication:
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/DeviceResetAuthenticationRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: uniqueIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: post_8
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/devices/{deviceType}/available-phones:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      tags:
+      - Customer Devices
+      operationId: get_42
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/devices/{deviceType}/{baseId}/handsets/{handsetId}:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/HandsetDeviceUpdateRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: handsetId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: baseId
+      tags:
+      - Customer Devices
+      operationId: put_11
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: handsetId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: baseId
+      tags:
+      - Customer Devices
+      operationId: delete_6
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: handsetId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: baseId
+      tags:
+      - Customer Devices
+      operationId: get_39
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K1234/devices/bases/00:15:65:A1:B2:C3
+                  rel: base
+                - href: /api/customers/K1234/devices/activation/00:15:65:A1:B2:C3-1
+                  rel: activation
+                - href: /api/customers/K1234/phone-extensions/100
+                  rel: extension
+                data:
+                - value: '1'
+                  name: port
+                - value: '1234'
+                  name: bluetoothPin
+                - value: '3'
+                  name: ringtoneInternal
+                - value: '5'
+                  name: ringtoneExternal
+                - value: '2'
+                  name: groupQueueSkillRingtone
+                - value: 'OFF'
+                  name: suppressLineno
+                href: /api/customers/example-id/devices/example-id/example-id/handsets/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/devices/{deviceType}/{baseId}/handsets:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: baseId
+      tags:
+      - Customer Devices
+      operationId: get_38
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+          description: Success
+        '403':
+          description: Insufficient permissions
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/HandsetDeviceRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: baseId
+      tags:
+      - Customer Devices
+      operationId: post_10
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/devices:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: get_35
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                type: object
+          description: Success
+        '403':
+          description: Insufficient permissions
+  /tenants/{participantExternalIdentifier}/devices/lync/{uniqueIdentifier}:
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: uniqueIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: delete_9
+      security:
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: uniqueIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: get_43
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K1234/device-types/Lync
+                  rel: deviceType
+                - href: /api/customers/K1234/sites/SF001
+                  rel: site
+                - href: /api/customers/K1234
+                  rel: customer
+                - href: /api/customers/K1234/phone-extensions/100
+                  rel: extension
+                data:
+                - value: lync-user-01@sip.example.com
+                  name: uniqueIdentifier
+                href: /api/customers/example-id/devices/lync/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/devices/softphone/{uniqueIdentifier}:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/SoftphoneDevicePUTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: uniqueIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: put_15
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: uniqueIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: delete_11
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: uniqueIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: get_46
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K1234/device-types/NFON%20Softphone
+                  rel: deviceType
+                - href: /api/customers/K1234/phone-extensions/100
+                  rel: extension
+                - href: /api/customers/K1234/sites/SF-001
+                  rel: site
+                - href: /api/customers/K1234
+                  rel: customer
+                - href: /api/customers/K1234/devices/activation/SP-001-ABC
+                  rel: activation
+                - href: /api/customers/K1234/devices/softphone/SP-001-ABC/site-options
+                  rel: siteOptions
+                data:
+                - value: SP-001-ABC
+                  name: uniqueIdentifier
+                - value: 2
+                  name: concurrentLines
+                - value: true
+                  name: useSiteOptionsFromSite
+                - value: 'OFF'
+                  name: suppressLineno
+                - value: Office softphone
+                  name: note
+                - value: Apple
+                  name: manufacturer
+                - value: iPhone 14
+                  name: model
+                - value: iOS 17.0
+                  name: operatingSystem
+                - value: '+491701234567'
+                  name: mobilePhoneNumber
+                href: /api/customers/example-id/devices/softphone/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/devices/{deviceType}/{baseId}:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/BaseDevicePUTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: baseId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: put_9
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+    delete:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: baseId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: delete_5
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Deleted
+        '403':
+          description: Insufficient permissions
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: baseId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: get_36
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiResponse'
+              example:
+                links:
+                - href: /api/customers/K1234/sites/SF-001
+                  rel: site
+                - href: /api/customers/K1234/device-types/Yealink%20T46G/firmwares/84.0.15
+                  rel: firmware
+                data:
+                - value: '9600'
+                  name: bitrate
+                - value: 'true'
+                  name: useSiteOptionsFromSite
+                - value: 'OFF'
+                  name: suppressLineno
+                - value: 'false'
+                  name: webguiHttpsonly
+                - value: Office desk phone
+                  name: note
+                - value: 'true'
+                  name: dhcpEnabled
+                - value: 10.0.0.100
+                  name: ipAddress
+                - value: 255.255.255.0
+                  name: netmask
+                - value: 10.0.0.1
+                  name: gateway
+                - value: 8.8.8.8
+                  name: dns1
+                - value: 8.8.4.4
+                  name: dns2
+                - value: '1500'
+                  name: mtu
+                href: /api/customers/example-id/devices/example-id/example-id
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/devices/{deviceType}/{baseId}/free-ports:
+    get:
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: baseId
+      tags:
+      - Customer Devices
+      operationId: get_37
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '200':
+          content:
+            application/vnd.collection.next+json:
+              schema:
+                $ref: '#/components/schemas/NfonApiCollectionResponse'
+              example:
+                links: {}
+                data:
+                - value: '2'
+                  name: port
+                href: /api/customers/example-id/devices/example-id/example-id/free-ports
+          description: Success
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Not found
+  /tenants/{participantExternalIdentifier}/devices/{deviceType}:
+    post:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/BaseDevicePOSTRequest'
+              - $ref: '#/components/schemas/ExternalLineDevicePOSTRequest'
+              - $ref: '#/components/schemas/MediaGatewayPOSTRequest'
+              - $ref: '#/components/schemas/OperatorPanelDeviceRequest'
+              - $ref: '#/components/schemas/SoftphoneDevicePOSTRequest'
+              - $ref: '#/components/schemas/StandardDevicePOSTRequest'
+              - $ref: '#/components/schemas/UnprovisionedSipDevicePOSTRequest'
+              - $ref: '#/components/schemas/XCAPIDevicePOSTRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      tags:
+      - Customer Devices
+      operationId: post_12
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '403':
+          description: Insufficient permissions
+        '400':
+          description: Validation error
+        '201':
+          description: Created
+  /tenants/{participantExternalIdentifier}/devices/{deviceType}/{baseId}/handsets/{handsetId}/activate:
+    put:
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/DeviceActivationRequest'
+      parameters:
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: baseId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: handsetId
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: deviceType
+      - schema:
+          type: string
+        required: true
+        in: path
+        name: participantExternalIdentifier
+      tags:
+      - Customer Devices
+      operationId: put_10
+      security:
+      - oauth2:
+        - tenant.manager
+      - oauth2:
+        - tenant.system-integrator
+      - oauth2:
+        - tenant.operator
+      - oauth2:
+        - tenant.admin
+      responses:
+        '404':
+          description: Not found
+        '204':
+          description: Updated
+        '400':
+          description: Validation error
+        '403':
+          description: Insufficient permissions
+components:
+  schemas:
+    BaseDevicePOSTData:
+      properties:
+        ipAddress:
+          $ref: '#/components/schemas/String'
+        netmask:
+          $ref: '#/components/schemas/String'
+        webguiHttpsonly:
+          $ref: '#/components/schemas/Boolean'
+        gateway:
+          $ref: '#/components/schemas/String'
+        uniqueIdentifier:
+          $ref: '#/components/schemas/String'
+        createAllPorts:
+          $ref: '#/components/schemas/Boolean'
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+        dns2:
+          $ref: '#/components/schemas/String'
+        note:
+          $ref: '#/components/schemas/String'
+        mtu:
+          $ref: '#/components/schemas/String'
+        bitrate:
+          $ref: '#/components/schemas/String'
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        mac:
+          $ref: '#/components/schemas/String'
+        dns1:
+          $ref: '#/components/schemas/String'
+        dhcpEnabled:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    HandsetDeviceUpdateRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/HandsetDeviceItem'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    UpdateOperatorPanelRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          $ref: '#/components/schemas/Data'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NoLinks:
+      type: object
+    XCAPIDevicePUTData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        setE164DidInTo:
+          $ref: '#/components/schemas/Boolean'
+        cidScreening:
+          $ref: '#/components/schemas/Enum'
+        note:
+          $ref: '#/components/schemas/String'
+        concurrentLines:
+          $ref: '#/components/schemas/Integer'
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    StandardDevicePOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/StandardDevicePOSTRequestLinks'
+        data:
+          $ref: '#/components/schemas/StandardDevicePOSTRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    BaseLicenseUpdateRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/BaseLicenseUpdateData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    DeviceBypassAuthenticationRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/DeviceBypassAuthenticationData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    SoftphoneDevicePUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/SoftphoneDevicePUTRequestLinks'
+        data:
+          $ref: '#/components/schemas/SoftphoneDevicePUTRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    StandardDevicePOSTRequestLinks:
+      properties:
+        firmware:
+          $ref: '#/components/schemas/String'
+        deviceType:
+          example: /api/customers/K1234/device-types/Yealink%20T46G
+          type: string
+        site:
+          $ref: '#/components/schemas/String'
+      type: object
+    Integer:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
+      type: object
+      description: Subscribers soft limit
+    ExternalLineDevicePUTLinks:
+      properties:
+        site:
+          $ref: '#/components/schemas/String'
+      type: object
+    BaseDevicePUTLinks:
+      properties:
+        firmware:
+          $ref: '#/components/schemas/String'
+        site:
+          $ref: '#/components/schemas/String'
+      type: object
+    SoftphoneDevicePOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/SoftphoneDevicePOSTRequestLinks'
+        data:
+          $ref: '#/components/schemas/SoftphoneDevicePOSTRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    SoftphoneDevicePOSTRequestData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        note:
+          $ref: '#/components/schemas/String'
+        uniqueIdentifier:
+          example: SP-001-ABC
+          type: string
+      type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    MediaGatewayPOSTData:
+      properties:
+        uniqueIdentifier:
+          type: string
+        licenseKey:
+          $ref: '#/components/schemas/String'
+        licenseDescription:
+          $ref: '#/components/schemas/String'
+      type: object
+    DeviceResetAuthenticationRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/DeviceResetAuthenticationData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    ExternalLineDevicePOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/ExternalLineDevicePOSTRequestLinks'
+        data:
+          $ref: '#/components/schemas/ExternalLineDevicePOSTRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    DeviceActivationCredentialsRenewalData:
+      type: object
+    UnprovisionedSipDevicePOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/UnprovisionedSipDevicePOSTRequestLinks'
+        data:
+          $ref: '#/components/schemas/UnprovisionedSipDevicePOSTRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    ExternalLineDevicePUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/ExternalLineDevicePUTLinks'
+        data:
+          $ref: '#/components/schemas/ExternalLineDevicePUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    BaseLicenseCreateData:
+      properties:
+        licenseKey:
+          type: string
+        licenseType:
+          type: string
+      type: object
+    XCAPIDevicePOSTRequestData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        setE164DidInTo:
+          $ref: '#/components/schemas/Boolean'
+        cidScreening:
+          $ref: '#/components/schemas/Enum'
+        note:
+          $ref: '#/components/schemas/String'
+        uniqueIdentifier:
+          example: XCAPI-001
+          type: string
+        concurrentLines:
+          $ref: '#/components/schemas/Integer'
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    BaseDevicePOSTLinks:
+      properties:
+        firmware:
+          $ref: '#/components/schemas/String'
+        deviceType:
+          example: /api/customers/K1234/device-types/Yealink%20T46G
+          type: string
+        site:
+          $ref: '#/components/schemas/String'
+      type: object
+    UnprovisionedSipDevicePOSTRequestData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        note:
+          $ref: '#/components/schemas/String'
+        cidScreening:
+          $ref: '#/components/schemas/Enum'
+        uniqueIdentifier:
+          $ref: '#/components/schemas/String'
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    SiteOptionsPUTData:
+      properties:
+        ldapUsername:
+          $ref: '#/components/schemas/String'
+        dialPrefix:
+          $ref: '#/components/schemas/String'
+        language:
+          $ref: '#/components/schemas/Enum'
+        publicSpace:
+          $ref: '#/components/schemas/Boolean'
+        canReinvite:
+          $ref: '#/components/schemas/Boolean'
+        nat:
+          $ref: '#/components/schemas/Boolean'
+        ldapPassword:
+          $ref: '#/components/schemas/String'
+        uacstaPassword:
+          $ref: '#/components/schemas/String'
+        dataVlan:
+          $ref: '#/components/schemas/Integer'
+        portSpeed:
+          $ref: '#/components/schemas/String'
+        ntpServer:
+          $ref: '#/components/schemas/String'
+        autoHotDesking:
+          $ref: '#/components/schemas/Boolean'
+        monitoringServer:
+          $ref: '#/components/schemas/String'
+        monitoringLevel:
+          $ref: '#/components/schemas/String'
+        codecProfile:
+          $ref: '#/components/schemas/String'
+        uacstaActive:
+          $ref: '#/components/schemas/Boolean'
+        uacstaServer:
+          $ref: '#/components/schemas/String'
+        voiceVlan:
+          $ref: '#/components/schemas/Integer'
+        uacstaPort:
+          $ref: '#/components/schemas/Integer'
+        sipTransport:
+          $ref: '#/components/schemas/Enum'
+        ldapActive:
+          $ref: '#/components/schemas/Boolean'
+        ldapServer:
+          $ref: '#/components/schemas/String'
+        vlanTagging:
+          $ref: '#/components/schemas/Boolean'
+        ldapPort:
+          $ref: '#/components/schemas/Integer'
+        uacstaProtocol:
+          $ref: '#/components/schemas/Enum'
+      type: object
+    DeviceActivationPinRenewalRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/DeviceActivationPinRenewalData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    UnprovisionedSipDevicePOSTRequestLinks:
+      properties:
+        site:
+          $ref: '#/components/schemas/String'
+        deviceType:
+          example: /api/customers/K1234/device-types/SIP%20Trunk
+          type: string
+      type: object
+    OperatorPanelDeviceRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/DeviceLinks'
+        data:
+          $ref: '#/components/schemas/Data'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    DeviceBypassAuthenticationData:
+      type: object
+    BaseDevicePOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/BaseDevicePOSTLinks'
+        data:
+          $ref: '#/components/schemas/BaseDevicePOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    SoftphoneDevicePUTRequestData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        note:
+          $ref: '#/components/schemas/String'
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    DeviceResetAuthenticationData:
+      type: object
+    UnprovisionedSipDevicePUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/UnprovisionedSipDevicePUTLinks'
+        data:
+          $ref: '#/components/schemas/UnprovisionedSipDevicePUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    HandsetDeviceItem:
+      properties:
+        uniqueIdentifier:
+          $ref: '#/components/schemas/String'
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        sipUsername:
+          $ref: '#/components/schemas/String'
+        sipSecret:
+          $ref: '#/components/schemas/String'
+        note:
+          $ref: '#/components/schemas/String'
+        activationPin:
+          $ref: '#/components/schemas/String'
+        baseFamily:
+          $ref: '#/components/schemas/String'
+        deviceCategory:
+          $ref: '#/components/schemas/String'
+        bluetoothPin:
+          $ref: '#/components/schemas/String'
+        ringtoneInternal:
+          $ref: '#/components/schemas/Integer'
+        ringtoneExternal:
+          $ref: '#/components/schemas/Integer'
+        groupQueueSkillRingtone:
+          $ref: '#/components/schemas/Integer'
+        port:
+          $ref: '#/components/schemas/String'
+        deviceMasterCategory:
+          $ref: '#/components/schemas/String'
+      type: object
+    DeviceActivationCredentialsRenewalRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/DeviceActivationCredentialsRenewalData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    StandardDevicePUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/StandardDevicePUTRequestLinks'
+        data:
+          $ref: '#/components/schemas/StandardDevicePUTRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    ExternalLineDevicePUTData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        note:
+          $ref: '#/components/schemas/String'
+        cidScreening:
+          $ref: '#/components/schemas/Enum'
+        associatedMobilePhoneNumber:
+          $ref: '#/components/schemas/String'
+        setE164DidInTo:
+          $ref: '#/components/schemas/Boolean'
+        concurrentLines:
+          $ref: '#/components/schemas/Integer'
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    MediaGatewayPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/MediaGatewayPOSTLinks'
+        data:
+          $ref: '#/components/schemas/MediaGatewayPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    SoftphoneDevicePUTRequestLinks:
+      properties:
+        site:
+          $ref: '#/components/schemas/String'
+      type: object
+    DeviceLinks:
+      type: object
+    Enum:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: object
+      type: object
+      example: 'OFF'
+    ExternalLineDevicePOSTRequestLinks:
+      properties:
+        site:
+          $ref: '#/components/schemas/String'
+        deviceType:
+          example: /api/customers/K1234/device-types/External%20Line
+          type: string
+      type: object
+    StandardDevicePOSTRequestData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        note:
+          $ref: '#/components/schemas/String'
+        webguiHttpsonly:
+          $ref: '#/components/schemas/Boolean'
+        ringtoneInternal:
+          $ref: '#/components/schemas/Integer'
+        ringtoneExternal:
+          $ref: '#/components/schemas/Integer'
+        groupQueueSkillRingtone:
+          $ref: '#/components/schemas/Integer'
+        uniqueIdentifier:
+          example: 00:1A:2B:3C:4D:5E
+          type: string
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    DeviceActivationPinRenewalData:
+      type: object
+    ExternalLineDevicePOSTRequestData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        note:
+          $ref: '#/components/schemas/String'
+        cidScreening:
+          $ref: '#/components/schemas/Enum'
+        associatedMobilePhoneNumber:
+          example: '+491701234567'
+          type: string
+        setE164DidInTo:
+          $ref: '#/components/schemas/Boolean'
+        uniqueIdentifier:
+          $ref: '#/components/schemas/String'
+        concurrentLines:
+          $ref: '#/components/schemas/Integer'
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    UnprovisionedSipDevicePUTLinks:
+      properties:
+        trunks:
+          type: array
+          items:
+            example: '["/api/customers/K1234/trunks/1"]'
+            type: string
+          example:
+          - /api/customers/K1234/trunks/1
+        site:
+          $ref: '#/components/schemas/String'
+      type: object
+    SoftphoneDevicePOSTRequestLinks:
+      properties:
+        site:
+          $ref: '#/components/schemas/String'
+        deviceType:
+          example: /api/customers/K1234/device-types/NFON%20Softphone
+          type: string
+      type: object
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    StandardDevicePUTRequestLinks:
+      properties:
+        firmware:
+          $ref: '#/components/schemas/String'
+        site:
+          $ref: '#/components/schemas/String'
+      type: object
+    XCAPIDevicePOSTRequestLinks:
+      properties:
+        site:
+          $ref: '#/components/schemas/String'
+        deviceType:
+          example: /api/customers/K1234/device-types/XCAPI
+          type: string
+      type: object
+    Data:
+      properties:
+        key:
+          type: string
+          description: Metadata key.
+          example: function_key_number
+        value:
+          type: string
+          description: Metadata value.
+          example: '5'
+      type: object
+      required:
+      - key
+      - value
+      description: Data represents key-value pair for additional reference metadata.
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    XCAPIDevicePUTLinks:
+      properties:
+        site:
+          $ref: '#/components/schemas/String'
+      type: object
+    BaseLicenseUpdateData:
+      properties:
+        licenseKey:
+          $ref: '#/components/schemas/String'
+        licenseType:
+          $ref: '#/components/schemas/String'
+      type: object
+    BaseLicenseCreateRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/BaseLicenseCreateData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    DeviceSiteOptionsPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/DeviceSiteOptionsPUTLinks'
+        data:
+          $ref: '#/components/schemas/SiteOptionsPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    StandardDevicePUTRequestData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        note:
+          $ref: '#/components/schemas/String'
+        ringtoneInternal:
+          $ref: '#/components/schemas/Integer'
+        ringtoneExternal:
+          $ref: '#/components/schemas/Integer'
+        groupQueueSkillRingtone:
+          $ref: '#/components/schemas/Integer'
+        webguiHttpsonly:
+          $ref: '#/components/schemas/Boolean'
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    MediaGatewayPOSTLinks:
+      properties:
+        firmware:
+          $ref: '#/components/schemas/String'
+        deviceType:
+          type: string
+        site:
+          $ref: '#/components/schemas/String'
+      type: object
+    UnprovisionedSipDevicePUTData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        note:
+          $ref: '#/components/schemas/String'
+        cidScreening:
+          $ref: '#/components/schemas/Enum'
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    XCAPIDevicePOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/XCAPIDevicePOSTRequestLinks'
+        data:
+          $ref: '#/components/schemas/XCAPIDevicePOSTRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    DeviceActivationData:
+      properties:
+        active:
+          type: boolean
+      type: object
+    HandsetDeviceRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/HandsetDeviceItem'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    DeviceActivationRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/DeviceActivationData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    XCAPIDevicePUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/XCAPIDevicePUTLinks'
+        data:
+          $ref: '#/components/schemas/XCAPIDevicePUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Links:
+      description: Related resource links
+      type: object
+    BaseDevicePUTData:
+      properties:
+        ipAddress:
+          $ref: '#/components/schemas/String'
+        netmask:
+          $ref: '#/components/schemas/String'
+        gateway:
+          $ref: '#/components/schemas/String'
+        dns1:
+          $ref: '#/components/schemas/String'
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+        dns2:
+          $ref: '#/components/schemas/String'
+        note:
+          $ref: '#/components/schemas/String'
+        mtu:
+          $ref: '#/components/schemas/String'
+        bitrate:
+          $ref: '#/components/schemas/String'
+        webguiHttpsonly:
+          $ref: '#/components/schemas/Boolean'
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        dhcpEnabled:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    BaseDevicePUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/BaseDevicePUTLinks'
+        data:
+          $ref: '#/components/schemas/BaseDevicePUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    DeviceSiteOptionsPUTLinks:
+      properties:
+        mediaGateway:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JSON Web Token
