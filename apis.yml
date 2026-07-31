@@ -1,7 +1,20 @@
 aid: nfon
 name: Nfon
-description: 'Nfon is a company surfaced as a portfolio company of earlybird and added to the API Evangelist
-  network as a stub for enrichment. Sector: telecom. This profile is a lead awaiting the enrichment pipeline.'
+description: >-
+  NFON AG is a European provider of cloud telephony and unified communications
+  (UCaaS/CPaaS), headquartered in Munich and serving businesses across 15+
+  European countries. Its Cloudya cloud phone system and related products deliver
+  business voice, video, contact centre and AI-assisted communication. For
+  developers and integration partners, NFON publishes a set of RESTful JSON APIs
+  hosted from the NFON-AG GitHub organisation: the flagship PBX Configuration API
+  (OAuth 2.0, ~480 operations for provisioning tenants, extensions, devices,
+  queues, groups, IVRs, phone books, licences and more — the successor to the
+  legacy Service Portal API), the CTI API (server-to-server call control and
+  Server-Sent-Event call/state streaming), and the Call History API offered under
+  "Login with NFON" (OAuth 2.0 Authorization Code + PKCE) for retrieving,
+  streaming and deleting call records with transcriptions and summaries. Use of
+  the APIs is free of charge; access is provisioned by contacting
+  integration@nfon.com.
 url: https://raw.githubusercontent.com/api-evangelist/nfon/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,15 +22,1243 @@ x-backed-by:
 - earlybird
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
+image: https://a.storyblok.com/f/290788/2624x1428/c0ccf89b71/homepage-hero-home.png
 tags:
 - Company
 - Telecom
-apis: []
+- Cloud Telephony
+- UCaaS
+- CPaaS
+- VoIP
+- CTI
+- Call History
+- PBX
+- Communications
+- SIP
+- Germany
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 24
+  pass: local-v1
+apis:
+- name: NFON Service Portal API (legacy)
+  description: >-
+    Legacy PBX configuration API (Basic Auth / API key) for viewing and modifying PBX-related configuration.
+    Being deprecated in favour of the PBX Configuration API; maintained only for critical fixes. Public
+    Postman collection published.
+  humanURL: https://github.com/NFON-AG/Service-Portal-API
+  baseURL: https://portal-api.nfon.net:8090/api
+  properties:
+  - type: Postman
+    url: postman/nfon-service-portal-api.postman_collection.json
+  - type: Documentation
+    url: https://nfon-ag.github.io/Service-Portal-API-Specification/net/nfon/portal/api/Api.html
+- aid: nfon:nfon-accounts-api
+  name: Nfon Accounts API
+  description: The Accounts API from Nfon — 4 operation(s) for accounts.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-address-api
+  name: Nfon address API
+  description: The address API from Nfon — 1 operation(s) for address.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - address
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-address-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-authentication-api
+  name: Nfon authentication API
+  description: Everything about authentication
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-blacklist-profiles-api
+  name: Nfon Blacklist Profiles API
+  description: Blacklist profile management
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Blacklist Profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-blacklist-profiles-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-clip-screened-prefixes-api
+  name: Nfon clip-screened-prefixes API
+  description: CLIP screened prefix management for SIPTrunk customers
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - clip-screened-prefixes
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-clip-screened-prefixes-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-contract-types-api
+  name: Nfon Contract Types API
+  description: The Contract Types API from Nfon — 2 operation(s) for contract types.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Contract Types
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-contract-types-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-announcements-api
+  name: Nfon Customer Announcements API
+  description: The Customer Announcements API from Nfon — 2 operation(s) for customer announcements.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Announcements
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-announcements-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-conference-api
+  name: Nfon Customer Conference API
+  description: The Customer Conference API from Nfon — 4 operation(s) for customer conference.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Conference
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-conference-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-contracts-api
+  name: Nfon Customer Contracts API
+  description: The Customer Contracts API from Nfon — 2 operation(s) for customer contracts.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Contracts
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-contracts-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-device-types-api
+  name: Nfon Customer Device Types API
+  description: The Customer Device Types API from Nfon — 4 operation(s) for customer device types.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Device Types
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-device-types-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-devices-api
+  name: Nfon Customer Devices API
+  description: The Customer Devices API from Nfon — 20 operation(s) for customer devices.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Devices
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-devices-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-dids-api
+  name: Nfon Customer DIDs API
+  description: The Customer DIDs API from Nfon — 4 operation(s) for customer dids.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer DIDs
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-dids-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-extensions-api
+  name: Nfon Customer Extensions API
+  description: The Customer Extensions API from Nfon — 38 operation(s) for customer extensions.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Extensions
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-extensions-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-frontdesk-api
+  name: Nfon Customer Frontdesk API
+  description: The Customer Frontdesk API from Nfon — 6 operation(s) for customer frontdesk.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Frontdesk
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-frontdesk-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-groups-api
+  name: Nfon Customer Groups API
+  description: The Customer Groups API from Nfon — 8 operation(s) for customer groups.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-groups-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-ip-whitelist-api
+  name: Nfon Customer IP Whitelist API
+  description: The Customer IP Whitelist API from Nfon — 2 operation(s) for customer ip whitelist.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer IP Whitelist
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-ip-whitelist-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-ivr-api
+  name: Nfon Customer IVR API
+  description: The Customer IVR API from Nfon — 11 operation(s) for customer ivr.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer IVR
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-ivr-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-lync-api
+  name: Nfon Customer Lync API
+  description: The Customer Lync API from Nfon — 5 operation(s) for customer lync.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Lync
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-lync-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-phone-books-api
+  name: Nfon Customer Phone Books API
+  description: The Customer Phone Books API from Nfon — 5 operation(s) for customer phone books.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Phone Books
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-phone-books-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-queues-api
+  name: Nfon Customer Queues API
+  description: The Customer Queues API from Nfon — 12 operation(s) for customer queues.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Queues
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-queues-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-routers-api
+  name: Nfon Customer Routers API
+  description: The Customer Routers API from Nfon — 2 operation(s) for customer routers.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Routers
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-routers-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-sites-api
+  name: Nfon Customer Sites API
+  description: The Customer Sites API from Nfon — 3 operation(s) for customer sites.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Sites
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-sites-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-skills-api
+  name: Nfon Customer Skills API
+  description: The Customer Skills API from Nfon — 12 operation(s) for customer skills.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Skills
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-skills-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-speed-dials-api
+  name: Nfon Customer Speed Dials API
+  description: The Customer Speed Dials API from Nfon — 2 operation(s) for customer speed dials.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Speed Dials
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-speed-dials-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-targets-api
+  name: Nfon Customer Targets API
+  description: The Customer Targets API from Nfon — 29 operation(s) for customer targets.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Targets
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-targets-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-time-controls-api
+  name: Nfon Customer Time Controls API
+  description: The Customer Time Controls API from Nfon — 5 operation(s) for customer time controls.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Time Controls
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-time-controls-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-trunks-api
+  name: Nfon Customer Trunks API
+  description: The Customer Trunks API from Nfon — 4 operation(s) for customer trunks.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Trunks
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-trunks-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customer-voice-recording-api
+  name: Nfon Customer Voice Recording API
+  description: >-
+    The Customer Voice Recording API from Nfon — 2 operation(s) for customer voice recording.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customer Voice Recording
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customer-voice-recording-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-customers-api
+  name: Nfon Customers API
+  description: Customer management
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Customers
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-customers-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-device-ids-api
+  name: Nfon Device IDs API
+  description: The Device IDs API from Nfon — 1 operation(s) for device ids.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Device IDs
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-device-ids-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-device-types-api
+  name: Nfon Device Types API
+  description: The Device Types API from Nfon — 4 operation(s) for device types.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Device Types
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-device-types-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-devices-api
+  name: Nfon Devices API
+  description: The Devices API from Nfon — 5 operation(s) for devices.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Devices
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-devices-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-direct-calls-api
+  name: Nfon Direct Calls API
+  description: The Direct Calls API from Nfon — 2 operation(s) for direct calls.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Direct Calls
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-direct-calls-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-import-export-api
+  name: Nfon import-export API
+  description: Bulk import and export operations
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - import-export
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-import-export-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-integration-types-api
+  name: Nfon Integration Types API
+  description: The Integration Types API from Nfon — 2 operation(s) for integration types.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Integration Types
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-integration-types-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-licenses-api
+  name: Nfon licenses API
+  description: Unified license management operations
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - licenses
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-licenses-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-operators-api
+  name: Nfon Operators API
+  description: Operator management
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Operators
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-operators-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-pbx-groups-api
+  name: Nfon PBX Groups API
+  description: PBX group management
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - PBX Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-pbx-groups-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-phone-extensions-api
+  name: Nfon phone extensions API
+  description: Data for phone extensions
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - phone extensions
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-phone-extensions-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-queue-profiles-api
+  name: Nfon queue-profiles API
+  description: The queue-profiles API from Nfon — 5 operation(s) for queue-profiles.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - queue-profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-queue-profiles-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-rating-profiles-api
+  name: Nfon Rating Profiles API
+  description: Rating profile management
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Rating Profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-rating-profiles-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-records-api
+  name: Nfon records API
+  description: Call Records Management
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - records
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-records-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-references-api
+  name: Nfon references API
+  description: Find references to identifiers (extensions and service codes)
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - references
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-references-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-sip-servers-api
+  name: Nfon SIP Servers API
+  description: Manage SIP server infrastructure
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - SIP Servers
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-sip-servers-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-sites-api
+  name: Nfon sites API
+  description: Site management operations
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - sites
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-sites-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-softswitches-api
+  name: Nfon Softswitches API
+  description: Softswitch management
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Softswitches
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-softswitches-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-system-integrators-api
+  name: Nfon System Integrators API
+  description: The System Integrators API from Nfon — 3 operation(s) for system integrators.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - System Integrators
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-system-integrators-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-tenants-api
+  name: Nfon Tenants API
+  description: The Tenants API from Nfon — 9 operation(s) for tenants.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Tenants
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-tenants-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-timezones-api
+  name: Nfon Timezones API
+  description: The Timezones API from Nfon — 2 operation(s) for timezones.
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - Timezones
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-timezones-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-trial-templates-api
+  name: Nfon trial-templates API
+  description: Trial template operations
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - trial-templates
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-trial-templates-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+- aid: nfon:nfon-trunks-api
+  name: Nfon trunks API
+  description: Trunk management operations
+  humanURL: https://www.nfon.com/en/integrations/api
+  baseURL: https://api.nfon.net/configuration/v1
+  tags:
+  - trunks
+  properties:
+  - type: OpenAPI
+    url: openapi/nfon-trunks-api-openapi.yml
+  - type: Documentation
+    url: https://api.nfon.net/configuration/
+  - type: APIReference
+    url: https://api.nfon.net/configuration/
+  - type: Documentation
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/CTI-API/
+  - type: Documentation
+    url: https://nfon-ag.github.io/Call-History-API/
+  - type: APIReference
+    url: https://nfon-ag.github.io/Call-History-API/
+common:
+- type: DomainSecurity
+  url: security/nfon-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/nfon-agentic-access.yml
+- type: Authentication
+  url: authentication/nfon-authentication.yml
+- type: DeveloperPortal
+  url: https://www.nfon.com/en/integrations/api
+- type: Documentation
+  url: https://api.nfon.net/configuration/
+- type: APIReference
+  url: https://nfon-ag.github.io/CTI-API/
+- type: GitHubOrganization
+  url: https://github.com/NFON-AG
+- type: StatusPage
+  url: https://status.nfon.com
+- type: Deprecation
+  url: https://github.com/NFON-AG/PBX-Configuration-APIs/blob/main/api-gateway-migration-guide.md
+- type: TrustCenter
+  url: https://www.nfon.com/en/trust-center/
+- type: Compliance
+  url: https://www.nfon.com/en/trust-center/
+- type: TermsOfService
+  url: https://www.nfon.com/en/legal/gtc-sla/
+- type: PrivacyPolicy
+  url: https://www.nfon.com/en/legal/data-protection
+- type: Login
+  url: https://start.cloudya.com/auth/login
+- type: Support
+  url: https://partners.nfon.com/
+- type: Postman
+  url: postman/nfon-service-portal-api.postman_collection.json
+- type: ErrorCatalog
+  url: errors/nfon-problem-types.yml
+- type: Conformance
+  url: conformance/nfon-conformance.yml
+- type: Lifecycle
+  url: lifecycle/nfon-lifecycle.yml
+- type: Conventions
+  url: conventions/nfon-conventions.yml
+- type: DataModel
+  url: data-model/nfon-data-model.yml
+- type: MCPServer
+  url: mcp/nfon-mcp.yml
+- type: LLMsTxt
+  url: llms/nfon-llms.txt
+- type: Packages
+  url: packages/nfon-packages.yml
+- type: WellKnown
+  url: well-known/nfon-well-known.yml
+- type: ChangeLog
+  url: changelog/nfon-changelog.yml
+- type: Overlay
+  url: overlays/nfon-pbx-configuration-overlay.yaml
+- type: Overlay
+  url: overlays/nfon-cti-overlay.yaml
+- type: Overlay
+  url: overlays/nfon-call-history-overlay.yaml
+- type: AgentSkill
+  url: skills/nfon-cti-originate-and-cancel-call.md
+- type: AgentSkill
+  url: skills/nfon-call-history-retrieve-records.md
+- type: AgentSkill
+  url: skills/nfon-pbx-provision-extension.md

@@ -1,0 +1,46 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/nfon-call-history-api-openapi.yml, openapi/nfon-cti-api-openapi.yml, openapi/nfon-pbx-configuration-api-openapi.json
+docs: https://www.nfon.com/en/integrations/api
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+  - authorizationCode
+identity_provider: https://sso.cloud-cfg.com/
+notes: >-
+  All NFON APIs authenticate with an Authorization Bearer JWT. Three distinct
+  token-acquisition models are documented, one per API. Access is provisioned
+  by contacting integration@nfon.com. A User-Agent header of the form
+  "<productname>/<productversion> (<K-Account>)" is required on all requests.
+schemes:
+- name: bearer_auth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: JSON Web Token bearer, applied to every operation across all three APIs.
+  sources:
+  - openapi/nfon-call-history-api-openapi.yml
+  - openapi/nfon-cti-api-openapi.yml
+  - openapi/nfon-pbx-configuration-api-openapi.json
+token_acquisition:
+- api: NFON PBX Configuration API
+  model: oauth2-client-credentials
+  identity_provider: https://sso.cloud-cfg.com/
+  credentials: Client ID + Client Secret (request via integration@nfon.com)
+  notes: Machine-to-machine OAuth 2.0 client credentials flow; browser login via Login with NFON also supported.
+- api: NFON Call History API
+  model: oauth2-authorization-code-pkce
+  identity_provider: https://sso.cloud-cfg.com/
+  offering: Login with NFON (Early Access)
+  notes: Standard OAuth 2.0 Authorization Code flow with PKCE; partners receive their own OAuth client. Browser login via Cloudya (https://start.cloudya.com/).
+- api: NFON CTI API
+  model: custom-token-exchange
+  login_operation: createToken (POST /login)
+  refresh_operation: refreshAccessToken (PUT /login)
+  credentials: API Username + API Password
+  access_token_ttl_seconds: 300
+  jwks: /.well-known/jwks.json (publicKeyWellKnown)
+  notes: Username/password exchanged for a short-lived (5 minute) access + refresh token pair; tokens are RS-signed JWTs verifiable via the published JWKS.

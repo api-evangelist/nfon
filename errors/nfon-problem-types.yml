@@ -1,0 +1,85 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/nfon-cti-api-openapi.yml, openapi/nfon-call-history-api-openapi.yml, openapi/nfon-pbx-configuration-api-openapi.json
+format: json
+envelope:
+  description: >-
+    The CTI API and Call History API return a simple JSON error envelope
+    {"error": "<message>"}. Errors carry an X-Request-Id response header that
+    uniquely identifies the request on the NFON backend for support. The PBX
+    Configuration API returns standard HTTP status codes with JSON bodies.
+    None of the APIs use RFC 9457 application/problem+json.
+  field: error
+  tracing_header: X-Request-Id
+problems:
+- status: 400
+  title: Bad Request
+  meaning: One or more request parameters failed validation.
+  source_operations:
+  - openapi/nfon-cti-api-openapi.yml#createToken
+  - openapi/nfon-cti-api-openapi.yml#originate
+  - openapi/nfon-call-history-api-openapi.yml#/records[get]
+  - openapi/nfon-pbx-configuration-api-openapi.json
+- status: 401
+  title: Unauthorized
+  meaning: Missing, invalid or expired bearer token (CTI access tokens expire after 5 minutes).
+  source_operations:
+  - openapi/nfon-cti-api-openapi.yml#createToken
+  - openapi/nfon-cti-api-openapi.yml#getState
+  - openapi/nfon-pbx-configuration-api-openapi.json
+- status: 402
+  title: Payment Required
+  meaning: Operation blocked by licensing/entitlement constraints.
+  source_operations:
+  - openapi/nfon-pbx-configuration-api-openapi.json
+- status: 403
+  title: Forbidden
+  meaning: Authenticated principal lacks the required permission (default permission is tenant.manager).
+  source_operations:
+  - openapi/nfon-cti-api-openapi.yml#originate
+  - openapi/nfon-pbx-configuration-api-openapi.json
+- status: 404
+  title: Not Found
+  meaning: The requested resource (extension, call, record, tenant) does not exist.
+  source_operations:
+  - openapi/nfon-cti-api-openapi.yml#cancel
+  - openapi/nfon-call-history-api-openapi.yml#/records/{uuid}[get]
+  - openapi/nfon-pbx-configuration-api-openapi.json
+- status: 405
+  title: Method Not Allowed
+  source_operations:
+  - openapi/nfon-cti-api-openapi.yml#getPhoneExtensionData
+- status: 406
+  title: Not Acceptable
+  meaning: Requested representation (e.g. Accept header) not supported by the streaming endpoint.
+  source_operations:
+  - openapi/nfon-cti-api-openapi.yml#stream
+- status: 409
+  title: Conflict
+  meaning: Request conflicts with the current state of the resource.
+  source_operations:
+  - openapi/nfon-pbx-configuration-api-openapi.json
+- status: 413
+  title: Payload Too Large
+  source_operations:
+  - openapi/nfon-pbx-configuration-api-openapi.json
+- status: 422
+  title: Unprocessable Entity
+  meaning: Well-formed request that fails semantic/business validation.
+  source_operations:
+  - openapi/nfon-pbx-configuration-api-openapi.json
+- status: 500
+  title: Internal Server Error
+  meaning: Unexpected server error.
+  source_operations:
+  - openapi/nfon-cti-api-openapi.yml#getState
+  - openapi/nfon-call-history-api-openapi.yml#/records[get]
+  - openapi/nfon-pbx-configuration-api-openapi.json
+- status: 502
+  title: Bad Gateway
+  source_operations:
+  - openapi/nfon-pbx-configuration-api-openapi.json
+- status: 503
+  title: Service Unavailable
+  source_operations:
+  - openapi/nfon-pbx-configuration-api-openapi.json

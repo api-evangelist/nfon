@@ -1,0 +1,34 @@
+# NFON
+
+> NFON AG is a European cloud telephony and unified-communications provider (Cloudya). For developers it publishes RESTful JSON APIs from the NFON-AG GitHub organisation: the PBX Configuration API, the CTI API, and the Call History API (Login with NFON). All APIs use Authorization Bearer JWT; access is provisioned via integration@nfon.com and is free of charge.
+
+## APIs
+
+- [NFON PBX Configuration API](https://www.nfon.com/en/integrations/api): OAuth 2.0, ~480 operations to provision tenants, extensions, devices, phone books, queues, groups, IVR, licences and more. Base https://api.nfon.net/configuration/v1
+- [NFON CTI API](https://www.nfon.com/en/integrations/cti-api): Server-to-server call control and SSE call/state streaming. Base https://providersupportdata.cloud-cfg.com/v1
+- [NFON Call History API](https://www.nfon.com/en/integrations/login-with-nfon/): Retrieve, stream and delete call records with AI transcriptions and summaries (early access). Base https://api.nfon.com/call-history
+- [NFON Service Portal API (legacy)](https://github.com/NFON-AG/Service-Portal-API): Deprecated; superseded by the PBX Configuration API.
+
+## Specs
+
+- [PBX Configuration OpenAPI](https://api.nfon.net/configuration/api/openapi.json)
+- [CTI API OpenAPI](https://raw.githubusercontent.com/api-evangelist/nfon/refs/heads/main/openapi/nfon-cti-api-openapi.yml)
+- [Call History OpenAPI](https://raw.githubusercontent.com/api-evangelist/nfon/refs/heads/main/openapi/nfon-call-history-api-openapi.yml)
+- [Service Portal Postman collection](https://raw.githubusercontent.com/api-evangelist/nfon/refs/heads/main/postman/nfon-service-portal-api.postman_collection.json)
+
+## Docs
+
+- [API landing page](https://www.nfon.com/en/integrations/api)
+- [CTI API reference](https://nfon-ag.github.io/CTI-API/)
+- [Call History API reference](https://nfon-ag.github.io/Call-History-API/)
+- [PBX Configuration interactive docs](https://api.nfon.net/configuration/)
+- [PBX migration guide](https://github.com/NFON-AG/PBX-Configuration-APIs/blob/main/api-gateway-migration-guide.md)
+- [NFON-AG GitHub organisation](https://github.com/NFON-AG)
+
+## Operations & Support
+
+- [Status page (API Breaking Changes)](https://status.nfon.com)
+- [Partner Portal](https://partners.nfon.com/)
+- [Trust Center (BSI C5)](https://www.nfon.com/en/trust-center/)
+- [Terms of Service / SLA](https://www.nfon.com/en/legal/gtc-sla/)
+- Access requests: integration@nfon.com

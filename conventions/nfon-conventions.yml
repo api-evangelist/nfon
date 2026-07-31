@@ -1,0 +1,52 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/*, README docs (NFON-AG GitHub)
+authentication:
+  style: Authorization Bearer JWT (see authentication/nfon-authentication.yml)
+  required_header: >-
+    User-Agent must be "<productname>/<productversion> (<K-Account>)" (CTI) or
+    "<productname>/<productversion>" (Call History) on every request.
+idempotency:
+  supported: false
+  notes: >-
+    No Idempotency-Key header or idempotency contract is documented or present in
+    any spec. Mutating calls (originate, delete records, PBX writes) are not
+    advertised as idempotent.
+pagination:
+  style: offset-limit
+  params:
+    limit: Maximum number of records to return.
+    offset: Starting offset into the result set.
+  applies_to:
+  - openapi/nfon-call-history-api-openapi.yml (GET /records)
+  - openapi/nfon-pbx-configuration-api-openapi.json (pageSize/offset/limit/page across list operations)
+filtering_sorting:
+  filter: >-
+    Call History GET/DELETE /records accept a comma-separated `filter` (e.g.
+    status:missed, direction:inbound, transcription, internal:<ext>, global:<num>)
+    plus `search`, `from`, `to`, `customer`, `extension`.
+  sort: Call History supports `sort=asc|desc` on creation time.
+streaming:
+  style: server-sent-events
+  notes: >-
+    CTI (/extensions/phone/states, /extensions/phone/calls) and Call History
+    (GET /records with Accept: text/event-stream) stream events via SSE. Records
+    may be re-sent with the same uuid when updated (e.g. transcription completes);
+    clients must de-duplicate/replace by uuid.
+request_tracing:
+  header: X-Request-Id
+  notes: Returned on error responses (Call History) to correlate requests with NFON support.
+content_type:
+  format: JSON (application/json); text/event-stream for SSE.
+forward_compatibility:
+  notes: >-
+    Schemas explicitly require clients to tolerate unknown enum values
+    (context, destination_type, status, history entries) and treat them as
+    defaults — a documented forward-compatibility contract.
+error_envelope:
+  shape: '{"error": "<message>"}'
+  detail: See errors/nfon-problem-types.yml
+versioning:
+  detail: See lifecycle/nfon-lifecycle.yml
+rate_limiting:
+  documented: false

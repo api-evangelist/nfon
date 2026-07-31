@@ -1,0 +1,17 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for NFON Call History API
+  version: 1.0.0
+extends: openapi/nfon-call-history-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enrichment:
+      provider: nfon
+      auth: oauth2-authorization-code-pkce
+      offering: Login with NFON (Early Access)
+      identity_provider: https://sso.cloud-cfg.com/
+      streaming: server-sent-events (Accept text/event-stream)
+      pagination: offset-limit
+      tracing_header: X-Request-Id
+      docs: https://nfon-ag.github.io/Call-History-API/

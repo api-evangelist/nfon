@@ -1,0 +1,25 @@
+generated: '2026-07-20'
+method: searched
+notes: >-
+  Probed /.well-known/ discovery surfaces on the NFON website, identity provider,
+  and API hosts. Absence/blocked results are recorded as observed.
+documents:
+- host: https://www.nfon.com
+  path: /.well-known/security.txt
+  status: 404
+- host: https://sso.cloud-cfg.com
+  path: /.well-known/openid-configuration
+  status: 403
+  notes: NFON Identity Provider; discovery endpoint exists but is access-restricted from anonymous probe.
+- host: https://sso.cloud-cfg.com
+  path: /.well-known/oauth-authorization-server
+  status: 403
+- host: https://api.nfon.com
+  path: /.well-known/security.txt
+  status: 404
+- host: https://providersupportdata.cloud-cfg.com
+  path: /v1/.well-known/jwks.json
+  status: in-spec
+  notes: >-
+    Published as a first-class CTI API operation (publicKeyWellKnown, GET
+    /.well-known/jwks.json) returning the RS public keys used to verify CTI JWTs.

@@ -1,0 +1,15 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for NFON PBX Configuration API
+  version: 1.0.0
+extends: openapi/nfon-pbx-configuration-api-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enrichment:
+      provider: nfon
+      auth: oauth2-client-credentials
+      identity_provider: https://sso.cloud-cfg.com/
+      docs: https://api.nfon.net/configuration/
+      supersedes: NFON Service Portal API
+      tenant_scope: /tenants/{participantExternalIdentifier}

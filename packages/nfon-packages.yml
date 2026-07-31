@@ -1,0 +1,29 @@
+generated: '2026-07-20'
+method: searched
+source: npm, PyPI, NFON-AG GitHub org
+notes: >-
+  NFON does not publish official first-party client SDK libraries. Each API repo
+  ships copy-paste example code (Go, Java, Node.js, Python, C#, TypeScript) rather
+  than a packaged SDK. The only registry hit is a third-party community package;
+  no official SDK pointer is emitted.
+packages:
+- language: javascript
+  registry: npm
+  name: nfon
+  url: https://www.npmjs.com/package/nfon
+  install: npm install nfon
+  official: false
+  notes: Community package "NFON REST API implementation for Node.js" by Sebastian Ortmann (ortmann64) — not maintained by NFON AG.
+example_code:
+- api: NFON PBX Configuration API
+  repo: https://github.com/NFON-AG/PBX-Configuration-APIs
+  languages: [go, java, python, csharp, typescript]
+- api: NFON CTI API
+  repo: https://github.com/NFON-AG/CTI-API
+  languages: [go, java, javascript]
+- api: NFON Call History API
+  repo: https://github.com/NFON-AG/Call-History-API
+  languages: [go, java, javascript]
+- name: API Showcase
+  repo: https://github.com/NFON-AG/API-Showcase
+  notes: Interactive browser + local demos for the CTI, Call History and Portal APIs.

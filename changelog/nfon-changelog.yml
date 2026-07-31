@@ -1,0 +1,34 @@
+generated: '2026-07-20'
+method: searched
+source: README docs (NFON-AG GitHub), https://status.nfon.com, api-gateway-migration-guide.md
+scheme:
+  description: >-
+    NFON does not publish a single dated public changelog. Breaking changes are
+    announced via the "API Breaking Changes" subscription on the NFON status page.
+    The PBX Configuration OpenAPI carries a date-stamped version (e.g. 2026.07.20).
+  breaking_changes_channel: https://status.nfon.com
+current_versions:
+  pbx_configuration: 2026.07.20
+  cti: 1.0.0
+  call_history: 2.0-early-access
+entries:
+- date: '2026-07'
+  api: NFON PBX Configuration API
+  type: addition
+  breaking: false
+  highlights:
+  - New tenant licence endpoints (licenses, licenses/usage, licenses/assign, licenses/unassign).
+  - Bulk import/export for devices, phone extensions, phone books, speed dials, virtual fax extensions.
+  - Async import/export jobs (GET /tenants/{tenant}/jobs, /jobs/{eventId}).
+- api: NFON PBX Configuration API
+  type: migration
+  breaking: true
+  highlights:
+  - Supersedes the Service Portal API. Base URL moves to https://api.nfon.net/configuration/v1/tenants/{K-number}.
+  - Authentication changes from Basic Auth / API key to OAuth 2.0 Bearer.
+  reference: https://github.com/NFON-AG/PBX-Configuration-APIs/blob/main/api-gateway-migration-guide.md
+- api: NFON Call History API
+  type: addition
+  breaking: false
+  highlights:
+  - Version 2.0 (early access) under Login with NFON; adds SSE streaming and AI transcription/summary fields.

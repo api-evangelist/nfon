@@ -1,0 +1,46 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/nfon-cti-api-openapi.yml, openapi/nfon-call-history-api-openapi.yml
+notes: >-
+  No official hosted/remote NFON MCP server was found (checked docs, NFON-AG
+  GitHub org, npm @modelcontextprotocol). The following is a candidate tool list
+  derived from the CTI and Call History OpenAPI operations, one tool per
+  operation, to seed a future MCP server. Not published by NFON.
+server:
+  name: nfon
+  transport: http
+tools:
+- name: cti_create_token
+  description: Exchange API username/password for a CTI access + refresh token pair.
+  source_operation: openapi/nfon-cti-api-openapi.yml#createToken
+- name: cti_refresh_token
+  description: Refresh the CTI access token using the refresh token.
+  source_operation: openapi/nfon-cti-api-openapi.yml#refreshAccessToken
+- name: cti_get_phone_extension_data
+  description: Retrieve configured extensions (number + name) for a tenant.
+  source_operation: openapi/nfon-cti-api-openapi.yml#getPhoneExtensionData
+- name: cti_get_state
+  description: Get current line status of all extensions (snapshot or stream).
+  source_operation: openapi/nfon-cti-api-openapi.yml#getState
+- name: cti_originate_call
+  description: Start an outgoing call for an extension; returns a call UUID.
+  source_operation: openapi/nfon-cti-api-openapi.yml#originate
+- name: cti_cancel_call
+  description: End a call started via the API, identified by UUID.
+  source_operation: openapi/nfon-cti-api-openapi.yml#cancel
+- name: cti_stream_calls
+  description: Stream real-time call events for a tenant via SSE.
+  source_operation: openapi/nfon-cti-api-openapi.yml#stream
+- name: call_history_list_records
+  description: Get, search, filter and stream call history records.
+  source_operation: openapi/nfon-call-history-api-openapi.yml#GET-/records
+- name: call_history_get_record
+  description: Get details for a single call record by UUID.
+  source_operation: openapi/nfon-call-history-api-openapi.yml#GET-/records/{uuid}
+- name: call_history_delete_records
+  description: Delete multiple call records matching a filter.
+  source_operation: openapi/nfon-call-history-api-openapi.yml#DELETE-/records
+- name: call_history_delete_record
+  description: Delete a single call record by UUID.
+  source_operation: openapi/nfon-call-history-api-openapi.yml#DELETE-/records/{uuid}

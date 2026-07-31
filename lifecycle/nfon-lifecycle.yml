@@ -1,0 +1,38 @@
+generated: '2026-07-20'
+method: searched
+source: README docs (NFON-AG GitHub), https://status.nfon.com, api-gateway-migration-guide.md
+versioning:
+  scheme: uri-path
+  notes: >-
+    CTI API pins version in the path (/v1) and reports 1.0.0; PBX Configuration API
+    serves from /configuration/v1 and reports a date-stamped version (e.g.
+    2026.07.20); Call History API is at 2.0-early-access.
+  apis:
+  - api: NFON PBX Configuration API
+    current: v1 (2026.07.20)
+    stability: general-availability
+  - api: NFON CTI API
+    current: v1 (1.0.0)
+    stability: released (incoming direct-to-extension calls)
+  - api: NFON Call History API
+    current: 2.0-early-access
+    stability: early-access
+    notes: Subject to change on short notice under Login with NFON early access.
+deprecation:
+  policy: >-
+    Breaking changes are announced in advance via the "API Breaking Changes"
+    subscription on the NFON status page. The legacy Service Portal API is
+    deprecated in favour of the PBX Configuration API and maintained only for
+    critical fixes.
+  breaking_changes_channel: https://status.nfon.com
+  migration_guide: https://github.com/NFON-AG/PBX-Configuration-APIs/blob/main/api-gateway-migration-guide.md
+  deprecated_apis:
+  - name: NFON Service Portal API
+    superseded_by: NFON PBX Configuration API
+status_page: https://status.nfon.com
+support:
+  contact: integration@nfon.com
+  partner_portal: https://partners.nfon.com/
+  feature_requests:
+  - https://nfon.airfocus.com/share/forms/648a1c17a224aa6e8937f8393f4bc21c
+terms_of_service: https://www.nfon.com/en/legal/gtc-sla/

@@ -1,0 +1,37 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/*, https://www.nfon.com/en/trust-center/, README auth docs
+standards:
+- id: oauth2
+  conforms: true
+  evidence: PBX Configuration API (client credentials) and Call History API (authorization code + PKCE) authenticate via the NFON Identity Provider (sso.cloud-cfg.com) OAuth 2.0.
+- id: oidc
+  conforms: partial
+  evidence: NFON Identity Provider exposes /.well-known/openid-configuration (access restricted, HTTP 403 from public probe); Login with NFON is an OIDC-style browser login.
+- id: pkce
+  conforms: true
+  evidence: Call History API documents OAuth 2.0 Authorization Code flow with PKCE for Login with NFON.
+- id: jwt-bearer
+  conforms: true
+  evidence: All APIs use RFC 6750 Authorization Bearer with RS-signed JWTs; CTI publishes JWKS at /.well-known/jwks.json.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'Errors use a simple {"error": "..."} envelope, not application/problem+json.'
+- id: sse-server-sent-events
+  conforms: true
+  evidence: CTI API (call/state event streams) and Call History API (text/event-stream) stream via W3C Server-Sent Events.
+- id: e164-numbering
+  conforms: true
+  evidence: Call records express external numbers in E.164 (global context).
+- id: bsi-c5
+  conforms: true
+  evidence: NFON Trust Center publishes BSI C5 (Cloud Computing Compliance Criteria Catalogue) attestation.
+- id: gdpr
+  conforms: true
+  evidence: EU-based provider; data-protection terms at nfon.com/en/legal/data-protection.
+- id: fhir
+  conforms: false
+- id: scim
+  conforms: false
+- id: json-api
+  conforms: false

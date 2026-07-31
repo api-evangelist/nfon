@@ -1,0 +1,18 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for NFON CTI API
+  version: 1.0.0
+extends: openapi/nfon-cti-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enrichment:
+      provider: nfon
+      auth: custom-token-exchange
+      login: POST /login (createToken)
+      refresh: PUT /login (refreshAccessToken)
+      access_token_ttl_seconds: 300
+      jwks: /.well-known/jwks.json
+      streaming: server-sent-events
+      required_header: 'User-Agent: <productname>/<productversion> (<K-Account>)'
+      docs: https://nfon-ag.github.io/CTI-API/

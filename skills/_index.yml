@@ -1,0 +1,15 @@
+generated: '2026-07-20'
+method: generated
+skills:
+- file: nfon-cti-originate-and-cancel-call.md
+  name: Originate and cancel a call with the NFON CTI API
+  api: openapi/nfon-cti-api-openapi.yml
+  operations: [createToken, getPhoneExtensionData, originate, cancel]
+- file: nfon-call-history-retrieve-records.md
+  name: Retrieve and stream NFON call history records
+  api: openapi/nfon-call-history-api-openapi.yml
+  operations: ["GET /records", "GET /records/{uuid}"]
+- file: nfon-pbx-provision-extension.md
+  name: Provision a phone extension via the NFON PBX Configuration API
+  api: openapi/nfon-pbx-configuration-api-openapi.json
+  operations: [get_66, post_15, put_24]

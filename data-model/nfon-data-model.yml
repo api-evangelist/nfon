@@ -1,0 +1,88 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/nfon-pbx-configuration-api-openapi.json, openapi/nfon-cti-api-openapi.yml, openapi/nfon-call-history-api-openapi.yml
+notes: >-
+  Entity graph derived from OpenAPI schemas and path hierarchy. The PBX
+  Configuration API is organised as tenant-scoped resources under
+  /tenants/{participantExternalIdentifier}. The K-Account (K-number, e.g. K0611)
+  identifies a tenant.
+entities:
+- name: Operator
+  api: pbx-configuration
+  description: Top-level operator owning softswitches and tenants.
+  relationships:
+  - has_many: Softswitch
+  - has_many: Tenant
+- name: Tenant
+  api: pbx-configuration
+  key: participantExternalIdentifier (K-number)
+  description: Customer PBX account; root of all customer-scoped configuration.
+  relationships:
+  - belongs_to: Operator
+  - has_many: Extension
+  - has_many: Device
+  - has_many: PhoneBook
+  - has_many: SpeedDial
+  - has_many: Queue
+  - has_many: Group
+  - has_many: IVR
+  - has_many: License
+- name: Extension
+  api: pbx-configuration
+  key: extensionNumber
+  description: Phone extension within a tenant; carries call-forwards, function keys, voicemail.
+  relationships:
+  - belongs_to: Tenant
+  - has_one: Device
+  - has_many: CallForward
+- name: Device
+  api: pbx-configuration
+  relationships:
+  - belongs_to: Tenant
+  - belongs_to: Extension
+- name: PhoneBook
+  api: pbx-configuration
+  key: phoneBookId
+  relationships:
+  - belongs_to: Tenant
+- name: Queue
+  api: pbx-configuration
+  relationships:
+  - belongs_to: Tenant
+- name: Group
+  api: pbx-configuration
+  relationships:
+  - belongs_to: Tenant
+- name: License
+  api: pbx-configuration
+  relationships:
+  - belongs_to: Tenant
+- name: Job
+  api: pbx-configuration
+  key: eventId
+  description: Async import/export job.
+  relationships:
+  - belongs_to: Tenant
+- name: PhoneExtensionState
+  api: cti
+  description: Real-time line state (offline, ringing, in-use) of an extension.
+  relationships:
+  - belongs_to: Extension
+- name: Call
+  api: cti
+  key: uuid
+  description: A call originated/monitored via the CTI API, identified by UUID.
+  relationships:
+  - references: Extension (A-number / B-number)
+- name: CallRecord
+  api: call-history
+  key: uuid
+  description: A historical call record with caller/callee, status, direction, and optional transcription + summary.
+  relationships:
+  - has_one: Transcription
+  - references: Extension (via caller/callee context K-number)
+- name: Transcription
+  api: call-history
+  description: AI transcript + summary attached to a call record; delivered asynchronously.
+  relationships:
+  - belongs_to: CallRecord
