@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts address API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "address",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup ONKZ for an address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/address/onkz/:countrycode/:postalcode/:city/:street"
+          },
+          "docs": "Geocodes the given address via OpenStreetMap Nominatim and determines the German ONKZ (Ortsnetzkennzahl / area code). Only German addresses (countrycode=de) are supported."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

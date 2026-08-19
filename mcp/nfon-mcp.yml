@@ -2,11 +2,9 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: openapi/nfon-cti-api-openapi.yml, openapi/nfon-call-history-api-openapi.yml
-notes: >-
-  No official hosted/remote NFON MCP server was found (checked docs, NFON-AG
-  GitHub org, npm @modelcontextprotocol). The following is a candidate tool list
-  derived from the CTI and Call History OpenAPI operations, one tool per
-  operation, to seed a future MCP server. Not published by NFON.
+notes: No official hosted/remote NFON MCP server was found (checked docs, NFON-AG GitHub org, npm @modelcontextprotocol).
+  The following is a candidate tool list derived from the CTI and Call History OpenAPI operations, one
+  tool per operation, to seed a future MCP server. Not published by NFON.
 server:
   name: nfon
   transport: http
@@ -44,3 +42,9 @@ tools:
 - name: call_history_delete_record
   description: Delete a single call record by UUID.
   source_operation: openapi/nfon-call-history-api-openapi.yml#DELETE-/records/{uuid}
+deployment:
+  mode: none
+  verified: derived
+  tools: 11
+  checked: '2026-08-12'
+  source: catalog MCP census

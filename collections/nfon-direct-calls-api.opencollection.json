@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts Direct Calls API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Direct Calls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get direct call",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/directcall-numbers/:number",
+            "params": [
+              {
+                "name": "number",
+                "value": "",
+                "type": "path",
+                "description": "Direct call number"
+              }
+            ]
+          },
+          "docs": "Get direct call"
+        },
+        {
+          "info": {
+            "name": "List direct calls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/directcall-numbers"
+          },
+          "docs": "List direct calls"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

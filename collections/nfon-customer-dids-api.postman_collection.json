@@ -1,0 +1,979 @@
+{
+  "item": [
+    {
+      "id": "c9f60bdb-95f6-4033-aafa-af94100c30d3",
+      "name": "Customer DIDs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "944f96bc-f82c-425b-a1da-914de68123bb",
+          "name": "get 52",
+          "request": {
+            "name": "get 52",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "dids"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "3905ee78-ee95-4a47-9883-6d841f7ca0eb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "dids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"first\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"prev\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"next\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"last\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"offset\": 0,\n  \"total\": 42,\n  \"items\": [\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    },\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    }\n  ],\n  \"size\": 20,\n  \"href\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e65c28a8-9c2a-42ae-a1be-d1f2e3b6810a",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "dids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3e318fd-e1ac-477f-a250-a63951b204b7",
+          "name": "get 53",
+          "request": {
+            "name": "get 53",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "dids",
+                ":didNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "didNumber",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "84916976-b7bb-4263-ba49-f43fe2ecdc19",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "dids",
+                    ":didNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "didNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {},\n  \"data\": {},\n  \"href\": \"/api/sip-servers/100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43b3d354-b297-4666-9beb-4d8129d7fd36",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "dids",
+                    ":didNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "didNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "414a74b0-898f-4076-a4c3-34525c4b7426",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "dids",
+                    ":didNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "didNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b18aceb6-7747-4db4-b836-f092e3a5787a",
+          "name": "get 54",
+          "request": {
+            "name": "get 54",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "dids",
+                ":didNumber",
+                "destination"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "didNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "543bdc9c-d035-4645-bc2f-f6b2f65ed04a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "dids",
+                    ":didNumber",
+                    "destination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "didNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {},\n  \"data\": {},\n  \"href\": \"/api/sip-servers/100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c154c803-2023-4446-a602-d1425106e7d2",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "dids",
+                    ":didNumber",
+                    "destination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "didNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "89b4caff-3b50-467b-ba00-7abaa336cfa8",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "dids",
+                    ":didNumber",
+                    "destination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "didNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9aacca86-7e31-4b77-b5a1-db198902d216",
+          "name": "put 14",
+          "request": {
+            "name": "put 14",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "dids",
+                ":didNumber",
+                "destination"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "didNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"links\": {\n    \"destination\": \"<string>\"\n  },\n  \"data\": \"<object>\",\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "328ba5f1-3256-4296-9980-f94d4a678603",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "dids",
+                    ":didNumber",
+                    "destination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "didNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"destination\": \"/api/customers/K1234/targets/phone-extensions/100\"\n  },\n  \"data\": {},\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "67ea8aa9-ff54-45b4-a5f6-3669f37787c1",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "dids",
+                    ":didNumber",
+                    "destination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "didNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"destination\": \"/api/customers/K1234/targets/phone-extensions/100\"\n  },\n  \"data\": {},\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7ac92645-4943-4b57-99b1-0dc1daeb464e",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "dids",
+                    ":didNumber",
+                    "destination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "didNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"destination\": \"/api/customers/K1234/targets/phone-extensions/100\"\n  },\n  \"data\": {},\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fd0d824c-7a42-43f4-b52c-a28a7e8c24dc",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "dids",
+                    ":didNumber",
+                    "destination"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "didNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"destination\": \"/api/customers/K1234/targets/phone-extensions/100\"\n  },\n  \"data\": {},\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c10ba418-e9a0-453e-b84e-81bd42a35db0",
+          "name": "get 51",
+          "request": {
+            "name": "get 51",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "dids",
+                "available-destinations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "23c3e53f-75de-4828-85bb-70d9b25480c6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "dids",
+                    "available-destinations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"first\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"prev\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"next\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"last\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"offset\": 0,\n  \"total\": 42,\n  \"items\": [\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    },\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    }\n  ],\n  \"size\": 20,\n  \"href\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b2163b1-ac31-449e-8830-c2ad1df65c1d",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "dids",
+                    "available-destinations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3a43c54f-bb76-48e3-98be-fd759c4ce4b8",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "dids",
+                    "available-destinations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nfon.com/call-history",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7c2edad2-e684-4308-88fb-363cde55246b",
+    "name": "NFON Call History Accounts Customer DIDs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.\n\nThis API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.\n\nFor more information, see: https://www.nfon.com/en/integrations/login-with-nfon/\n\nContact Support:\n Name: NFON\n Email: integration@nfon.com",
+      "type": "text/plain"
+    }
+  }
+}

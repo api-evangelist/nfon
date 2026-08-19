@@ -1,0 +1,961 @@
+{
+  "item": [
+    {
+      "id": "69233f22-4771-457b-9ab1-d23f60dac1ed",
+      "name": "Customer Contracts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5c71f38f-cda9-49c7-bb1d-8efc5b6c39b6",
+          "name": "get 31",
+          "request": {
+            "name": "get 31",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "e2fbddf1-7612-49e4-9afb-4b2a14eb1220",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {},\n  \"data\": [\n    {\n      \"value\": \"Enterprise Plan\",\n      \"name\": \"name\"\n    },\n    {\n      \"value\": \"SF-00123456\",\n      \"name\": \"salesForceId\"\n    },\n    {\n      \"value\": 1,\n      \"name\": \"subId\"\n    }\n  ],\n  \"href\": \"/api/customers/example-id/contracts\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c78c4f08-bbfc-461c-93f8-50241dd65ca0",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5917b3e2-05cb-44db-967d-83c878886db5",
+          "name": "post 5",
+          "request": {
+            "name": "post 5",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"links\": \"<object>\",\n  \"data\": {\n    \"salesForceId\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"subId\": \"<integer>\",\n    \"name\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "910547a4-1be5-440c-a39d-95cce0d7a791",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {},\n  \"data\": {\n    \"salesForceId\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"subId\": 1,\n    \"name\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c57dc82c-cdb8-41ce-8ac7-75eef3480229",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {},\n  \"data\": {\n    \"salesForceId\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"subId\": 1,\n    \"name\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5f7d6327-033b-4df0-940e-e573d9924c98",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {},\n  \"data\": {\n    \"salesForceId\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"subId\": 1,\n    \"name\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0de9cc0e-1ea0-4ba0-afb1-7206415762c7",
+          "name": "put 6",
+          "request": {
+            "name": "put 6",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "contracts",
+                ":salesForceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "salesForceId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"links\": \"<object>\",\n  \"data\": {\n    \"name\": \"<string>\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "e16c120e-8021-4f6f-8cb3-a246de15adb0",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "contracts",
+                    ":salesForceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "salesForceId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {},\n  \"data\": {\n    \"name\": \"Enterprise Plan\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8c87c20a-3a44-4368-97ad-309f608789a6",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "contracts",
+                    ":salesForceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "salesForceId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {},\n  \"data\": {\n    \"name\": \"Enterprise Plan\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ddea7939-4bc0-40ce-a2c5-4558f09de0f1",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "contracts",
+                    ":salesForceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "salesForceId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {},\n  \"data\": {\n    \"name\": \"Enterprise Plan\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "24c66d41-21d4-4bb0-bbd9-94ede7f998ea",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "contracts",
+                    ":salesForceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "salesForceId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {},\n  \"data\": {\n    \"name\": \"Enterprise Plan\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb13a9bc-974a-4d80-83db-320a1972b791",
+          "name": "delete 3",
+          "request": {
+            "name": "delete 3",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "contracts",
+                ":salesForceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "salesForceId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "22f35db0-a45f-4004-84a9-66630eb0accd",
+              "name": "Deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "contracts",
+                    ":salesForceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "salesForceId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "01396a2d-4049-4ae7-8896-1a7ed8d0c7ba",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "contracts",
+                    ":salesForceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "salesForceId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "44efd9c9-079e-4db9-998b-a8e09e2968f1",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "contracts",
+                    ":salesForceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "salesForceId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c879cdda-2b1a-4f11-b930-e3c03bd3f378",
+          "name": "get 32",
+          "request": {
+            "name": "get 32",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "contracts",
+                ":salesForceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "salesForceId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "127c5ea5-449c-482b-ad7a-530863627206",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "contracts",
+                    ":salesForceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "salesForceId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {},\n  \"data\": [\n    {\n      \"value\": \"Enterprise Plan\",\n      \"name\": \"name\"\n    }\n  ],\n  \"href\": \"/api/customers/example-id/contracts/example-id\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9e51f90-f92f-45bb-ac67-3e507ad1bcd6",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "contracts",
+                    ":salesForceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "salesForceId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "64d6848e-6872-4078-8a63-7e92c02aee23",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "contracts",
+                    ":salesForceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "salesForceId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nfon.com/call-history",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9a8994b0-e753-428f-993f-38d32312b53c",
+    "name": "NFON Call History Accounts Customer Contracts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.\n\nThis API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.\n\nFor more information, see: https://www.nfon.com/en/integrations/login-with-nfon/\n\nContact Support:\n Name: NFON\n Email: integration@nfon.com",
+      "type": "text/plain"
+    }
+  }
+}

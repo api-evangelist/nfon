@@ -1,0 +1,1006 @@
+{
+  "item": [
+    {
+      "id": "9b535e9c-bac6-4d13-89a7-f18b255ddfaa",
+      "name": "Customer Trunks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4e6ada61-ae6f-46dc-b431-3b26a778b470",
+          "name": "get 190",
+          "request": {
+            "name": "get 190",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "trunks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "9df9b293-3227-4d15-94ad-b29b3508d811",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "trunks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"first\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"prev\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"next\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"last\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"offset\": 0,\n  \"total\": 42,\n  \"items\": [\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    },\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    }\n  ],\n  \"size\": 20,\n  \"href\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bb38250-3491-4f41-9392-ba53e45ab8e7",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "trunks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4cafaf8-51d4-42ce-80fa-78f1bff5353b",
+          "name": "get 191",
+          "request": {
+            "name": "get 191",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "trunks",
+                ":trunkNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "trunkNumber",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "277588e5-5f47-449a-bdab-b432950d7545",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "trunks",
+                    ":trunkNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": [\n    {\n      \"href\": \"/api/customers/K0001/customer-contracts/a1B2c3D4\",\n      \"rel\": \"customerContract\"\n    },\n    {\n      \"href\": \"/api/operators/OP001/softswitches/1\",\n      \"rel\": \"softswitch\"\n    },\n    {\n      \"href\": \"/api/customers/K0001/targets/phone-extensions/100\",\n      \"rel\": \"dropExtension\"\n    },\n    {\n      \"href\": \"/api/time-zones/Europe.Berlin\",\n      \"rel\": \"timezone\"\n    },\n    {\n      \"href\": \"/api/customers/K0001/blacklist-global-profiles/Standard\",\n      \"rel\": \"inboundBlacklistGlobalProfile\"\n    },\n    {\n      \"href\": \"/api/customers/K0001/blacklist-global-profiles/Standard\",\n      \"rel\": \"outboundBlacklistGlobalProfile\"\n    }\n  ],\n  \"data\": [\n    {\n      \"value\": \"1\",\n      \"name\": \"trunkNumber\"\n    },\n    {\n      \"value\": \"false\",\n      \"name\": \"hairpinCallsEnabled\"\n    },\n    {\n      \"value\": \"false\",\n      \"name\": \"clipNoScreeningEnabled\"\n    },\n    {\n      \"value\": \"a1B2c3D4e5F6\",\n      \"name\": \"salesForceId\"\n    },\n    {\n      \"value\": \"OFF\",\n      \"name\": \"suppressLineno\"\n    }\n  ],\n  \"href\": \"/api/customers/example-id/trunks/example-id\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00007c1b-544c-4ba0-a936-6aa3a0208ba9",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "trunks",
+                    ":trunkNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "380e7551-87f8-424b-9671-daf0fd6adafe",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "trunks",
+                    ":trunkNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb716bcf-ced1-4dd5-99fb-4f2f134ff6b0",
+          "name": "put 55",
+          "request": {
+            "name": "put 55",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "trunks",
+                ":trunkNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "trunkNumber",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"links\": {\n    \"outboundBlacklistGlobalProfile\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"timezone\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"dropExtension\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"customerContract\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"softswitch\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"inboundBlacklistGlobalProfile\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"data\": {\n    \"suppressLineno\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<object>\"\n    },\n    \"hairpinCallsEnabled\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<boolean>\"\n    },\n    \"clipNoScreeningEnabled\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<boolean>\"\n    },\n    \"salesForceId\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"trunkNumber\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<integer>\"\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "15d55ad0-efe1-4cfb-9c10-678d41fb58bb",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "trunks",
+                    ":trunkNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"outboundBlacklistGlobalProfile\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"timezone\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"dropExtension\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"customerContract\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"softswitch\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"inboundBlacklistGlobalProfile\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    }\n  },\n  \"data\": {\n    \"suppressLineno\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": {}\n    },\n    \"hairpinCallsEnabled\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": true\n    },\n    \"clipNoScreeningEnabled\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": false\n    },\n    \"salesForceId\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"trunkNumber\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": 2490\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "045b1498-b7c1-43c3-91ab-dc5ab4fbd53b",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "trunks",
+                    ":trunkNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"outboundBlacklistGlobalProfile\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"timezone\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"dropExtension\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"customerContract\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"softswitch\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"inboundBlacklistGlobalProfile\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    }\n  },\n  \"data\": {\n    \"suppressLineno\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": {}\n    },\n    \"hairpinCallsEnabled\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": true\n    },\n    \"clipNoScreeningEnabled\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": false\n    },\n    \"salesForceId\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"trunkNumber\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": 2490\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "df4a2494-df19-4d87-a4e2-2ba77bb62972",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "trunks",
+                    ":trunkNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"outboundBlacklistGlobalProfile\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"timezone\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"dropExtension\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"customerContract\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"softswitch\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"inboundBlacklistGlobalProfile\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    }\n  },\n  \"data\": {\n    \"suppressLineno\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": {}\n    },\n    \"hairpinCallsEnabled\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": true\n    },\n    \"clipNoScreeningEnabled\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": false\n    },\n    \"salesForceId\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"trunkNumber\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": 2490\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aef3acd8-b03a-4163-b515-ce14fca68485",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "trunks",
+                    ":trunkNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"outboundBlacklistGlobalProfile\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"timezone\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"dropExtension\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"customerContract\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"softswitch\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"inboundBlacklistGlobalProfile\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    }\n  },\n  \"data\": {\n    \"suppressLineno\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": {}\n    },\n    \"hairpinCallsEnabled\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": true\n    },\n    \"clipNoScreeningEnabled\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": false\n    },\n    \"salesForceId\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"trunkNumber\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": 2490\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a097bdfb-9924-429b-8813-4d477eb25d2c",
+          "name": "get 189",
+          "request": {
+            "name": "get 189",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "trunks",
+                ":trunkNumber",
+                "available-drop-extensions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "trunkNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "dfb0badc-c0cd-4a44-a94e-8eb6bda90887",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "trunks",
+                    ":trunkNumber",
+                    "available-drop-extensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"first\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"prev\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"next\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"last\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"offset\": 0,\n  \"total\": 42,\n  \"items\": [\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    },\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    }\n  ],\n  \"size\": 20,\n  \"href\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46c3f2e0-07b6-49da-b0d6-081a31a09d54",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "trunks",
+                    ":trunkNumber",
+                    "available-drop-extensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "12743d60-9cba-4f8f-b477-22209a9809c4",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "trunks",
+                    ":trunkNumber",
+                    "available-drop-extensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c92ced7e-7f72-4cc6-a6ee-a4c2a6b066ce",
+          "name": "get Available Extensions",
+          "request": {
+            "name": "get Available Extensions",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "trunks",
+                ":trunkNumber",
+                "available-extensions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "trunkNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "6596660d-8886-4d91-991b-c77c1362a299",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "trunks",
+                    ":trunkNumber",
+                    "available-extensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"first\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"prev\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"next\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"last\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"offset\": 0,\n  \"total\": 42,\n  \"items\": [\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    },\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    }\n  ],\n  \"size\": 20,\n  \"href\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "181a922c-df7c-45c6-97f5-489ffa784760",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "trunks",
+                    ":trunkNumber",
+                    "available-extensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "88dece0c-5606-409e-b9fe-dc95bde37143",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "trunks",
+                    ":trunkNumber",
+                    "available-extensions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nfon.com/call-history",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e5a95fe4-aa76-4ffc-99d8-797abf13294b",
+    "name": "NFON Call History Accounts Customer Trunks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.\n\nThis API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.\n\nFor more information, see: https://www.nfon.com/en/integrations/login-with-nfon/\n\nContact Support:\n Name: NFON\n Email: integration@nfon.com",
+      "type": "text/plain"
+    }
+  }
+}

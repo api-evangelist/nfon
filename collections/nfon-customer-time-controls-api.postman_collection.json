@@ -1,0 +1,1979 @@
+{
+  "item": [
+    {
+      "id": "0a3262a1-44cd-4079-9124-df5368f6b5bd",
+      "name": "Customer Time Controls",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e4546f15-8867-4876-84d5-4c675e3d3b76",
+          "name": "get 185",
+          "request": {
+            "name": "get 185",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "targets",
+                "time-control-services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "3ec0a866-05ef-4bf5-ae9f-759161e7e22c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"first\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"prev\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"next\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"last\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"offset\": 0,\n  \"total\": 42,\n  \"items\": [\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    },\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    }\n  ],\n  \"size\": 20,\n  \"href\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "deaf2083-62b6-4479-837d-8a720aed4538",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b22bbfb4-325a-4245-883c-767f97e32b98",
+          "name": "post 50",
+          "request": {
+            "name": "post 50",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "targets",
+                "time-control-services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"links\": {\n    \"destinationIfDenied\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"timezone\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"destinationIfAllowed\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"inboundTrunkNumbers\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"data\": {\n    \"key\": \"<string>\",\n    \"value\": \"<string>\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "2cfef518-469b-4aee-98ef-9fc68bea154f",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"destinationIfDenied\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"timezone\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"destinationIfAllowed\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"inboundTrunkNumbers\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"data\": {\n    \"key\": \"function_key_number\",\n    \"value\": \"5\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "27823c3a-f20b-4098-b343-5949341e71c1",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"destinationIfDenied\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"timezone\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"destinationIfAllowed\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"inboundTrunkNumbers\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"data\": {\n    \"key\": \"function_key_number\",\n    \"value\": \"5\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1882d46c-7490-4280-aef4-63cd8ebfe228",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"destinationIfDenied\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"timezone\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"destinationIfAllowed\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"inboundTrunkNumbers\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"data\": {\n    \"key\": \"function_key_number\",\n    \"value\": \"5\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba162e57-7fa5-4bbb-b566-00fbcb3dd3da",
+          "name": "get 184",
+          "request": {
+            "name": "get 184",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "targets",
+                "time-control-services",
+                "available-destinations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "46ad0d21-d1a9-4815-9ac6-bba615a59793",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    "available-destinations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"first\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"prev\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"next\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"last\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"offset\": 0,\n  \"total\": 42,\n  \"items\": [\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    },\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    }\n  ],\n  \"size\": 20,\n  \"href\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff9463d6-3c48-4c6c-8ac3-988b76b33ac1",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    "available-destinations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4af2e083-2722-4c36-b2d3-58689651450f",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    "available-destinations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "247259ff-974d-495d-a2ac-92f78dcf8a01",
+          "name": "put 54",
+          "request": {
+            "name": "put 54",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "targets",
+                "time-control-services",
+                ":serviceNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "serviceNumber",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"links\": {\n    \"destinationIfDenied\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"timezone\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"destinationIfAllowed\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"inboundTrunkNumbers\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"data\": {\n    \"key\": \"<string>\",\n    \"value\": \"<string>\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "bda67ee4-0c1f-4055-b752-7535f426fa61",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"destinationIfDenied\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"timezone\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"destinationIfAllowed\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"inboundTrunkNumbers\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"data\": {\n    \"key\": \"function_key_number\",\n    \"value\": \"5\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4e035894-34e5-4adf-96cb-a04cf1dcae59",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"destinationIfDenied\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"timezone\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"destinationIfAllowed\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"inboundTrunkNumbers\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"data\": {\n    \"key\": \"function_key_number\",\n    \"value\": \"5\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5512d977-d20d-4cfc-b2cf-7af4e0c6d677",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"destinationIfDenied\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"timezone\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"destinationIfAllowed\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"inboundTrunkNumbers\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"data\": {\n    \"key\": \"function_key_number\",\n    \"value\": \"5\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b54cc809-9756-49a2-8b9f-677ac6438d84",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"destinationIfDenied\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"timezone\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"destinationIfAllowed\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"inboundTrunkNumbers\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"data\": {\n    \"key\": \"function_key_number\",\n    \"value\": \"5\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "523fec27-cb47-400d-bdae-576a827e7cf6",
+          "name": "delete 54",
+          "request": {
+            "name": "delete 54",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "targets",
+                "time-control-services",
+                ":serviceNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "serviceNumber",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "3c7d65c9-8363-443b-87da-20fcc9fc6524",
+              "name": "Deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1af156ee-2437-4d65-8a46-f39d9fa27560",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "42197678-c6d4-4bf6-8467-0941265b462b",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a7d9175-bb95-4dda-b7fe-4eec59d4fe2a",
+          "name": "get 186",
+          "request": {
+            "name": "get 186",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "targets",
+                "time-control-services",
+                ":serviceNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "serviceNumber",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "58deca10-cf30-41a4-87fd-66e47a74b7d4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": [\n    {\n      \"href\": \"/api/customers/K1234/targets/services/5/destination-if-allowed\",\n      \"rel\": \"destinationIfAllowed\"\n    },\n    {\n      \"href\": \"/api/customers/K1234/targets/services/5/destination-if-denied\",\n      \"rel\": \"destinationIfDenied\"\n    },\n    {\n      \"href\": \"/api/customers/K1234/time-controls/5/inbound-trunk-numbers\",\n      \"rel\": \"inboundTrunkNumbers\"\n    },\n    {\n      \"href\": \"/api/timezones/Europe%2FBerlin\",\n      \"rel\": \"timezone\"\n    }\n  ],\n  \"data\": [\n    {\n      \"value\": \"ALLOW_WITHIN_RANGE\",\n      \"name\": \"evaluationStrategy\"\n    },\n    {\n      \"value\": \"MONDAY\",\n      \"name\": \"fromDay\"\n    },\n    {\n      \"value\": \"08:00 AM\",\n      \"name\": \"fromTimeOfDay\"\n    },\n    {\n      \"value\": \"FRIDAY\",\n      \"name\": \"toDay\"\n    },\n    {\n      \"value\": \"06:00 PM\",\n      \"name\": \"toTimeOfDay\"\n    },\n    {\n      \"value\": \"[\\\"Dec 25, 2025\\\", \\\"Jan 01, 2026\\\"]\",\n      \"name\": \"referralAllowed\"\n    },\n    {\n      \"value\": \"[\\\"Dec 24, 2025\\\"]\",\n      \"name\": \"referralDenied\"\n    }\n  ],\n  \"href\": \"/api/customers/example-id/targets/time-control-services/example-id\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f5aa564-15fa-4b72-8e44-def61f4511cf",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8a0818f2-ca8f-4ade-82be-8e125a750cdf",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a1025fd-ab45-48b9-a3c7-e550a6b9c29f",
+          "name": "get 187",
+          "request": {
+            "name": "get 187",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "targets",
+                "time-control-services",
+                ":serviceNumber",
+                "inbound-trunk-numbers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "serviceNumber",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "9d6908f0-3357-422c-8e0d-81535ceb113d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber",
+                    "inbound-trunk-numbers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {},\n  \"data\": [\n    {\n      \"value\": \"123456\",\n      \"name\": \"didExtension\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9ca7aa2-ec60-40d5-a308-c7cfb4d80352",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber",
+                    "inbound-trunk-numbers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f64479ec-e26f-4d6a-9e18-8735c38642f1",
+          "name": "post 51",
+          "request": {
+            "name": "post 51",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "targets",
+                "time-control-services",
+                ":serviceNumber",
+                "inbound-trunk-numbers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "serviceNumber",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"links\": {\n    \"trunk\": \"<string>\"\n  },\n  \"data\": {\n    \"didExtension\": \"<string>\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "2b10ea67-a15c-460f-80c2-c7969b0c3fbe",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber",
+                    "inbound-trunk-numbers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"trunk\": \"string\"\n  },\n  \"data\": {\n    \"didExtension\": \"123456\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ac93447c-669b-4488-a318-df13cf68642c",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber",
+                    "inbound-trunk-numbers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"trunk\": \"string\"\n  },\n  \"data\": {\n    \"didExtension\": \"123456\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0f726227-2323-4300-9fdd-af4f7503c2ac",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber",
+                    "inbound-trunk-numbers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"trunk\": \"string\"\n  },\n  \"data\": {\n    \"didExtension\": \"123456\"\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "54474f9a-4d86-4c2f-80e8-41235ae16c0e",
+          "name": "delete 55",
+          "request": {
+            "name": "delete 55",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "targets",
+                "time-control-services",
+                ":serviceNumber",
+                "inbound-trunk-numbers",
+                ":didNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "didNumber",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "serviceNumber",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "992a2ee6-40ef-4833-b0fe-3698eed64584",
+              "name": "Deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber",
+                    "inbound-trunk-numbers",
+                    ":didNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "didNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "971c8efa-8dfc-4134-8d92-092373113197",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber",
+                    "inbound-trunk-numbers",
+                    ":didNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "didNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0d641396-cc77-4292-93cc-a62a5a5e0496",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber",
+                    "inbound-trunk-numbers",
+                    ":didNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "didNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4fac4bd6-30ab-4dc3-8e77-ad30b99fef32",
+          "name": "get 188",
+          "request": {
+            "name": "get 188",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "targets",
+                "time-control-services",
+                ":serviceNumber",
+                "inbound-trunk-numbers",
+                ":didNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "didNumber",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "serviceNumber",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "16970569-e6f0-4536-a81a-95e11d5385d6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber",
+                    "inbound-trunk-numbers",
+                    ":didNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "didNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {},\n  \"data\": [\n    {\n      \"value\": \"123456\",\n      \"name\": \"didExtension\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bd5b479-2ef8-4a71-8b4f-a2e55ee69476",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber",
+                    "inbound-trunk-numbers",
+                    ":didNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "didNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7221dea5-719a-4b02-822e-f07c1b5d117b",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "targets",
+                    "time-control-services",
+                    ":serviceNumber",
+                    "inbound-trunk-numbers",
+                    ":didNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "didNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceNumber",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nfon.com/call-history",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9a002b09-6baf-4828-a0d8-dcb845cb635f",
+    "name": "NFON Call History Accounts Customer Time Controls API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.\n\nThis API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.\n\nFor more information, see: https://www.nfon.com/en/integrations/login-with-nfon/\n\nContact Support:\n Name: NFON\n Email: integration@nfon.com",
+      "type": "text/plain"
+    }
+  }
+}

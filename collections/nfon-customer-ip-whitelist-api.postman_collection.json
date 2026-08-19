@@ -1,0 +1,708 @@
+{
+  "item": [
+    {
+      "id": "a5610517-ac4f-48a2-bc66-428cd1efeb1f",
+      "name": "Customer IP Whitelist",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7e07f575-0f27-4b04-b729-9f9a8509d097",
+          "name": "get 110",
+          "request": {
+            "name": "get 110",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "ip-whitelist"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "8e93207a-f73c-402a-bcea-ca72b0613abb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "ip-whitelist"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {},\n  \"data\": [\n    {\n      \"value\": \"192.168.1.100\",\n      \"name\": \"ipAddress\"\n    },\n    {\n      \"value\": \"PERMANENT\",\n      \"name\": \"type\"\n    },\n    {\n      \"value\": \"PROVISIONING\",\n      \"name\": \"usage\"\n    },\n    {\n      \"value\": \"2026-12-31\",\n      \"name\": \"validUntil\"\n    },\n    {\n      \"value\": \"Office network\",\n      \"name\": \"description\"\n    }\n  ],\n  \"href\": \"/api/customers/example-id/ip-whitelist\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2b4b9b1-1dad-4931-bcb1-ace52832b3e5",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "ip-whitelist"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0dd5d9d1-d163-41a0-aa48-59d09efedcc5",
+          "name": "post 34",
+          "request": {
+            "name": "post 34",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "ip-whitelist"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"links\": \"<object>\",\n  \"data\": {\n    \"ipAddress\": \"<string>\",\n    \"type\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"validUntil\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"usage\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"description\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "83e0d23b-fae1-42c2-8f4d-ccf4fc26af50",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "ip-whitelist"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {},\n  \"data\": {\n    \"ipAddress\": \"192.168.1.100\",\n    \"type\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"validUntil\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"usage\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"description\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7f21252c-e953-4b53-b088-ebb23eefc869",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "ip-whitelist"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {},\n  \"data\": {\n    \"ipAddress\": \"192.168.1.100\",\n    \"type\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"validUntil\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"usage\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"description\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4b87568a-a114-4160-bc31-c2ff844b39d3",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "ip-whitelist"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {},\n  \"data\": {\n    \"ipAddress\": \"192.168.1.100\",\n    \"type\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"validUntil\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"usage\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"description\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "275cfb33-29b3-4c91-928f-807888d0dd8d",
+          "name": "delete 33",
+          "request": {
+            "name": "delete 33",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "ip-whitelist",
+                ":ipWhitelistId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ipWhitelistId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "df5365ec-5969-4ad6-9a21-9874999fb699",
+              "name": "Deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "ip-whitelist",
+                    ":ipWhitelistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ipWhitelistId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "56e4cd59-b848-4202-a57e-b3d0477040af",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "ip-whitelist",
+                    ":ipWhitelistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ipWhitelistId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ff782e01-cb96-4ae3-bd9f-c7c8d1546967",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "ip-whitelist",
+                    ":ipWhitelistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ipWhitelistId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12ee309d-a9a9-4753-a535-94e36d52775b",
+          "name": "get 111",
+          "request": {
+            "name": "get 111",
+            "description": {},
+            "url": {
+              "path": [
+                "tenants",
+                ":participantExternalIdentifier",
+                "ip-whitelist",
+                ":ipWhitelistId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ipWhitelistId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantExternalIdentifier",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "29d453de-9f98-4407-8cd2-1ec21619714e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "ip-whitelist",
+                    ":ipWhitelistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ipWhitelistId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {},\n  \"data\": [\n    {\n      \"value\": \"192.168.1.100\",\n      \"name\": \"ipAddress\"\n    },\n    {\n      \"value\": \"PERMANENT\",\n      \"name\": \"type\"\n    },\n    {\n      \"value\": \"PROVISIONING\",\n      \"name\": \"usage\"\n    },\n    {\n      \"value\": \"2026-12-31\",\n      \"name\": \"validUntil\"\n    },\n    {\n      \"value\": \"Office network\",\n      \"name\": \"description\"\n    }\n  ],\n  \"href\": \"/api/customers/example-id/ip-whitelist/example-id\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0a16b4e-8337-4954-ac35-5c4f7867b1dd",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "ip-whitelist",
+                    ":ipWhitelistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ipWhitelistId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dbcd5596-6384-45de-83c5-81ac75fdca87",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":participantExternalIdentifier",
+                    "ip-whitelist",
+                    ":ipWhitelistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ipWhitelistId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantExternalIdentifier",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nfon.com/call-history",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a7ff1c49-923c-45cd-8fcb-67890b804b2a",
+    "name": "NFON Call History Accounts Customer IP Whitelist API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.\n\nThis API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.\n\nFor more information, see: https://www.nfon.com/en/integrations/login-with-nfon/\n\nContact Support:\n Name: NFON\n Email: integration@nfon.com",
+      "type": "text/plain"
+    }
+  }
+}

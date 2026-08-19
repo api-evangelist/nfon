@@ -1,0 +1,3143 @@
+{
+  "item": [
+    {
+      "id": "4185d4e0-455a-4b1f-885d-26575d8ab676",
+      "name": "licenses",
+      "description": {
+        "content": "Unified license management operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dcf5f250-b80b-44e0-a339-89502305a5a8",
+          "name": "Get licenses assigned to the authenticated user",
+          "request": {
+            "name": "Get licenses assigned to the authenticated user",
+            "description": {
+              "content": "Returns all licenses assigned to the specified user. The userid must match the authenticated user's identity from the bearer token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenant",
+                "users",
+                ":userid",
+                "licenses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "ee1230ad-eb7c-47a7-9eda-7683debde06c",
+              "name": "Licenses assigned to the user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "users",
+                    ":userid",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"user_id\": \"string\",\n    \"product_license_key\": \"string\",\n    \"child_of\": \"string\",\n    \"type\": \"string\",\n    \"extension\": \"string\",\n    \"license_id\": \"string\",\n    \"children\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/LicenseDetail detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/LicenseDetail detected>\"\n      }\n    ],\n    \"bss_note\": \"string\"\n  },\n  {\n    \"user_id\": \"string\",\n    \"product_license_key\": \"string\",\n    \"child_of\": \"string\",\n    \"type\": \"string\",\n    \"extension\": \"string\",\n    \"license_id\": \"string\",\n    \"children\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/LicenseDetail detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/LicenseDetail detected>\"\n      }\n    ],\n    \"bss_note\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "434e7e38-8a11-4b57-a412-265ab49fcfd9",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "users",
+                    ":userid",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Invalid request parameters\",\n  \"code\": \"validation_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f43bd8e-3492-4bd5-a972-df3a60095a8c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "users",
+                    ":userid",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"JWT missing from the Authorization header.\",\n  \"code\": \"authorization\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a259da36-fc8b-4df9-afbf-6d584be3156e",
+              "name": "Forbidden - userid does not match authenticated user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "users",
+                    ":userid",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"User does not have permission to perform this operation\",\n  \"code\": \"forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f857cc5-a5f6-4e70-a078-8f5601e29d05",
+              "name": "Tenant or user not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "users",
+                    ":userid",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The requested resource was not found\",\n  \"code\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9bf7189a-9657-4482-98ef-77846ea7af7b",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "users",
+                    ":userid",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d39e1b16-e2d2-496c-a1bf-d068238e3f7c",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "users",
+                    ":userid",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08dfab43-9441-4374-8ed7-a1c87aedc500",
+          "name": "Get all available license types",
+          "request": {
+            "name": "Get all available license types",
+            "description": {
+              "content": "Returns metadata for all available license types including their properties and constraints",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "license-types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "metadata",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c4194a19-2047-484a-83c6-2fe4bce1b892",
+              "name": "List of license types",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "license-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metadata",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"assignment_requires_extension\": true,\n    \"assignment_requires_user\": true,\n    \"type\": \"MOBILITY_PER_USER\",\n    \"is_package\": false,\n    \"name\": \"Mobility Per User\",\n    \"description\": \"Mobile access for individual users with extension assignment\"\n  },\n  {\n    \"assignment_requires_extension\": false,\n    \"assignment_requires_user\": false,\n    \"type\": \"CONFERENCE_UNLIMITED_PER_CONTRACT\",\n    \"is_package\": false,\n    \"name\": \"Conference Unlimited\",\n    \"description\": \"Unlimited conferencing access for the entire contract\"\n  },\n  {\n    \"assignment_requires_extension\": true,\n    \"assignment_requires_user\": false,\n    \"type\": \"FAX_PER_EXTENSION\",\n    \"is_package\": false,\n    \"name\": \"Fax Per Extension\",\n    \"description\": \"Fax capability assigned to a specific extension\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7f3a81a-4a63-4445-b6b2-b65bc7d2125b",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "license-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metadata",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Invalid request parameters\",\n  \"code\": \"validation_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7758243-cd5a-42c0-bc1a-7ebc9bb61416",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "license-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metadata",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab0ef5ba-0410-417f-9ec5-fb9fe34e81d7",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "license-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metadata",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "361451eb-6052-4be1-a607-17cf0e2d2c7d",
+          "name": "Create licenses for a tenant",
+          "request": {
+            "name": "Create licenses for a tenant",
+            "description": {
+              "content": "Creates one or more licenses for the specified tenant",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenant",
+                "licenses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "flatten",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"type\": \"<string>\",\n    \"child_of\": \"<string>\",\n    \"license_id\": \"<string>\",\n    \"product_license_key\": \"<string>\",\n    \"children\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/LicenseElement detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/LicenseElement detected>\"\n      }\n    ],\n    \"bss_note\": \"<string>\"\n  },\n  {\n    \"type\": \"<string>\",\n    \"child_of\": \"<string>\",\n    \"license_id\": \"<string>\",\n    \"product_license_key\": \"<string>\",\n    \"children\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/LicenseElement detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/LicenseElement detected>\"\n      }\n    ],\n    \"bss_note\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f7104365-dca8-4f53-b576-4c66bbb3d7d8",
+              "name": "Licenses created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "flatten",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"children\": [\n      {\n        \"type\": \"FAX_PER_EXTENSION\"\n      },\n      {\n        \"type\": \"EXTENSION\"\n      }\n    ],\n    \"type\": \"PACKAGE_CLOUD_PBX_2025_M\"\n  },\n  {\n    \"type\": \"FAX_PER_EXTENSION\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"licenses\": [\n    {\n      \"license_id\": \"a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d\",\n      \"type\": \"PACKAGE_CLOUD_PBX_2025_M\"\n    },\n    {\n      \"license_id\": \"c2d3e4f5-a6b7-5c8d-9e0f-1a2b3c4d5e6f\",\n      \"child_of\": \"a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d\",\n      \"type\": \"FAX_PER_EXTENSION\"\n    },\n    {\n      \"license_id\": \"f6e5d4c3-b2a1-4b7a-9c8d-5e4f3a2b1c0d\",\n      \"child_of\": \"a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d\",\n      \"type\": \"EXTENSION\"\n    }\n  ],\n  \"created\": 3\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c5c73c6-fcbc-4394-aada-9815fa7b7a21",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "flatten",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"children\": [\n      {\n        \"type\": \"FAX_PER_EXTENSION\"\n      },\n      {\n        \"type\": \"EXTENSION\"\n      }\n    ],\n    \"type\": \"PACKAGE_CLOUD_PBX_2025_M\"\n  },\n  {\n    \"type\": \"FAX_PER_EXTENSION\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Invalid request parameters\",\n  \"code\": \"validation_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5aa76d96-91e0-4a69-851c-b74db1059147",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "flatten",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"children\": [\n      {\n        \"type\": \"FAX_PER_EXTENSION\"\n      },\n      {\n        \"type\": \"EXTENSION\"\n      }\n    ],\n    \"type\": \"PACKAGE_CLOUD_PBX_2025_M\"\n  },\n  {\n    \"type\": \"FAX_PER_EXTENSION\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"JWT missing from the Authorization header.\",\n  \"code\": \"authorization\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53e70f72-b88a-43cc-bddb-4c906ac06be7",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "flatten",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"children\": [\n      {\n        \"type\": \"FAX_PER_EXTENSION\"\n      },\n      {\n        \"type\": \"EXTENSION\"\n      }\n    ],\n    \"type\": \"PACKAGE_CLOUD_PBX_2025_M\"\n  },\n  {\n    \"type\": \"FAX_PER_EXTENSION\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"User does not have permission to perform this operation\",\n  \"code\": \"forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81f87319-f691-4477-8dc6-d262b9545f66",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "flatten",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"children\": [\n      {\n        \"type\": \"FAX_PER_EXTENSION\"\n      },\n      {\n        \"type\": \"EXTENSION\"\n      }\n    ],\n    \"type\": \"PACKAGE_CLOUD_PBX_2025_M\"\n  },\n  {\n    \"type\": \"FAX_PER_EXTENSION\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The requested resource was not found\",\n  \"code\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4ad38e9-f08c-44df-8d2d-8dcd33baa8e9",
+              "name": "Conflict - License already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "flatten",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"children\": [\n      {\n        \"type\": \"FAX_PER_EXTENSION\"\n      },\n      {\n        \"type\": \"EXTENSION\"\n      }\n    ],\n    \"type\": \"PACKAGE_CLOUD_PBX_2025_M\"\n  },\n  {\n    \"type\": \"FAX_PER_EXTENSION\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"License with this ID already exists\",\n  \"code\": \"conflict\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2d01701-7f86-4396-91f7-f0e2fa08f7f4",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "flatten",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"children\": [\n      {\n        \"type\": \"FAX_PER_EXTENSION\"\n      },\n      {\n        \"type\": \"EXTENSION\"\n      }\n    ],\n    \"type\": \"PACKAGE_CLOUD_PBX_2025_M\"\n  },\n  {\n    \"type\": \"FAX_PER_EXTENSION\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3aa3a6c1-9917-4f5d-bf5c-42b875b52668",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "flatten",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"children\": [\n      {\n        \"type\": \"FAX_PER_EXTENSION\"\n      },\n      {\n        \"type\": \"EXTENSION\"\n      }\n    ],\n    \"type\": \"PACKAGE_CLOUD_PBX_2025_M\"\n  },\n  {\n    \"type\": \"FAX_PER_EXTENSION\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6daf5aba-3462-4aa5-a4b7-fe4d4bda3f77",
+          "name": "Delete licenses for a tenant",
+          "request": {
+            "name": "Delete licenses for a tenant",
+            "description": {
+              "content": "Deletes one or more licenses for the specified tenant",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenant",
+                "licenses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "license_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "138df0c2-d66d-4a47-b8e1-6e4725373ed3",
+              "name": "All licenses deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "license_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2,\n  \"failed\": 0,\n  \"succeeded\": 2,\n  \"results\": [\n    {\n      \"license_id\": \"377586d5-001c-4bcf-9155-4f507559240b\",\n      \"status\": \"success\"\n    },\n    {\n      \"license_id\": \"488697e6-112d-5ccf-a266-5f608b82361c\",\n      \"status\": \"success\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17e3dfd7-5b62-40cb-9e98-bb1d9fdbd9fb",
+              "name": "Multi-Status - Some deletions succeeded some failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "license_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Multi-Status (WebDAV) (RFC 4918)",
+              "code": 207,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3,\n  \"failed\": 1,\n  \"succeeded\": 2,\n  \"results\": [\n    {\n      \"license_id\": \"377586d5-001c-4bcf-9155-4f507559240b\",\n      \"status\": \"success\"\n    },\n    {\n      \"license_id\": \"488697e6-112d-5ccf-a266-5f608b82361c\",\n      \"status\": \"success\"\n    },\n    {\n      \"license_id\": \"2a456b78-def9-4321-abcd-ef1234567890\",\n      \"status\": \"error\",\n      \"error\": {\n        \"message\": \"Cannot delete license that is currently assigned to a user. Unassign the license first.\",\n        \"code\": \"license_assigned\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e34d610-e263-4e84-af01-59c39e33ad75",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "license_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Invalid request parameters\",\n  \"code\": \"validation_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e687de08-77bc-48c6-a147-94dc9e5246cf",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "license_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0afe0ad2-ffc5-4d98-9c8f-6861c8a1d6b9",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "license_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "925ad45b-8ebf-4d1f-b33f-bc8a4c880205",
+          "name": "Retrieve licenses for a tenant",
+          "request": {
+            "name": "Retrieve licenses for a tenant",
+            "description": {
+              "content": "Returns detailed license information for a tenant, including packages with their children.\nCan be filtered by user_id, license_id, type, and/or extension. Filters can be combined.\n\n**Filtering:**\n- `license_id`, `type`, and `extension` support comma-separated values for multiple filters\n- `user_id` accepts a single UUID only\n\n**Response modes:**\n- `flatten=false` (default): Nested structure - packages have children in a 'children' array\n- `flatten=true`: Flat structure - all licenses at top level with 'child_of' references",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenant",
+                "licenses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "license_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "extension",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "flatten",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "fe98e7bd-e6a8-4756-a929-6c8aa7f089a0",
+              "name": "List of licenses",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "license_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flatten",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"license_id\": \"a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d\",\n    \"type\": \"PACKAGE_CLOUD_PBX_2025_M\",\n    \"children\": [\n      {\n        \"extension\": \"409\",\n        \"user_id\": \"d2897036-9eb0-4ff3-9c4f-ef387de24a7c\",\n        \"license_id\": \"c2d3e4f5-a6b7-5c8d-9e0f-1a2b3c4d5e6f\",\n        \"type\": \"FAX_PER_EXTENSION\"\n      },\n      {\n        \"license_id\": \"f6e5d4c3-b2a1-4b7a-9c8d-5e4f3a2b1c0d\",\n        \"type\": \"EXTENSION\"\n      }\n    ],\n    \"bss_note\": \"Munich office order (Sep 2025)\"\n  },\n  {\n    \"extension\": \"410\",\n    \"user_id\": \"a4440613-af08-648d-bf3f-9f9gga98ed65\",\n    \"license_id\": \"377586d5-001c-4bcf-9155-4f507559240b\",\n    \"type\": \"MOBILITY_PER_USER\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "492256bf-695e-4d35-8298-cda65b0276ab",
+              "name": "Tenant not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "license_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flatten",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The requested resource was not found\",\n  \"code\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7fce6b8-0c91-4fea-9f7d-d480f4dc4587",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "license_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flatten",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7c6a4c8-ff85-433f-ab2a-74755e2a8a49",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "license_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flatten",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e7d8ffa-200a-4264-860e-4a429046623f",
+          "name": "Assign licenses to users or extensions",
+          "request": {
+            "name": "Assign licenses to users or extensions",
+            "description": {
+              "content": "Assigns available licenses to users and/or extensions. Supports batch operations.\n\n**Package Licenses:**\n- Package licenses require both `license_id` and `user_id`\n- Cannot use FIFO (automatic selection) - must specify exact package\n- Child licenses automatically inherit user assignment if they require `user_id`\n\n**Package Child License Restrictions:**\n- Child licenses that require `user_id` cannot be assigned independently\n- Child licenses that don't require `user_id` (e.g., FAX_PER_EXTENSION) can be assigned independently",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenant",
+                "licenses",
+                "assign"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"type\": \"<string>\",\n    \"extension\": \"<string>\",\n    \"user_id\": \"<string>\",\n    \"license_id\": \"<string>\"\n  },\n  {\n    \"type\": \"<string>\",\n    \"extension\": \"<string>\",\n    \"user_id\": \"<string>\",\n    \"license_id\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1bcd5083-93b4-4817-886c-d80ae423eefc",
+              "name": "All operations succeeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"extension\": \"409\",\n    \"user_id\": \"e1119380-f895-415a-9c67-ad8b71675cf0\",\n    \"type\": \"MOBILITY_PER_USER\"\n  },\n  {\n    \"user_id\": \"a4440613-af08-648d-bf3f-9f9gga98ed65\",\n    \"type\": \"CLIENT_MIA_PER_USER\"\n  },\n  {\n    \"extension\": \"410\",\n    \"type\": \"FAX_PER_EXTENSION\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3,\n  \"failed\": 0,\n  \"succeeded\": 3,\n  \"results\": [\n    {\n      \"status\": \"success\",\n      \"type\": \"MOBILITY_PER_USER\",\n      \"extension\": \"409\",\n      \"user_id\": \"e1119380-f895-415a-9c67-ad8b71675cf0\",\n      \"license_id\": \"53763b37-ac19-4209-b3dc-50ca41d98913\"\n    },\n    {\n      \"license_id\": \"8d234567-abcd-1234-ef56-789012345678\",\n      \"user_id\": \"a4440613-af08-648d-bf3f-9f9gga98ed65\",\n      \"status\": \"success\",\n      \"type\": \"CLIENT_MIA_PER_USER\"\n    },\n    {\n      \"extension\": \"410\",\n      \"license_id\": \"7b345678-bcde-2345-fg67-890123456789\",\n      \"status\": \"success\",\n      \"type\": \"FAX_PER_EXTENSION\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0dcb4144-4b9a-4b66-83b3-3cb3afeb0cc5",
+              "name": "Multi-Status - Some operations succeeded some failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"extension\": \"409\",\n    \"user_id\": \"e1119380-f895-415a-9c67-ad8b71675cf0\",\n    \"type\": \"MOBILITY_PER_USER\"\n  },\n  {\n    \"user_id\": \"a4440613-af08-648d-bf3f-9f9gga98ed65\",\n    \"type\": \"CLIENT_MIA_PER_USER\"\n  },\n  {\n    \"extension\": \"410\",\n    \"type\": \"FAX_PER_EXTENSION\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Multi-Status (WebDAV) (RFC 4918)",
+              "code": 207,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3,\n  \"failed\": 1,\n  \"succeeded\": 2,\n  \"results\": [\n    {\n      \"status\": \"success\",\n      \"type\": \"MOBILITY_PER_USER\",\n      \"extension\": \"409\",\n      \"user_id\": \"e1119380-f895-415a-9c67-ad8b71675cf0\",\n      \"license_id\": \"53763b37-ac19-4209-b3dc-50ca41d98913\"\n    },\n    {\n      \"license_id\": \"8d234567-abcd-1234-ef56-789012345678\",\n      \"user_id\": \"a4440613-af08-648d-bf3f-9f9gga98ed65\",\n      \"status\": \"success\",\n      \"type\": \"CLIENT_MIA_PER_USER\"\n    },\n    {\n      \"extension\": \"410\",\n      \"type\": \"FAX_PER_EXTENSION\",\n      \"status\": \"error\",\n      \"error\": {\n        \"message\": \"Extension 410 is already assigned\",\n        \"code\": \"extension_in_use\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4159f650-e98f-4c62-9f38-a7d15f3fd052",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"extension\": \"409\",\n    \"user_id\": \"e1119380-f895-415a-9c67-ad8b71675cf0\",\n    \"type\": \"MOBILITY_PER_USER\"\n  },\n  {\n    \"user_id\": \"a4440613-af08-648d-bf3f-9f9gga98ed65\",\n    \"type\": \"CLIENT_MIA_PER_USER\"\n  },\n  {\n    \"extension\": \"410\",\n    \"type\": \"FAX_PER_EXTENSION\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Invalid request parameters\",\n  \"code\": \"validation_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "931534de-e7bc-48c8-9242-d63f578fc453",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"extension\": \"409\",\n    \"user_id\": \"e1119380-f895-415a-9c67-ad8b71675cf0\",\n    \"type\": \"MOBILITY_PER_USER\"\n  },\n  {\n    \"user_id\": \"a4440613-af08-648d-bf3f-9f9gga98ed65\",\n    \"type\": \"CLIENT_MIA_PER_USER\"\n  },\n  {\n    \"extension\": \"410\",\n    \"type\": \"FAX_PER_EXTENSION\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"JWT missing from the Authorization header.\",\n  \"code\": \"authorization\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1afb6324-ce8f-4e82-bda5-a5ad815931d6",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"extension\": \"409\",\n    \"user_id\": \"e1119380-f895-415a-9c67-ad8b71675cf0\",\n    \"type\": \"MOBILITY_PER_USER\"\n  },\n  {\n    \"user_id\": \"a4440613-af08-648d-bf3f-9f9gga98ed65\",\n    \"type\": \"CLIENT_MIA_PER_USER\"\n  },\n  {\n    \"extension\": \"410\",\n    \"type\": \"FAX_PER_EXTENSION\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"code\": \"bad_request\",\n  \"details\": {\n    \"message\": \"Cannot delete license that is currently assigned to a user\",\n    \"code\": \"license_assigned\"\n  },\n  \"message\": \"Invalid request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52eb084c-b324-4a33-a192-59f7f47f4136",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"extension\": \"409\",\n    \"user_id\": \"e1119380-f895-415a-9c67-ad8b71675cf0\",\n    \"type\": \"MOBILITY_PER_USER\"\n  },\n  {\n    \"user_id\": \"a4440613-af08-648d-bf3f-9f9gga98ed65\",\n    \"type\": \"CLIENT_MIA_PER_USER\"\n  },\n  {\n    \"extension\": \"410\",\n    \"type\": \"FAX_PER_EXTENSION\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The requested resource was not found\",\n  \"code\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee1181c7-c9e1-409b-b196-50e7a7761322",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"extension\": \"409\",\n    \"user_id\": \"e1119380-f895-415a-9c67-ad8b71675cf0\",\n    \"type\": \"MOBILITY_PER_USER\"\n  },\n  {\n    \"user_id\": \"a4440613-af08-648d-bf3f-9f9gga98ed65\",\n    \"type\": \"CLIENT_MIA_PER_USER\"\n  },\n  {\n    \"extension\": \"410\",\n    \"type\": \"FAX_PER_EXTENSION\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79377649-ade5-4af3-99a3-466cc8f01e13",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"extension\": \"409\",\n    \"user_id\": \"e1119380-f895-415a-9c67-ad8b71675cf0\",\n    \"type\": \"MOBILITY_PER_USER\"\n  },\n  {\n    \"user_id\": \"a4440613-af08-648d-bf3f-9f9gga98ed65\",\n    \"type\": \"CLIENT_MIA_PER_USER\"\n  },\n  {\n    \"extension\": \"410\",\n    \"type\": \"FAX_PER_EXTENSION\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62028375-40f6-4b0a-95d2-fc990ddd79c8",
+          "name": "Unassign licenses",
+          "request": {
+            "name": "Unassign licenses",
+            "description": {
+              "content": "Unassigns one or more licenses from users or extensions",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenant",
+                "licenses",
+                "unassign"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"license_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec83b974-186b-4f31-9bd3-1d0518d6094b",
+              "name": "All operations succeeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "unassign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"license_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3,\n  \"failed\": 0,\n  \"succeeded\": 3,\n  \"results\": [\n    {\n      \"license_id\": \"53763b37-ac19-4209-b3dc-50ca41d98913\",\n      \"status\": \"success\"\n    },\n    {\n      \"license_id\": \"7b345678-bcde-2345-fg67-890123456789\",\n      \"status\": \"success\"\n    },\n    {\n      \"license_id\": \"8d234567-abcd-1234-ef56-789012345678\",\n      \"status\": \"success\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0105eb2e-20bd-4da8-a05b-302701e8ee69",
+              "name": "Multi-Status - Some operations succeeded some failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "unassign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"license_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Multi-Status (WebDAV) (RFC 4918)",
+              "code": 207,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 3457,\n  \"failed\": 2496,\n  \"succeeded\": 1543,\n  \"results\": [\n    {\n      \"license_id\": \"53763b37-ac19-4209-b3dc-50ca41d98913\",\n      \"status\": \"success\",\n      \"error\": {\n        \"message\": \"Cannot delete license that is currently assigned to a user\",\n        \"code\": \"license_assigned\"\n      }\n    },\n    {\n      \"license_id\": \"53763b37-ac19-4209-b3dc-50ca41d98913\",\n      \"status\": \"error\",\n      \"error\": {\n        \"message\": \"Cannot delete license that is currently assigned to a user\",\n        \"code\": \"license_assigned\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7dcb441-5d8d-406e-b16d-5518d2fc7fee",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "unassign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"license_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Invalid request parameters\",\n  \"code\": \"validation_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5479ca6-d7a1-458a-a7da-66c8c19672e7",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "unassign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"license_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b723f8a-5a28-41b7-91bb-6ca37148040e",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "unassign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"license_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4951b8f3-9679-4945-8595-ebdc764a7737",
+          "name": "Get license usage for a tenant",
+          "request": {
+            "name": "Get license usage for a tenant",
+            "description": {
+              "content": "Returns usage statistics for all licenses assigned to the tenant",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenant",
+                "licenses",
+                "usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "226cb932-0111-4496-9769-1896808462fa",
+              "name": "License usage statistics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"used\": 7,\n    \"type\": \"MOBILITY_PER_USER\",\n    \"amount\": 10,\n    \"available\": 3\n  },\n  {\n    \"used\": 2,\n    \"type\": \"CONFERENCE_PER_SERVICE\",\n    \"amount\": 5,\n    \"available\": 3\n  },\n  {\n    \"used\": 1,\n    \"type\": \"FAX_UNLIMITED_PER_CONTRACT\",\n    \"amount\": 1,\n    \"available\": 0\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe29904f-964b-4615-89b2-e905738d1bcc",
+              "name": "Tenant not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The requested resource was not found\",\n  \"code\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9046e64e-8721-4418-b085-3d97c8d91fa5",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3c36531-46e3-47d5-9292-a9bb913a5964",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "licenses",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "f1bb89db-c3f8-9404-200c-770df8c72997"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nfon.com/call-history",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "648b153b-4271-4de3-b19c-e2d6793d135b",
+    "name": "NFON Call History Accounts licenses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.\n\nThis API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.\n\nFor more information, see: https://www.nfon.com/en/integrations/login-with-nfon/\n\nContact Support:\n Name: NFON\n Email: integration@nfon.com",
+      "type": "text/plain"
+    }
+  }
+}

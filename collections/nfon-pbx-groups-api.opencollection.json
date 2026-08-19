@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts PBX Groups API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PBX Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get PBX group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/operators/:operatorId/pbx-groups/:pbxGroupName",
+            "params": [
+              {
+                "name": "pbxGroupName",
+                "value": "",
+                "type": "path",
+                "description": "PBX group name"
+              },
+              {
+                "name": "operatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get PBX group"
+        },
+        {
+          "info": {
+            "name": "Get PBX group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/pbx-groups/:pbxGroupName",
+            "params": [
+              {
+                "name": "pbxGroupName",
+                "value": "",
+                "type": "path",
+                "description": "PBX group name"
+              }
+            ]
+          },
+          "docs": "Get PBX group"
+        },
+        {
+          "info": {
+            "name": "List PBX groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/pbx-groups"
+          },
+          "docs": "List PBX groups"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

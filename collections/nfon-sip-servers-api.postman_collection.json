@@ -1,0 +1,735 @@
+{
+  "item": [
+    {
+      "id": "38db7333-7132-4f72-9c42-9f6ba7587aa5",
+      "name": "SIP Servers",
+      "description": {
+        "content": "Manage SIP server infrastructure",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2427a29c-4dc4-4b1f-a0e7-5f67f48ff3b7",
+          "name": "List SIP servers",
+          "request": {
+            "name": "List SIP servers",
+            "description": {
+              "content": "Returns a paginated list of all SIP servers",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sip-servers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "1685449d-00b8-42b9-91d4-33657047049a",
+              "name": "Paginated list of SIP servers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sip-servers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"first\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"prev\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"next\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"last\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    }\n  },\n  \"offset\": 0,\n  \"total\": 42,\n  \"items\": [\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    },\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    }\n  ],\n  \"size\": 20,\n  \"href\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93effd74-aa51-4a8b-85f1-6a6be5ef2f44",
+          "name": "Create SIP server",
+          "request": {
+            "name": "Create SIP server",
+            "description": {
+              "content": "Creates a new SIP server",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sip-servers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"links\": {\n    \"pbxGroup\": \"<string>\"\n  },\n  \"data\": {\n    \"internalIp\": \"<string>\",\n    \"partition\": \"<string>\",\n    \"maxSubscribers\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<integer>\"\n    },\n    \"subscribersLimit\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"location\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"externalIp\": \"<string>\",\n    \"description\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "261b9f8b-ade3-4e0b-ab47-0ca9c1faabc8",
+              "name": "SIP server created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sip-servers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"pbxGroup\": \"/api/pbx-groups/Pbx1\"\n  },\n  \"data\": {\n    \"internalIp\": \"10.0.0.1\",\n    \"partition\": \"P01\",\n    \"maxSubscribers\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": 7527\n    },\n    \"subscribersLimit\": 500,\n    \"name\": \"sip-server-01\",\n    \"location\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"externalIp\": \"192.168.1.1\",\n    \"description\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"href\": \"/api/sip-servers/200\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cc464e2-3d08-4625-9604-39be87e68a98",
+              "name": "Validation error (e.g. duplicate name, missing required fields)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sip-servers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"pbxGroup\": \"/api/pbx-groups/Pbx1\"\n  },\n  \"data\": {\n    \"internalIp\": \"10.0.0.1\",\n    \"partition\": \"P01\",\n    \"maxSubscribers\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": 7527\n    },\n    \"subscribersLimit\": 500,\n    \"name\": \"sip-server-01\",\n    \"location\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"externalIp\": \"192.168.1.1\",\n    \"description\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4512da0f-02a7-4149-a439-1e50490c3fa1",
+          "name": "Update SIP server",
+          "request": {
+            "name": "Update SIP server",
+            "description": {
+              "content": "Updates an existing SIP server. Only provided fields are updated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sip-servers",
+                ":sipServerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "sipServerId",
+                  "description": "(Required) SIP server ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"links\": {\n    \"pbxGroup\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"data\": {\n    \"internalIp\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"partition\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"maxSubscribers\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<integer>\"\n    },\n    \"subscribersLimit\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<integer>\"\n    },\n    \"name\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"location\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"externalIp\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    },\n    \"description\": {\n      \"notNull\": \"<boolean>\",\n      \"notPresent\": \"<boolean>\",\n      \"present\": \"<boolean>\",\n      \"presentNotNull\": \"<boolean>\",\n      \"presentNull\": \"<boolean>\",\n      \"value\": \"<string>\"\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "0990f58c-1016-44a7-aa40-5e68059dd820",
+              "name": "SIP server updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sip-servers",
+                    ":sipServerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "sipServerId",
+                      "description": "(Required) SIP server ID"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"pbxGroup\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"data\": {\n    \"internalIp\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"partition\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"maxSubscribers\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": 8043\n    },\n    \"subscribersLimit\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": 3647\n    },\n    \"name\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"location\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"externalIp\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"description\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "800a2af3-447b-43fd-8108-c2c7e91d42f6",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sip-servers",
+                    ":sipServerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "sipServerId",
+                      "description": "(Required) SIP server ID"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"pbxGroup\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"data\": {\n    \"internalIp\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"partition\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"maxSubscribers\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": 8043\n    },\n    \"subscribersLimit\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": 3647\n    },\n    \"name\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"location\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"externalIp\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"description\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a05d98a1-9430-4397-9328-731a8ece622c",
+              "name": "SIP server not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sip-servers",
+                    ":sipServerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "sipServerId",
+                      "description": "(Required) SIP server ID"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {\n    \"pbxGroup\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"data\": {\n    \"internalIp\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"partition\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"maxSubscribers\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": 8043\n    },\n    \"subscribersLimit\": {\n      \"notNull\": true,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": 3647\n    },\n    \"name\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"location\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"externalIp\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": false,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"description\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    }\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4656e081-fc91-4ce6-87af-1fa25c7ae9ac",
+          "name": "Delete SIP server",
+          "request": {
+            "name": "Delete SIP server",
+            "description": {
+              "content": "Deletes a SIP server. Fails if the server still has assigned customers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sip-servers",
+                ":sipServerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "sipServerId",
+                  "description": "(Required) SIP server ID"
+                }
+              ]
+            },
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "a83c5f84-950e-48e8-a44d-ae73bbf49481",
+              "name": "SIP server deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sip-servers",
+                    ":sipServerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "sipServerId",
+                      "description": "(Required) SIP server ID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d397d7b1-ba37-4925-80d4-05c22676a521",
+              "name": "SIP server cannot be deleted (still in use)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sip-servers",
+                    ":sipServerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "sipServerId",
+                      "description": "(Required) SIP server ID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "902fe6eb-f7bd-47eb-abec-e4e2f8f85004",
+              "name": "SIP server not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sip-servers",
+                    ":sipServerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "sipServerId",
+                      "description": "(Required) SIP server ID"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70928b2a-84a1-44b6-9713-31083d68195d",
+          "name": "Get SIP server",
+          "request": {
+            "name": "Get SIP server",
+            "description": {
+              "content": "Returns details of a single SIP server",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sip-servers",
+                ":sipServerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "sipServerId",
+                  "description": "(Required) SIP server ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "18636c7b-6542-4d3c-a189-66651fc0233d",
+              "name": "SIP server details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sip-servers",
+                    ":sipServerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "sipServerId",
+                      "description": "(Required) SIP server ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": [\n    {\n      \"href\": \"/api/pbx-groups/Pbx1\",\n      \"rel\": \"pbxGroup\"\n    },\n    {\n      \"href\": \"/api/pbx-groups\",\n      \"rel\": \"availablePbxGroup\"\n    }\n  ],\n  \"data\": [\n    {\n      \"value\": \"sipServerName\",\n      \"name\": \"name\"\n    },\n    {\n      \"value\": \"192.168.1.1\",\n      \"name\": \"externalIp\"\n    },\n    {\n      \"value\": \"192.168.1.2\",\n      \"name\": \"internalIp\"\n    },\n    {\n      \"value\": 1000,\n      \"name\": \"maxSubscribers\"\n    },\n    {\n      \"value\": 500,\n      \"name\": \"subscribersLimit\"\n    },\n    {\n      \"value\": \"Frankfurt\",\n      \"name\": \"location\"\n    },\n    {\n      \"value\": \"P01\",\n      \"name\": \"partition\"\n    },\n    {\n      \"value\": \"4xE5504-2GHZ;4GB\",\n      \"name\": \"description\"\n    }\n  ],\n  \"href\": \"/api/sip-servers/100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c41cb08-ed5c-45e8-bd79-e1337a4971be",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sip-servers",
+                    ":sipServerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "sipServerId",
+                      "description": "(Required) SIP server ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2a9388b4-c6d7-4e07-92a7-debba157473e",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sip-servers",
+                    ":sipServerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "sipServerId",
+                      "description": "(Required) SIP server ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "398a20f1-b1f7-4105-93b1-5f09b401a2fd",
+              "name": "SIP server not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sip-servers",
+                    ":sipServerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "sipServerId",
+                      "description": "(Required) SIP server ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nfon.com/call-history",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "79f23371-d6e2-480b-a3d6-d0828bee5b6b",
+    "name": "NFON Call History Accounts SIP Servers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.\n\nThis API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.\n\nFor more information, see: https://www.nfon.com/en/integrations/login-with-nfon/\n\nContact Support:\n Name: NFON\n Email: integration@nfon.com",
+      "type": "text/plain"
+    }
+  }
+}

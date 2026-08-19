@@ -1,0 +1,424 @@
+{
+  "item": [
+    {
+      "id": "ffc75976-e5b3-4c81-8080-6bb2f39c74f5",
+      "name": "Softswitches",
+      "description": {
+        "content": "Softswitch management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b7866eab-159c-4089-b910-2c5abeae640e",
+          "name": "Get softswitch",
+          "request": {
+            "name": "Get softswitch",
+            "description": {},
+            "url": {
+              "path": [
+                "operators",
+                ":operatorId",
+                "softswitches",
+                ":softswitchId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "softswitchId",
+                  "description": "(Required) Softswitch identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "operatorId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "6a7029ee-de16-4254-bed7-8e76bc89a61b",
+              "name": "Softswitch found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":operatorId",
+                    "softswitches",
+                    ":softswitchId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "softswitchId",
+                      "description": "(Required) Softswitch identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "operatorId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {},\n  \"data\": {},\n  \"href\": \"/api/sip-servers/100\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12779dd8-8db6-4996-903f-80e4e21dc641",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":operatorId",
+                    "softswitches",
+                    ":softswitchId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "softswitchId",
+                      "description": "(Required) Softswitch identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "operatorId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01a91e49-df5e-4a4c-b1c6-095105eb1bda",
+          "name": "List softswitches",
+          "request": {
+            "name": "List softswitches",
+            "description": {},
+            "url": {
+              "path": [
+                "operators",
+                ":operatorId",
+                "softswitches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "operatorId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "05703620-521f-49a3-a059-8c9bda33b607",
+              "name": "Softswitch list retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":operatorId",
+                    "softswitches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "operatorId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {\n    \"first\": {\n      \"notNull\": false,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": false,\n      \"value\": \"string\"\n    },\n    \"prev\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": true,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"next\": {\n      \"notNull\": true,\n      \"notPresent\": false,\n      \"present\": false,\n      \"presentNotNull\": false,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    },\n    \"last\": {\n      \"notNull\": false,\n      \"notPresent\": true,\n      \"present\": false,\n      \"presentNotNull\": true,\n      \"presentNull\": true,\n      \"value\": \"string\"\n    }\n  },\n  \"offset\": 0,\n  \"total\": 42,\n  \"items\": [\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    },\n    {\n      \"links\": {},\n      \"data\": {},\n      \"href\": \"/api/sip-servers/100\"\n    }\n  ],\n  \"size\": 20,\n  \"href\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6a5414e-eb4c-445d-8023-a7c58adaf2b7",
+          "name": "List available softswitches",
+          "request": {
+            "name": "List available softswitches",
+            "description": {
+              "content": "Returns all available softswitches",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "softswitches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "ee3f9893-363e-496e-903b-61f8d6076a30",
+              "name": "List of softswitches",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "softswitches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "ab1537a7-ce5c-c294-5c5c-e09fbc23e223"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"softswitch\": \"BTNGN1\"\n  },\n  {\n    \"softswitch\": \"BTNGN1\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fff8f4d4-0cfd-46d6-b5ff-d522c466d69a",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "softswitches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "ab1537a7-ce5c-c294-5c5c-e09fbc23e223"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac5e6966-3b17-4909-846d-30cb1b1c4688",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "softswitches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "ab1537a7-ce5c-c294-5c5c-e09fbc23e223"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nfon.com/call-history",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9ee24234-755a-4cf5-8b6b-5800c75bf3a0",
+    "name": "NFON Call History Accounts Softswitches API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.\n\nThis API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.\n\nFor more information, see: https://www.nfon.com/en/integrations/login-with-nfon/\n\nContact Support:\n Name: NFON\n Email: integration@nfon.com",
+      "type": "text/plain"
+    }
+  }
+}

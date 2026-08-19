@@ -1,0 +1,1340 @@
+{
+  "item": [
+    {
+      "id": "f7038a2f-b2e6-4a53-9260-474277022890",
+      "name": "records",
+      "description": {
+        "content": "Call Records Management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b537b2c9-641e-483f-a7dc-8809cac6eb14",
+          "name": "Get, stream, and search call records",
+          "request": {
+            "name": "Get, stream, and search call records",
+            "description": {
+              "content": "Get the latest call records. They can be filtered by number, name, time or type.\n\nThe response format is controlled by the `Accept` request header:\n\n`application/json` *(default)*:\n\nReturns a JSON array of call records.\n\n`text/event-stream`:\n\nStreams call records as Server-Sent Events (SSE).\n\nEach event carries one JSON-encoded call record in its `data` field.\nA record will be **re-sent** if it is updated after initial delivery. The most common update case is transcription processing: a call with transcription activated is first streamed with `transcription.available: false` (audio processing still in progress). Once processing completes, the **same record** — identified by the same `uuid` — is streamed again with `transcription.available: true` and an `updated` timestamp. Clients should use `uuid` to detect such updates and replace the previously received record accordingly.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "records"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search the records. The search looks at the caller and callee names and numbers. Any other call record fields are currently not considered when searching"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter call records that match certain property values.\n\nIt is possible to specify multiple filters by providing a comma separated list. In this case only records that match all filters will be returned in the result.\n\nFor compatibility reasons, the `customer` and `extension` filters are treated as separate query parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "customer",
+                  "value": "<string>",
+                  "description": "The K-number for which to return call records. Applies only to admin level access with appropriate permissions"
+                },
+                {
+                  "disabled": false,
+                  "key": "extension",
+                  "value": "<string>",
+                  "description": "The extension (user) for which to return call records. Applies to admin level access with appropriate permissions"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<number>",
+                  "description": "Limit the list to records that are newer than this timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<number>",
+                  "description": "Limit the list to records that are older than this timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "0",
+                  "description": "Limit the number of call records in the result."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Generate the list starting from offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "complete",
+                  "value": "false",
+                  "description": "Should the records include the complete transcripts and summaries (for transcribed calls)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "desc",
+                  "description": "Set creation time sort order"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "218b4473-f999-440e-af06-a9b3b00e2e1f",
+              "name": "Call records. The response format depends on the `Accept` request header:\n- `application/json` (default): a JSON array of call records.\n- `text/event-stream`: a Server-Sent Events (SSE) stream of call records. Records are delivered in chronological order.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "0"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "complete",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"uuid\": \"110e8400-e29b-41d4-a716-446655440011\",\n    \"duration\": 30,\n    \"direction\": \"outbound\",\n    \"caller\": {\n      \"name\": \"Alice\",\n      \"number\": \"1001\",\n      \"context\": \"K9999\"\n    },\n    \"callee\": {\n      \"name\": \"Bob\",\n      \"number\": \"4989123456789\",\n      \"context\": \"global\"\n    },\n    \"status\": \"answered\",\n    \"created\": \"2025-06-03T10:12:34Z\",\n    \"trunk_code\": \"07\",\n    \"transcription\": {\n      \"available\": false\n    }\n  },\n  {\n    \"uuid\": \"220e8400-e29b-41d4-a716-446655440022\",\n    \"duration\": 30,\n    \"direction\": \"inbound\",\n    \"caller\": {\n      \"name\": \"Charlie\",\n      \"number\": \"1003\",\n      \"context\": \"K9999\"\n    },\n    \"callee\": {\n      \"name\": \"Alice\",\n      \"number\": \"1001\",\n      \"context\": \"K9999\"\n    },\n    \"status\": \"answered\",\n    \"created\": \"2025-06-03T10:22:24Z\",\n    \"transcription\": {\n      \"available\": true\n    }\n  },\n  {\n    \"uuid\": \"330e8400-e29b-41d4-a716-446655440033\",\n    \"duration\": 0,\n    \"direction\": \"inbound\",\n    \"caller\": {\n      \"name\": \"Charlie\",\n      \"number\": \"1003\",\n      \"context\": \"K9999\"\n    },\n    \"callee\": {\n      \"name\": \"Alice\",\n      \"number\": \"1001\",\n      \"context\": \"K9999\"\n    },\n    \"history\": [\n      {\n        \"callee\": {\n          \"name\": \"Test Group\",\n          \"number\": \"10\",\n          \"context\": \"K9999\",\n          \"destination_type\": \"group\"\n        },\n        \"updated\": \"2025-06-03T10:25:26Z\"\n      }\n    ],\n    \"status\": \"cancelled\",\n    \"created\": \"2025-06-03T10:25:25Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "851318a0-0fed-4ffa-affc-4b0d5c5b1b17",
+              "name": "One or more request parameters failed validation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "0"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "complete",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend.",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff511dfa-cc59-4b9f-8544-a2cec9f56b10",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "0"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "complete",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend.",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09c88391-08b8-47d5-ba25-5c93e6189943",
+          "name": "Delete multiple call records",
+          "request": {
+            "name": "Delete multiple call records",
+            "description": {
+              "content": "Delete some or all call records (depending on the filters)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "records"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<string>",
+                  "description": "Delete call records with a given `uuid`. Multiple `uuid` parameters in a single query are supported as well."
+                },
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<string>",
+                  "description": "Delete call records with a given `uuid`. Multiple `uuid` parameters in a single query are supported as well."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Only delete call records that match the filter.\n\nIt is possible to specify multiple filters by providing a comma separated list. In this case only the records that match all filters will be deleted."
+                },
+                {
+                  "disabled": false,
+                  "key": "customer",
+                  "value": "<string>",
+                  "description": "The K-number for which to return call records. Applies only to admin level access with appropriate permissions"
+                },
+                {
+                  "disabled": false,
+                  "key": "extension",
+                  "value": "<string>",
+                  "description": "The extension (user) for which to return call records. Applies only to admin level access with appropriate permissions"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<number>",
+                  "description": "Limit the list to records that are newer than this timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<number>",
+                  "description": "Limit the list to records that are older than this timestamp"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2329dc98-51e5-49ff-95c3-b6fed195b72a",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a7a91d38-3bba-4d24-b458-62d7bf56cf9e",
+              "name": "One or more request parameters failed validation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend.",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c169095-97de-4873-bb4e-e56907deea5b",
+              "name": "Resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend.",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2204729-9d68-42b2-aa0d-61a7a8cff90b",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend.",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fae4ded3-6d29-4254-9072-d28843d7f88a",
+          "name": "Get call record details",
+          "request": {
+            "name": "Get call record details",
+            "description": {
+              "content": "Return call record details for a given call record uuid",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "records",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) The `uuid` of the call record"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bb3ccd78-1c90-44b5-80f5-522a73b13925",
+              "name": "The call record details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "records",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The `uuid` of the call record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"000e8400-e29b-41d4-a716-446655440000\",\n  \"duration\": 30,\n  \"direction\": \"inbound\",\n  \"caller\": {\n    \"name\": \"Charlie\",\n    \"number\": \"1003\",\n    \"context\": \"K9999\"\n  },\n  \"callee\": {\n    \"name\": \"Alice\",\n    \"number\": \"1001\",\n    \"context\": \"K9999\"\n  },\n  \"status\": \"answered\",\n  \"created\": \"2025-06-03T10:22:24Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74422979-9d10-408f-afc9-6e5509b255de",
+              "name": "One or more request parameters failed validation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "records",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The `uuid` of the call record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend.",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7000684d-cf51-4cb1-9f16-44e87b95f38c",
+              "name": "Resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "records",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The `uuid` of the call record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend.",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a42de4ef-3bcd-4d0e-a590-d0ac8fe6b6ae",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "records",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The `uuid` of the call record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend.",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5465247-b5ee-44f7-95cf-d7994408cdda",
+          "name": "Delete single call record",
+          "request": {
+            "name": "Delete single call record",
+            "description": {
+              "content": "Deletes the call record for the given call record uuid",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "records",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) The `uuid` of the call record"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ac1f0e04-344a-42ea-9c66-f08d6534de01",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "records",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The `uuid` of the call record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "25ed3f32-96a2-48b3-bb5e-20f31da45bdc",
+              "name": "One or more request parameters failed validation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "records",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The `uuid` of the call record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend.",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8bc9216-6a36-42aa-bac5-f0c76ffc8d0f",
+              "name": "Resource was not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "records",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The `uuid` of the call record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend.",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7a77975-3d0e-453f-b83b-9d7edd12cf56",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "records",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) The `uuid` of the call record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend.",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nfon.com/call-history",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1ba1883c-b19a-46cb-a51a-f635d4f397ab",
+    "name": "NFON Call History Accounts records API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.\n\nThis API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.\n\nFor more information, see: https://www.nfon.com/en/integrations/login-with-nfon/\n\nContact Support:\n Name: NFON\n Email: integration@nfon.com",
+      "type": "text/plain"
+    }
+  }
+}

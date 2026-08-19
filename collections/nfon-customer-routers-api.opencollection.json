@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts Customer Routers API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customer Routers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get_156",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/routers",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "post_48",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/routers",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_157",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/routers/:routerId",
+            "params": [
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "put_47",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/routers/:routerId",
+            "params": [
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "delete_48",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/routers/:routerId",
+            "params": [
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

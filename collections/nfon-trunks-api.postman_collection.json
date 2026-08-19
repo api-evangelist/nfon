@@ -1,0 +1,1237 @@
+{
+  "item": [
+    {
+      "id": "0164f1d2-6536-4d4b-8790-6a3fa2457558",
+      "name": "trunks",
+      "description": {
+        "content": "Trunk management operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "24d977d4-1c1a-4b82-aca5-b0dffed089b7",
+          "name": "Delete tenant trunk",
+          "request": {
+            "name": "Delete tenant trunk",
+            "description": {
+              "content": "Deletes a trunk for a tenant",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenant",
+                "trunks",
+                ":trunkId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "trunkId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "4cc6a72c-1df2-4052-99ec-66caccf2fbdf",
+              "name": "Trunk deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks",
+                    ":trunkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9fc5adeb-cc72-42f5-85f5-474cbb1b7e62",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks",
+                    ":trunkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Invalid request parameters\",\n  \"code\": \"validation_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "952f0e90-483f-4a81-b215-b6d0bdd20b77",
+              "name": "Trunk not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks",
+                    ":trunkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The requested resource was not found\",\n  \"code\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29084a64-c8d0-485f-a90c-d5a6c8be6b11",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks",
+                    ":trunkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5447bf53-11fb-4465-9c7b-6743ec146530",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks",
+                    ":trunkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc4071d7-46f6-499a-990a-b8a00675953d",
+          "name": "Update tenant trunk",
+          "request": {
+            "name": "Update tenant trunk",
+            "description": {
+              "content": "Updates an existing trunk for a tenant",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenant",
+                "trunks",
+                ":trunkId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "trunkId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"carrier_name\": \"<string>\",\n  \"pilot_reachable\": \"<boolean>\",\n  \"inbound_calls_enabled\": \"<boolean>\",\n  \"outbound_calls_enabled\": \"<boolean>\",\n  \"shorten_on_zero\": \"<boolean>\",\n  \"softswitch\": \"<string>\",\n  \"site_id\": \"<string>\",\n  \"site_salesforce_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eac71dc4-c9a0-4275-8df3-201992b42558",
+              "name": "Trunk updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks",
+                    ":trunkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier_name\": \"Deutsche Telekom\",\n  \"pilot_reachable\": \"<boolean>\",\n  \"inbound_calls_enabled\": \"<boolean>\",\n  \"outbound_calls_enabled\": \"<boolean>\",\n  \"shorten_on_zero\": \"<boolean>\",\n  \"softswitch\": \"BTNGN1\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_salesforce_id\": \"a06D000000kIkHq\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "99c05aff-65a1-4545-8f58-62cc972e3577",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks",
+                    ":trunkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier_name\": \"Deutsche Telekom\",\n  \"pilot_reachable\": \"<boolean>\",\n  \"inbound_calls_enabled\": \"<boolean>\",\n  \"outbound_calls_enabled\": \"<boolean>\",\n  \"shorten_on_zero\": \"<boolean>\",\n  \"softswitch\": \"BTNGN1\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_salesforce_id\": \"a06D000000kIkHq\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Invalid request parameters\",\n  \"code\": \"validation_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8f215ed-9f0a-40b4-8e36-9dd1f5b17823",
+              "name": "Trunk not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks",
+                    ":trunkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier_name\": \"Deutsche Telekom\",\n  \"pilot_reachable\": \"<boolean>\",\n  \"inbound_calls_enabled\": \"<boolean>\",\n  \"outbound_calls_enabled\": \"<boolean>\",\n  \"shorten_on_zero\": \"<boolean>\",\n  \"softswitch\": \"BTNGN1\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_salesforce_id\": \"a06D000000kIkHq\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The requested resource was not found\",\n  \"code\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e285ea9-c2b0-4475-b800-004b123ae83e",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks",
+                    ":trunkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier_name\": \"Deutsche Telekom\",\n  \"pilot_reachable\": \"<boolean>\",\n  \"inbound_calls_enabled\": \"<boolean>\",\n  \"outbound_calls_enabled\": \"<boolean>\",\n  \"shorten_on_zero\": \"<boolean>\",\n  \"softswitch\": \"BTNGN1\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_salesforce_id\": \"a06D000000kIkHq\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "739269c6-80c7-42e8-a911-6b8523f3d4ef",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks",
+                    ":trunkId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trunkId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"carrier_name\": \"Deutsche Telekom\",\n  \"pilot_reachable\": \"<boolean>\",\n  \"inbound_calls_enabled\": \"<boolean>\",\n  \"outbound_calls_enabled\": \"<boolean>\",\n  \"shorten_on_zero\": \"<boolean>\",\n  \"softswitch\": \"BTNGN1\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_salesforce_id\": \"a06D000000kIkHq\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "501b8992-4424-4d94-9bfa-abd550f70144",
+          "name": "Create tenant trunk",
+          "request": {
+            "name": "Create tenant trunk",
+            "description": {
+              "content": "Creates a new trunk for a tenant",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenant",
+                "trunks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"base_number\": {\n    \"country_code\": \"<string>\",\n    \"national_destination_code\": \"<string>\",\n    \"pilot\": \"<string>\",\n    \"extension\": \"<string>\"\n  },\n  \"carrier_name\": \"<string>\",\n  \"shorten_on_zero\": \"<boolean>\",\n  \"softswitch\": \"<string>\",\n  \"drop_extension\": \"<string>\",\n  \"number_block_end\": \"<long>\",\n  \"inbound_calls_enabled\": \"<boolean>\",\n  \"number_block_start\": \"<long>\",\n  \"trunk_salesforce_id\": \"<string>\",\n  \"outbound_calls_enabled\": \"<boolean>\",\n  \"pilot_reachable\": \"<boolean>\",\n  \"trunk_number\": \"<long>\",\n  \"site_id\": \"<string>\",\n  \"site_salesforce_id\": \"<string>\",\n  \"trunk_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4b55050f-1294-45fb-99e6-7b379be9de64",
+              "name": "Trunk created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"base_number\": {\n    \"country_code\": \"49\",\n    \"national_destination_code\": \"30\",\n    \"pilot\": \"12345\",\n    \"extension\": \"string\"\n  },\n  \"carrier_name\": \"Deutsche Telekom\",\n  \"shorten_on_zero\": \"<boolean>\",\n  \"softswitch\": \"BTNGN1\",\n  \"drop_extension\": \"186\",\n  \"number_block_end\": \"<long>\",\n  \"inbound_calls_enabled\": \"<boolean>\",\n  \"number_block_start\": \"<long>\",\n  \"trunk_salesforce_id\": \"a06D000000kIkHs\",\n  \"outbound_calls_enabled\": \"<boolean>\",\n  \"pilot_reachable\": \"<boolean>\",\n  \"trunk_number\": \"<long>\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_salesforce_id\": \"a06D000000kIkHq\",\n  \"trunk_id\": \"a06D000000kIkHs\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"trunk_salesforce_id\": \"a06D000000kIkHs\",\n  \"trunk_id\": \"a06D000000kIkHs\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d7038ce-8ffe-418e-b519-a03f71ac3fa2",
+              "name": "Bad Request - Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"base_number\": {\n    \"country_code\": \"49\",\n    \"national_destination_code\": \"30\",\n    \"pilot\": \"12345\",\n    \"extension\": \"string\"\n  },\n  \"carrier_name\": \"Deutsche Telekom\",\n  \"shorten_on_zero\": \"<boolean>\",\n  \"softswitch\": \"BTNGN1\",\n  \"drop_extension\": \"186\",\n  \"number_block_end\": \"<long>\",\n  \"inbound_calls_enabled\": \"<boolean>\",\n  \"number_block_start\": \"<long>\",\n  \"trunk_salesforce_id\": \"a06D000000kIkHs\",\n  \"outbound_calls_enabled\": \"<boolean>\",\n  \"pilot_reachable\": \"<boolean>\",\n  \"trunk_number\": \"<long>\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_salesforce_id\": \"a06D000000kIkHq\",\n  \"trunk_id\": \"a06D000000kIkHs\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"country_code must be a number greater than 0 and have a length <= 255\",\n  \"code\": \"invalid_country_code\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "638f083e-34ff-458c-a4e2-0bc4e4a1dc01",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"base_number\": {\n    \"country_code\": \"49\",\n    \"national_destination_code\": \"30\",\n    \"pilot\": \"12345\",\n    \"extension\": \"string\"\n  },\n  \"carrier_name\": \"Deutsche Telekom\",\n  \"shorten_on_zero\": \"<boolean>\",\n  \"softswitch\": \"BTNGN1\",\n  \"drop_extension\": \"186\",\n  \"number_block_end\": \"<long>\",\n  \"inbound_calls_enabled\": \"<boolean>\",\n  \"number_block_start\": \"<long>\",\n  \"trunk_salesforce_id\": \"a06D000000kIkHs\",\n  \"outbound_calls_enabled\": \"<boolean>\",\n  \"pilot_reachable\": \"<boolean>\",\n  \"trunk_number\": \"<long>\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_salesforce_id\": \"a06D000000kIkHq\",\n  \"trunk_id\": \"a06D000000kIkHs\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"JWT missing from the Authorization header.\",\n  \"code\": \"authorization\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8de287d3-7fe8-4386-b659-ff7e5d5c924a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"base_number\": {\n    \"country_code\": \"49\",\n    \"national_destination_code\": \"30\",\n    \"pilot\": \"12345\",\n    \"extension\": \"string\"\n  },\n  \"carrier_name\": \"Deutsche Telekom\",\n  \"shorten_on_zero\": \"<boolean>\",\n  \"softswitch\": \"BTNGN1\",\n  \"drop_extension\": \"186\",\n  \"number_block_end\": \"<long>\",\n  \"inbound_calls_enabled\": \"<boolean>\",\n  \"number_block_start\": \"<long>\",\n  \"trunk_salesforce_id\": \"a06D000000kIkHs\",\n  \"outbound_calls_enabled\": \"<boolean>\",\n  \"pilot_reachable\": \"<boolean>\",\n  \"trunk_number\": \"<long>\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_salesforce_id\": \"a06D000000kIkHq\",\n  \"trunk_id\": \"a06D000000kIkHs\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"User does not have permission to perform this operation\",\n  \"code\": \"forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14deb6ce-20ab-414e-a778-916340320c57",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"base_number\": {\n    \"country_code\": \"49\",\n    \"national_destination_code\": \"30\",\n    \"pilot\": \"12345\",\n    \"extension\": \"string\"\n  },\n  \"carrier_name\": \"Deutsche Telekom\",\n  \"shorten_on_zero\": \"<boolean>\",\n  \"softswitch\": \"BTNGN1\",\n  \"drop_extension\": \"186\",\n  \"number_block_end\": \"<long>\",\n  \"inbound_calls_enabled\": \"<boolean>\",\n  \"number_block_start\": \"<long>\",\n  \"trunk_salesforce_id\": \"a06D000000kIkHs\",\n  \"outbound_calls_enabled\": \"<boolean>\",\n  \"pilot_reachable\": \"<boolean>\",\n  \"trunk_number\": \"<long>\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_salesforce_id\": \"a06D000000kIkHq\",\n  \"trunk_id\": \"a06D000000kIkHs\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The number of trunks exceeds the maximum allowed limit of 10\",\n  \"code\": \"unprocessable_entity\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20370b97-6725-457b-a7b3-1f0ca5ee424f",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"base_number\": {\n    \"country_code\": \"49\",\n    \"national_destination_code\": \"30\",\n    \"pilot\": \"12345\",\n    \"extension\": \"string\"\n  },\n  \"carrier_name\": \"Deutsche Telekom\",\n  \"shorten_on_zero\": \"<boolean>\",\n  \"softswitch\": \"BTNGN1\",\n  \"drop_extension\": \"186\",\n  \"number_block_end\": \"<long>\",\n  \"inbound_calls_enabled\": \"<boolean>\",\n  \"number_block_start\": \"<long>\",\n  \"trunk_salesforce_id\": \"a06D000000kIkHs\",\n  \"outbound_calls_enabled\": \"<boolean>\",\n  \"pilot_reachable\": \"<boolean>\",\n  \"trunk_number\": \"<long>\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_salesforce_id\": \"a06D000000kIkHq\",\n  \"trunk_id\": \"a06D000000kIkHs\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dec97b05-9ad7-4e61-9228-e5c980748653",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "trunks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"base_number\": {\n    \"country_code\": \"49\",\n    \"national_destination_code\": \"30\",\n    \"pilot\": \"12345\",\n    \"extension\": \"string\"\n  },\n  \"carrier_name\": \"Deutsche Telekom\",\n  \"shorten_on_zero\": \"<boolean>\",\n  \"softswitch\": \"BTNGN1\",\n  \"drop_extension\": \"186\",\n  \"number_block_end\": \"<long>\",\n  \"inbound_calls_enabled\": \"<boolean>\",\n  \"number_block_start\": \"<long>\",\n  \"trunk_salesforce_id\": \"a06D000000kIkHs\",\n  \"outbound_calls_enabled\": \"<boolean>\",\n  \"pilot_reachable\": \"<boolean>\",\n  \"trunk_number\": \"<long>\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_salesforce_id\": \"a06D000000kIkHq\",\n  \"trunk_id\": \"a06D000000kIkHs\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "a29f84f6-20fd-6c7b-42fb-f719b903f039"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nfon.com/call-history",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b14ba4ae-dfe7-4678-a7c9-5d780a781a27",
+    "name": "NFON Call History Accounts trunks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.\n\nThis API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.\n\nFor more information, see: https://www.nfon.com/en/integrations/login-with-nfon/\n\nContact Support:\n Name: NFON\n Email: integration@nfon.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts phone extensions API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "phone extensions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the data of phone extensions for a specific tenant, constraint by your credentials.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/extensions/phone/data",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the data of phone extensions for a specific tenant, constraint by your credentials."
+        },
+        {
+          "info": {
+            "name": "Event streams and snapshots of presence and line state changes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/extensions/phone/states",
+            "params": [
+              {
+                "name": "extension",
+                "value": "",
+                "type": "query",
+                "description": "Optional argument only used when delivering a snapshot. Will only deliver the state of the given extensions not a full dump."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "## Overview\n\nThis endpoint provides information about the `presence` and `line` states.\n\n## Usage \n\nIt is only allowed to get the `state` of users that belong to your K-Account.\n\n### Accept Header\n\nThe reply depends on the content of the `Accept` request header. There are two options:\n\n* **Event streaming** (default) - the API will send back an SSE event stream if the `Accept` header specifies `text/event-stream` or if it's empty. \nOn connect the API will first bootstrap the client by sending th"
+        },
+        {
+          "info": {
+            "name": "Get call details and state change events in real-time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/extensions/phone/calls",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "## Overview\nThe API streams in real time  the call state update events for **all** the calls of a particular customer.\n\n## Usage\nThe `Accept: text/event-stream` header is set\n\nThe SSE stream will send events for any call state change that happens **after** the client SSE connection was established.\n\nThe stream will not send any past events, not even for calls that were established prior to the SSE connection and that are still ongoing. \n\nThis means that it is currently possible to get a `hangup`"
+        },
+        {
+          "info": {
+            "name": "Initiate new call",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/extensions/phone/calls",
+            "headers": [
+              {
+                "name": "X-Cloudya-Device-UUID",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "## Overview\nThis endpoint can be used to initiate voice calls.\n\n## Usage\n\nThe reply depends on the content of the `Accept` request header. \nThere are two options:\n\n### Single event (default) \nif the `Accept` header specifies `application/json` or if it's empty, the API will reply with `202 Accepted` and a body, which contains a normal JSON object representing the initial `start` event.\nThe `start` event contains the call `uuid`. \nThis could be useful when the client doesn't care about the progre"
+        },
+        {
+          "info": {
+            "name": "Cancel an in-progress call",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/extensions/phone/calls/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "Call UUID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint can be used to cancel a call which is in the process of being established."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

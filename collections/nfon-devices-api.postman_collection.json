@@ -1,0 +1,2012 @@
+{
+  "item": [
+    {
+      "id": "47b0a82d-c481-4053-9d99-027ccdb71174",
+      "name": "Devices",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9d35cfde-e155-4d16-95c9-6c55fd381fc1",
+          "name": "List devices",
+          "request": {
+            "name": "List devices",
+            "description": {},
+            "url": {
+              "path": [
+                "devices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "72227349-e5be-4165-88ae-5085ae3041f9",
+              "name": "Devices retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": [\n    {\n      \"href\": \"/api/customers/K1234\",\n      \"rel\": \"customer\"\n    },\n    {\n      \"href\": \"/api/device-types/Yealink%20T46U\",\n      \"rel\": \"deviceType\"\n    }\n  ],\n  \"data\": [\n    {\n      \"value\": \"00:15:65:A1:B2:C3\",\n      \"name\": \"deviceId\"\n    },\n    {\n      \"value\": \"Yealink\",\n      \"name\": \"manufacturer\"\n    },\n    {\n      \"value\": \"REGISTERED\",\n      \"name\": \"registrationStatus\"\n    },\n    {\n      \"value\": true,\n      \"name\": \"phoneExists\"\n    }\n  ],\n  \"href\": \"/api/devices\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e43fc9c1-dec4-4383-a7f5-c1f2b0243d05",
+          "name": "Validate device IDs",
+          "request": {
+            "name": "Validate device IDs",
+            "description": {},
+            "url": {
+              "path": [
+                "devices",
+                "validate-deviceid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"links\": \"<object>\",\n  \"data\": {\n    \"deviceIds\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "b079281a-6ab9-4683-9ba7-c5f30cb08876",
+              "name": "Validation results returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices",
+                    "validate-deviceid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {},\n  \"data\": {\n    \"deviceIds\": [\n      \"00:15:65:A1:B2:C3\",\n      \"00:15:65:D4:E5:F6\"\n    ]\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cccb629c-bbe3-45d4-ae60-70bb467a178f",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices",
+                    "validate-deviceid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"links\": {},\n  \"data\": {\n    \"deviceIds\": [\n      \"00:15:65:A1:B2:C3\",\n      \"00:15:65:D4:E5:F6\"\n    ]\n  },\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"itemCount\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34ecb296-f797-442f-8a15-27bdad34fb0e",
+          "name": "Bulk Export Devices",
+          "request": {
+            "name": "Bulk Export Devices",
+            "description": {
+              "content": "Export all devices for a tenant as CSV or Excel file (synchronous)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenant",
+                "devices",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sanitize",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "faca0510-5af6-4df0-9d47-bfc544402c8e",
+              "name": "Export file",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sanitize",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4fe5c4db-bad0-4257-8e1d-495ca488e50a",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sanitize",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Invalid request parameters\",\n  \"code\": \"validation_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "722cd131-a742-4eb9-823c-9a090d8524a6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sanitize",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"JWT missing from the Authorization header.\",\n  \"code\": \"authorization\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a8531f9-9ce8-418a-9c2d-e069a021de65",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sanitize",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"User does not have permission to perform this operation\",\n  \"code\": \"forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f88fea95-8731-4eb9-b891-0747acbfbb57",
+              "name": "Tenant not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sanitize",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The requested resource was not found\",\n  \"code\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f1240d8-0dda-4652-83b5-a7c0bd192f68",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sanitize",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0621985d-3a98-44e5-9616-e8ae7cbca716",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sanitize",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70dd49a6-e9bf-4402-bf0c-362947eed3eb",
+          "name": "Submit Device Bulk Import",
+          "request": {
+            "name": "Submit Device Bulk Import",
+            "description": {
+              "content": "Submit a device bulk import job for asynchronous processing.\nReturns immediately with a job ID that can be used to poll for status.\n\n**Supported Device Categories:**\n- `STANDARD`: Standard phones (single port)\n- `BASE`: Base phones (multi-port creation is automatic)\n- `HANDSET`: Handsets (must reference a base device via base_device_id)\n\n**Features:**\n- Automatic base-handset relationship handling\n- Best-effort import (continues on errors, reports per-device failures)\n- Device registration with RDS for eligible manufacturers\n\n**Workflow:**\n1. Call POST /devices/bulk/validate first to check for errors\n2. Submit import with POST /devices/bulk\n3. Poll GET /jobs/{eventId} until status is \"completed\" or \"failed\"",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenant",
+                "devices",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"devices\": [\n    {\n      \"base_device_id\": \"<string>\",\n      \"site_id\": \"<string>\",\n      \"site_salesforce_id\": \"<string>\",\n      \"device_id\": \"<string>\",\n      \"device_type\": \"<string>\"\n    },\n    {\n      \"base_device_id\": \"<string>\",\n      \"site_id\": \"<string>\",\n      \"site_salesforce_id\": \"<string>\",\n      \"device_id\": \"<string>\",\n      \"device_type\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2e2029e4-27e6-4120-9525-e47aae8748f8",
+              "name": "Import job accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devices\": [\n    {\n      \"base_device_id\": \"001122334400\",\n      \"site_id\": \"a06D000000kIkHp\",\n      \"site_salesforce_id\": \"a06D000000kIkHp\",\n      \"device_id\": \"001122334455\",\n      \"device_type\": \"DEVICE001\"\n    },\n    {\n      \"base_device_id\": \"001122334400\",\n      \"site_id\": \"a06D000000kIkHp\",\n      \"site_salesforce_id\": \"a06D000000kIkHp\",\n      \"device_id\": \"001122334455\",\n      \"device_type\": \"DEVICE001\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"completed\",\n  \"event_id\": \"string\",\n  \"details\": {\n    \"errors\": [\n      {\n        \"row\": 1814,\n        \"message\": \"string\",\n        \"type\": \"string\"\n      },\n      {\n        \"row\": 4373,\n        \"message\": \"string\",\n        \"type\": \"string\"\n      }\n    ],\n    \"rows\": 1821\n  },\n  \"type\": \"contact\",\n  \"created\": \"string\",\n  \"filename\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f39a666-34f8-4141-a6e1-3162a7685327",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devices\": [\n    {\n      \"base_device_id\": \"001122334400\",\n      \"site_id\": \"a06D000000kIkHp\",\n      \"site_salesforce_id\": \"a06D000000kIkHp\",\n      \"device_id\": \"001122334455\",\n      \"device_type\": \"DEVICE001\"\n    },\n    {\n      \"base_device_id\": \"001122334400\",\n      \"site_id\": \"a06D000000kIkHp\",\n      \"site_salesforce_id\": \"a06D000000kIkHp\",\n      \"device_id\": \"001122334455\",\n      \"device_type\": \"DEVICE001\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Invalid request parameters\",\n  \"code\": \"validation_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cca268d3-96e6-4d51-b40c-f3c6ff4cbb41",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devices\": [\n    {\n      \"base_device_id\": \"001122334400\",\n      \"site_id\": \"a06D000000kIkHp\",\n      \"site_salesforce_id\": \"a06D000000kIkHp\",\n      \"device_id\": \"001122334455\",\n      \"device_type\": \"DEVICE001\"\n    },\n    {\n      \"base_device_id\": \"001122334400\",\n      \"site_id\": \"a06D000000kIkHp\",\n      \"site_salesforce_id\": \"a06D000000kIkHp\",\n      \"device_id\": \"001122334455\",\n      \"device_type\": \"DEVICE001\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"JWT missing from the Authorization header.\",\n  \"code\": \"authorization\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a872ca8f-5be3-46b7-b169-548d236cf4cd",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devices\": [\n    {\n      \"base_device_id\": \"001122334400\",\n      \"site_id\": \"a06D000000kIkHp\",\n      \"site_salesforce_id\": \"a06D000000kIkHp\",\n      \"device_id\": \"001122334455\",\n      \"device_type\": \"DEVICE001\"\n    },\n    {\n      \"base_device_id\": \"001122334400\",\n      \"site_id\": \"a06D000000kIkHp\",\n      \"site_salesforce_id\": \"a06D000000kIkHp\",\n      \"device_id\": \"001122334455\",\n      \"device_type\": \"DEVICE001\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"User does not have permission to perform this operation\",\n  \"code\": \"forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70a0566c-00ff-483d-987d-7ce3b38cd848",
+              "name": "File too large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devices\": [\n    {\n      \"base_device_id\": \"001122334400\",\n      \"site_id\": \"a06D000000kIkHp\",\n      \"site_salesforce_id\": \"a06D000000kIkHp\",\n      \"device_id\": \"001122334455\",\n      \"device_type\": \"DEVICE001\"\n    },\n    {\n      \"base_device_id\": \"001122334400\",\n      \"site_id\": \"a06D000000kIkHp\",\n      \"site_salesforce_id\": \"a06D000000kIkHp\",\n      \"device_id\": \"001122334455\",\n      \"device_type\": \"DEVICE001\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"code\": \"bad_request\",\n  \"details\": {\n    \"message\": \"Cannot delete license that is currently assigned to a user\",\n    \"code\": \"license_assigned\"\n  },\n  \"message\": \"Invalid request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53377995-1a37-4ec2-b221-5bcc250ebcd7",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devices\": [\n    {\n      \"base_device_id\": \"001122334400\",\n      \"site_id\": \"a06D000000kIkHp\",\n      \"site_salesforce_id\": \"a06D000000kIkHp\",\n      \"device_id\": \"001122334455\",\n      \"device_type\": \"DEVICE001\"\n    },\n    {\n      \"base_device_id\": \"001122334400\",\n      \"site_id\": \"a06D000000kIkHp\",\n      \"site_salesforce_id\": \"a06D000000kIkHp\",\n      \"device_id\": \"001122334455\",\n      \"device_type\": \"DEVICE001\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25741a34-dcb9-472b-b976-a1d53bcd2f7f",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devices\": [\n    {\n      \"base_device_id\": \"001122334400\",\n      \"site_id\": \"a06D000000kIkHp\",\n      \"site_salesforce_id\": \"a06D000000kIkHp\",\n      \"device_id\": \"001122334455\",\n      \"device_type\": \"DEVICE001\"\n    },\n    {\n      \"base_device_id\": \"001122334400\",\n      \"site_id\": \"a06D000000kIkHp\",\n      \"site_salesforce_id\": \"a06D000000kIkHp\",\n      \"device_id\": \"001122334455\",\n      \"device_type\": \"DEVICE001\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4c4607b-d431-4d53-a85d-7e06f4da888a",
+          "name": "Validate Device Bulk Import",
+          "request": {
+            "name": "Validate Device Bulk Import",
+            "description": {
+              "content": "Validates device data for bulk import and returns enriched information.\nDoes not perform actual import - allows UI to review and filter devices before importing.\n\n**Validation Checks:**\n- Required fields: device_id, device_type\n- Duplicate device_id within the request\n- Device already exists in system (unique across all tenants)\n- Device type exists and is valid\n- Device category is STANDARD, BASE, or HANDSET\n\n**Recommended Workflow:**\n1. Call this endpoint to validate devices\n2. Review errors in the response\n3. Filter out devices with errors\n4. Submit valid devices to POST /devices/bulk",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenant",
+                "devices",
+                "bulk",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a79bd84d-3fde-4099-9e7f-592562cfd3c3",
+              "name": "Validation results with enriched device information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"devices\": [\n    {\n      \"device_type_info\": {\n        \"ports\": 1,\n        \"device_master_category\": \"STANDARD\",\n        \"port_type\": \"PORT\",\n        \"name\": \"DEVICE001\"\n      },\n      \"device_type\": \"DEVICE001\",\n      \"errors\": {},\n      \"device_id\": \"001122334455\"\n    },\n    {\n      \"errors\": [\n        \"Device type not found: INVALID-TYPE\"\n      ],\n      \"device_type\": \"INVALID-TYPE\",\n      \"device_id\": \"001122334466\"\n    },\n    {\n      \"errors\": [\n        \"duplicate device_id in request\"\n      ],\n      \"device_type\": \"DEVICE001\",\n      \"device_id\": \"001122334455\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a87631a2-614c-4be6-8d6a-3364106654c0",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Invalid request parameters\",\n  \"code\": \"validation_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5979a0d-97ef-4425-88a4-95fe26c9584c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"JWT missing from the Authorization header.\",\n  \"code\": \"authorization\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61de6f93-da7d-409a-8f34-6f004e4ad49b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"User does not have permission to perform this operation\",\n  \"code\": \"forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44cf1c66-2bba-4e4d-8c13-90a24cd21564",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44b5863d-5dc7-4b34-9054-8f88f69f7cbb",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "devices",
+                    "bulk",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d28368e-af27-4eee-92bf-43b8f724d519",
+          "name": "Get Import Job Status",
+          "request": {
+            "name": "Get Import Job Status",
+            "description": {
+              "content": "Poll the status of an import job",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenant",
+                "jobs",
+                ":eventId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "ffc1c70a-5f20-4429-abcd-6d531e1c0570",
+              "name": "Job status retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "jobs",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"completed\",\n  \"event_id\": \"string\",\n  \"details\": {\n    \"errors\": [\n      {\n        \"row\": 1814,\n        \"message\": \"string\",\n        \"type\": \"string\"\n      },\n      {\n        \"row\": 4373,\n        \"message\": \"string\",\n        \"type\": \"string\"\n      }\n    ],\n    \"rows\": 1821\n  },\n  \"type\": \"contact\",\n  \"created\": \"string\",\n  \"filename\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac91df9d-a998-491e-9b59-fa4e5cef2ce5",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "jobs",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Invalid request parameters\",\n  \"code\": \"validation_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c779bb11-7d6e-4431-8168-f05778eb94a5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "jobs",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"JWT missing from the Authorization header.\",\n  \"code\": \"authorization\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "625cb2a2-2362-47ed-90e2-1f744402b061",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "jobs",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"User does not have permission to perform this operation\",\n  \"code\": \"forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6aa5d4c4-c85a-42ca-9e01-77bb57d22dc1",
+              "name": "Job not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "jobs",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The requested resource was not found\",\n  \"code\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b20db37-515d-429d-9e23-1e602482254b",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "jobs",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b70ca3c6-cdbe-4dae-8c72-123413807911",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "jobs",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "2ca04baa-4b96-6972-e3b0-16fbd0e396ea"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nfon.com/call-history",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8c36d4cd-deee-4a4c-983f-cd81d385602e",
+    "name": "NFON Call History Accounts Devices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.\n\nThis API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.\n\nFor more information, see: https://www.nfon.com/en/integrations/login-with-nfon/\n\nContact Support:\n Name: NFON\n Email: integration@nfon.com",
+      "type": "text/plain"
+    }
+  }
+}

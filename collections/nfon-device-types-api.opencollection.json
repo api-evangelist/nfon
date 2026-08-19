@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts Device Types API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Device Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get_196",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/device-types"
+          }
+        },
+        {
+          "info": {
+            "name": "get_197",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/device-types/:deviceTypeName",
+            "params": [
+              {
+                "name": "deviceTypeName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_198",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/device-types/:deviceTypeName/firmwares",
+            "params": [
+              {
+                "name": "deviceTypeName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_199",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/device-types/:deviceTypeName/firmwares/:releaseVersion",
+            "params": [
+              {
+                "name": "releaseVersion",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "deviceTypeName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

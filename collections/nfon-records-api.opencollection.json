@@ -1,0 +1,194 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts records API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "records",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get, stream, and search call records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/records",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search the records. The search looks at the caller and callee names and numbers. Any other call record fields are currently not considered when searching"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter call records that match certain property values.\n\nIt is possible to specify multiple filters by providing a comma separated list. In this case only records that match all filters will be returned in the result.\n\nFor compatibility reasons, the `customer` and `extension` filters are treated as separate query parameters."
+              },
+              {
+                "name": "customer",
+                "value": "",
+                "type": "query",
+                "description": "The K-number for which to return call records. Applies only to admin level access with appropriate permissions"
+              },
+              {
+                "name": "extension",
+                "value": "",
+                "type": "query",
+                "description": "The extension (user) for which to return call records. Applies to admin level access with appropriate permissions"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Limit the list to records that are newer than this timestamp."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Limit the list to records that are older than this timestamp"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of call records in the result."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Generate the list starting from offset"
+              },
+              {
+                "name": "complete",
+                "value": "",
+                "type": "query",
+                "description": "Should the records include the complete transcripts and summaries (for transcribed calls)."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Set creation time sort order"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the latest call records. They can be filtered by number, name, time or type.\n\nThe response format is controlled by the `Accept` request header:\n\n`application/json` *(default)*:\n\nReturns a JSON array of call records.\n\n`text/event-stream`:\n\nStreams call records as Server-Sent Events (SSE).\n\nEach event carries one JSON-encoded call record in its `data` field.\nA record will be **re-sent** if it is updated after initial delivery. The most common update case is transcription processing: a call wit"
+        },
+        {
+          "info": {
+            "name": "Delete multiple call records",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/records",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "Delete call records with a given `uuid`. Multiple `uuid` parameters in a single query are supported as well."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Only delete call records that match the filter.\n\nIt is possible to specify multiple filters by providing a comma separated list. In this case only the records that match all filters will be deleted."
+              },
+              {
+                "name": "customer",
+                "value": "",
+                "type": "query",
+                "description": "The K-number for which to return call records. Applies only to admin level access with appropriate permissions"
+              },
+              {
+                "name": "extension",
+                "value": "",
+                "type": "query",
+                "description": "The extension (user) for which to return call records. Applies only to admin level access with appropriate permissions"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Limit the list to records that are newer than this timestamp."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Limit the list to records that are older than this timestamp"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete some or all call records (depending on the filters)"
+        },
+        {
+          "info": {
+            "name": "Get call record details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/records/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The `uuid` of the call record"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Return call record details for a given call record uuid"
+        },
+        {
+          "info": {
+            "name": "Delete single call record",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/records/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The `uuid` of the call record"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes the call record for the given call record uuid"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

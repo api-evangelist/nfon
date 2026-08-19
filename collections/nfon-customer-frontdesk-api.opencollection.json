@@ -1,0 +1,347 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts Customer Frontdesk API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customer Frontdesk",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getTargetByTargetId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/frontdesk-services/:serviceNumber/target/:targetServiceNumber",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "targetServiceNumber",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "updateTargetByTargetId",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/frontdesk-services/:serviceNumber/target/:targetServiceNumber",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "targetServiceNumber",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "deleteTarget",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/frontdesk-services/:serviceNumber/target/:targetServiceNumber",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "targetServiceNumber",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_99",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/frontdesk-services/:serviceNumber/inbound-trunk-numbers",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "post_28",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/frontdesk-services/:serviceNumber/inbound-trunk-numbers",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "getAllTargets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/frontdesk-services/:serviceNumber/target",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "createFrontdeskTarget",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/frontdesk-services/:serviceNumber/target",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_98",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/frontdesk-services/:serviceNumber",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "put_31",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/frontdesk-services/:serviceNumber",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "delete_26",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/frontdesk-services/:serviceNumber",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_97",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/frontdesk-services",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filter Frontdesk services by activation state. true returns services with notActiveSince null; false returns services with notActiveSince set."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "post_27",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/frontdesk-services",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_100",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/frontdesk-services/:serviceNumber/inbound-trunk-numbers/:didNumber",
+            "params": [
+              {
+                "name": "didNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "delete_27",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/frontdesk-services/:serviceNumber/inbound-trunk-numbers/:didNumber",
+            "params": [
+              {
+                "name": "didNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts Customer Contracts API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customer Contracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get_31",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/contracts",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "post_5",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/contracts",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_32",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/contracts/:salesForceId",
+            "params": [
+              {
+                "name": "salesForceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "put_6",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/contracts/:salesForceId",
+            "params": [
+              {
+                "name": "salesForceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "delete_3",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/contracts/:salesForceId",
+            "params": [
+              {
+                "name": "salesForceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

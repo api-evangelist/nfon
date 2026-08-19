@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts trial-templates API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "trial-templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create tenant trial template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/create-trial-template",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a trial template for a tenant. Only supports PBX contract types. Trial templates are not supported for nconnect_voice contract type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

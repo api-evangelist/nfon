@@ -1,0 +1,519 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts Customer Queues API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customer Queues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get_146",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/available-destinations-on-rejection",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_142",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/available-general-announcements",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_143",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/available-music-on-hold-announcements",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_150",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber/members",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "post_46",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber/members",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_151",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber/members/:extensionNumber",
+            "params": [
+              {
+                "name": "extensionNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "put_45",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber/members/:extensionNumber",
+            "params": [
+              {
+                "name": "extensionNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "delete_46",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber/members/:extensionNumber",
+            "params": [
+              {
+                "name": "extensionNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_182",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber/timeout",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "put_52",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber/timeout",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "delete_52",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber/timeout",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_135",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "put_41",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "delete_42",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_137",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber/inbound-trunk-numbers/:didNumber",
+            "params": [
+              {
+                "name": "didNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "delete_43",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber/inbound-trunk-numbers/:didNumber",
+            "params": [
+              {
+                "name": "didNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_136",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber/inbound-trunk-numbers",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "post_43",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber/inbound-trunk-numbers",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_134",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "post_42",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_148",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber/destination-on-rejection",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "put_43",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/:serviceNumber/destination-on-rejection",
+            "params": [
+              {
+                "name": "serviceNumber",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_178",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/targets/queue-services/available-destinations-on-timeout",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

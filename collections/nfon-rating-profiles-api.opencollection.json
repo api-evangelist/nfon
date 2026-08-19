@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts Rating Profiles API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rating Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get rating profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/operators/:operatorId/rating-profiles/:ratingProfileName",
+            "params": [
+              {
+                "name": "ratingProfileName",
+                "value": "",
+                "type": "path",
+                "description": "Rating profile name"
+              },
+              {
+                "name": "operatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get rating profile"
+        },
+        {
+          "info": {
+            "name": "Delete rating profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/operators/:operatorId/rating-profiles/:ratingProfileName",
+            "params": [
+              {
+                "name": "ratingProfileName",
+                "value": "",
+                "type": "path",
+                "description": "Rating profile name"
+              },
+              {
+                "name": "operatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete rating profile"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

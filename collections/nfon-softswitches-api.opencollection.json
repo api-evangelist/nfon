@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts Softswitches API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Softswitches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get softswitch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/operators/:operatorId/softswitches/:softswitchId",
+            "params": [
+              {
+                "name": "softswitchId",
+                "value": "",
+                "type": "path",
+                "description": "Softswitch identifier"
+              },
+              {
+                "name": "operatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get softswitch"
+        },
+        {
+          "info": {
+            "name": "List softswitches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/operators/:operatorId/softswitches",
+            "params": [
+              {
+                "name": "operatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List softswitches"
+        },
+        {
+          "info": {
+            "name": "List available softswitches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/softswitches"
+          },
+          "docs": "Returns all available softswitches"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

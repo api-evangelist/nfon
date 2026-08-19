@@ -1,0 +1,236 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts import-export API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "import-export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bulk Export Virtual Fax Extensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/virtual-fax-extensions/bulk",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "sanitize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Export all virtual fax extensions for a tenant as CSV or Excel file (synchronous)"
+        },
+        {
+          "info": {
+            "name": "Bulk Import Virtual Fax Extensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/virtual-fax-extensions/bulk",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a bulk import job for virtual fax extensions (asynchronous). The delete flag is not supported and will return an error if set to true."
+        },
+        {
+          "info": {
+            "name": "Bulk Export Phone Books",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/phone-books/bulk",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "sanitize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Export all phone book entries for a tenant as CSV or Excel file (synchronous)"
+        },
+        {
+          "info": {
+            "name": "Bulk Import Phone Books",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/phone-books/bulk",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a bulk import job for phone book entries (asynchronous)"
+        },
+        {
+          "info": {
+            "name": "List jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/jobs",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all async jobs for a tenant with optional type and status filtering"
+        },
+        {
+          "info": {
+            "name": "Bulk Export Phone Extensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/phone-extensions/bulk",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "sanitize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Export all phone extensions for a tenant as CSV or Excel file (synchronous)"
+        },
+        {
+          "info": {
+            "name": "Bulk Import Phone Extensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/phone-extensions/bulk",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a bulk import job for phone extensions (asynchronous). The delete flag is not supported and will return an error if set to true."
+        },
+        {
+          "info": {
+            "name": "Bulk Export Speed Dials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/speed-dials/bulk",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "sanitize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Export all speed dials for a tenant as CSV or Excel file (synchronous)"
+        },
+        {
+          "info": {
+            "name": "Bulk Import Speed Dials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/speed-dials/bulk",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a bulk import job for speed dials (asynchronous)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

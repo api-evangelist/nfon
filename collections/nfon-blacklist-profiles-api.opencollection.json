@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts Blacklist Profiles API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Blacklist Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get blacklist profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/operators/:operatorId/blacklist-profiles/:blacklistProfileId",
+            "params": [
+              {
+                "name": "blacklistProfileId",
+                "value": "",
+                "type": "path",
+                "description": "Blacklist profile identifier"
+              },
+              {
+                "name": "operatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get blacklist profile"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

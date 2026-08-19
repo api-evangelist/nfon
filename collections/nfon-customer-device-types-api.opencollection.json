@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts Customer Device Types API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customer Device Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get_45",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/device-types",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_48",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/device-types/:deviceTypeName",
+            "params": [
+              {
+                "name": "deviceTypeName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_49",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/device-types/:deviceTypeName/firmwares",
+            "params": [
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "deviceTypeName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_50",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:participantExternalIdentifier/device-types/:deviceTypeName/firmwares/:releaseVersion",
+            "params": [
+              {
+                "name": "releaseVersion",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "participantExternalIdentifier",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "deviceTypeName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

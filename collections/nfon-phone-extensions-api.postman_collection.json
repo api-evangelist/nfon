@@ -1,0 +1,1975 @@
+{
+  "item": [
+    {
+      "id": "abe79e93-d7e4-4b3f-a064-40987381f0df",
+      "name": "phone extensions",
+      "description": {
+        "content": "Data for phone extensions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b130f781-7531-4cc4-b69d-b5f6a9a92b63",
+          "name": "Get the data of phone extensions for a specific tenant, constraint by your credentials.",
+          "request": {
+            "name": "Get the data of phone extensions for a specific tenant, constraint by your credentials.",
+            "description": {},
+            "url": {
+              "path": [
+                "extensions",
+                "phone",
+                "data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5c71de7e-17df-42fe-8ce4-b49db8d91dcd",
+              "name": "A list extension data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"uuid\": \"100@KLMN0\",\n    \"extension_number\": \"100\",\n    \"name\": \"office\"\n  },\n  {\n    \"uuid\": \"100@KLMN0\",\n    \"extension_number\": \"100\",\n    \"name\": \"office\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d99888e6-2a08-42ee-ae1a-26bf4d7e215e",
+              "name": "Invalid ID supplied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0cf4ff30-c792-4817-b738-2bb9ebd648e4",
+              "name": "Extension not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f751c7a8-0e04-4d2c-8bf6-baaead7c1000",
+              "name": "Validation exception",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c6e79b6-0619-4e75-bb77-556a41771111",
+          "name": "Event streams and snapshots of presence and line state changes.",
+          "request": {
+            "name": "Event streams and snapshots of presence and line state changes.",
+            "description": {
+              "content": "## Overview\n\nThis endpoint provides information about the `presence` and `line` states.\n\n## Usage \n\nIt is only allowed to get the `state` of users that belong to your K-Account.\n\n### Accept Header\n\nThe reply depends on the content of the `Accept` request header. There are two options:\n\n* **Event streaming** (default) - the API will send back an SSE event stream if the `Accept` header specifies `text/event-stream` or if it's empty. \nOn connect the API will first bootstrap the client by sending the latest `state` of the users and after that it will continue to stream `state` changes as they happen.\n\n* **Single snapshot** if the `Accept` header specifies `application/json`, the API will return a normal JSON reply with an array of all `state` objects at the time of the request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                "phone",
+                "states"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "extension",
+                  "value": "<string>",
+                  "description": "Optional argument only used when delivering a snapshot. Will only deliver the state of the given extensions not a full dump."
+                },
+                {
+                  "disabled": false,
+                  "key": "extension",
+                  "value": "<string>",
+                  "description": "Optional argument only used when delivering a snapshot. Will only deliver the state of the given extensions not a full dump."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/event-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1063440c-2d2e-4b81-aae5-03d1e0f630f8",
+              "name": "The reply could be either a Server-Sent Event (SSE) stream of `presence` and `line` updates or a single one-time snapshot of the current `presence` and `line` states of all extensions at the time of the request. \n\nThe type of response is controlled by the `Accept` header of the request.\n\n**Note**: The SSE stream is a stream of JSON **objects**, even though it is visualized as an array (see [OpenAPI 3.1 issue](https://github.com/OAI/OpenAPI-Specification/issues/396#issuecomment-492287488)).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "states"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/event-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"extension\": \"100\",\n    \"customer\": \"K0001\",\n    \"presence\": \"offline\",\n    \"line\": \"idle\"\n  },\n  {\n    \"extension\": \"420\",\n    \"customer\": \"K0001\",\n    \"presence\": \"available\",\n    \"line\": \"idle\"\n  },\n  {\n    \"extension\": \"2001\",\n    \"customer\": \"K0001\",\n    \"presence\": \"available\",\n    \"line\": \"in-use\"\n  },\n  {\n    \"extension\": \"3021\",\n    \"customer\": \"K0001\",\n    \"presence\": \"dnd\",\n    \"line\": \"in-use\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53bbaaa2-a0ce-4873-bb7b-b71d08625cdb",
+              "name": "One or more request parameters failed validation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "states"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "706960fb-0454-4292-abf0-04558e80bc46",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "states"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ae06ae61-623a-4a5b-886a-e58a43662757",
+              "name": "Authenticated user is not allowed to perform the action or may not have a license",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "states"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2208f785-8257-45de-b2c7-d5d21ab03b19",
+              "name": "Requested object (call) does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "states"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1dfb7923-8c84-444e-b609-f7341f19a0f5",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "states"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extension",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f95f63ff-38c6-4eb6-aad7-cff4a8d38837",
+          "name": "Initiate new call",
+          "request": {
+            "name": "Initiate new call",
+            "description": {
+              "content": "## Overview\nThis endpoint can be used to initiate voice calls.\n\n## Usage\n\nThe reply depends on the content of the `Accept` request header. \nThere are two options:\n\n### Single event (default) \nif the `Accept` header specifies `application/json` or if it's empty, the API will reply with `202 Accepted` and a body, which contains a normal JSON object representing the initial `start` event.\nThe `start` event contains the call `uuid`. \nThis could be useful when the client doesn't care about the progress of the call and doesn't want to keep an event stream open while the PBX processes the call.\nIn this case the client may still need to know the call `uuid`, so it can cancel the request. \n\n### Event streaming\nThe API will send back an SSE event stream if the `Accept` header specifies `text/event-stream`.\nIt will stream events as the request gets processed.\nThe events are intentionally limited to contain only the `uuid` and the `state` of the call, because they are streamed back in the context of the POST request and are only meant to convey the real time changes in the `state` of the call.\nThe stream always starts with a `start` event, which contains the call `uuid` and always ends with an `end` event, which indicates the final result of the call request.\nIn between there are a number of other update events, which are sent to the client to indicate interim status changes as the call progresses.\n\n  An error can happen at any point in the process. A client should be prepared to receive an `end` event at any time and should use the `error` property of the event to identify if the call request was successful or not.\n\n  **Note**: The Server-Sent Event (SSE) stream examples are not a JSON array of objects, even though it is visualized like this! This is a stream JSON objects, where each SSE event contains one `call` object. The OpenAPI specification doesn't have a way to specify this currently (see [this issue](https://github.com/OAI/OpenAPI-Specification/issues/396#issuecomment-492287488))\n\n## Events\n\nThe usual event sequence looks like this:\n\n- `start` contains the call `uuid`, which can be used to cancel the call at any time (see DELETE method). This event is always the first one to be sent. It signals the start of the processing of the HTTP request. It is not necessarily related to any call state event. The event that follow are call state events.\n\n- `caller-dial` indicates when the PBX initiates the call to the `caller` number.\n\n- `caller-ring` indicates that the `caller` number was successfully called and is ringing. This event is **optional**. It may not be present always. Some devices may be configured to auto-answer the call and may not ring at all. Client should be prepared to not receive this event.\n\n- `caller-answer` indicates that the `caller` has accepted the call. At this point the connection to the `caller` is successfully established and the process continues with dialing the `callee` number.\n\n- `dial` indicates that the PBX has initiated the call to the `callee` number (destination).\n\n- `ring` indicates that the `callee` number was successfully called and that the phone is ringing. This event is **optional**.\n\n- `answer` indicates that the `callee` number has accepted the call. At this point the connections to the `caller` and `callee` numbers are successfully established.\n\n- `end` indicates that the processing of the HTTP request has ended. This is *not* a call related event and it is not linked to any call state. On success the `error` parameter will not be present in the event. On error the `error` parameter will be present and will be set to one of the pre-defined errors. The client can use this parameter to differentiate successful from unsuccessful call.\n\n## Phone Number Context\n\nNot all numbers are globally unique. Some are indeed global telephone numbers like the E164 formatted numbers, but many are not. The same number may represent different destinations depending on the context in which it is interpreted. The 112 for example could be an extension number or an emergency number. The number alone doesn't provide enough information to uniquely identify the correct destination, which is why the number `context` is needed.\n\nSee also the `caller_context` and `callee_context` parameter description for a bit more detailed example and for the list of possible context values.\n\n## Extension Override\n\nThe `extension` parameter allows to override the extension on behalf of which the call will be originated.\n\nIf it is set in the request the API will initiate the click-to-dial call on behalf of the extension that is specified in this parameter.\n\nThis is useful in setups where this API is integrated with CRM systems, that need to be able to initiate calls on behalf of any user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                "phone",
+                "calls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Used for authorization while matching an API client request to a conference moderator. Required if the `callee_context` is set to `conference`",
+                "key": "X-Cloudya-Device-UUID",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/event-stream"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uuid\": \"<uuid>\",\n  \"caller\": \"<string>\",\n  \"caller_context\": \"<string>\",\n  \"caller_device\": \"<string>\",\n  \"caller_role\": \"<string>\",\n  \"callee\": \"<string>\",\n  \"callee_context\": \"<string>\",\n  \"callee_conference_uuid\": \"<uuid>\",\n  \"state\": \"<string>\",\n  \"updated\": \"<dateTime>\",\n  \"extension\": \"<string>\",\n  \"customer\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"timeout\": \"<integer>\",\n  \"error\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4b707bb4-c9e5-4a80-a42d-154e0d2b851c",
+              "name": "Server-Sent Event (SSE) stream.\n\n**Note**: This is not a JSON array of objects, even though it is visualized like this! \n\nThis is a stream JSON objects, where each SSE event contains one `call` object (see [this issue](https://github.com/OAI/OpenAPI-Specification/issues/396#issuecomment-492287488))",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Used for authorization while matching an API client request to a conference moderator. Required if the `callee_context` is set to `conference`",
+                    "key": "X-Cloudya-Device-UUID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/event-stream"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"caller\": \"102\",\n  \"caller_context\": \"K9999\",\n  \"callee\": \"49123456789\",\n  \"callee_context\": \"global\",\n  \"extension\": \"102\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/event-stream"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f6645a3b-b40a-416b-9ee0-cb34cbba8543",
+              "name": "This reply is sent when the request `Accept` header specifies `application/json`.\n\nIn this case the API will return only the initial `start` event and will continue processing the call in the background, hence the `202 Accepted` status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Used for authorization while matching an API client request to a conference moderator. Required if the `callee_context` is set to `conference`",
+                    "key": "X-Cloudya-Device-UUID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"caller\": \"102\",\n  \"caller_context\": \"K9999\",\n  \"callee\": \"49123456789\",\n  \"callee_context\": \"global\",\n  \"extension\": \"102\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"715a1333-0174-40ea-8b38-67e289069476\",\n  \"caller\": \"420\",\n  \"caller_context\": \"K9999\",\n  \"callee\": \"49123456789\",\n  \"callee_context\": \"global\",\n  \"extension\": \"420\",\n  \"direction\": \"outbound\",\n  \"state\": \"start\",\n  \"updated\": \"2013-10-27T13:01:10:00.069620809+02:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e36d98e-5efc-42b5-8a62-f3d9f11214e5",
+              "name": "One or more request parameters failed validation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Used for authorization while matching an API client request to a conference moderator. Required if the `callee_context` is set to `conference`",
+                    "key": "X-Cloudya-Device-UUID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"caller\": \"102\",\n  \"caller_context\": \"K9999\",\n  \"callee\": \"49123456789\",\n  \"callee_context\": \"global\",\n  \"extension\": \"102\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21824682-2e5f-4a8c-af9f-ef36b7b02c5a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Used for authorization while matching an API client request to a conference moderator. Required if the `callee_context` is set to `conference`",
+                    "key": "X-Cloudya-Device-UUID",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"caller\": \"102\",\n  \"caller_context\": \"K9999\",\n  \"callee\": \"49123456789\",\n  \"callee_context\": \"global\",\n  \"extension\": \"102\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9df78c51-b4e2-47ca-b576-62019e1b78e8",
+              "name": "Authenticated user is not allowed to perform the action or may not have a license",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Used for authorization while matching an API client request to a conference moderator. Required if the `callee_context` is set to `conference`",
+                    "key": "X-Cloudya-Device-UUID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"caller\": \"102\",\n  \"caller_context\": \"K9999\",\n  \"callee\": \"49123456789\",\n  \"callee_context\": \"global\",\n  \"extension\": \"102\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1804e18f-53a7-4a83-ae26-be5f2a36abab",
+              "name": "Requested object (call) does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Used for authorization while matching an API client request to a conference moderator. Required if the `callee_context` is set to `conference`",
+                    "key": "X-Cloudya-Device-UUID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"caller\": \"102\",\n  \"caller_context\": \"K9999\",\n  \"callee\": \"49123456789\",\n  \"callee_context\": \"global\",\n  \"extension\": \"102\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12345528-eaff-4735-ba34-58b4d8d2b5ee",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Used for authorization while matching an API client request to a conference moderator. Required if the `callee_context` is set to `conference`",
+                    "key": "X-Cloudya-Device-UUID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"caller\": \"102\",\n  \"caller_context\": \"K9999\",\n  \"callee\": \"49123456789\",\n  \"callee_context\": \"global\",\n  \"extension\": \"102\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f9ab69d-b4a3-4174-9dff-0b804bfbb0c4",
+          "name": "Get call details and state change events in real-time",
+          "request": {
+            "name": "Get call details and state change events in real-time",
+            "description": {
+              "content": "## Overview\nThe API streams in real time  the call state update events for **all** the calls of a particular customer.\n\n## Usage\nThe `Accept: text/event-stream` header is set\n\nThe SSE stream will send events for any call state change that happens **after** the client SSE connection was established.\n\nThe stream will not send any past events, not even for calls that were established prior to the SSE connection and that are still ongoing. \n\nThis means that it is currently possible to get a `hangup` event without any prior matching `answer` or `ring` events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                "phone",
+                "calls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/event-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "34e98820-3a6a-4700-89a7-2c0ac2ad333c",
+              "name": "Server-Sent Event (SSE) stream.\n\n**Note**: The `text/event-stream` response type is **not** a JSON array of objects, even though it is visualized like this! \nThis is a **stream** JSON objects, where each SSE event contains one `call` object (see [this issue](https://github.com/OAI/OpenAPI-Specification/issues/396#issuecomment-492287488))",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/event-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/event-stream"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "98a2e004-146c-4100-ae8d-547f15311b26",
+              "name": "One or more request parameters failed validation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae5eb20e-7528-49c5-bf27-500f318124fb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5906e309-1d5f-4f9c-aab8-c30113d33f81",
+              "name": "Authenticated user is not allowed to perform the action or may not have a license",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62a7813c-da09-492e-ad07-a621c04fba8e",
+              "name": "Requested object (call) does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d2ad3b9-ad96-4dad-af6e-474fe32dc357",
+              "name": "Requested MIME type is not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88c7703f-784d-46bd-8587-15e008f2b704",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69646218-608b-4cf4-b4ce-adf55b213b1c",
+          "name": "Cancel an in-progress call",
+          "request": {
+            "name": "Cancel an in-progress call",
+            "description": {
+              "content": "This endpoint can be used to cancel a call which is in the process of being established.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extensions",
+                "phone",
+                "calls",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uuid",
+                  "description": "(Required) Call UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0457f2ed-97cc-48c7-9d22-7f9dcb4b1d5b",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Call UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "89152ded-0856-4e4a-a987-e92821d8abbb",
+              "name": "One or more request parameters failed validation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Call UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef3f3362-04f6-416a-92f8-80beb04db152",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Call UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0bc77b9b-5ddc-4e7d-b48a-a65af2100519",
+              "name": "Authenticated user is not allowed to perform the action or may not have a license",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Call UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a62a7b4-4b7f-4823-852b-b79659e420d6",
+              "name": "Requested object (call) does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Call UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e14d2882-2687-4f65-aec1-7d5724fe31e4",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extensions",
+                    "phone",
+                    "calls",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uuid",
+                      "description": "(Required) Call UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier used to track this particular request on the backend",
+                  "key": "X-Request-Id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"some error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nfon.com/call-history",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7ba172b0-e32b-46ea-bc61-422871ee4a93",
+    "name": "NFON Call History Accounts phone extensions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.\n\nThis API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.\n\nFor more information, see: https://www.nfon.com/en/integrations/login-with-nfon/\n\nContact Support:\n Name: NFON\n Email: integration@nfon.com",
+      "type": "text/plain"
+    }
+  }
+}

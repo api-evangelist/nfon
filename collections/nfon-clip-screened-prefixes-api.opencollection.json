@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts clip-screened-prefixes API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "clip-screened-prefixes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create CLIP screened prefix",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/clip-screened-prefixes",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new CLIP screened prefix for a tenant"
+        },
+        {
+          "info": {
+            "name": "Delete CLIP screened prefix",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/clip-screened-prefixes/:clipScreenedPrefixId",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "clipScreenedPrefixId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a CLIP screened prefix for a tenant"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

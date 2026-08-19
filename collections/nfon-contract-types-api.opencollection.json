@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts Contract Types API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contract Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List contract types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/contract-types"
+          },
+          "docs": "List contract types"
+        },
+        {
+          "info": {
+            "name": "Get contract type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/contract-types/:contractType",
+            "params": [
+              {
+                "name": "contractType",
+                "value": "",
+                "type": "path",
+                "description": "Contract type name"
+              }
+            ]
+          },
+          "docs": "Get contract type"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

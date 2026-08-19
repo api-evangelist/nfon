@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts Timezones API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Timezones",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List timezones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/time-zones"
+          },
+          "docs": "List timezones"
+        },
+        {
+          "info": {
+            "name": "Get timezone",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/time-zones/:timezoneName",
+            "params": [
+              {
+                "name": "timezoneName",
+                "value": "",
+                "type": "path",
+                "description": "Timezone name"
+              }
+            ]
+          },
+          "docs": "Get timezone"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

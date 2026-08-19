@@ -1,0 +1,496 @@
+{
+  "item": [
+    {
+      "id": "64463683-303f-4c44-9145-900450e083e9",
+      "name": "trial-templates",
+      "description": {
+        "content": "Trial template operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f0fa0d26-1b5f-4cc2-9952-84ba6de48917",
+          "name": "Create tenant trial template",
+          "request": {
+            "name": "Create tenant trial template",
+            "description": {
+              "content": "Creates a trial template for a tenant. Only supports PBX contract types. Trial templates are not supported for nconnect_voice contract type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tenants",
+                ":tenant",
+                "create-trial-template"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"trunk\": {\n    \"carrier_name\": \"<string>\",\n    \"softswitch\": \"<string>\",\n    \"base_number\": {\n      \"country_code\": \"<string>\",\n      \"national_destination_code\": \"<string>\",\n      \"pilot\": \"<string>\",\n      \"extension\": \"<string>\"\n    },\n    \"trunk_number\": \"<long>\",\n    \"pilot_reachable\": \"<boolean>\"\n  },\n  \"device\": {\n    \"device_type\": \"<string>\",\n    \"unique_identifier\": \"<string>\",\n    \"firmware\": \"<string>\"\n  },\n  \"sales_force_id\": \"<string>\",\n  \"site_id\": \"<string>\",\n  \"site_sales_force_id\": \"<string>\",\n  \"template_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8c973fa9-57c9-4b2d-8767-4e2daefd8e4e",
+              "name": "Trial template created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "create-trial-template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"trunk\": {\n    \"carrier_name\": \"Deutsche Telekom\",\n    \"softswitch\": \"BTNGN1\",\n    \"base_number\": {\n      \"country_code\": \"49\",\n      \"national_destination_code\": \"30\",\n      \"pilot\": \"12345\",\n      \"extension\": \"string\"\n    },\n    \"trunk_number\": 5,\n    \"pilot_reachable\": true\n  },\n  \"device\": {\n    \"device_type\": \"DEVICE001\",\n    \"unique_identifier\": \"001122334455\",\n    \"firmware\": \"1.0.0\"\n  },\n  \"sales_force_id\": \"a06D000000kIkHp\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_sales_force_id\": \"a06D000000kIkHq\",\n  \"template_id\": \"a06D000000kIkHp\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "b5738caa-fa79-914d-b62b-84559cdb107f"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f46b204a-e5ae-4539-a8be-198772582f75",
+              "name": "Invalid request or unsupported contract type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "create-trial-template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"trunk\": {\n    \"carrier_name\": \"Deutsche Telekom\",\n    \"softswitch\": \"BTNGN1\",\n    \"base_number\": {\n      \"country_code\": \"49\",\n      \"national_destination_code\": \"30\",\n      \"pilot\": \"12345\",\n      \"extension\": \"string\"\n    },\n    \"trunk_number\": 5,\n    \"pilot_reachable\": true\n  },\n  \"device\": {\n    \"device_type\": \"DEVICE001\",\n    \"unique_identifier\": \"001122334455\",\n    \"firmware\": \"1.0.0\"\n  },\n  \"sales_force_id\": \"a06D000000kIkHp\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_sales_force_id\": \"a06D000000kIkHq\",\n  \"template_id\": \"a06D000000kIkHp\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "b5738caa-fa79-914d-b62b-84559cdb107f"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"trial templates are not supported for nconnect_voice contract type\",\n      \"code\": \"bad_request\",\n      \"type\": \"validation\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f1d7724-a24a-4fd2-9d03-1798d321e368",
+              "name": "Tenant not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "create-trial-template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"trunk\": {\n    \"carrier_name\": \"Deutsche Telekom\",\n    \"softswitch\": \"BTNGN1\",\n    \"base_number\": {\n      \"country_code\": \"49\",\n      \"national_destination_code\": \"30\",\n      \"pilot\": \"12345\",\n      \"extension\": \"string\"\n    },\n    \"trunk_number\": 5,\n    \"pilot_reachable\": true\n  },\n  \"device\": {\n    \"device_type\": \"DEVICE001\",\n    \"unique_identifier\": \"001122334455\",\n    \"firmware\": \"1.0.0\"\n  },\n  \"sales_force_id\": \"a06D000000kIkHp\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_sales_force_id\": \"a06D000000kIkHq\",\n  \"template_id\": \"a06D000000kIkHp\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "b5738caa-fa79-914d-b62b-84559cdb107f"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The requested resource was not found\",\n  \"code\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c56ff68-aae4-4ccb-96e5-e529d133aa6f",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "create-trial-template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"trunk\": {\n    \"carrier_name\": \"Deutsche Telekom\",\n    \"softswitch\": \"BTNGN1\",\n    \"base_number\": {\n      \"country_code\": \"49\",\n      \"national_destination_code\": \"30\",\n      \"pilot\": \"12345\",\n      \"extension\": \"string\"\n    },\n    \"trunk_number\": 5,\n    \"pilot_reachable\": true\n  },\n  \"device\": {\n    \"device_type\": \"DEVICE001\",\n    \"unique_identifier\": \"001122334455\",\n    \"firmware\": \"1.0.0\"\n  },\n  \"sales_force_id\": \"a06D000000kIkHp\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_sales_force_id\": \"a06D000000kIkHq\",\n  \"template_id\": \"a06D000000kIkHp\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "b5738caa-fa79-914d-b62b-84559cdb107f"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"A resource with this identifier already exists\",\n  \"code\": \"conflict\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25c27ea6-fdc8-41e4-94ba-0ec46d622a50",
+              "name": "Unprocessable entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "create-trial-template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"trunk\": {\n    \"carrier_name\": \"Deutsche Telekom\",\n    \"softswitch\": \"BTNGN1\",\n    \"base_number\": {\n      \"country_code\": \"49\",\n      \"national_destination_code\": \"30\",\n      \"pilot\": \"12345\",\n      \"extension\": \"string\"\n    },\n    \"trunk_number\": 5,\n    \"pilot_reachable\": true\n  },\n  \"device\": {\n    \"device_type\": \"DEVICE001\",\n    \"unique_identifier\": \"001122334455\",\n    \"firmware\": \"1.0.0\"\n  },\n  \"sales_force_id\": \"a06D000000kIkHp\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_sales_force_id\": \"a06D000000kIkHq\",\n  \"template_id\": \"a06D000000kIkHp\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "b5738caa-fa79-914d-b62b-84559cdb107f"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"code\": \"bad_request\",\n  \"details\": {\n    \"message\": \"Cannot delete license that is currently assigned to a user\",\n    \"code\": \"license_assigned\"\n  },\n  \"message\": \"Invalid request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e70b8f99-0100-46ef-8f16-1cba66b47615",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "create-trial-template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"trunk\": {\n    \"carrier_name\": \"Deutsche Telekom\",\n    \"softswitch\": \"BTNGN1\",\n    \"base_number\": {\n      \"country_code\": \"49\",\n      \"national_destination_code\": \"30\",\n      \"pilot\": \"12345\",\n      \"extension\": \"string\"\n    },\n    \"trunk_number\": 5,\n    \"pilot_reachable\": true\n  },\n  \"device\": {\n    \"device_type\": \"DEVICE001\",\n    \"unique_identifier\": \"001122334455\",\n    \"firmware\": \"1.0.0\"\n  },\n  \"sales_force_id\": \"a06D000000kIkHp\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_sales_force_id\": \"a06D000000kIkHq\",\n  \"template_id\": \"a06D000000kIkHp\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "b5738caa-fa79-914d-b62b-84559cdb107f"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Internal server error\",\n  \"code\": \"internal_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5df7d090-1790-4261-9af8-de373843ee08",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tenants",
+                    ":tenant",
+                    "create-trial-template"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"trunk\": {\n    \"carrier_name\": \"Deutsche Telekom\",\n    \"softswitch\": \"BTNGN1\",\n    \"base_number\": {\n      \"country_code\": \"49\",\n      \"national_destination_code\": \"30\",\n      \"pilot\": \"12345\",\n      \"extension\": \"string\"\n    },\n    \"trunk_number\": 5,\n    \"pilot_reachable\": true\n  },\n  \"device\": {\n    \"device_type\": \"DEVICE001\",\n    \"unique_identifier\": \"001122334455\",\n    \"firmware\": \"1.0.0\"\n  },\n  \"sales_force_id\": \"a06D000000kIkHp\",\n  \"site_id\": \"a06D000000kIkHq\",\n  \"site_sales_force_id\": \"a06D000000kIkHq\",\n  \"template_id\": \"a06D000000kIkHp\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "b5738caa-fa79-914d-b62b-84559cdb107f"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The service is temporarily unavailable. Please try again later.\",\n  \"code\": \"upstream_unavailable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nfon.com/call-history",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b3802633-6e89-4512-8425-d51d7e52c96c",
+    "name": "NFON Call History Accounts trial-templates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.\n\nThis API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.\n\nFor more information, see: https://www.nfon.com/en/integrations/login-with-nfon/\n\nContact Support:\n Name: NFON\n Email: integration@nfon.com",
+      "type": "text/plain"
+    }
+  }
+}

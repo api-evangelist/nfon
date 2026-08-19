@@ -1,0 +1,255 @@
+{
+  "item": [
+    {
+      "id": "d95efc91-3648-4179-8f1c-0be04797a00b",
+      "name": "address",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a37e4ce7-80db-4e42-a1f2-91cdc58eb7e7",
+          "name": "Lookup ONKZ for an address",
+          "request": {
+            "name": "Lookup ONKZ for an address",
+            "description": {
+              "content": "Geocodes the given address via OpenStreetMap Nominatim and determines the German ONKZ (Ortsnetzkennzahl / area code). Only German addresses (countrycode=de) are supported.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "address",
+                "onkz",
+                ":countrycode",
+                ":postalcode",
+                ":city",
+                ":street"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "493b17cf-baee-4c09-9ee8-9f4324d5ba8c",
+              "name": "ONKZ found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "address",
+                    "onkz",
+                    ":countrycode",
+                    ":postalcode",
+                    ":city",
+                    ":street"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "7d9d1448-38fa-d138-eb08-9efa7d79b017"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": 9555,\n    \"detail\": \"ONKZ found\"\n  },\n  \"address\": {\n    \"country\": \"Deutschland\",\n    \"country_code\": \"de\",\n    \"house_number\": \"1\",\n    \"postcode\": \"80331\",\n    \"street\": \"Marienplatz\",\n    \"city\": \"München\"\n  },\n  \"onkz\": \"string\",\n  \"coordinates\": {\n    \"longitude\": 5121.697052745258,\n    \"latitude\": 6393.701035617234\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20f85894-3c18-4439-a152-18b6e814f391",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "address",
+                    "onkz",
+                    ":countrycode",
+                    ":postalcode",
+                    ":city",
+                    ":street"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "7d9d1448-38fa-d138-eb08-9efa7d79b017"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"Invalid request parameters\",\n  \"code\": \"validation_error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dcc942b0-3e79-483a-920a-f8ab1e4adc29",
+              "name": "Address or ONKZ not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "address",
+                    "onkz",
+                    ":countrycode",
+                    ":postalcode",
+                    ":city",
+                    ":street"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "7d9d1448-38fa-d138-eb08-9efa7d79b017"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"message\": \"The requested resource was not found\",\n  \"code\": \"not_found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e19d5f6b-503a-4eec-ac66-0bbf65578f8d",
+              "name": "Geocoding service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "address",
+                    "onkz",
+                    ":countrycode",
+                    ":postalcode",
+                    ":city",
+                    ":street"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique request identifier",
+                  "key": "X-Request-Id",
+                  "value": "7d9d1448-38fa-d138-eb08-9efa7d79b017"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"code\": 9555,\n    \"detail\": \"ONKZ found\"\n  },\n  \"address\": {\n    \"country\": \"Deutschland\",\n    \"country_code\": \"de\",\n    \"house_number\": \"1\",\n    \"postcode\": \"80331\",\n    \"street\": \"Marienplatz\",\n    \"city\": \"München\"\n  },\n  \"onkz\": \"string\",\n  \"coordinates\": {\n    \"longitude\": 5121.697052745258,\n    \"latitude\": 6393.701035617234\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nfon.com/call-history",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9232574e-fa1a-411e-af23-9a72922495b3",
+    "name": "NFON Call History Accounts address API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.\n\nThis API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.\n\nFor more information, see: https://www.nfon.com/en/integrations/login-with-nfon/\n\nContact Support:\n Name: NFON\n Email: integration@nfon.com",
+      "type": "text/plain"
+    }
+  }
+}

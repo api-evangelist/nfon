@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts authentication API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a new Token with provided user credentials.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Token with provided user credentials."
+        },
+        {
+          "info": {
+            "name": "Refreshes the Token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.nfon.com/call-history/login"
+          },
+          "docs": "Refreshes the Token."
+        },
+        {
+          "info": {
+            "name": "publicKeyWellKnown",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/.well-known/jwks.json"
+          },
+          "docs": "Provides the public keys to validate the signing of the JWTs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

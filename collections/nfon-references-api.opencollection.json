@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts references API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "references",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find references to an identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/references",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "query",
+                "description": "One or more identifiers to search for (comma-separated"
+              },
+              {
+                "name": "flatten",
+                "value": "",
+                "type": "query",
+                "description": "Controls the response structure. true (default) returns flat array"
+              }
+            ]
+          },
+          "docs": "Find all places where a given identifier (extension number or service code) is referenced within the tenant's configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

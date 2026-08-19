@@ -1,0 +1,318 @@
+{
+  "item": [
+    {
+      "id": "862e104d-7772-4c51-b704-46d9c29a6de9",
+      "name": "Rating Profiles",
+      "description": {
+        "content": "Rating profile management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "08aeae35-e7e6-41ad-a5d5-0d88f4c7eb01",
+          "name": "Delete rating profile",
+          "request": {
+            "name": "Delete rating profile",
+            "description": {},
+            "url": {
+              "path": [
+                "operators",
+                ":operatorId",
+                "rating-profiles",
+                ":ratingProfileName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ratingProfileName",
+                  "description": "(Required) Rating profile name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "operatorId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "025acaf3-548e-4a1a-bbc3-c656449cd008",
+              "name": "Rating profile deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":operatorId",
+                    "rating-profiles",
+                    ":ratingProfileName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ratingProfileName",
+                      "description": "(Required) Rating profile name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "operatorId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "caeab34a-0aa4-43e1-bd1a-74918cb1637f",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":operatorId",
+                    "rating-profiles",
+                    ":ratingProfileName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ratingProfileName",
+                      "description": "(Required) Rating profile name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "operatorId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44d207ed-0d1d-4483-a694-77e5a45c95b1",
+          "name": "Get rating profile",
+          "request": {
+            "name": "Get rating profile",
+            "description": {},
+            "url": {
+              "path": [
+                "operators",
+                ":operatorId",
+                "rating-profiles",
+                ":ratingProfileName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ratingProfileName",
+                  "description": "(Required) Rating profile name"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "operatorId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.collection.next+json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "5ea2caca-c160-438a-be6f-2bd55197c727",
+              "name": "Rating profile found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":operatorId",
+                    "rating-profiles",
+                    ":ratingProfileName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ratingProfileName",
+                      "description": "(Required) Rating profile name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "operatorId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.collection.next+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.collection.next+json"
+                }
+              ],
+              "body": "{\n  \"links\": {},\n  \"data\": [\n    {\n      \"value\": \"standard-rate\",\n      \"name\": \"name\"\n    },\n    {\n      \"value\": \"Standard rating profile for domestic calls\",\n      \"name\": \"description\"\n    }\n  ],\n  \"href\": \"/api/operators/example-id/rating-profiles/example-id\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5aa90846-d8f7-4e9b-b54a-123e6090afb7",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "operators",
+                    ":operatorId",
+                    "rating-profiles",
+                    ":ratingProfileName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ratingProfileName",
+                      "description": "(Required) Rating profile name"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "operatorId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nfon.com/call-history",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3ac3a964-a78e-4129-82c0-986c478894cf",
+    "name": "NFON Call History Accounts Rating Profiles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.\n\nThis API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.\n\nFor more information, see: https://www.nfon.com/en/integrations/login-with-nfon/\n\nContact Support:\n Name: NFON\n Email: integration@nfon.com",
+      "type": "text/plain"
+    }
+  }
+}

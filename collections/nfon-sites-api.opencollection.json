@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts sites API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "sites",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Replace site",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.nfon.com/call-history/sites/:oldID/replace/:newID",
+            "params": [
+              {
+                "name": "oldID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "newID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Replaces an old site with a new site"
+        },
+        {
+          "info": {
+            "name": "Delete site",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/sites/:siteId",
+            "params": [
+              {
+                "name": "siteId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a site by Salesforce ID. The site must have no active dependencies (trunks, phones, virtual faxes, or emergency site references). Mobile sites cannot be deleted via this endpoint."
+        },
+        {
+          "info": {
+            "name": "Update site",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.nfon.com/call-history/sites/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing site"
+        },
+        {
+          "info": {
+            "name": "Create site",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/sites",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new site configuration"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

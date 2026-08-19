@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts queue-profiles API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "queue-profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get tenant queue profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/extensions/:extension/queue-profiles",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extension",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all queue profiles for the specified tenant and extension"
+        },
+        {
+          "info": {
+            "name": "Activate queue profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/extensions/:extension/queue-profiles/:queueProfileId/activate",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extension",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "queueProfileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Activates a queue profile for the specified extension"
+        },
+        {
+          "info": {
+            "name": "Logout from all queues",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/extensions/:extension/queue/logout",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extension",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Logs out the specified extension from all queues"
+        },
+        {
+          "info": {
+            "name": "Get queue profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/queue-profiles",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all queue profiles for the specified tenant"
+        },
+        {
+          "info": {
+            "name": "Create queue profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/queue-profiles",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new queue profile for the specified tenant"
+        },
+        {
+          "info": {
+            "name": "Update queue profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/queue-profiles/:queueProfileId",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "queueProfileId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing queue profile for the specified tenant"
+        },
+        {
+          "info": {
+            "name": "Delete queue profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/queue-profiles/:queueProfileId",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "queueProfileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a queue profile for the specified tenant"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

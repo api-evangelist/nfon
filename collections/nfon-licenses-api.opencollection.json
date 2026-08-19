@@ -1,0 +1,214 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts licenses API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "licenses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get licenses assigned to the authenticated user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/users/:userid/licenses",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all licenses assigned to the specified user. The userid must match the authenticated user's identity from the bearer token."
+        },
+        {
+          "info": {
+            "name": "Get all available license types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/license-types",
+            "params": [
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns metadata for all available license types including their properties and constraints"
+        },
+        {
+          "info": {
+            "name": "Retrieve licenses for a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/licenses",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "license_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "extension",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "flatten",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns detailed license information for a tenant, including packages with their children.\nCan be filtered by user_id, license_id, type, and/or extension. Filters can be combined.\n\n**Filtering:**\n- `license_id`, `type`, and `extension` support comma-separated values for multiple filters\n- `user_id` accepts a single UUID only\n\n**Response modes:**\n- `flatten=false` (default): Nested structure - packages have children in a 'children' array\n- `flatten=true`: Flat structure - all licenses at top leve"
+        },
+        {
+          "info": {
+            "name": "Create licenses for a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/licenses",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "flatten",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates one or more licenses for the specified tenant"
+        },
+        {
+          "info": {
+            "name": "Delete licenses for a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/licenses",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "license_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Deletes one or more licenses for the specified tenant"
+        },
+        {
+          "info": {
+            "name": "Assign licenses to users or extensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/licenses/assign",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns available licenses to users and/or extensions. Supports batch operations.\n\n**Package Licenses:**\n- Package licenses require both `license_id` and `user_id`\n- Cannot use FIFO (automatic selection) - must specify exact package\n- Child licenses automatically inherit user assignment if they require `user_id`\n\n**Package Child License Restrictions:**\n- Child licenses that require `user_id` cannot be assigned independently\n- Child licenses that don't require `user_id` (e.g., FAX_PER_EXTENSION) "
+        },
+        {
+          "info": {
+            "name": "Unassign licenses",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/licenses/unassign",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unassigns one or more licenses from users or extensions"
+        },
+        {
+          "info": {
+            "name": "Get license usage for a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/licenses/usage",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns usage statistics for all licenses assigned to the tenant"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

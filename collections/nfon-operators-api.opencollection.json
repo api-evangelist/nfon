@@ -1,0 +1,201 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts Operators API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Operators",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get operator",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/operators/:operatorId",
+            "params": [
+              {
+                "name": "operatorId",
+                "value": "",
+                "type": "path",
+                "description": "Operator external identifier"
+              }
+            ]
+          },
+          "docs": "Get operator"
+        },
+        {
+          "info": {
+            "name": "Update operator",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.nfon.com/call-history/operators/:operatorId",
+            "params": [
+              {
+                "name": "operatorId",
+                "value": "",
+                "type": "path",
+                "description": "Operator external identifier"
+              }
+            ]
+          },
+          "docs": "Update operator"
+        },
+        {
+          "info": {
+            "name": "get_213",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/operators/:operatorId/rating-profiles",
+            "params": [
+              {
+                "name": "operatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "post_55",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/operators/:operatorId/rating-profiles",
+            "params": [
+              {
+                "name": "operatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_212",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/operators/:operatorId/rating-profiles/available",
+            "params": [
+              {
+                "name": "operatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_209",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/operators/:operatorId/tenants",
+            "params": [
+              {
+                "name": "operatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_217",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/operators/:operatorId/system-integrators",
+            "params": [
+              {
+                "name": "operatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_207",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/operators/:operatorId/blacklist-profiles",
+            "params": [
+              {
+                "name": "operatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "List operators",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/operators"
+          },
+          "docs": "List operators"
+        },
+        {
+          "info": {
+            "name": "Create operator",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/operators",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new operator"
+        },
+        {
+          "info": {
+            "name": "get_210",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/operators/:operatorId/pbx-groups",
+            "params": [
+              {
+                "name": "operatorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

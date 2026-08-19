@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts Devices API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Devices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List devices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/devices"
+          },
+          "docs": "List devices"
+        },
+        {
+          "info": {
+            "name": "Validate device IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/devices/validate-deviceid"
+          },
+          "docs": "Validate device IDs"
+        },
+        {
+          "info": {
+            "name": "Bulk Export Devices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/devices/bulk",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "sanitize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Export all devices for a tenant as CSV or Excel file (synchronous)"
+        },
+        {
+          "info": {
+            "name": "Submit Device Bulk Import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/devices/bulk",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a device bulk import job for asynchronous processing.\nReturns immediately with a job ID that can be used to poll for status.\n\n**Supported Device Categories:**\n- `STANDARD`: Standard phones (single port)\n- `BASE`: Base phones (multi-port creation is automatic)\n- `HANDSET`: Handsets (must reference a base device via base_device_id)\n\n**Features:**\n- Automatic base-handset relationship handling\n- Best-effort import (continues on errors, reports per-device failures)\n- Device registration with "
+        },
+        {
+          "info": {
+            "name": "Validate Device Bulk Import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/devices/bulk/validate",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validates device data for bulk import and returns enriched information.\nDoes not perform actual import - allows UI to review and filter devices before importing.\n\n**Validation Checks:**\n- Required fields: device_id, device_type\n- Duplicate device_id within the request\n- Device already exists in system (unique across all tenants)\n- Device type exists and is valid\n- Device category is STANDARD, BASE, or HANDSET\n\n**Recommended Workflow:**\n1. Call this endpoint to validate devices\n2. Review errors i"
+        },
+        {
+          "info": {
+            "name": "Get Import Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/tenants/:tenant/jobs/:eventId",
+            "params": [
+              {
+                "name": "tenant",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Poll the status of an import job"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

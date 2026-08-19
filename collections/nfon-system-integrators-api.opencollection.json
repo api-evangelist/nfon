@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts System Integrators API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "System Integrators",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get_223",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/system-integrators/:systemIntegratorId/tenants",
+            "params": [
+              {
+                "name": "systemIntegratorId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Get system integrator",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/system-integrators/:systemIntegratorId",
+            "params": [
+              {
+                "name": "systemIntegratorId",
+                "value": "",
+                "type": "path",
+                "description": "System integrator ID"
+              }
+            ]
+          },
+          "docs": "Get system integrator"
+        },
+        {
+          "info": {
+            "name": "Update system integrator",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.nfon.com/call-history/system-integrators/:systemIntegratorId",
+            "params": [
+              {
+                "name": "systemIntegratorId",
+                "value": "",
+                "type": "path",
+                "description": "System integrator ID"
+              }
+            ]
+          },
+          "docs": "Update system integrator"
+        },
+        {
+          "info": {
+            "name": "Create system integrator",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/system-integrators",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new system integrator"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

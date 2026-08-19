@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NFON Call History Accounts SIP Servers API",
+    "version": "2.0-early-access"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SIP Servers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List SIP servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/sip-servers"
+          },
+          "docs": "Returns a paginated list of all SIP servers"
+        },
+        {
+          "info": {
+            "name": "Create SIP server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nfon.com/call-history/sip-servers"
+          },
+          "docs": "Creates a new SIP server"
+        },
+        {
+          "info": {
+            "name": "Get SIP server",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nfon.com/call-history/sip-servers/:sipServerId",
+            "params": [
+              {
+                "name": "sipServerId",
+                "value": "100",
+                "type": "path",
+                "description": "SIP server ID"
+              }
+            ]
+          },
+          "docs": "Returns details of a single SIP server"
+        },
+        {
+          "info": {
+            "name": "Update SIP server",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.nfon.com/call-history/sip-servers/:sipServerId",
+            "params": [
+              {
+                "name": "sipServerId",
+                "value": "100",
+                "type": "path",
+                "description": "SIP server ID"
+              }
+            ]
+          },
+          "docs": "Updates an existing SIP server. Only provided fields are updated."
+        },
+        {
+          "info": {
+            "name": "Delete SIP server",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.nfon.com/call-history/sip-servers/:sipServerId",
+            "params": [
+              {
+                "name": "sipServerId",
+                "value": "100",
+                "type": "path",
+                "description": "SIP server ID"
+              }
+            ]
+          },
+          "docs": "Deletes a SIP server. Fails if the server still has assigned customers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
