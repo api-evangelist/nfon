@@ -80,6 +80,8 @@ apis:
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -102,6 +104,8 @@ apis:
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
   tags:
+  - Address
+  tags_raw:
   - address
   properties:
   - type: OpenAPI
@@ -124,6 +128,8 @@ apis:
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
   tags:
+  - Authentication
+  tags_raw:
   - authentication
   properties:
   - type: OpenAPI
@@ -807,6 +813,8 @@ apis:
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
   tags:
+  - Import Export
+  tags_raw:
   - import-export
   properties:
   - type: OpenAPI
@@ -851,6 +859,8 @@ apis:
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
   tags:
+  - Licenses
+  tags_raw:
   - licenses
   properties:
   - type: OpenAPI
@@ -983,6 +993,8 @@ apis:
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
   tags:
+  - Records
+  tags_raw:
   - records
   properties:
   - type: OpenAPI
@@ -1005,6 +1017,8 @@ apis:
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
   tags:
+  - References
+  tags_raw:
   - references
   properties:
   - type: OpenAPI
@@ -1049,6 +1063,8 @@ apis:
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
   tags:
+  - Sites
+  tags_raw:
   - sites
   properties:
   - type: OpenAPI
@@ -1181,6 +1197,8 @@ apis:
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
   tags:
+  - Trunks
+  tags_raw:
   - trunks
   properties:
   - type: OpenAPI
