@@ -1,22 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
-
-
-    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
-
-
-    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
-  title: NFON Call History Accounts Customer Skills API
-  version: 2.0-early-access
-  termsOfService: https://www.nfon.com/en/legal/gtc
-  contact:
-    name: NFON
-    email: integration@nfon.com
-  license:
-    name: NFON proprietary
+  description: APIs for managing PBX configuration, tenants, operators, licenses, and related resources
+  title: PBX Configuration Customer Skills API
+  version: 2026.07.20
 servers:
-- url: https://api.nfon.com/call-history
+- url: /configuration/v1
 tags:
 - name: Customer Skills
 paths:
@@ -935,7 +923,129 @@ paths:
           description: Insufficient permissions
 components:
   schemas:
-    ChildHref:
+    TimeoutRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/TimeoutLinks'
+        data:
+          $ref: '#/components/schemas/Data'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    SkillMemberData:
+      properties:
+        skillServiceNumber:
+          $ref: '#/components/schemas/Integer'
+        extensionDisplayName:
+          $ref: '#/components/schemas/String'
+        enabled:
+          $ref: '#/components/schemas/Boolean'
+        skillLevel:
+          $ref: '#/components/schemas/Integer'
+        extensionNumber:
+          $ref: '#/components/schemas/String'
+        skillDisplayName:
+          $ref: '#/components/schemas/String'
+      type: object
+    InboundTrunkNumberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/InboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    SkillRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/SkillLinks'
+        data:
+          $ref: '#/components/schemas/SkillData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    SkillLinks:
+      properties:
+        availableMusicOnHoldAnnouncements:
+          $ref: '#/components/schemas/String'
+        periodicAnnouncement:
+          $ref: '#/components/schemas/String'
+        customer:
+          $ref: '#/components/schemas/String'
+        members:
+          $ref: '#/components/schemas/String'
+        initialAnnouncement:
+          $ref: '#/components/schemas/String'
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+        musicOnHoldAnnouncement:
+          $ref: '#/components/schemas/String'
+        destinationOnRejection:
+          $ref: '#/components/schemas/String'
+        memberAnnouncement:
+          $ref: '#/components/schemas/String'
+        availableDestinationsOnRejection:
+          writeOnly: true
+          type: string
+        destinationOnTimeout:
+          $ref: '#/components/schemas/ChildHref'
+        availableGeneralAnnouncements:
+          $ref: '#/components/schemas/String'
+        availableDestinationsOnTimeout:
+          writeOnly: true
+          type: string
+      type: object
+    SkillMemberLinks:
+      properties:
+        phoneExtension:
+          $ref: '#/components/schemas/String'
+      type: object
+    Links:
+      description: Related resource links
+      type: object
+    DestinationOnRejectionRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/RequestLinks'
+        data:
+          $ref: '#/components/schemas/Data'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
     Integer:
       properties:
@@ -955,49 +1065,6 @@ components:
       example: 1000
       type: object
       description: Subscribers soft limit
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    TimeoutRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/TimeoutLinks'
-        data:
-          $ref: '#/components/schemas/Data'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
     SkillData:
       properties:
         weight:
@@ -1037,31 +1104,61 @@ components:
         direction:
           $ref: '#/components/schemas/Enum'
       type: object
-    SkillMemberLinks:
+    CollectionLinks:
       properties:
-        phoneExtension:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
           $ref: '#/components/schemas/String'
       type: object
-    TimeoutLinks:
-      type: object
+      description: Pagination links for collection responses
     RequestLinks:
       properties:
         destinationOnRejection:
           type: string
       type: object
-    SkillRequest:
+    ChildHref:
+      type: object
+    String:
       properties:
-        links:
-          $ref: '#/components/schemas/SkillLinks'
-        data:
-          $ref: '#/components/schemas/SkillData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
       type: object
     NfonApiCollectionResponse:
       oneOf:
@@ -1069,63 +1166,6 @@ components:
       - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
       type: object
       description: Collection response envelope
-    SkillMemberData:
-      properties:
-        skillServiceNumber:
-          $ref: '#/components/schemas/Integer'
-        extensionDisplayName:
-          $ref: '#/components/schemas/String'
-        enabled:
-          $ref: '#/components/schemas/Boolean'
-        skillLevel:
-          $ref: '#/components/schemas/Integer'
-        extensionNumber:
-          $ref: '#/components/schemas/String'
-        skillDisplayName:
-          $ref: '#/components/schemas/String'
-      type: object
-    InboundTrunkNumberRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/InboundTrunkNumberLinks'
-        data:
-          $ref: '#/components/schemas/InboundTrunkNumberData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    SkillMemberRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/SkillMemberLinks'
-        data:
-          $ref: '#/components/schemas/SkillMemberData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    DestinationOnRejectionRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/RequestLinks'
-        data:
-          $ref: '#/components/schemas/Data'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
     Enum:
       properties:
         notNull:
@@ -1171,55 +1211,8 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    Data:
-      properties:
-        key:
-          type: string
-          description: Metadata key.
-          example: function_key_number
-        value:
-          type: string
-          description: Metadata value.
-          example: '5'
+    TimeoutLinks:
       type: object
-      required:
-      - key
-      - value
-      description: Data represents key-value pair for additional reference metadata.
-    InboundTrunkNumberData:
-      properties:
-        didExtension:
-          example: '123456'
-          type: string
-      type: object
-    Boolean:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: boolean
-      type: object
-      example: false
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
     Date:
       properties:
         notNull:
@@ -1236,62 +1229,56 @@ components:
           format: date-time
           type: string
       type: object
-    Links:
-      description: Related resource links
-      type: object
-    SkillLinks:
-      properties:
-        availableMusicOnHoldAnnouncements:
-          $ref: '#/components/schemas/String'
-        periodicAnnouncement:
-          $ref: '#/components/schemas/String'
-        customer:
-          $ref: '#/components/schemas/String'
-        members:
-          $ref: '#/components/schemas/String'
-        initialAnnouncement:
-          $ref: '#/components/schemas/String'
-        inboundTrunkNumbers:
-          $ref: '#/components/schemas/String'
-        musicOnHoldAnnouncement:
-          $ref: '#/components/schemas/String'
-        destinationOnRejection:
-          $ref: '#/components/schemas/String'
-        memberAnnouncement:
-          $ref: '#/components/schemas/String'
-        availableDestinationsOnRejection:
-          writeOnly: true
-          type: string
-        destinationOnTimeout:
-          $ref: '#/components/schemas/ChildHref'
-        availableGeneralAnnouncements:
-          $ref: '#/components/schemas/String'
-        availableDestinationsOnTimeout:
-          writeOnly: true
-          type: string
-      type: object
-    NfonApiCollectionResponseNonPage:
+    NfonApiResponse:
       properties:
         links:
           $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
         href:
-          description: Self-link to this collection
+          example: /api/sip-servers/100
           type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
+          description: Self-link to this resource
       type: object
-      description: Non-paginated collection response envelope
-    InboundTrunkNumberLinks:
+      description: Standard API response envelope for a single resource
+    InboundTrunkNumberData:
       properties:
-        trunk:
+        didExtension:
+          example: '123456'
           type: string
+      type: object
+    Data:
+      properties:
+        key:
+          type: string
+          description: Metadata key.
+          example: function_key_number
+        value:
+          type: string
+          description: Metadata value.
+          example: '5'
+      type: object
+      required:
+      - key
+      - value
+      description: Data represents key-value pair for additional reference metadata.
+    SkillMemberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/SkillMemberLinks'
+        data:
+          $ref: '#/components/schemas/SkillMemberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
   securitySchemes:
-    bearer_auth:
-      type: http
+    jwt:
       scheme: bearer
       bearerFormat: JWT
-      description: JSON Web Token
+      type: http

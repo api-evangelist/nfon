@@ -1,22 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
-
-
-    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
-
-
-    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
-  title: NFON Call History Accounts Customer Extensions API
-  version: 2.0-early-access
-  termsOfService: https://www.nfon.com/en/legal/gtc
-  contact:
-    name: NFON
-    email: integration@nfon.com
-  license:
-    name: NFON proprietary
+  description: APIs for managing PBX configuration, tenants, operators, licenses, and related resources
+  title: PBX Configuration Customer Extensions API
+  version: 2026.07.20
 servers:
-- url: https://api.nfon.com/call-history
+- url: /configuration/v1
 tags:
 - name: Customer Extensions
 paths:
@@ -2855,34 +2843,42 @@ paths:
           description: Not found
 components:
   schemas:
-    CallForwardGlobalsReferenceLinks:
+    PhoneExtensionDevicesPOSTRequest:
       properties:
-        current:
-          $ref: '#/components/schemas/String'
-        available:
-          $ref: '#/components/schemas/String'
+        links:
+          $ref: '#/components/schemas/PhoneExtensionDevicesPOSTLinks'
+        data:
+          $ref: '#/components/schemas/NoData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
-    LoginStatusData:
+    PhoneExtensionDevicesPOSTLinks:
       type: object
-    NoLinks:
-      type: object
-    OutboundTrunkNumberData:
-      type: object
-    PhoneExtensionCallForwardsPUTData:
+    InboundTrunkNumberRequest:
       properties:
-        callForwardTimeout:
-          $ref: '#/components/schemas/Integer'
-        signaledNumber:
-          $ref: '#/components/schemas/Enum'
-        externalNumbersEnabled:
-          $ref: '#/components/schemas/Boolean'
+        links:
+          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/InboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
-    CallForwardProfilesPOSTRequest:
+    VoicemailRequest:
       properties:
         links:
           $ref: '#/components/schemas/NoLinks'
         data:
-          $ref: '#/components/schemas/CallForwardProfilesPOSTData'
+          $ref: '#/components/schemas/VoicemailData'
         items:
           items:
             type: object
@@ -2891,35 +2887,26 @@ components:
           format: int32
           type: integer
       type: object
-    FunctionKeyPUTLinks:
-      properties:
-        target:
-          $ref: '#/components/schemas/String'
-      type: object
-    Integer:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: int32
-          type: integer
-      example: 1000
-      type: object
-      description: Subscribers soft limit
-    FunctionKeyPUTRequest:
+    NfonApiCollectionResponseNonPage:
       properties:
         links:
-          $ref: '#/components/schemas/FunctionKeyPUTLinks'
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    CallForwardGlobalsReferenceRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/CallForwardGlobalsReferenceLinks'
         data:
-          $ref: '#/components/schemas/FunctionKeyPUTData'
+          $ref: '#/components/schemas/CallForwardGlobalsReferenceData'
         items:
           items:
             type: object
@@ -2928,53 +2915,6 @@ components:
           format: int32
           type: integer
       type: object
-    CFRulesPOSTLinks:
-      properties:
-        unconditionalCallForward:
-          $ref: '#/components/schemas/String'
-        notAvailableCallForward:
-          $ref: '#/components/schemas/String'
-        source:
-          type: string
-        busyCallForward:
-          $ref: '#/components/schemas/String'
-        notRegisteredCallForward:
-          $ref: '#/components/schemas/String'
-      type: object
-    CallForwardProfilesPOSTData:
-      properties:
-        profileName:
-          $ref: '#/components/schemas/String'
-        active:
-          $ref: '#/components/schemas/Boolean'
-        profileNumber:
-          $ref: '#/components/schemas/Integer'
-      type: object
-    CallForwardGlobalsReferenceData:
-      properties:
-        type:
-          $ref: '#/components/schemas/String'
-        extensionNumber:
-          $ref: '#/components/schemas/String'
-        name:
-          $ref: '#/components/schemas/String'
-      type: object
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
     PhoneExtensionPOSTData:
       properties:
         useTps:
@@ -3030,42 +2970,89 @@ components:
         nMeeting:
           $ref: '#/components/schemas/Boolean'
       type: object
-    CallForwardGlobalsPUTData:
-      properties:
-        externalNumbersEnabled:
-          $ref: '#/components/schemas/Boolean'
-        signaledNumber:
-          $ref: '#/components/schemas/Enum'
-      type: object
-    PhoneExtensionDevicesPOSTLinks:
-      type: object
-    NfonApiCollectionResponseNonPage:
+    CallForwardGlobalsPUTRequest:
       properties:
         links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
-      type: object
-      description: Non-paginated collection response envelope
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/NoLinks'
         data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
+          $ref: '#/components/schemas/CallForwardGlobalsPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
-      description: Standard API response envelope for a single resource
+    PhoneExtensionCallForwardsPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/PhoneExtensionCallForwardsPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CallForwardRulesPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/CFRulesPOSTLinks'
+        data:
+          $ref: '#/components/schemas/CFRulesPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CallForwardRulePUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/CallForwardRulePUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    FunctionKeyPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/FunctionKeyPUTLinks'
+        data:
+          $ref: '#/components/schemas/FunctionKeyPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CFRulesPOSTData:
+      properties:
+        unconditionalCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        busyCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        callForwardTimeout:
+          $ref: '#/components/schemas/Integer'
+        notAvailableCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        notRegisteredCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+      type: object
     VoicemailData:
       properties:
         sendEmail:
@@ -3099,43 +3086,8 @@ components:
         name:
           $ref: '#/components/schemas/String'
       type: object
-    PhoneExtensionLinks:
-      properties:
-        voiceRecordingProfile:
-          $ref: '#/components/schemas/String'
-        preferredOutboundTrunk:
-          $ref: '#/components/schemas/String'
-        emergencySite:
-          $ref: '#/components/schemas/String'
-        blacklistProfile:
-          $ref: '#/components/schemas/String'
-        ctiInfo:
-          $ref: '#/components/schemas/String'
-        customerContract:
-          $ref: '#/components/schemas/String'
-        timezone:
-          $ref: '#/components/schemas/String'
-        internalOutgoing:
-          $ref: '#/components/schemas/String'
+    OutboundTrunkNumberData:
       type: object
-    FunctionKeyPOSTData:
-      properties:
-        keyNumber:
-          format: int32
-          type: integer
-        functionCode:
-          $ref: '#/components/schemas/String'
-        displayName:
-          $ref: '#/components/schemas/String'
-        type:
-          type: string
-      type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
     PhoneExtensionCallForwardData:
       properties:
         type:
@@ -3145,12 +3097,54 @@ components:
         name:
           $ref: '#/components/schemas/String'
       type: object
-    CallForwardProfilePUTRequest:
+    Links:
+      description: Related resource links
+      type: object
+    Integer:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
+      type: object
+      description: Subscribers soft limit
+    CallForwardGlobalsReferenceData:
+      properties:
+        type:
+          $ref: '#/components/schemas/String'
+        extensionNumber:
+          $ref: '#/components/schemas/String'
+        name:
+          $ref: '#/components/schemas/String'
+      type: object
+    LoginStatusData:
+      type: object
+    FunctionKeyPUTData:
+      properties:
+        functionCode:
+          $ref: '#/components/schemas/String'
+        displayName:
+          $ref: '#/components/schemas/String'
+        type:
+          example: BLF
+          type: string
+      type: object
+    PhoneExtensionSkillCollectionRequest:
       properties:
         links:
-          $ref: '#/components/schemas/NoLinks'
+          $ref: '#/components/schemas/PhoneExtensionSkillCollectionLinks'
         data:
-          $ref: '#/components/schemas/CallForwardProfilePUTData'
+          $ref: '#/components/schemas/PhoneExtensionSkillCollectionData'
         items:
           items:
             type: object
@@ -3158,6 +3152,63 @@ components:
         itemCount:
           format: int32
           type: integer
+      type: object
+    FunctionKeyPUTLinks:
+      properties:
+        target:
+          $ref: '#/components/schemas/String'
+      type: object
+    CallForwardProfilesPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/CallForwardProfilesPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    PhoneExtensionPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/PhoneExtensionLinks'
+        data:
+          $ref: '#/components/schemas/PhoneExtensionPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    PhoneExtensionSkillCollectionLinks:
+      properties:
+        skillService:
+          $ref: '#/components/schemas/String'
+      type: object
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    PhoneExtensionCallForwardLinks:
+      properties:
+        current:
+          $ref: '#/components/schemas/String'
+        available:
+          $ref: '#/components/schemas/String'
       type: object
     NoData:
       type: object
@@ -3227,151 +3278,14 @@ components:
         skillDisplayName:
           $ref: '#/components/schemas/String'
       type: object
-    FunctionKeyPOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/FunctionKeyPOSTLinks'
-        data:
-          $ref: '#/components/schemas/FunctionKeyPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+    NoLinks:
       type: object
-    FunctionKeyPOSTLinks:
-      properties:
-        target:
-          $ref: '#/components/schemas/String'
-      type: object
-    InboundTrunkNumberRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/InboundTrunkNumberLinks'
-        data:
-          $ref: '#/components/schemas/InboundTrunkNumberData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    CallForwardRulePUTData:
-      properties:
-        unconditionalCallForwardActive:
-          $ref: '#/components/schemas/Boolean'
-        busyCallForwardActive:
-          $ref: '#/components/schemas/Boolean'
-        callForwardTimeout:
-          $ref: '#/components/schemas/Integer'
-        notAvailableCallForwardActive:
-          $ref: '#/components/schemas/Boolean'
-        notRegisteredCallForwardActive:
-          $ref: '#/components/schemas/Boolean'
-      type: object
-    OutboundTrunkNumberLinks:
-      type: object
-    PhoneExtensionPOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/PhoneExtensionLinks'
-        data:
-          $ref: '#/components/schemas/PhoneExtensionPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    CallForwardGlobalsPUTRequest:
+    CallForwardProfilePUTRequest:
       properties:
         links:
           $ref: '#/components/schemas/NoLinks'
         data:
-          $ref: '#/components/schemas/CallForwardGlobalsPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    PhoneExtensionPUTLinks:
-      properties:
-        voiceRecordingProfile:
-          $ref: '#/components/schemas/String'
-        preferredOutboundTrunk:
-          $ref: '#/components/schemas/String'
-        emergencySite:
-          $ref: '#/components/schemas/String'
-        blacklistProfile:
-          $ref: '#/components/schemas/String'
-        ctiInfo:
-          $ref: '#/components/schemas/String'
-        customerContract:
-          $ref: '#/components/schemas/String'
-        timezone:
-          $ref: '#/components/schemas/String'
-        internalOutgoing:
-          $ref: '#/components/schemas/String'
-      type: object
-    Enum:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: object
-      type: object
-      example: 'OFF'
-    PhoneExtensionSkillCollectionRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/PhoneExtensionSkillCollectionLinks'
-        data:
-          $ref: '#/components/schemas/PhoneExtensionSkillCollectionData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    PhoneExtensionCallForwardsPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/PhoneExtensionCallForwardsPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    CallForwardRulesPOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/CFRulesPOSTLinks'
-        data:
-          $ref: '#/components/schemas/CFRulesPOSTData'
+          $ref: '#/components/schemas/CallForwardProfilePUTData'
         items:
           items:
             type: object
@@ -3389,6 +3303,22 @@ components:
         lyncSite:
           type: string
       type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
     CallForwardProfilePUTData:
       properties:
         profileName:
@@ -3398,18 +3328,111 @@ components:
         profileNumber:
           $ref: '#/components/schemas/Integer'
       type: object
-    CFRulesPOSTData:
+    CallForwardProfilesPOSTData:
       properties:
-        unconditionalCallForwardActive:
+        profileName:
+          $ref: '#/components/schemas/String'
+        active:
           $ref: '#/components/schemas/Boolean'
-        busyCallForwardActive:
-          $ref: '#/components/schemas/Boolean'
-        callForwardTimeout:
+        profileNumber:
           $ref: '#/components/schemas/Integer'
-        notAvailableCallForwardActive:
+      type: object
+    CallForwardGlobalsReferenceLinks:
+      properties:
+        current:
+          $ref: '#/components/schemas/String'
+        available:
+          $ref: '#/components/schemas/String'
+      type: object
+    FunctionKeyPOSTData:
+      properties:
+        keyNumber:
+          format: int32
+          type: integer
+        functionCode:
+          $ref: '#/components/schemas/String'
+        displayName:
+          $ref: '#/components/schemas/String'
+        type:
+          type: string
+      type: object
+    FunctionKeyPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/FunctionKeyPOSTLinks'
+        data:
+          $ref: '#/components/schemas/FunctionKeyPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    OutboundTrunkNumberLinks:
+      type: object
+    CallForwardGlobalsPUTData:
+      properties:
+        externalNumbersEnabled:
           $ref: '#/components/schemas/Boolean'
-        notRegisteredCallForwardActive:
-          $ref: '#/components/schemas/Boolean'
+        signaledNumber:
+          $ref: '#/components/schemas/Enum'
+      type: object
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
+      type: object
+    PhoneExtensionPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/PhoneExtensionPUTLinks'
+        data:
+          $ref: '#/components/schemas/PhoneExtensionPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    LoginStatusRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          $ref: '#/components/schemas/LoginStatusData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
     NfonApiCollectionResponsePage:
       properties:
@@ -3440,23 +3463,7 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    FunctionKeyPUTData:
-      properties:
-        functionCode:
-          $ref: '#/components/schemas/String'
-        displayName:
-          $ref: '#/components/schemas/String'
-        type:
-          example: BLF
-          type: string
-      type: object
-    InboundTrunkNumberData:
-      properties:
-        didExtension:
-          example: '123456'
-          type: string
-      type: object
-    Boolean:
+    Enum:
       properties:
         notNull:
           type: boolean
@@ -3469,66 +3476,25 @@ components:
         presentNull:
           type: boolean
         value:
-          type: boolean
+          type: object
       type: object
-      example: false
-    CollectionLinks:
+      example: 'OFF'
+    FunctionKeyPOSTLinks:
       properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
+        target:
           $ref: '#/components/schemas/String'
       type: object
-      description: Pagination links for collection responses
-    PhoneExtensionPUTRequest:
+    CFRulesPOSTLinks:
       properties:
-        links:
-          $ref: '#/components/schemas/PhoneExtensionPUTLinks'
-        data:
-          $ref: '#/components/schemas/PhoneExtensionPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    LoginStatusRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          $ref: '#/components/schemas/LoginStatusData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    PhoneExtensionDevicesPOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/PhoneExtensionDevicesPOSTLinks'
-        data:
-          $ref: '#/components/schemas/NoData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    PhoneExtensionSkillCollectionLinks:
-      properties:
-        skillService:
+        unconditionalCallForward:
+          $ref: '#/components/schemas/String'
+        notAvailableCallForward:
+          $ref: '#/components/schemas/String'
+        source:
+          type: string
+        busyCallForward:
+          $ref: '#/components/schemas/String'
+        notRegisteredCallForward:
           $ref: '#/components/schemas/String'
       type: object
     LyncOptionRequest:
@@ -3561,19 +3527,24 @@ components:
           format: date-time
           type: string
       type: object
-    CallForwardGlobalsReferenceRequest:
+    NfonApiResponse:
       properties:
         links:
-          $ref: '#/components/schemas/CallForwardGlobalsReferenceLinks'
+          $ref: '#/components/schemas/Links'
         data:
-          $ref: '#/components/schemas/CallForwardGlobalsReferenceData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    InboundTrunkNumberData:
+      properties:
+        didExtension:
+          example: '123456'
+          type: string
       type: object
     OutboundTrunkNumberRequest:
       properties:
@@ -3589,6 +3560,66 @@ components:
           format: int32
           type: integer
       type: object
+    PhoneExtensionLinks:
+      properties:
+        voiceRecordingProfile:
+          $ref: '#/components/schemas/String'
+        preferredOutboundTrunk:
+          $ref: '#/components/schemas/String'
+        emergencySite:
+          $ref: '#/components/schemas/String'
+        blacklistProfile:
+          $ref: '#/components/schemas/String'
+        ctiInfo:
+          $ref: '#/components/schemas/String'
+        customerContract:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+        internalOutgoing:
+          $ref: '#/components/schemas/String'
+      type: object
+    CallForwardRulePUTData:
+      properties:
+        unconditionalCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        busyCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        callForwardTimeout:
+          $ref: '#/components/schemas/Integer'
+        notAvailableCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        notRegisteredCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    PhoneExtensionPUTLinks:
+      properties:
+        voiceRecordingProfile:
+          $ref: '#/components/schemas/String'
+        preferredOutboundTrunk:
+          $ref: '#/components/schemas/String'
+        emergencySite:
+          $ref: '#/components/schemas/String'
+        blacklistProfile:
+          $ref: '#/components/schemas/String'
+        ctiInfo:
+          $ref: '#/components/schemas/String'
+        customerContract:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+        internalOutgoing:
+          $ref: '#/components/schemas/String'
+      type: object
+    PhoneExtensionCallForwardsPUTData:
+      properties:
+        callForwardTimeout:
+          $ref: '#/components/schemas/Integer'
+        signaledNumber:
+          $ref: '#/components/schemas/Enum'
+        externalNumbersEnabled:
+          $ref: '#/components/schemas/Boolean'
+      type: object
     CallForwardRequest:
       properties:
         links:
@@ -3603,52 +3634,8 @@ components:
           format: int32
           type: integer
       type: object
-    CallForwardRulePUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/CallForwardRulePUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    Links:
-      description: Related resource links
-      type: object
-    VoicemailRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/VoicemailData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    PhoneExtensionCallForwardLinks:
-      properties:
-        current:
-          $ref: '#/components/schemas/String'
-        available:
-          $ref: '#/components/schemas/String'
-      type: object
-    InboundTrunkNumberLinks:
-      properties:
-        trunk:
-          type: string
-      type: object
   securitySchemes:
-    bearer_auth:
-      type: http
+    jwt:
       scheme: bearer
       bearerFormat: JWT
-      description: JSON Web Token
+      type: http

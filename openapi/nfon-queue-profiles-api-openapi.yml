@@ -1,22 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
-
-
-    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
-
-
-    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
-  title: NFON Call History Accounts queue-profiles API
-  version: 2.0-early-access
-  termsOfService: https://www.nfon.com/en/legal/gtc
-  contact:
-    name: NFON
-    email: integration@nfon.com
-  license:
-    name: NFON proprietary
+  description: APIs for managing PBX configuration, tenants, operators, licenses, and related resources
+  title: PBX Configuration Queue Profiles API
+  version: 2026.07.20
 servers:
-- url: https://api.nfon.com/call-history
+- url: /configuration/v1
 tags:
 - name: queue-profiles
 paths:
@@ -1019,6 +1007,82 @@ components:
           example: Invalid request
       type: object
       description: Error represents the standard API error response.
+    QueueProfileRequest:
+      properties:
+        queue_service_numbers:
+          type: array
+          items:
+            type: string
+          description: QueueServiceNumbers is the list of queue service numbers (optional, if empty the profile has no queues)
+        color:
+          type: string
+          pattern: ^#[0-9A-Fa-f]{6}$
+          description: Color in hex format (e.g., \"#FF5733\")
+          example: '#FF0000'
+        visibilities:
+          $ref: '#/components/schemas/Visibilities'
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Name of the queue profile (1-255 characters)
+      type: object
+      required:
+      - name
+      - color
+      description: QueueProfilesRequest represents the request body for creating a queue profile. Name and Color are required. Visibilities and QueueServiceNumbers are optional.
+    GetQueueProfilesExtensionResponse:
+      properties:
+        profile_id:
+          type: string
+          description: ProfileId Unique identifier of the queue profile.
+        queue_service_numbers:
+          type: array
+          items:
+            type: string
+          description: Array of queue service numbers associated with this profile.
+        color:
+          type: string
+          description: Hex color code for the queue profile.
+          example: '#FF0000'
+        status:
+          $ref: '#/components/schemas/Status'
+        name:
+          type: string
+          description: Display name of the queue profile.
+      type: object
+      description: GetQueueProfilesExtensionResponse represents extension queue profiles response.
+    QueueProfilePatchRequest:
+      properties:
+        queue_service_numbers:
+          type: array
+          items:
+            type: string
+          description: QueueServiceNumbers is the list of queue service numbers (optional, if empty all queues are removed)
+        color:
+          type: string
+          pattern: ^#[0-9A-Fa-f]{6}$
+          description: Color in hex format (e.g., \"#FF5733\", optional)
+          example: '#FF0000'
+        visibilities:
+          $ref: '#/components/schemas/Visibilities'
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Name of the queue profile (1-255 characters, optional)
+      type: object
+      description: QueueProfilePatchRequest represents a partial update request. All fields are optional, but at least one must be provided.
+    QueueProfileList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GetQueueProfilesExtensionResponse'
+      description: QueueProfileList is a list of queue profiles.
+    Visibilities:
+      type: array
+      items:
+        $ref: '#/components/schemas/Visibility'
+      description: Visibilities is a list of visibility entries.
     ErrorDetail:
       properties:
         message:
@@ -1046,27 +1110,6 @@ components:
       - name
       - extension
       description: Visibility represents a single visibility entry with name and extension.
-    QueueProfilePatchRequest:
-      properties:
-        queue_service_numbers:
-          type: array
-          items:
-            type: string
-          description: QueueServiceNumbers is the list of queue service numbers (optional, if empty all queues are removed)
-        color:
-          type: string
-          pattern: ^#[0-9A-Fa-f]{6}$
-          description: Color in hex format (e.g., \"#FF5733\", optional)
-          example: '#FF0000'
-        visibilities:
-          $ref: '#/components/schemas/Visibilities'
-        name:
-          type: string
-          minLength: 1
-          maxLength: 255
-          description: Name of the queue profile (1-255 characters, optional)
-      type: object
-      description: QueueProfilePatchRequest represents a partial update request. All fields are optional, but at least one must be provided.
     QueueProfile:
       properties:
         profile_id:
@@ -1089,67 +1132,11 @@ components:
           description: Display name of the queue profile.
       type: object
       description: QueueProfileResponse represents the response when creating/updating a queue profile. This is named QueueProfile in the OpenAPI spec.
-    QueueProfileRequest:
-      properties:
-        queue_service_numbers:
-          type: array
-          items:
-            type: string
-          description: QueueServiceNumbers is the list of queue service numbers (optional, if empty the profile has no queues)
-        color:
-          type: string
-          pattern: ^#[0-9A-Fa-f]{6}$
-          description: Color in hex format (e.g., \"#FF5733\")
-          example: '#FF0000'
-        visibilities:
-          $ref: '#/components/schemas/Visibilities'
-        name:
-          type: string
-          minLength: 1
-          maxLength: 255
-          description: Name of the queue profile (1-255 characters)
-      type: object
-      required:
-      - name
-      - color
-      description: QueueProfilesRequest represents the request body for creating a queue profile. Name and Color are required. Visibilities and QueueServiceNumbers are optional.
-    QueueProfileList:
-      type: array
-      items:
-        $ref: '#/components/schemas/GetQueueProfilesExtensionResponse'
-      description: QueueProfileList is a list of queue profiles.
-    GetQueueProfilesExtensionResponse:
-      properties:
-        profile_id:
-          type: string
-          description: ProfileId Unique identifier of the queue profile.
-        queue_service_numbers:
-          type: array
-          items:
-            type: string
-          description: Array of queue service numbers associated with this profile.
-        color:
-          type: string
-          description: Hex color code for the queue profile.
-          example: '#FF0000'
-        status:
-          $ref: '#/components/schemas/Status'
-        name:
-          type: string
-          description: Display name of the queue profile.
-      type: object
-      description: GetQueueProfilesExtensionResponse represents extension queue profiles response.
     Status:
       type: string
       description: Status represents an active/inactive status.
-    Visibilities:
-      type: array
-      items:
-        $ref: '#/components/schemas/Visibility'
-      description: Visibilities is a list of visibility entries.
   securitySchemes:
-    bearer_auth:
-      type: http
+    jwt:
       scheme: bearer
       bearerFormat: JWT
-      description: JSON Web Token
+      type: http

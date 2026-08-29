@@ -1,22 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
-
-
-    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
-
-
-    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
-  title: NFON Call History Accounts import-export API
-  version: 2.0-early-access
-  termsOfService: https://www.nfon.com/en/legal/gtc
-  contact:
-    name: NFON
-    email: integration@nfon.com
-  license:
-    name: NFON proprietary
+  description: APIs for managing PBX configuration, tenants, operators, licenses, and related resources
+  title: PBX Configuration Import Export API
+  version: 2026.07.20
 servers:
-- url: https://api.nfon.com/call-history
+- url: /configuration/v1
 tags:
 - x-displayName: Import Export
   description: Bulk import and export operations
@@ -1492,22 +1480,6 @@ components:
           example: Invalid request
       type: object
       description: Error represents the standard API error response.
-    BulkImportRequest:
-      properties:
-        import:
-          $ref: '#/components/schemas/ImportMetadata'
-        file:
-          type: string
-          description: CSV file containing import data (max 10MB)
-      type: object
-      description: BulkImportRequest represents the multipart form data for bulk import operations.
-    ImportMetadata:
-      properties:
-        delete:
-          type: boolean
-          description: Removes existing records before importing. Only supported for 'contact' and 'speeddial' resource types.
-      type: object
-      description: ImportMetadata represents the optional JSON metadata in a bulk import request.
     SubmitJobResponse:
       properties:
         status:
@@ -1535,9 +1507,24 @@ components:
           example: license_assigned
       type: object
       description: ErrorDetail represents error details in the delete response.
+    BulkImportRequest:
+      properties:
+        import:
+          $ref: '#/components/schemas/ImportMetadata'
+        file:
+          type: string
+          description: CSV file containing import data (max 10MB)
+      type: object
+      description: BulkImportRequest represents the multipart form data for bulk import operations.
+    ImportMetadata:
+      properties:
+        delete:
+          type: boolean
+          description: Removes existing records before importing. Only supported for 'contact' and 'speeddial' resource types.
+      type: object
+      description: ImportMetadata represents the optional JSON metadata in a bulk import request.
   securitySchemes:
-    bearer_auth:
-      type: http
+    jwt:
       scheme: bearer
       bearerFormat: JWT
-      description: JSON Web Token
+      type: http

@@ -1,22 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
-
-
-    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
-
-
-    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
-  title: NFON Call History Accounts Customer Trunks API
-  version: 2.0-early-access
-  termsOfService: https://www.nfon.com/en/legal/gtc
-  contact:
-    name: NFON
-    email: integration@nfon.com
-  license:
-    name: NFON proprietary
+  description: APIs for managing PBX configuration, tenants, operators, licenses, and related resources
+  title: PBX Configuration Customer Trunks API
+  version: 2026.07.20
 servers:
-- url: https://api.nfon.com/call-history
+- url: /configuration/v1
 tags:
 - name: Customer Trunks
 paths:
@@ -223,90 +211,12 @@ paths:
           description: Not found
 components:
   schemas:
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
       type: object
-      description: Pagination links for collection responses
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    Boolean:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: boolean
-      type: object
-      example: false
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    TrunkPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/TrunkPUTLinks'
-        data:
-          $ref: '#/components/schemas/TrunkPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    TrunkPUTData:
-      properties:
-        suppressLineno:
-          $ref: '#/components/schemas/Enum'
-        hairpinCallsEnabled:
-          $ref: '#/components/schemas/Boolean'
-        clipNoScreeningEnabled:
-          $ref: '#/components/schemas/Boolean'
-        salesForceId:
-          $ref: '#/components/schemas/String'
-        trunkNumber:
-          $ref: '#/components/schemas/Integer'
-      type: object
+      description: Collection response envelope
     Enum:
       properties:
         notNull:
@@ -323,33 +233,6 @@ components:
           type: object
       type: object
       example: 'OFF'
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
-    Links:
-      description: Related resource links
-      type: object
-    Integer:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: int32
-          type: integer
-      example: 1000
-      type: object
-      description: Subscribers soft limit
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -379,6 +262,99 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
+    TrunkPUTData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        hairpinCallsEnabled:
+          $ref: '#/components/schemas/Boolean'
+        clipNoScreeningEnabled:
+          $ref: '#/components/schemas/Boolean'
+        salesForceId:
+          $ref: '#/components/schemas/String'
+        trunkNumber:
+          $ref: '#/components/schemas/Integer'
+      type: object
+    Links:
+      description: Related resource links
+      type: object
+    Integer:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
+      type: object
+      description: Subscribers soft limit
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    TrunkPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/TrunkPUTLinks'
+        data:
+          $ref: '#/components/schemas/TrunkPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
     NfonApiCollectionResponseNonPage:
       properties:
         links:
@@ -393,6 +369,18 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
     TrunkPUTLinks:
       properties:
         outboundBlacklistGlobalProfile:
@@ -409,8 +397,7 @@ components:
           $ref: '#/components/schemas/String'
       type: object
   securitySchemes:
-    bearer_auth:
-      type: http
+    jwt:
       scheme: bearer
       bearerFormat: JWT
-      description: JSON Web Token
+      type: http

@@ -1,22 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
-
-
-    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
-
-
-    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
-  title: NFON Call History Accounts references API
-  version: 2.0-early-access
-  termsOfService: https://www.nfon.com/en/legal/gtc
-  contact:
-    name: NFON
-    email: integration@nfon.com
-  license:
-    name: NFON proprietary
+  description: APIs for managing PBX configuration, tenants, operators, licenses, and related resources
+  title: PBX Configuration References API
+  version: 2026.07.20
 servers:
-- url: https://api.nfon.com/call-history
+- url: /configuration/v1
 tags:
 - x-displayName: References
   description: Find references to identifiers (extensions and service codes)
@@ -189,6 +177,31 @@ paths:
           description: Internal server error
 components:
   schemas:
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    HierarchicalReferences:
+      properties:
+        identifiers:
+          items:
+            $ref: '#/components/schemas/IdentifierReferences'
+          type: array
+      type: object
+      required:
+      - identifiers
+      description: HierarchicalReferencesResponse represents references grouped by identifier. This is returned when flatten=false.
     IdentifierReferences:
       properties:
         references:
@@ -202,6 +215,39 @@ components:
       - identifier
       - references
       description: IdentifierReferences groups references for a single identifier.
+    References:
+      oneOf:
+      - $ref: '#/components/schemas/FlatReferences'
+      - $ref: '#/components/schemas/HierarchicalReferences'
+      description: 'FindReferencesResponse represents the response from the findReferences endpoint. The response structure depends on the ''flatten'' parameter: - flatten=true: FlatReferencesResponse (flat array with identifier field on each item) - flatten=false: HierarchicalReferencesResponse (grouped by identifier).'
+    Data:
+      properties:
+        key:
+          type: string
+          description: Metadata key.
+          example: function_key_number
+        value:
+          type: string
+          description: Metadata value.
+          example: '5'
+      type: object
+      required:
+      - key
+      - value
+      description: Data represents key-value pair for additional reference metadata.
+    FlatReferences:
+      properties:
+        references:
+          items:
+            $ref: '#/components/schemas/ReferenceItem'
+          type: array
+      type: object
+      required:
+      - references
+      description: FlatReferencesResponse represents a flat array of references with identifier field on each item. This is returned when flatten=true (default).
+    ReferenceType:
+      type: string
+      description: ReferenceType represents the type of entity that contains the reference.
     ReferenceItem:
       properties:
         fields:
@@ -232,44 +278,6 @@ components:
       - type
       - display_name
       description: ReferenceItem represents a single reference to an identifier within the tenant's configuration.
-    Error:
-      properties:
-        request_id:
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
-        code:
-          type: string
-          example: bad_request
-        details:
-          $ref: '#/components/schemas/ErrorDetail'
-        message:
-          type: string
-          example: Invalid request
-      type: object
-      description: Error represents the standard API error response.
-    ReferenceType:
-      type: string
-      description: ReferenceType represents the type of entity that contains the reference.
-    HierarchicalReferences:
-      properties:
-        identifiers:
-          items:
-            $ref: '#/components/schemas/IdentifierReferences'
-          type: array
-      type: object
-      required:
-      - identifiers
-      description: HierarchicalReferencesResponse represents references grouped by identifier. This is returned when flatten=false.
-    FlatReferences:
-      properties:
-        references:
-          items:
-            $ref: '#/components/schemas/ReferenceItem'
-          type: array
-      type: object
-      required:
-      - references
-      description: FlatReferencesResponse represents a flat array of references with identifier field on each item. This is returned when flatten=true (default).
     Field:
       properties:
         name:
@@ -285,11 +293,6 @@ components:
       required:
       - name
       description: Field represents a field within an entity that references the identifier.
-    References:
-      oneOf:
-      - $ref: '#/components/schemas/FlatReferences'
-      - $ref: '#/components/schemas/HierarchicalReferences'
-      description: 'FindReferencesResponse represents the response from the findReferences endpoint. The response structure depends on the ''flatten'' parameter: - flatten=true: FlatReferencesResponse (flat array with identifier field on each item) - flatten=false: HierarchicalReferencesResponse (grouped by identifier).'
     ErrorDetail:
       properties:
         message:
@@ -300,24 +303,8 @@ components:
           example: license_assigned
       type: object
       description: ErrorDetail represents error details in the delete response.
-    Data:
-      properties:
-        key:
-          type: string
-          description: Metadata key.
-          example: function_key_number
-        value:
-          type: string
-          description: Metadata value.
-          example: '5'
-      type: object
-      required:
-      - key
-      - value
-      description: Data represents key-value pair for additional reference metadata.
   securitySchemes:
-    bearer_auth:
-      type: http
+    jwt:
       scheme: bearer
       bearerFormat: JWT
-      description: JSON Web Token
+      type: http

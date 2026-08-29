@@ -1,22 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
-
-
-    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
-
-
-    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
-  title: NFON Call History Accounts Customers API
-  version: 2.0-early-access
-  termsOfService: https://www.nfon.com/en/legal/gtc
-  contact:
-    name: NFON
-    email: integration@nfon.com
-  license:
-    name: NFON proprietary
+  description: APIs for managing PBX configuration, tenants, operators, licenses, and related resources
+  title: PBX Configuration Customers API
+  version: 2026.07.20
 servers:
-- url: https://api.nfon.com/call-history
+- url: /configuration/v1
 tags:
 - name: Customers
   description: Customer management
@@ -1857,38 +1845,12 @@ paths:
           description: Not found
 components:
   schemas:
-    NoLinks:
-      type: object
-    CustomerDefaultSystemIntegratorPUTLinks:
-      properties:
-        defaultSystemIntegrator:
-          example: /api/system-integrators/SI001
-          type: string
-      type: object
-    Integer:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: int32
-          type: integer
-      example: 1000
-      type: object
-      description: Subscribers soft limit
-    IntegrationTenantPUTRequest:
+    IntegrationTargetPOSTRequest:
       properties:
         links:
-          $ref: '#/components/schemas/IntegrationTenantPUTLinks'
+          $ref: '#/components/schemas/IntegrationTargetPOSTLinks'
         data:
-          $ref: '#/components/schemas/IntegrationTenantPUTData'
+          $ref: '#/components/schemas/IntegrationTargetPOSTData'
         items:
           items:
             type: object
@@ -1897,36 +1859,12 @@ components:
           format: int32
           type: integer
       type: object
-    IntegrationTenantPOSTRequest:
+    CustomerOperatorDetailsPUTLinks:
       properties:
-        links:
-          $ref: '#/components/schemas/IntegrationTenantPOSTLinks'
-        data:
-          $ref: '#/components/schemas/IntegrationTenantPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
+        pbxGroup:
+          example: /api/operators/O1234/pbx-groups/pbx-group-01
           type: string
       type: object
-      description: Link to the last page
     CustomerBasicDataRequest:
       properties:
         links:
@@ -1941,30 +1879,12 @@ components:
           format: int32
           type: integer
       type: object
-    IntegrationTenantPUTLinks:
-      properties:
-        integrationType:
-          $ref: '#/components/schemas/String'
-      type: object
-    NfonApiResponse:
+    CustomerCallRecordingRequest:
       properties:
         links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/CustomerCallRecordingPUTLinks'
         data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    CustomerOptionsRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/CustomerOptionsLinks'
-        data:
-          $ref: '#/components/schemas/CustomerOptionsPUTData'
+          $ref: '#/components/schemas/CustomerCallRecordingPUTData'
         items:
           items:
             type: object
@@ -1972,44 +1892,6 @@ components:
         itemCount:
           format: int32
           type: integer
-      type: object
-    IntegrationTargetPOSTData:
-      properties:
-        active:
-          type: boolean
-        connectionConfig:
-          $ref: '#/components/schemas/JsonNode'
-        context:
-          type: string
-      type: object
-    DirectcallData:
-      properties:
-        number:
-          example: '+4989123456'
-          type: string
-      type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
-    NoData:
-      type: object
-    IntegrationTenantPOSTData:
-      properties:
-        status:
-          $ref: '#/components/schemas/Enum'
-        connectionConfig:
-          $ref: '#/components/schemas/JsonNode'
-        authConfig:
-          $ref: '#/components/schemas/JsonNode'
-        active:
-          $ref: '#/components/schemas/Boolean'
-        context:
-          $ref: '#/components/schemas/String'
-        name:
-          type: string
       type: object
     CustomerOptionsLinks:
       properties:
@@ -2032,11 +1914,6 @@ components:
         timezone:
           $ref: '#/components/schemas/String'
       type: object
-    ExternalNumbersHrefData:
-      properties:
-        allowed:
-          type: boolean
-      type: object
     IntegrationTargetPUTData:
       properties:
         active:
@@ -2046,79 +1923,19 @@ components:
         context:
           $ref: '#/components/schemas/String'
       type: object
-    IntegrationTargetPOSTRequest:
+    IntegrationTargetPOSTData:
       properties:
-        links:
-          $ref: '#/components/schemas/IntegrationTargetPOSTLinks'
-        data:
-          $ref: '#/components/schemas/IntegrationTargetPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    IntegrationTargetPOSTLinks:
-      properties:
-        target:
+        active:
+          type: boolean
+        connectionConfig:
+          $ref: '#/components/schemas/JsonNode'
+        context:
           type: string
       type: object
-    Enum:
+    IntegrationTenantPOSTLinks:
       properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: object
-      type: object
-      example: 'OFF'
-    CustomerOperatorDetailsPUTLinks:
-      properties:
-        pbxGroup:
-          example: /api/operators/O1234/pbx-groups/pbx-group-01
+        integrationType:
           type: string
-      type: object
-    CustomerCallRecordingPUTLinks:
-      properties:
-        recordStartAnnouncement:
-          $ref: '#/components/schemas/String'
-      type: object
-    CustomerDirectcallRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/DirectcallData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    ExternalNumbersRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/ExternalNumbersHrefData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
       type: object
     CustomerCallRecordingPUTData:
       properties:
@@ -2129,49 +1946,19 @@ components:
         recordStartMessageRecipients:
           $ref: '#/components/schemas/Enum'
       type: object
-    NfonApiCollectionResponsePage:
+    IntegrationTenantPOSTRequest:
       properties:
         links:
-          $ref: '#/components/schemas/CollectionLinks'
-        offset:
-          example: 0
-          description: Current page offset
-          format: int64
-          type: integer
-        total:
-          example: 42
-          description: Total number of items in the collection
-          format: int64
-          type: integer
+          $ref: '#/components/schemas/IntegrationTenantPOSTLinks'
+        data:
+          $ref: '#/components/schemas/IntegrationTenantPOSTData'
         items:
-          type: array
           items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: Items in this page
-        size:
-          example: 20
-          description: Number of items in this page
+            type: object
+          type: array
+        itemCount:
           format: int32
           type: integer
-        href:
-          description: Self-link to this collection
-          type: string
-      type: object
-      description: Paginated collection response envelope
-    IntegrationTenantPUTData:
-      properties:
-        status:
-          $ref: '#/components/schemas/Enum'
-        connectionConfig:
-          $ref: '#/components/schemas/JsonNode'
-        authConfig:
-          $ref: '#/components/schemas/JsonNode'
-        active:
-          $ref: '#/components/schemas/Boolean'
-        context:
-          $ref: '#/components/schemas/String'
-        name:
-          $ref: '#/components/schemas/String'
       type: object
     CustomerOptionsPUTData:
       properties:
@@ -2244,6 +2031,34 @@ components:
         vlanProvisioning:
           $ref: '#/components/schemas/Boolean'
       type: object
+    CustomerDefaultSystemIntegratorPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/CustomerDefaultSystemIntegratorPUTLinks'
+        data:
+          $ref: '#/components/schemas/NoData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
     CustomerBasicDataPUT:
       properties:
         maxExtensionsCount:
@@ -2273,6 +2088,133 @@ components:
         name:
           $ref: '#/components/schemas/String'
       type: object
+    Links:
+      description: Related resource links
+      type: object
+    Integer:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
+      type: object
+      description: Subscribers soft limit
+    IntegrationTenantPUTData:
+      properties:
+        status:
+          $ref: '#/components/schemas/Enum'
+        connectionConfig:
+          $ref: '#/components/schemas/JsonNode'
+        authConfig:
+          $ref: '#/components/schemas/JsonNode'
+        active:
+          $ref: '#/components/schemas/Boolean'
+        context:
+          $ref: '#/components/schemas/String'
+        name:
+          $ref: '#/components/schemas/String'
+      type: object
+    CustomerOperatorDetailPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/CustomerOperatorDetailsPUTLinks'
+        data:
+          $ref: '#/components/schemas/NoData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    DirectcallData:
+      properties:
+        number:
+          example: '+4989123456'
+          type: string
+      type: object
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    CustomerCallRecordingPUTLinks:
+      properties:
+        recordStartAnnouncement:
+          $ref: '#/components/schemas/String'
+      type: object
+    CustomerDefaultSystemIntegratorPUTLinks:
+      properties:
+        defaultSystemIntegrator:
+          example: /api/system-integrators/SI001
+          type: string
+      type: object
+    NoData:
+      type: object
+    NoLinks:
+      type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    CustomerDirectcallRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/DirectcallData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    IntegrationTenantPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/IntegrationTenantPUTLinks'
+        data:
+          $ref: '#/components/schemas/IntegrationTenantPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
     Boolean:
       properties:
         notNull:
@@ -2289,21 +2231,107 @@ components:
           type: boolean
       type: object
       example: false
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
     JsonNode:
       type: object
     IntegrationTargetPUTLinks:
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    Enum:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: object
+      type: object
+      example: 'OFF'
+    ExternalNumbersRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/ExternalNumbersHrefData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    IntegrationTenantPOSTData:
+      properties:
+        status:
+          $ref: '#/components/schemas/Enum'
+        connectionConfig:
+          $ref: '#/components/schemas/JsonNode'
+        authConfig:
+          $ref: '#/components/schemas/JsonNode'
+        active:
+          $ref: '#/components/schemas/Boolean'
+        context:
+          $ref: '#/components/schemas/String'
+        name:
+          type: string
+      type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    ExternalNumbersHrefData:
+      properties:
+        allowed:
+          type: boolean
       type: object
     IntegrationTargetPUTRequest:
       properties:
@@ -2319,73 +2347,32 @@ components:
           format: int32
           type: integer
       type: object
-    IntegrationTenantPOSTLinks:
+    CustomerOptionsRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/CustomerOptionsLinks'
+        data:
+          $ref: '#/components/schemas/CustomerOptionsPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    IntegrationTargetPOSTLinks:
+      properties:
+        target:
+          type: string
+      type: object
+    IntegrationTenantPUTLinks:
       properties:
         integrationType:
-          type: string
-      type: object
-    CustomerDefaultSystemIntegratorPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/CustomerDefaultSystemIntegratorPUTLinks'
-        data:
-          $ref: '#/components/schemas/NoData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    Links:
-      description: Related resource links
-      type: object
-    NfonApiCollectionResponseNonPage:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
-      type: object
-      description: Non-paginated collection response envelope
-    CustomerOperatorDetailPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/CustomerOperatorDetailsPUTLinks'
-        data:
-          $ref: '#/components/schemas/NoData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    CustomerCallRecordingRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/CustomerCallRecordingPUTLinks'
-        data:
-          $ref: '#/components/schemas/CustomerCallRecordingPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+          $ref: '#/components/schemas/String'
       type: object
   securitySchemes:
-    bearer_auth:
-      type: http
+    jwt:
       scheme: bearer
       bearerFormat: JWT
-      description: JSON Web Token
+      type: http

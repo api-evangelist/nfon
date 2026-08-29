@@ -1,14 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
-
-
-    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
-
-
-    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
-  title: NFON Call History Accounts authentication API
-  version: 2.0-early-access
+  title: NFON CTI Authentication API
+  version: 1.0.0
+  description: This API provides PBX data on tenant base. The CTI API currently only supports incoming calls that arrive directly at an extension. Functions such as group calls, skill-based calls or queues are currently not supported. Call scenarios in which a call is forwarded and conferences with several participants are also not supported. Only one device may be assigned to each extension.
   termsOfService: https://www.nfon.com/en/legal/gtc
   contact:
     name: NFON
@@ -16,7 +10,10 @@ info:
   license:
     name: NFON proprietary
 servers:
-- url: https://api.nfon.com/call-history
+- url: https://providersupportdata.cloud-cfg.com/{version}
+  variables:
+    version:
+      default: v1
 tags:
 - name: authentication
   description: Everything about authentication
@@ -87,22 +84,6 @@ paths:
                 $ref: '#/components/schemas/publicKey'
 components:
   schemas:
-    tokens:
-      type: object
-      properties:
-        access-token:
-          type: string
-          format: jwt
-        refresh-token:
-          type: string
-          format: jwt
-    publicKey:
-      type: object
-      properties:
-        keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/jwksData'
     jwksData:
       type: object
       properties:
@@ -130,9 +111,29 @@ components:
           type: string
           description: Public key use
           example: sig
+    publicKey:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/jwksData'
+    tokens:
+      type: object
+      properties:
+        access-token:
+          type: string
+          format: jwt
+        refresh-token:
+          type: string
+          format: jwt
   securitySchemes:
     bearer_auth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: JSON Web Token
+    refresh_token_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Method to refresh the access token. Use the refresh token as bearer token here.

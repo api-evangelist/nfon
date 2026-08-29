@@ -1,22 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  description: 'The NFON Call History API provides endpoints for retrieving, streaming, and deleting call history records for an authenticated NFON Cloud Telephony user.
-
-
-    This API is currently offered as part of **Login with NFON (Early Access)**. As an early access offering, the API is subject to change. Updates may occur on short notice, though we strive to provide advance notice where possible.
-
-
-    For more information, see: https://www.nfon.com/en/integrations/login-with-nfon/'
-  title: NFON Call History Accounts Tenants API
-  version: 2.0-early-access
-  termsOfService: https://www.nfon.com/en/legal/gtc
-  contact:
-    name: NFON
-    email: integration@nfon.com
-  license:
-    name: NFON proprietary
+  description: APIs for managing PBX configuration, tenants, operators, licenses, and related resources
+  title: PBX Configuration Tenants API
+  version: 2026.07.20
 servers:
-- url: https://api.nfon.com/call-history
+- url: /configuration/v1
 tags:
 - name: Tenants
 paths:
@@ -829,44 +817,99 @@ paths:
           description: Internal server error
 components:
   schemas:
-    PrimaryContact:
-      description: PrimaryContactParams represents primary contact with address. This is named PrimaryContact in the OpenAPI spec.
-      allOf:
-      - $ref: '#/components/schemas/Contact'
-      - properties:
-          address:
-            $ref: '#/components/schemas/Address'
-        type: object
-    TenantOptions:
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    NfonApiCollectionResponsePage:
       properties:
-        element_creation_popup:
-          type: boolean
-          example: 'true'
-        port_lock:
-          type: boolean
-          example: 'true'
-        project_number_length:
-          maximum: 6
-          minimum: 0
-          example: '4'
-          format: int32
-          type: integer
-        queuemetrics_enabled:
-          type: boolean
-          example: 'false'
-        speed_dial_length:
-          maximum: 4
-          minimum: 0
-          example: '3'
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
           format: int64
           type: integer
-        acureus_billing:
-          type: boolean
-          example: 'false'
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
       type: object
-      required:
-      - project_number_length
-      description: OptionsRequestParams represents tenant options. This is named TenantOptions in the OpenAPI spec.
+      description: Paginated collection response envelope
+    Links:
+      description: Related resource links
+      type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
     Contact:
       properties:
         email:
@@ -900,98 +943,6 @@ components:
       - name
       - email
       description: Contact is the struct that holds the contact in a request.
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    ErrorResponse:
-      properties:
-        request_id:
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
-        message:
-          type: string
-          example: Invalid request
-        code:
-          type: string
-          example: bad_request
-      type: object
-      description: ErrorResponse represents the standard error response format.
-    TenantOptionsUpdate:
-      properties:
-        acureus_billing:
-          type: boolean
-      type: object
-      description: OptionsUpdateParams represents tenant options update. This is named TenantOptionsUpdate in the OpenAPI spec.
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
-    UpdateTenantRequest:
-      properties:
-        contract_duration_months:
-          type: integer
-          minimum: 0
-          format: int64
-          example: '24'
-        system_integrator:
-          type: string
-          example: S0001
-        contract_type:
-          type: string
-          example: pbx
-        primary_contact:
-          $ref: '#/components/schemas/UpdateContact'
-        partner_ref_number:
-          type: string
-          maxLength: 100
-          example: REF-2024-001
-        commission_non_recurring:
-          type: number
-          minimum: 0
-          format: double
-          example: '100.50'
-        options:
-          $ref: '#/components/schemas/TenantOptionsUpdate'
-      type: object
-      description: PartialUpdateRequest represents tenant partial update request. This is named UpdateTenantRequest in the OpenAPI spec.
-    ErrorDetail:
-      properties:
-        message:
-          type: string
-          example: Cannot delete license that is currently assigned to a user
-        code:
-          type: string
-          example: license_assigned
-      type: object
-      description: ErrorDetail represents error details in the delete response.
     Address:
       properties:
         country:
@@ -1021,6 +972,31 @@ components:
       - street
       - postal_code
       description: Address is the struct that holds the address in a request. nolint:recvcheck // mixed receivers for zerolog/validation compatibility
+    BillingExtensionsCreated:
+      properties:
+        extension_numbers:
+          type: array
+          description: The extension numbers that were created
+          items:
+            type: string
+          example: '["999999","999998","999997"]'
+      type: object
+      required:
+      - extension_numbers
+      description: BillingExtensionsCreated represents the response after creating billing extensions.
+    ErrorResponse:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        message:
+          type: string
+          example: Invalid request
+        code:
+          type: string
+          example: bad_request
+      type: object
+      description: ErrorResponse represents the standard error response format.
     Error:
       properties:
         request_id:
@@ -1036,6 +1012,48 @@ components:
           example: Invalid request
       type: object
       description: Error represents the standard API error response.
+    TenantOptionsUpdate:
+      properties:
+        acureus_billing:
+          type: boolean
+      type: object
+      description: OptionsUpdateParams represents tenant options update. This is named TenantOptionsUpdate in the OpenAPI spec.
+    UpdateTenantRequest:
+      properties:
+        contract_duration_months:
+          type: integer
+          minimum: 0
+          format: int64
+          example: '24'
+        system_integrator:
+          type: string
+          example: S0001
+        contract_type:
+          type: string
+          example: pbx
+        primary_contact:
+          $ref: '#/components/schemas/UpdateContact'
+        partner_ref_number:
+          type: string
+          maxLength: 100
+          example: REF-2024-001
+        commission_non_recurring:
+          type: number
+          minimum: 0
+          format: double
+          example: '100.50'
+        options:
+          $ref: '#/components/schemas/TenantOptionsUpdate'
+      type: object
+      description: PartialUpdateRequest represents tenant partial update request. This is named UpdateTenantRequest in the OpenAPI spec.
+    PrimaryContact:
+      description: PrimaryContactParams represents primary contact with address. This is named PrimaryContact in the OpenAPI spec.
+      allOf:
+      - $ref: '#/components/schemas/Contact'
+      - properties:
+          address:
+            $ref: '#/components/schemas/Address'
+        type: object
     UpdateContact:
       properties:
         phone_number:
@@ -1053,6 +1071,13 @@ components:
           example: Max Mustermann
       type: object
       description: UpdateContact represents partial update for contact information.
+    TenantCreated:
+      properties:
+        external_identifier:
+          type: string
+          example: K1234
+      type: object
+      description: CreateCustomerResponse represents the Create Customer response structure. This is named TenantCreated in the OpenAPI spec.
     CreateTenantRequest:
       properties:
         partner_ref_number:
@@ -1133,66 +1158,16 @@ components:
       - security_answer
       - contract_type
       description: CreateCustomerParams wraps needed fields to create a customer. This is named CreateTenantRequest in the OpenAPI spec.
-    NfonApiCollectionResponsePage:
+    ErrorDetail:
       properties:
-        links:
-          $ref: '#/components/schemas/CollectionLinks'
-        offset:
-          example: 0
-          description: Current page offset
-          format: int64
-          type: integer
-        total:
-          example: 42
-          description: Total number of items in the collection
-          format: int64
-          type: integer
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: Items in this page
-        size:
-          example: 20
-          description: Number of items in this page
-          format: int32
-          type: integer
-        href:
-          description: Self-link to this collection
+        message:
           type: string
-      type: object
-      description: Paginated collection response envelope
-    TenantCreated:
-      properties:
-        external_identifier:
+          example: Cannot delete license that is currently assigned to a user
+        code:
           type: string
-          example: K1234
+          example: license_assigned
       type: object
-      description: CreateCustomerResponse represents the Create Customer response structure. This is named TenantCreated in the OpenAPI spec.
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
-    BillingExtensionsCreated:
-      properties:
-        extension_numbers:
-          type: array
-          description: The extension numbers that were created
-          items:
-            type: string
-          example: '["999999","999998","999997"]'
-      type: object
-      required:
-      - extension_numbers
-      description: BillingExtensionsCreated represents the response after creating billing extensions.
+      description: ErrorDetail represents error details in the delete response.
     CreateBillingExtensionsRequest:
       properties:
         quantity:
@@ -1204,26 +1179,38 @@ components:
       required:
       - quantity
       description: CreateBillingExtensionsRequest represents the request to create billing extensions.
-    Links:
-      description: Related resource links
-      type: object
-    NfonApiCollectionResponseNonPage:
+    TenantOptions:
       properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
+        element_creation_popup:
+          type: boolean
+          example: 'true'
+        port_lock:
+          type: boolean
+          example: 'true'
+        project_number_length:
+          maximum: 6
+          minimum: 0
+          example: '4'
+          format: int32
+          type: integer
+        queuemetrics_enabled:
+          type: boolean
+          example: 'false'
+        speed_dial_length:
+          maximum: 4
+          minimum: 0
+          example: '3'
+          format: int64
+          type: integer
+        acureus_billing:
+          type: boolean
+          example: 'false'
       type: object
-      description: Non-paginated collection response envelope
+      required:
+      - project_number_length
+      description: OptionsRequestParams represents tenant options. This is named TenantOptions in the OpenAPI spec.
   securitySchemes:
-    bearer_auth:
-      type: http
+    jwt:
       scheme: bearer
       bearerFormat: JWT
-      description: JSON Web Token
+      type: http
