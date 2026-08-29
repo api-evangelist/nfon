@@ -22,6 +22,18 @@ x-backed-by:
 - earlybird
 x-tier: stub
 x-tier-reason: portfolio-lead
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -1216,6 +1228,9 @@ apis:
   - type: APIReference
     url: https://nfon-ag.github.io/Call-History-API/
 common:
+- type: CapabilityMap
+  url: capabilities/nfon-capability-edges.yml
+  name: Nfon Business Capability Map
 - type: DomainSecurity
   url: security/nfon-domain-security.yml
 - type: AgenticAccess
