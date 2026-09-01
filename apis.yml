@@ -116,7 +116,7 @@ apis:
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
   tags:
-  - address
+  - Address
   tags_raw:
   - address
   properties:
@@ -825,7 +825,7 @@ apis:
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
   tags:
-  - import-export
+  - Import Export
   tags_raw:
   - import-export
   properties:
@@ -1209,7 +1209,7 @@ apis:
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
   tags:
-  - Trunks
+  - trunks
   tags_raw:
   - trunks
   properties:
