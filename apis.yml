@@ -1228,6 +1228,8 @@ apis:
   - type: APIReference
     url: https://nfon-ag.github.io/Call-History-API/
 common:
+- type: Website
+  url: https://www.nfon.com/
 - type: CapabilityMap
   url: capabilities/nfon-capability-edges.yml
   name: Nfon Business Capability Map
