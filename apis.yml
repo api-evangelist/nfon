@@ -895,6 +895,8 @@ apis:
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
   tags:
+  - Operator
+  tags_raw:
   - Operators
   properties:
   - type: OpenAPI
@@ -1165,6 +1167,8 @@ apis:
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
   tags:
+  - Timezone
+  tags_raw:
   - Timezones
   properties:
   - type: OpenAPI
