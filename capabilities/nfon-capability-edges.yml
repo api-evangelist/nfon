@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 3
+edge_count: 5
 edges:
 - tag: Tenants
   spec_file: nfon-tenants-api-openapi.yml
@@ -23,6 +23,29 @@ edges:
     'Purge tenant'; PUT /tenants/{tenant}/stop-trial-period
   reason: Creation, locking, trial termination and purging of tenants in a multi-tenant cloud platform
     is squarely tenant provisioning and lifecycle.
+- tag: Customer IVR
+  spec_file: nfon-customer-ivr-api-openapi.yml
+  capability_id: BC-430.30
+  capability_id_l1: BC-430
+  capability_name: Contact Centre Operations Management
+  confidence: 0.72
+  evidence: POST /tenants/{participantExternalIdentifier}/targets/ivr-services/{serviceNumber}/key-assignments;
+    available-general-announcements; IVRServiceRequest
+  reason: Interactive voice response services with announcements, keypad key assignments and timeout destinations
+    — automated inbound call routing, a core contact-centre telephony capability.
+  recovered_from: sweep-20260829T005356Z-edges.json
+- tag: Customer Queues
+  spec_file: nfon-customer-queues-api-openapi.yml
+  capability_id: BC-430.30
+  capability_id_l1: BC-430
+  capability_name: Contact Centre Operations Management
+  confidence: 0.72
+  evidence: GET .../queue-services/available-music-on-hold-announcements; POST .../queue-services/{serviceNumber}/members;
+    QueueMemberRequest
+  reason: Call queue services with agent members, music-on-hold and general announcements, rejection and
+    timeout destinations — this is inbound call queuing for a contact centre, plainly contact-centre/telephony
+    operations.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: Customer DIDs
   spec_file: nfon-customer-dids-api-openapi.yml
   capability_id: BC-2640.30
