@@ -39,6 +39,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 112
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/ivr-services:
     get:
       parameters:
@@ -68,6 +70,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 113
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -99,6 +103,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 35
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/ivr-services/available-destinations-on-timeout:
     get:
       parameters:
@@ -130,6 +136,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 177
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/ivr-services/target-available-destinations:
     get:
       parameters:
@@ -161,6 +169,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 120
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/ivr-services/{serviceNumber}:
     put:
       requestBody:
@@ -201,6 +211,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 35
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -233,6 +245,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 34
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -285,6 +299,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 114
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/ivr-services/{serviceNumber}/inbound-trunk-numbers:
     get:
       parameters:
@@ -324,6 +340,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 115
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -360,6 +378,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 36
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/ivr-services/{serviceNumber}/key-assignments:
     get:
       parameters:
@@ -400,6 +420,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 117
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -436,6 +458,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 37
+      x-summary-source: derived
   ? /tenants/{participantExternalIdentifier}/targets/ivr-services/{serviceNumber}/key-assignments/target-available-destinations
   : get:
       parameters:
@@ -472,6 +496,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 119
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/ivr-services/{serviceNumber}/key-assignments/{keyAssignmentNumber}:
     put:
       requestBody:
@@ -516,6 +542,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 36
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -552,6 +580,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 36
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -598,6 +628,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 118
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/ivr-services/{serviceNumber}/inbound-trunk-numbers/{didNumber}:
     delete:
       parameters:
@@ -635,6 +667,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 35
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -680,6 +714,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 116
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/ivr-services/{serviceNumber}/timeout:
     put:
       requestBody:
@@ -720,6 +756,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 51
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -752,6 +790,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 51
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -798,33 +838,93 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 181
+      x-summary-source: derived
 components:
   schemas:
-    IVRServiceKeyAssignmentData:
+    Date:
       properties:
-        number:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: date-time
+          type: string
+      type: object
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    InboundTrunkNumberData:
+      properties:
+        didExtension:
+          example: '123456'
+          type: string
+      type: object
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
+      type: object
+    IVRServiceKeyAssignmentLinks:
+      properties:
+        target:
           $ref: '#/components/schemas/String'
       type: object
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
     TimeoutRequest:
       properties:
         links:
           $ref: '#/components/schemas/TimeoutLinks'
         data:
           $ref: '#/components/schemas/Data'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    IVRServiceKeyAssignmentRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/IVRServiceKeyAssignmentLinks'
-        data:
-          $ref: '#/components/schemas/IVRServiceKeyAssignmentData'
         items:
           items:
             type: object
@@ -856,6 +956,49 @@ components:
         name:
           $ref: '#/components/schemas/String'
       type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    IVRServiceRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/IVRServiceLinks'
+        data:
+          $ref: '#/components/schemas/IVRServiceData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
     InboundTrunkNumberRequest:
       properties:
         links:
@@ -869,6 +1012,30 @@ components:
         itemCount:
           format: int32
           type: integer
+      type: object
+    IVRServiceLinks:
+      properties:
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+        destinationOnTimeout:
+          $ref: '#/components/schemas/String'
+        ivrKeyAssignments:
+          $ref: '#/components/schemas/String'
+        announcement:
+          $ref: '#/components/schemas/String'
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    TimeoutLinks:
+      type: object
+    IVRServiceKeyAssignmentData:
+      properties:
+        number:
+          $ref: '#/components/schemas/String'
       type: object
     NfonApiCollectionResponseNonPage:
       properties:
@@ -884,23 +1051,6 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
-    Links:
-      description: Related resource links
-      type: object
-    IVRServiceRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/IVRServiceLinks'
-        data:
-          $ref: '#/components/schemas/IVRServiceData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
     Integer:
       properties:
         notNull:
@@ -919,96 +1069,8 @@ components:
       example: 1000
       type: object
       description: Subscribers soft limit
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
-    IVRServiceKeyAssignmentLinks:
-      properties:
-        target:
-          $ref: '#/components/schemas/String'
-      type: object
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    Boolean:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: boolean
-      type: object
-      example: false
-    InboundTrunkNumberLinks:
-      properties:
-        trunk:
-          type: string
-      type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
-    NfonApiCollectionResponsePage:
-      properties:
-        links:
-          $ref: '#/components/schemas/CollectionLinks'
-        offset:
-          example: 0
-          description: Current page offset
-          format: int64
-          type: integer
-        total:
-          example: 42
-          description: Total number of items in the collection
-          format: int64
-          type: integer
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: Items in this page
-        size:
-          example: 20
-          description: Number of items in this page
-          format: int32
-          type: integer
-        href:
-          description: Self-link to this collection
-          type: string
-      type: object
-      description: Paginated collection response envelope
-    TimeoutLinks:
+    Links:
+      description: Related resource links
       type: object
     Data:
       properties:
@@ -1025,51 +1087,31 @@ components:
       - key
       - value
       description: Data represents key-value pair for additional reference metadata.
-    NfonApiResponse:
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    IVRServiceKeyAssignmentRequest:
       properties:
         links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/IVRServiceKeyAssignmentLinks'
         data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    InboundTrunkNumberData:
-      properties:
-        didExtension:
-          example: '123456'
-          type: string
-      type: object
-    IVRServiceLinks:
-      properties:
-        inboundTrunkNumbers:
-          $ref: '#/components/schemas/String'
-        destinationOnTimeout:
-          $ref: '#/components/schemas/String'
-        ivrKeyAssignments:
-          $ref: '#/components/schemas/String'
-        announcement:
-          $ref: '#/components/schemas/String'
-      type: object
-    Date:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: date-time
-          type: string
+          $ref: '#/components/schemas/IVRServiceKeyAssignmentData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
   securitySchemes:
     jwt:

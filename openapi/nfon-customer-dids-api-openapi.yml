@@ -37,6 +37,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 52
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/dids/{didNumber}:
     get:
       parameters:
@@ -73,6 +75,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 53
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/dids/{didNumber}/destination:
     get:
       parameters:
@@ -109,6 +113,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 54
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -147,6 +153,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 14
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/dids/available-destinations:
     get:
       parameters:
@@ -178,16 +186,46 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 51
+      x-summary-source: derived
 components:
   schemas:
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+    DidDestinationRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/DidDestinationPOSTLinks'
+        data:
+          $ref: '#/components/schemas/NoData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
-      description: Collection response envelope
-    NoData:
+    DidDestinationPOSTLinks:
+      properties:
+        destination:
+          example: /api/customers/K1234/targets/phone-extensions/100
+          type: string
       type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -217,14 +255,7 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    DidDestinationPOSTLinks:
-      properties:
-        destination:
-          example: /api/customers/K1234/targets/phone-extensions/100
-          type: string
-      type: object
-    Links:
-      description: Related resource links
+    NoData:
       type: object
     NfonApiResponse:
       properties:
@@ -239,36 +270,6 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    DidDestinationRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/DidDestinationPOSTLinks'
-        data:
-          $ref: '#/components/schemas/NoData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
     NfonApiCollectionResponseNonPage:
       properties:
         links:
@@ -295,6 +296,15 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
+    Links:
+      description: Related resource links
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
   securitySchemes:
     jwt:
       scheme: bearer

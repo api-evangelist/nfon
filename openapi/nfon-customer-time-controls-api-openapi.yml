@@ -37,6 +37,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 185
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -68,6 +70,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 50
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/time-control-services/available-destinations:
     get:
       parameters:
@@ -99,6 +103,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 184
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/time-control-services/{serviceNumber}:
     put:
       requestBody:
@@ -139,6 +145,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 54
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -171,6 +179,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 54
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -233,6 +243,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 186
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/time-control-services/{serviceNumber}/inbound-trunk-numbers:
     get:
       parameters:
@@ -272,6 +284,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 187
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -308,6 +322,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 51
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/time-control-services/{serviceNumber}/inbound-trunk-numbers/{didNumber}:
     delete:
       parameters:
@@ -345,6 +361,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 55
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -390,14 +408,26 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 188
+      x-summary-source: derived
 components:
   schemas:
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
       type: object
-      description: Collection response envelope
+      description: Link to the last page
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -427,8 +457,19 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    Links:
-      description: Related resource links
+    Request:
+      properties:
+        links:
+          $ref: '#/components/schemas/TimeControlServiceLinks'
+        data:
+          $ref: '#/components/schemas/Data'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
     Data:
       properties:
@@ -445,6 +486,12 @@ components:
       - key
       - value
       description: Data represents key-value pair for additional reference metadata.
+    InboundTrunkNumberData:
+      properties:
+        didExtension:
+          example: '123456'
+          type: string
+      type: object
     NfonApiResponse:
       properties:
         links:
@@ -458,55 +505,10 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    InboundTrunkNumberData:
+    InboundTrunkNumberLinks:
       properties:
-        didExtension:
-          example: '123456'
+        trunk:
           type: string
-      type: object
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    Request:
-      properties:
-        links:
-          $ref: '#/components/schemas/TimeControlServiceLinks'
-        data:
-          $ref: '#/components/schemas/Data'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    InboundTrunkNumberRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/InboundTrunkNumberLinks'
-        data:
-          $ref: '#/components/schemas/InboundTrunkNumberData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
       type: object
     NfonApiCollectionResponseNonPage:
       properties:
@@ -522,6 +524,17 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
+    TimeControlServiceLinks:
+      properties:
+        destinationIfDenied:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+        destinationIfAllowed:
+          $ref: '#/components/schemas/String'
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+      type: object
     CollectionLinks:
       properties:
         first:
@@ -534,22 +547,29 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
-    InboundTrunkNumberLinks:
+    InboundTrunkNumberRequest:
       properties:
-        trunk:
-          type: string
+        links:
+          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/InboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
-    TimeControlServiceLinks:
-      properties:
-        destinationIfDenied:
-          $ref: '#/components/schemas/String'
-        timezone:
-          $ref: '#/components/schemas/String'
-        destinationIfAllowed:
-          $ref: '#/components/schemas/String'
-        inboundTrunkNumbers:
-          $ref: '#/components/schemas/String'
+    Links:
+      description: Related resource links
       type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
   securitySchemes:
     jwt:
       scheme: bearer

@@ -160,12 +160,29 @@ paths:
           description: Authentication required
 components:
   schemas:
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+    SipServerPOSTLinks:
+      properties:
+        pbxGroup:
+          example: /api/pbx-groups/Pbx1
+          type: string
+          description: Link to the PBX group
       type: object
-      description: Collection response envelope
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -195,66 +212,6 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    SipServerPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/SipServerPUTLinks'
-        data:
-          $ref: '#/components/schemas/SipServerPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    Links:
-      description: Related resource links
-      type: object
-    SipServerPUTData:
-      properties:
-        internalIp:
-          $ref: '#/components/schemas/String'
-        partition:
-          $ref: '#/components/schemas/String'
-        maxSubscribers:
-          $ref: '#/components/schemas/Integer'
-        subscribersLimit:
-          $ref: '#/components/schemas/Integer'
-        name:
-          $ref: '#/components/schemas/String'
-        location:
-          $ref: '#/components/schemas/String'
-        externalIp:
-          $ref: '#/components/schemas/String'
-        description:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: SIP server update data (all fields optional)
-    SipServerPUTLinks:
-      properties:
-        pbxGroup:
-          $ref: '#/components/schemas/String'
-      type: object
-    Integer:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: int32
-          type: integer
-      example: 1000
-      type: object
-      description: Subscribers soft limit
     NfonApiResponse:
       properties:
         links:
@@ -268,22 +225,6 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
     SipServerPOSTData:
       properties:
         internalIp:
@@ -315,20 +256,6 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: SIP server creation data
-    SipServerPOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/SipServerPOSTLinks'
-        data:
-          $ref: '#/components/schemas/SipServerPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
     NfonApiCollectionResponseNonPage:
       properties:
         links:
@@ -343,6 +270,63 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
+    Integer:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
+      type: object
+      description: Subscribers soft limit
+    SipServerPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/SipServerPOSTLinks'
+        data:
+          $ref: '#/components/schemas/SipServerPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    SipServerPUTLinks:
+      properties:
+        pbxGroup:
+          $ref: '#/components/schemas/String'
+      type: object
+    SipServerPUTData:
+      properties:
+        internalIp:
+          $ref: '#/components/schemas/String'
+        partition:
+          $ref: '#/components/schemas/String'
+        maxSubscribers:
+          $ref: '#/components/schemas/Integer'
+        subscribersLimit:
+          $ref: '#/components/schemas/Integer'
+        name:
+          $ref: '#/components/schemas/String'
+        location:
+          $ref: '#/components/schemas/String'
+        externalIp:
+          $ref: '#/components/schemas/String'
+        description:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: SIP server update data (all fields optional)
     CollectionLinks:
       properties:
         first:
@@ -355,12 +339,28 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
-    SipServerPOSTLinks:
+    Links:
+      description: Related resource links
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    SipServerPUTRequest:
       properties:
-        pbxGroup:
-          example: /api/pbx-groups/Pbx1
-          type: string
-          description: Link to the PBX group
+        links:
+          $ref: '#/components/schemas/SipServerPUTLinks'
+        data:
+          $ref: '#/components/schemas/SipServerPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
   securitySchemes:
     jwt:

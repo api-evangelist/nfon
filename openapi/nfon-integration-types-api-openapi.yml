@@ -31,6 +31,8 @@ paths:
           description: Insufficient permissions
       tags:
       - Integration Types
+      summary: Get 203
+      x-summary-source: derived
     post:
       operationId: post_54
       requestBody:
@@ -56,6 +58,8 @@ paths:
           description: Created
       tags:
       - Integration Types
+      summary: Post 54
+      x-summary-source: derived
   /integration-types/{integrationId}:
     put:
       requestBody:
@@ -91,6 +95,8 @@ paths:
           description: Insufficient permissions
       tags:
       - Integration Types
+      summary: Put 56
+      x-summary-source: derived
     delete:
       security:
       - oauth2:
@@ -112,6 +118,8 @@ paths:
           description: Insufficient permissions
       tags:
       - Integration Types
+      summary: Delete 56
+      x-summary-source: derived
     get:
       security:
       - oauth2:
@@ -143,14 +151,35 @@ paths:
           description: Not found
       tags:
       - Integration Types
+      summary: Get 204
+      x-summary-source: derived
 components:
   schemas:
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
       type: object
-      description: Collection response envelope
+      description: Link to the last page
+    IntegrationTypePOSTData:
+      properties:
+        provider:
+          $ref: '#/components/schemas/String'
+        toolType:
+          type: string
+        name:
+          type: string
+      type: object
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -180,34 +209,6 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    IntegrationTypePUTData:
-      properties:
-        provider:
-          $ref: '#/components/schemas/String'
-        toolType:
-          $ref: '#/components/schemas/String'
-        name:
-          $ref: '#/components/schemas/String'
-      type: object
-    NoLinks:
-      type: object
-    Links:
-      description: Related resource links
-      type: object
-    IntegrationTypePOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/IntegrationTypePOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
     NfonApiResponse:
       properties:
         links:
@@ -221,44 +222,16 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
+    NoLinks:
       type: object
-      description: Link to the last page
-    IntegrationTypePOSTData:
+    IntegrationTypePUTData:
       properties:
         provider:
           $ref: '#/components/schemas/String'
         toolType:
-          type: string
+          $ref: '#/components/schemas/String'
         name:
-          type: string
-      type: object
-    IntegrationTypePUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/IntegrationTypePUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+          $ref: '#/components/schemas/String'
       type: object
     NfonApiCollectionResponseNonPage:
       properties:
@@ -286,6 +259,43 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
+    IntegrationTypePOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/IntegrationTypePOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Links:
+      description: Related resource links
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    IntegrationTypePUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/IntegrationTypePUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
   securitySchemes:
     jwt:
       scheme: bearer

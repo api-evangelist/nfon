@@ -37,6 +37,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 162
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -68,6 +70,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 49
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/speed-dials/{speedDialId}:
     put:
       requestBody:
@@ -108,6 +112,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 49
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -140,6 +146,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 49
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -176,28 +184,26 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 163
+      x-summary-source: derived
 components:
   schemas:
-    SpeedDialsPOSTRequest:
+    String:
       properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/SpeedDialItem'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
       type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
+      description: Link to the last page
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -227,22 +233,6 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    Links:
-      description: Related resource links
-      type: object
-    NoLinks:
-      type: object
-    SpeedDialItem:
-      properties:
-        code:
-          $ref: '#/components/schemas/String'
-        destination:
-          $ref: '#/components/schemas/String'
-        outwardDialOverwrite:
-          $ref: '#/components/schemas/Boolean'
-        name:
-          $ref: '#/components/schemas/String'
-      type: object
     NfonApiResponse:
       properties:
         links:
@@ -256,22 +246,25 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
+    NoLinks:
       type: object
-      description: Link to the last page
+    SpeedDialsPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/SpeedDialItem'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Links:
+      description: Related resource links
+      type: object
     NfonApiCollectionResponseNonPage:
       properties:
         links:
@@ -286,20 +279,35 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
-    SpeedDialPUTRequest:
+    CollectionLinks:
       properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/SpeedDialItem'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
       type: object
+      description: Pagination links for collection responses
+    SpeedDialItem:
+      properties:
+        code:
+          $ref: '#/components/schemas/String'
+        destination:
+          $ref: '#/components/schemas/String'
+        outwardDialOverwrite:
+          $ref: '#/components/schemas/Boolean'
+        name:
+          $ref: '#/components/schemas/String'
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
     Boolean:
       properties:
         notNull:
@@ -316,18 +324,20 @@ components:
           type: boolean
       type: object
       example: false
-    CollectionLinks:
+    SpeedDialPUTRequest:
       properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/SpeedDialItem'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
-      description: Pagination links for collection responses
   securitySchemes:
     jwt:
       scheme: bearer

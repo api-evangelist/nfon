@@ -95,6 +95,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 66
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -126,6 +128,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 15
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/available-internal-outgoings:
     get:
       parameters:
@@ -160,6 +164,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 64
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/call-forwards:
     get:
       parameters:
@@ -226,6 +232,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 78
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -264,6 +272,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 24
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-globals:
     get:
       parameters:
@@ -312,6 +322,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 70
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -350,6 +362,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 18
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-globals/{type}:
     get:
       parameters:
@@ -391,6 +405,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 71
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -434,6 +450,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 19
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-globals/{type}/available:
     get:
       parameters:
@@ -475,6 +493,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get available 1
+      x-summary-source: derived
   ? /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-profiles/{profileNumber}/rules
   : get:
       parameters:
@@ -514,6 +534,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 74
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -555,6 +577,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 18
+      x-summary-source: derived
   ? /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-profiles/{profileNumber}/rules/{sourceId}/{type}/available
   : get:
       parameters:
@@ -606,6 +630,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get available 2
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/devices:
     get:
       parameters:
@@ -642,6 +668,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 60
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -678,6 +706,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 13
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/function-keys/available-targets:
     get:
       parameters:
@@ -714,6 +744,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 80
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/function-keys/{keyNumber}:
     put:
       requestBody:
@@ -759,6 +791,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 25
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -796,6 +830,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 19
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -851,6 +887,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 82
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/inbound-trunk-numbers:
     get:
       parameters:
@@ -890,6 +928,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 68
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -926,6 +966,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 16
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/function-keys/available-targets:
     get:
       parameters:
@@ -957,6 +999,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 79
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}:
     put:
       requestBody:
@@ -996,6 +1040,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 17
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -1027,6 +1073,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 15
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -1134,6 +1182,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 67
+      x-summary-source: derived
   ? /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/outbound-trunk-numbers/available-trunks
   : get:
       parameters:
@@ -1170,6 +1220,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get available trunks
+      x-summary-source: derived
   ? /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-profiles/{profileNumber}/rules/{sourceId}
   : put:
       requestBody:
@@ -1219,6 +1271,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 21
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -1260,6 +1314,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 18
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -1339,6 +1395,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 75
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/voice-mail:
     get:
       parameters:
@@ -1403,6 +1461,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 87
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -1441,6 +1501,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 26
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/voice-mail/announcements:
     get:
       parameters:
@@ -1475,6 +1537,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 86
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{specification}/available:
     get:
       parameters:
@@ -1509,6 +1573,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 65
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/call-forwards/{type}/available:
     get:
       parameters:
@@ -1550,6 +1616,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get available
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-profiles:
     get:
       parameters:
@@ -1584,6 +1652,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 72
+      x-summary-source: derived
     post:
       tags:
       - Customer Extensions
@@ -1649,6 +1719,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 62
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/available-devices:
     get:
       parameters:
@@ -1680,6 +1752,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 58
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/inbound-trunk-numbers/{didNumber}:
     delete:
       parameters:
@@ -1717,6 +1791,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 16
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -1762,6 +1838,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 69
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/lync:
     get:
       parameters:
@@ -1806,6 +1884,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 83
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -1842,6 +1922,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 20
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/lync/{lyncOptionId}:
     delete:
       parameters:
@@ -1880,6 +1962,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 20
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -1931,6 +2015,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 84
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/outbound-trunk-numbers:
     get:
       parameters:
@@ -1967,6 +2053,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get outbound trunk numbers with page
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -2003,6 +2091,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post outbound trunk numbers
+      x-summary-source: derived
   ? /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/outbound-trunk-numbers/{outboundTrunkNumberId}
   : delete:
       parameters:
@@ -2040,6 +2130,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete outbound trunk number
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -2080,6 +2172,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get outbound trunk numbers
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/skills:
     get:
       parameters:
@@ -2114,6 +2208,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 85
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -2150,6 +2246,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 21
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/skills/login-status:
     get:
       parameters:
@@ -2186,6 +2284,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 92
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -2224,6 +2324,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 28
+      x-summary-source: derived
   ? /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/voice-mail/announcements/{announcementType}
   : post:
       requestBody:
@@ -2270,6 +2372,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 22
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -2306,6 +2410,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 21
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -2344,6 +2450,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get content 1
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/available-internal-outgoings:
     get:
       parameters:
@@ -2373,6 +2481,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 5
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/available-cti-info/{ctiInfoName}:
     get:
       parameters:
@@ -2409,6 +2519,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 63
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/function-keys:
     get:
       parameters:
@@ -2443,6 +2555,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 81
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -2479,6 +2593,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 19
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/call-forwards/{type}:
     get:
       parameters:
@@ -2520,6 +2636,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 77
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -2563,6 +2681,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 23
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/devices/{uniqueIdentifier}:
     delete:
       parameters:
@@ -2600,6 +2720,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 13
+      x-summary-source: derived
   ? /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-profiles/{profileNumber}/rules/{sourceId}/{type}
   : get:
       parameters:
@@ -2651,6 +2773,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 76
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -2704,6 +2828,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 22
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/phone-extensions/{extensionNumber}/callforward-profiles/{profileNumber}:
     put:
       tags:
@@ -2841,14 +2967,16 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 73
+      x-summary-source: derived
 components:
   schemas:
-    PhoneExtensionDevicesPOSTRequest:
+    PhoneExtensionPOSTRequest:
       properties:
         links:
-          $ref: '#/components/schemas/PhoneExtensionDevicesPOSTLinks'
+          $ref: '#/components/schemas/PhoneExtensionLinks'
         data:
-          $ref: '#/components/schemas/NoData'
+          $ref: '#/components/schemas/PhoneExtensionPOSTData'
         items:
           items:
             type: object
@@ -2857,21 +2985,30 @@ components:
           format: int32
           type: integer
       type: object
-    PhoneExtensionDevicesPOSTLinks:
-      type: object
-    InboundTrunkNumberRequest:
+    CallForwardProfilePUTData:
       properties:
-        links:
-          $ref: '#/components/schemas/InboundTrunkNumberLinks'
-        data:
-          $ref: '#/components/schemas/InboundTrunkNumberData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+        profileName:
+          $ref: '#/components/schemas/String'
+        active:
+          $ref: '#/components/schemas/Boolean'
+        profileNumber:
+          $ref: '#/components/schemas/Integer'
+      type: object
+    Date:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: date-time
+          type: string
       type: object
     VoicemailRequest:
       properties:
@@ -2887,26 +3024,103 @@ components:
           format: int32
           type: integer
       type: object
-    NfonApiCollectionResponseNonPage:
+    NfonApiCollectionResponsePage:
       properties:
         links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
         items:
           type: array
           items:
             $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
       type: object
-      description: Non-paginated collection response envelope
-    CallForwardGlobalsReferenceRequest:
+      description: Paginated collection response envelope
+    OutboundTrunkNumberLinks:
+      type: object
+    NoData:
+      type: object
+    CallForwardProfilePUTRequest:
       properties:
         links:
-          $ref: '#/components/schemas/CallForwardGlobalsReferenceLinks'
+          $ref: '#/components/schemas/NoLinks'
         data:
-          $ref: '#/components/schemas/CallForwardGlobalsReferenceData'
+          $ref: '#/components/schemas/CallForwardProfilePUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    InboundTrunkNumberData:
+      properties:
+        didExtension:
+          example: '123456'
+          type: string
+      type: object
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
+      type: object
+    FunctionKeyPUTLinks:
+      properties:
+        target:
+          $ref: '#/components/schemas/String'
+      type: object
+    PhoneExtensionCallForwardData:
+      properties:
+        type:
+          $ref: '#/components/schemas/String'
+        extensionNumber:
+          $ref: '#/components/schemas/String'
+        name:
+          $ref: '#/components/schemas/String'
+      type: object
+    PhoneExtensionLinks:
+      properties:
+        voiceRecordingProfile:
+          $ref: '#/components/schemas/String'
+        preferredOutboundTrunk:
+          $ref: '#/components/schemas/String'
+        emergencySite:
+          $ref: '#/components/schemas/String'
+        blacklistProfile:
+          $ref: '#/components/schemas/String'
+        ctiInfo:
+          $ref: '#/components/schemas/String'
+        customerContract:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+        internalOutgoing:
+          $ref: '#/components/schemas/String'
+      type: object
+    LoginStatusRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          $ref: '#/components/schemas/LoginStatusData'
         items:
           items:
             type: object
@@ -2970,12 +3184,74 @@ components:
         nMeeting:
           $ref: '#/components/schemas/Boolean'
       type: object
-    CallForwardGlobalsPUTRequest:
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    CallForwardGlobalsReferenceData:
+      properties:
+        type:
+          $ref: '#/components/schemas/String'
+        extensionNumber:
+          $ref: '#/components/schemas/String'
+        name:
+          $ref: '#/components/schemas/String'
+      type: object
+    LyncOptionLinks:
+      properties:
+        deviceType:
+          $ref: '#/components/schemas/String'
+        inboundTrunkNumber:
+          type: string
+        lyncSite:
+          type: string
+      type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    FunctionKeyPOSTData:
+      properties:
+        keyNumber:
+          format: int32
+          type: integer
+        functionCode:
+          $ref: '#/components/schemas/String'
+        displayName:
+          $ref: '#/components/schemas/String'
+        type:
+          type: string
+      type: object
+    PhoneExtensionPUTRequest:
       properties:
         links:
-          $ref: '#/components/schemas/NoLinks'
+          $ref: '#/components/schemas/PhoneExtensionPUTLinks'
         data:
-          $ref: '#/components/schemas/CallForwardGlobalsPUTData'
+          $ref: '#/components/schemas/PhoneExtensionPUTData'
         items:
           items:
             type: object
@@ -2984,40 +3260,12 @@ components:
           format: int32
           type: integer
       type: object
-    PhoneExtensionCallForwardsPUTRequest:
+    OutboundTrunkNumberRequest:
       properties:
         links:
-          $ref: '#/components/schemas/NoLinks'
+          $ref: '#/components/schemas/OutboundTrunkNumberLinks'
         data:
-          $ref: '#/components/schemas/PhoneExtensionCallForwardsPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    CallForwardRulesPOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/CFRulesPOSTLinks'
-        data:
-          $ref: '#/components/schemas/CFRulesPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    CallForwardRulePUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/CallForwardRulePUTData'
+          $ref: '#/components/schemas/OutboundTrunkNumberData'
         items:
           items:
             type: object
@@ -3039,178 +3287,6 @@ components:
         itemCount:
           format: int32
           type: integer
-      type: object
-    CFRulesPOSTData:
-      properties:
-        unconditionalCallForwardActive:
-          $ref: '#/components/schemas/Boolean'
-        busyCallForwardActive:
-          $ref: '#/components/schemas/Boolean'
-        callForwardTimeout:
-          $ref: '#/components/schemas/Integer'
-        notAvailableCallForwardActive:
-          $ref: '#/components/schemas/Boolean'
-        notRegisteredCallForwardActive:
-          $ref: '#/components/schemas/Boolean'
-      type: object
-    VoicemailData:
-      properties:
-        sendEmail:
-          $ref: '#/components/schemas/Boolean'
-        deleteAfterSending:
-          $ref: '#/components/schemas/Boolean'
-        type:
-          $ref: '#/components/schemas/String'
-        voicemailTranscriptionEnabled:
-          $ref: '#/components/schemas/Boolean'
-        active:
-          $ref: '#/components/schemas/Boolean'
-        extensionNumber:
-          $ref: '#/components/schemas/String'
-        voicemailEmail:
-          $ref: '#/components/schemas/String'
-        password:
-          $ref: '#/components/schemas/String'
-        serviceNumber:
-          $ref: '#/components/schemas/Integer'
-        serviceCode:
-          $ref: '#/components/schemas/String'
-        notActiveSince:
-          $ref: '#/components/schemas/Date'
-        displayName:
-          $ref: '#/components/schemas/String'
-        announceCID:
-          $ref: '#/components/schemas/Boolean'
-        announceDateTime:
-          $ref: '#/components/schemas/Boolean'
-        name:
-          $ref: '#/components/schemas/String'
-      type: object
-    OutboundTrunkNumberData:
-      type: object
-    PhoneExtensionCallForwardData:
-      properties:
-        type:
-          $ref: '#/components/schemas/String'
-        extensionNumber:
-          $ref: '#/components/schemas/String'
-        name:
-          $ref: '#/components/schemas/String'
-      type: object
-    Links:
-      description: Related resource links
-      type: object
-    Integer:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: int32
-          type: integer
-      example: 1000
-      type: object
-      description: Subscribers soft limit
-    CallForwardGlobalsReferenceData:
-      properties:
-        type:
-          $ref: '#/components/schemas/String'
-        extensionNumber:
-          $ref: '#/components/schemas/String'
-        name:
-          $ref: '#/components/schemas/String'
-      type: object
-    LoginStatusData:
-      type: object
-    FunctionKeyPUTData:
-      properties:
-        functionCode:
-          $ref: '#/components/schemas/String'
-        displayName:
-          $ref: '#/components/schemas/String'
-        type:
-          example: BLF
-          type: string
-      type: object
-    PhoneExtensionSkillCollectionRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/PhoneExtensionSkillCollectionLinks'
-        data:
-          $ref: '#/components/schemas/PhoneExtensionSkillCollectionData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    FunctionKeyPUTLinks:
-      properties:
-        target:
-          $ref: '#/components/schemas/String'
-      type: object
-    CallForwardProfilesPOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/CallForwardProfilesPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    PhoneExtensionPOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/PhoneExtensionLinks'
-        data:
-          $ref: '#/components/schemas/PhoneExtensionPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    PhoneExtensionSkillCollectionLinks:
-      properties:
-        skillService:
-          $ref: '#/components/schemas/String'
-      type: object
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
-    PhoneExtensionCallForwardLinks:
-      properties:
-        current:
-          $ref: '#/components/schemas/String'
-        available:
-          $ref: '#/components/schemas/String'
-      type: object
-    NoData:
       type: object
     PhoneExtensionPUTData:
       properties:
@@ -3267,25 +3343,12 @@ components:
         nMeeting:
           $ref: '#/components/schemas/Boolean'
       type: object
-    PhoneExtensionSkillCollectionData:
-      properties:
-        enabled:
-          $ref: '#/components/schemas/Boolean'
-        skillLevel:
-          $ref: '#/components/schemas/Integer'
-        skillServiceNumber:
-          $ref: '#/components/schemas/Integer'
-        skillDisplayName:
-          $ref: '#/components/schemas/String'
-      type: object
-    NoLinks:
-      type: object
-    CallForwardProfilePUTRequest:
+    PhoneExtensionDevicesPOSTRequest:
       properties:
         links:
-          $ref: '#/components/schemas/NoLinks'
+          $ref: '#/components/schemas/PhoneExtensionDevicesPOSTLinks'
         data:
-          $ref: '#/components/schemas/CallForwardProfilePUTData'
+          $ref: '#/components/schemas/NoData'
         items:
           items:
             type: object
@@ -3294,48 +3357,55 @@ components:
           format: int32
           type: integer
       type: object
-    LyncOptionLinks:
+    NfonApiResponse:
       properties:
-        deviceType:
-          $ref: '#/components/schemas/String'
-        inboundTrunkNumber:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
           type: string
-        lyncSite:
-          type: string
+          description: Self-link to this resource
       type: object
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
+      description: Standard API response envelope for a single resource
+    NoLinks:
       type: object
-      description: Link to the last page
-    CallForwardProfilePUTData:
+    LoginStatusData:
+      type: object
+    VoicemailData:
       properties:
-        profileName:
+        sendEmail:
+          $ref: '#/components/schemas/Boolean'
+        deleteAfterSending:
+          $ref: '#/components/schemas/Boolean'
+        type:
           $ref: '#/components/schemas/String'
+        voicemailTranscriptionEnabled:
+          $ref: '#/components/schemas/Boolean'
         active:
           $ref: '#/components/schemas/Boolean'
-        profileNumber:
-          $ref: '#/components/schemas/Integer'
-      type: object
-    CallForwardProfilesPOSTData:
-      properties:
-        profileName:
+        extensionNumber:
           $ref: '#/components/schemas/String'
-        active:
-          $ref: '#/components/schemas/Boolean'
-        profileNumber:
+        voicemailEmail:
+          $ref: '#/components/schemas/String'
+        password:
+          $ref: '#/components/schemas/String'
+        serviceNumber:
           $ref: '#/components/schemas/Integer'
+        serviceCode:
+          $ref: '#/components/schemas/String'
+        notActiveSince:
+          $ref: '#/components/schemas/Date'
+        displayName:
+          $ref: '#/components/schemas/String'
+        announceCID:
+          $ref: '#/components/schemas/Boolean'
+        announceDateTime:
+          $ref: '#/components/schemas/Boolean'
+        name:
+          $ref: '#/components/schemas/String'
       type: object
     CallForwardGlobalsReferenceLinks:
       properties:
@@ -3344,16 +3414,28 @@ components:
         available:
           $ref: '#/components/schemas/String'
       type: object
-    FunctionKeyPOSTData:
+    InboundTrunkNumberRequest:
       properties:
-        keyNumber:
+        links:
+          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/InboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
           format: int32
           type: integer
+      type: object
+    FunctionKeyPUTData:
+      properties:
         functionCode:
           $ref: '#/components/schemas/String'
         displayName:
           $ref: '#/components/schemas/String'
         type:
+          example: BLF
           type: string
       type: object
     FunctionKeyPOSTRequest:
@@ -3370,49 +3452,14 @@ components:
           format: int32
           type: integer
       type: object
-    Boolean:
+    PhoneExtensionCallForwardsPUTData:
       properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: boolean
-      type: object
-      example: false
-    OutboundTrunkNumberLinks:
-      type: object
-    CallForwardGlobalsPUTData:
-      properties:
-        externalNumbersEnabled:
-          $ref: '#/components/schemas/Boolean'
+        callForwardTimeout:
+          $ref: '#/components/schemas/Integer'
         signaledNumber:
           $ref: '#/components/schemas/Enum'
-      type: object
-    InboundTrunkNumberLinks:
-      properties:
-        trunk:
-          type: string
-      type: object
-    PhoneExtensionPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/PhoneExtensionPUTLinks'
-        data:
-          $ref: '#/components/schemas/PhoneExtensionPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+        externalNumbersEnabled:
+          $ref: '#/components/schemas/Boolean'
       type: object
     NfonApiCollectionResponse:
       oneOf:
@@ -3420,12 +3467,12 @@ components:
       - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
       type: object
       description: Collection response envelope
-    LoginStatusRequest:
+    LyncOptionRequest:
       properties:
         links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/LyncOptionLinks'
         data:
-          $ref: '#/components/schemas/LoginStatusData'
+          $ref: '#/components/schemas/NoData'
         items:
           items:
             type: object
@@ -3434,35 +3481,20 @@ components:
           format: int32
           type: integer
       type: object
-    NfonApiCollectionResponsePage:
+    NfonApiCollectionResponseNonPage:
       properties:
         links:
-          $ref: '#/components/schemas/CollectionLinks'
-        offset:
-          example: 0
-          description: Current page offset
-          format: int64
-          type: integer
-        total:
-          example: 42
-          description: Total number of items in the collection
-          format: int64
-          type: integer
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
         items:
           type: array
           items:
             $ref: '#/components/schemas/NfonApiResponse'
-          description: Items in this page
-        size:
-          example: 20
-          description: Number of items in this page
-          format: int32
-          type: integer
-        href:
-          description: Self-link to this collection
-          type: string
+          description: All items in the collection
       type: object
-      description: Paginated collection response envelope
+      description: Non-paginated collection response envelope
     Enum:
       properties:
         notNull:
@@ -3479,10 +3511,102 @@ components:
           type: object
       type: object
       example: 'OFF'
-    FunctionKeyPOSTLinks:
+    Integer:
       properties:
-        target:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
+      type: object
+      description: Subscribers soft limit
+    CallForwardRulePUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/CallForwardRulePUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CallForwardProfilesPOSTData:
+      properties:
+        profileName:
           $ref: '#/components/schemas/String'
+        active:
+          $ref: '#/components/schemas/Boolean'
+        profileNumber:
+          $ref: '#/components/schemas/Integer'
+      type: object
+    PhoneExtensionCallForwardsPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/PhoneExtensionCallForwardsPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    PhoneExtensionSkillCollectionData:
+      properties:
+        enabled:
+          $ref: '#/components/schemas/Boolean'
+        skillLevel:
+          $ref: '#/components/schemas/Integer'
+        skillServiceNumber:
+          $ref: '#/components/schemas/Integer'
+        skillDisplayName:
+          $ref: '#/components/schemas/String'
+      type: object
+    CallForwardGlobalsReferenceRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/CallForwardGlobalsReferenceLinks'
+        data:
+          $ref: '#/components/schemas/CallForwardGlobalsReferenceData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CallForwardGlobalsPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/CallForwardGlobalsPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Links:
+      description: Related resource links
       type: object
     CFRulesPOSTLinks:
       properties:
@@ -3496,101 +3620,6 @@ components:
           $ref: '#/components/schemas/String'
         notRegisteredCallForward:
           $ref: '#/components/schemas/String'
-      type: object
-    LyncOptionRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/LyncOptionLinks'
-        data:
-          $ref: '#/components/schemas/NoData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    Date:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: date-time
-          type: string
-      type: object
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    InboundTrunkNumberData:
-      properties:
-        didExtension:
-          example: '123456'
-          type: string
-      type: object
-    OutboundTrunkNumberRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/OutboundTrunkNumberLinks'
-        data:
-          $ref: '#/components/schemas/OutboundTrunkNumberData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    PhoneExtensionLinks:
-      properties:
-        voiceRecordingProfile:
-          $ref: '#/components/schemas/String'
-        preferredOutboundTrunk:
-          $ref: '#/components/schemas/String'
-        emergencySite:
-          $ref: '#/components/schemas/String'
-        blacklistProfile:
-          $ref: '#/components/schemas/String'
-        ctiInfo:
-          $ref: '#/components/schemas/String'
-        customerContract:
-          $ref: '#/components/schemas/String'
-        timezone:
-          $ref: '#/components/schemas/String'
-        internalOutgoing:
-          $ref: '#/components/schemas/String'
-      type: object
-    CallForwardRulePUTData:
-      properties:
-        unconditionalCallForwardActive:
-          $ref: '#/components/schemas/Boolean'
-        busyCallForwardActive:
-          $ref: '#/components/schemas/Boolean'
-        callForwardTimeout:
-          $ref: '#/components/schemas/Integer'
-        notAvailableCallForwardActive:
-          $ref: '#/components/schemas/Boolean'
-        notRegisteredCallForwardActive:
-          $ref: '#/components/schemas/Boolean'
       type: object
     PhoneExtensionPUTLinks:
       properties:
@@ -3611,14 +3640,100 @@ components:
         internalOutgoing:
           $ref: '#/components/schemas/String'
       type: object
-    PhoneExtensionCallForwardsPUTData:
+    PhoneExtensionDevicesPOSTLinks:
+      type: object
+    CallForwardRulePUTData:
       properties:
+        unconditionalCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        busyCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
         callForwardTimeout:
           $ref: '#/components/schemas/Integer'
-        signaledNumber:
-          $ref: '#/components/schemas/Enum'
+        notAvailableCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        notRegisteredCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    PhoneExtensionSkillCollectionLinks:
+      properties:
+        skillService:
+          $ref: '#/components/schemas/String'
+      type: object
+    CallForwardRulesPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/CFRulesPOSTLinks'
+        data:
+          $ref: '#/components/schemas/CFRulesPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    PhoneExtensionCallForwardLinks:
+      properties:
+        current:
+          $ref: '#/components/schemas/String'
+        available:
+          $ref: '#/components/schemas/String'
+      type: object
+    CallForwardGlobalsPUTData:
+      properties:
         externalNumbersEnabled:
           $ref: '#/components/schemas/Boolean'
+        signaledNumber:
+          $ref: '#/components/schemas/Enum'
+      type: object
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    FunctionKeyPOSTLinks:
+      properties:
+        target:
+          $ref: '#/components/schemas/String'
+      type: object
+    CallForwardProfilesPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/CallForwardProfilesPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    OutboundTrunkNumberData:
+      type: object
+    PhoneExtensionSkillCollectionRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/PhoneExtensionSkillCollectionLinks'
+        data:
+          $ref: '#/components/schemas/PhoneExtensionSkillCollectionData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
     CallForwardRequest:
       properties:
@@ -3633,6 +3748,19 @@ components:
         itemCount:
           format: int32
           type: integer
+      type: object
+    CFRulesPOSTData:
+      properties:
+        unconditionalCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        busyCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        callForwardTimeout:
+          $ref: '#/components/schemas/Integer'
+        notAvailableCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
+        notRegisteredCallForwardActive:
+          $ref: '#/components/schemas/Boolean'
       type: object
   securitySchemes:
     jwt:

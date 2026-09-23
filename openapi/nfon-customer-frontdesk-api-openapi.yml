@@ -53,6 +53,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Update target by target id
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -90,6 +92,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete target
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -131,6 +135,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get target by target id
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/frontdesk-services/{serviceNumber}/inbound-trunk-numbers:
     get:
       parameters:
@@ -170,6 +176,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 99
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -206,6 +214,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 28
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/frontdesk-services/{serviceNumber}/target:
     get:
       parameters:
@@ -248,6 +258,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get all targets
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -284,6 +296,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Create frontdesk target
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/frontdesk-services/{serviceNumber}:
     put:
       requestBody:
@@ -324,6 +338,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 31
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -356,6 +372,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 26
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -414,6 +432,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 98
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/frontdesk-services:
     get:
       parameters:
@@ -448,6 +468,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 97
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -479,6 +501,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 27
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/frontdesk-services/{serviceNumber}/inbound-trunk-numbers/{didNumber}:
     delete:
       parameters:
@@ -516,6 +540,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 27
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -561,11 +587,135 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 100
+      x-summary-source: derived
 components:
   schemas:
+    Date:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: date-time
+          type: string
+      type: object
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    InboundTrunkNumberData:
+      properties:
+        didExtension:
+          example: '123456'
+          type: string
+      type: object
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
+      type: object
+    FrontdeskServiceRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/FrontdeskServiceLinks'
+        data:
+          $ref: '#/components/schemas/FrontdeskServiceData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
     FrontdeskTargetData:
       properties:
         context:
+          $ref: '#/components/schemas/String'
+      type: object
+    FrontdeskServiceLinks:
+      properties:
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+        fallbackTarget:
           $ref: '#/components/schemas/String'
       type: object
     InboundTrunkNumberRequest:
@@ -582,6 +732,12 @@ components:
           format: int32
           type: integer
       type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
     NfonApiCollectionResponseNonPage:
       properties:
         links:
@@ -625,9 +781,6 @@ components:
         name:
           $ref: '#/components/schemas/String'
       type: object
-    Links:
-      description: Related resource links
-      type: object
     Integer:
       properties:
         notNull:
@@ -646,12 +799,13 @@ components:
       example: 1000
       type: object
       description: Subscribers soft limit
-    FrontdeskServiceLinks:
+    FrontdeskTargetLinks:
       properties:
-        inboundTrunkNumbers:
+        targetService:
           $ref: '#/components/schemas/String'
-        fallbackTarget:
-          $ref: '#/components/schemas/String'
+      type: object
+    Links:
+      description: Related resource links
       type: object
     FrontdeskTargetDto:
       properties:
@@ -679,132 +833,6 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
-    FrontdeskServiceRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/FrontdeskServiceLinks'
-        data:
-          $ref: '#/components/schemas/FrontdeskServiceData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    Boolean:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: boolean
-      type: object
-      example: false
-    InboundTrunkNumberLinks:
-      properties:
-        trunk:
-          type: string
-      type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
-    FrontdeskTargetLinks:
-      properties:
-        targetService:
-          $ref: '#/components/schemas/String'
-      type: object
-    NfonApiCollectionResponsePage:
-      properties:
-        links:
-          $ref: '#/components/schemas/CollectionLinks'
-        offset:
-          example: 0
-          description: Current page offset
-          format: int64
-          type: integer
-        total:
-          example: 42
-          description: Total number of items in the collection
-          format: int64
-          type: integer
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: Items in this page
-        size:
-          example: 20
-          description: Number of items in this page
-          format: int32
-          type: integer
-        href:
-          description: Self-link to this collection
-          type: string
-      type: object
-      description: Paginated collection response envelope
-    Date:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: date-time
-          type: string
-      type: object
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    InboundTrunkNumberData:
-      properties:
-        didExtension:
-          example: '123456'
-          type: string
-      type: object
   securitySchemes:
     jwt:
       scheme: bearer

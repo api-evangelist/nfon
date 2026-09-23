@@ -58,6 +58,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 2
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -90,6 +92,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put
+      x-summary-source: derived
   /accounts:
     post:
       requestBody:
@@ -189,6 +193,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 1
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -214,23 +220,45 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 1
+      x-summary-source: derived
 components:
   schemas:
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
-    NewAccountData:
-      type: object
-    UpdateAccountSiteRequestLinks:
+    UpdateAccountSiteRequestData:
       properties:
-        siteB:
+        country:
           $ref: '#/components/schemas/String'
-        siteA:
+        zip:
+          $ref: '#/components/schemas/String'
+        street:
+          $ref: '#/components/schemas/String'
+        ndc:
+          $ref: '#/components/schemas/String'
+        state:
+          $ref: '#/components/schemas/String'
+        city:
+          $ref: '#/components/schemas/String'
+        azc:
+          $ref: '#/components/schemas/String'
+        name:
           $ref: '#/components/schemas/String'
       type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -260,58 +288,6 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    Links:
-      description: Related resource links
-      type: object
-    UpdateAccountSiteRequestData:
-      properties:
-        country:
-          $ref: '#/components/schemas/String'
-        zip:
-          $ref: '#/components/schemas/String'
-        street:
-          $ref: '#/components/schemas/String'
-        ndc:
-          $ref: '#/components/schemas/String'
-        state:
-          $ref: '#/components/schemas/String'
-        city:
-          $ref: '#/components/schemas/String'
-        azc:
-          $ref: '#/components/schemas/String'
-        name:
-          $ref: '#/components/schemas/String'
-      type: object
-    NewAccountRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/NewAccountData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NoLinks:
-      type: object
-    UpdateAccountSiteRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/UpdateAccountSiteRequestLinks'
-        data:
-          $ref: '#/components/schemas/UpdateAccountSiteRequestData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
     NfonApiResponse:
       properties:
         links:
@@ -325,36 +301,22 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
+    NoLinks:
       type: object
-      description: Link to the last page
-    NewAccountSiteRequestJson:
+    NfonApiCollectionResponseNonPage:
       properties:
         links:
-          $ref: '#/components/schemas/NewAccountSiteLinks'
-        data:
-          $ref: '#/components/schemas/NewAccountSiteData'
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
         items:
-          items:
-            type: object
           type: array
-        itemCount:
-          format: int32
-          type: integer
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
       type: object
+      description: Non-paginated collection response envelope
     NewAccountSiteData:
       properties:
         ndc:
@@ -389,20 +351,27 @@ components:
         siteA:
           $ref: '#/components/schemas/String'
       type: object
-    NfonApiCollectionResponseNonPage:
+    NewAccountSiteRequestJson:
       properties:
         links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
+          $ref: '#/components/schemas/NewAccountSiteLinks'
+        data:
+          $ref: '#/components/schemas/NewAccountSiteData'
         items:
-          type: array
           items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
-      description: Non-paginated collection response envelope
+    UpdateAccountSiteRequestLinks:
+      properties:
+        siteB:
+          $ref: '#/components/schemas/String'
+        siteA:
+          $ref: '#/components/schemas/String'
+      type: object
     CollectionLinks:
       properties:
         first:
@@ -415,6 +384,45 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
+    NewAccountData:
+      type: object
+    NewAccountRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/NewAccountData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Links:
+      description: Related resource links
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    UpdateAccountSiteRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/UpdateAccountSiteRequestLinks'
+        data:
+          $ref: '#/components/schemas/UpdateAccountSiteRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
   securitySchemes:
     jwt:
       scheme: bearer

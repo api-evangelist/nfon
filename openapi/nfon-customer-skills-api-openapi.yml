@@ -62,6 +62,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 138
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -93,6 +95,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 44
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/skill-services/{serviceNumber}/inbound-trunk-numbers/{didNumber}:
     delete:
       parameters:
@@ -130,6 +134,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 45
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -175,6 +181,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 141
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/skill-services/{serviceNumber}/members/{extensionNumber}:
     put:
       requestBody:
@@ -219,6 +227,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 46
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -255,6 +265,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 47
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -311,6 +323,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 153
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/skill-services/available-destinations-on-rejection:
     get:
       parameters:
@@ -342,6 +356,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 147
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/skill-services/available-destinations-on-timeout:
     get:
       parameters:
@@ -373,6 +389,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 179
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/skill-services/available-general-announcements:
     get:
       parameters:
@@ -404,6 +422,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 144
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/skill-services/available-music-on-hold-announcements:
     get:
       parameters:
@@ -435,6 +455,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 145
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/skill-services/{serviceNumber}:
     put:
       requestBody:
@@ -475,6 +497,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 42
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -507,6 +531,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 44
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -566,6 +592,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 139
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/skill-services/{serviceNumber}/inbound-trunk-numbers:
     get:
       parameters:
@@ -605,6 +633,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 140
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -641,6 +671,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 45
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/skill-services/{serviceNumber}/members:
     get:
       parameters:
@@ -691,6 +723,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 152
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -727,6 +761,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 47
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/skill-services/{serviceNumber}/timeout:
     put:
       requestBody:
@@ -767,6 +803,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 53
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -799,6 +837,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 53
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -845,6 +885,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 183
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/skill-services/{serviceNumber}/destination-on-rejection:
     get:
       parameters:
@@ -882,6 +924,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 149
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -921,117 +965,65 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 44
+      x-summary-source: derived
 components:
   schemas:
-    TimeoutRequest:
+    Date:
       properties:
-        links:
-          $ref: '#/components/schemas/TimeoutLinks'
-        data:
-          $ref: '#/components/schemas/Data'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    SkillMemberData:
-      properties:
-        skillServiceNumber:
-          $ref: '#/components/schemas/Integer'
-        extensionDisplayName:
-          $ref: '#/components/schemas/String'
-        enabled:
-          $ref: '#/components/schemas/Boolean'
-        skillLevel:
-          $ref: '#/components/schemas/Integer'
-        extensionNumber:
-          $ref: '#/components/schemas/String'
-        skillDisplayName:
-          $ref: '#/components/schemas/String'
-      type: object
-    InboundTrunkNumberRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/InboundTrunkNumberLinks'
-        data:
-          $ref: '#/components/schemas/InboundTrunkNumberData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NfonApiCollectionResponseNonPage:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: date-time
           type: string
+      type: object
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
         items:
           type: array
           items:
             $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
-      type: object
-      description: Non-paginated collection response envelope
-    SkillRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/SkillLinks'
-        data:
-          $ref: '#/components/schemas/SkillData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
           format: int32
           type: integer
-      type: object
-    SkillLinks:
-      properties:
-        availableMusicOnHoldAnnouncements:
-          $ref: '#/components/schemas/String'
-        periodicAnnouncement:
-          $ref: '#/components/schemas/String'
-        customer:
-          $ref: '#/components/schemas/String'
-        members:
-          $ref: '#/components/schemas/String'
-        initialAnnouncement:
-          $ref: '#/components/schemas/String'
-        inboundTrunkNumbers:
-          $ref: '#/components/schemas/String'
-        musicOnHoldAnnouncement:
-          $ref: '#/components/schemas/String'
-        destinationOnRejection:
-          $ref: '#/components/schemas/String'
-        memberAnnouncement:
-          $ref: '#/components/schemas/String'
-        availableDestinationsOnRejection:
-          writeOnly: true
-          type: string
-        destinationOnTimeout:
-          $ref: '#/components/schemas/ChildHref'
-        availableGeneralAnnouncements:
-          $ref: '#/components/schemas/String'
-        availableDestinationsOnTimeout:
-          writeOnly: true
+        href:
+          description: Self-link to this collection
           type: string
       type: object
-    SkillMemberLinks:
+      description: Paginated collection response envelope
+    InboundTrunkNumberData:
       properties:
-        phoneExtension:
-          $ref: '#/components/schemas/String'
+        didExtension:
+          example: '123456'
+          type: string
       type: object
-    Links:
-      description: Related resource links
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
       type: object
     DestinationOnRejectionRequest:
       properties:
@@ -1047,6 +1039,155 @@ components:
           format: int32
           type: integer
       type: object
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    TimeoutRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/TimeoutLinks'
+        data:
+          $ref: '#/components/schemas/Data'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    SkillMemberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/SkillMemberLinks'
+        data:
+          $ref: '#/components/schemas/SkillMemberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    RequestLinks:
+      properties:
+        destinationOnRejection:
+          type: string
+      type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    InboundTrunkNumberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/InboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    SkillRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/SkillLinks'
+        data:
+          $ref: '#/components/schemas/SkillData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    TimeoutLinks:
+      type: object
+    SkillMemberLinks:
+      properties:
+        phoneExtension:
+          $ref: '#/components/schemas/String'
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    Enum:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: object
+      type: object
+      example: 'OFF'
     Integer:
       properties:
         notNull:
@@ -1065,6 +1206,9 @@ components:
       example: 1000
       type: object
       description: Subscribers soft limit
+    Links:
+      description: Related resource links
+      type: object
     SkillData:
       properties:
         weight:
@@ -1104,150 +1248,6 @@ components:
         direction:
           $ref: '#/components/schemas/Enum'
       type: object
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
-    RequestLinks:
-      properties:
-        destinationOnRejection:
-          type: string
-      type: object
-    ChildHref:
-      type: object
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    Boolean:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: boolean
-      type: object
-      example: false
-    InboundTrunkNumberLinks:
-      properties:
-        trunk:
-          type: string
-      type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
-    Enum:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: object
-      type: object
-      example: 'OFF'
-    NfonApiCollectionResponsePage:
-      properties:
-        links:
-          $ref: '#/components/schemas/CollectionLinks'
-        offset:
-          example: 0
-          description: Current page offset
-          format: int64
-          type: integer
-        total:
-          example: 42
-          description: Total number of items in the collection
-          format: int64
-          type: integer
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: Items in this page
-        size:
-          example: 20
-          description: Number of items in this page
-          format: int32
-          type: integer
-        href:
-          description: Self-link to this collection
-          type: string
-      type: object
-      description: Paginated collection response envelope
-    TimeoutLinks:
-      type: object
-    Date:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: date-time
-          type: string
-      type: object
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    InboundTrunkNumberData:
-      properties:
-        didExtension:
-          example: '123456'
-          type: string
-      type: object
     Data:
       properties:
         key:
@@ -1263,19 +1263,65 @@ components:
       - key
       - value
       description: Data represents key-value pair for additional reference metadata.
-    SkillMemberRequest:
+    SkillLinks:
       properties:
-        links:
-          $ref: '#/components/schemas/SkillMemberLinks'
-        data:
-          $ref: '#/components/schemas/SkillMemberData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+        availableMusicOnHoldAnnouncements:
+          $ref: '#/components/schemas/String'
+        periodicAnnouncement:
+          $ref: '#/components/schemas/String'
+        customer:
+          $ref: '#/components/schemas/String'
+        members:
+          $ref: '#/components/schemas/String'
+        initialAnnouncement:
+          $ref: '#/components/schemas/String'
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+        musicOnHoldAnnouncement:
+          $ref: '#/components/schemas/String'
+        destinationOnRejection:
+          $ref: '#/components/schemas/String'
+        memberAnnouncement:
+          $ref: '#/components/schemas/String'
+        availableDestinationsOnRejection:
+          writeOnly: true
+          type: string
+        destinationOnTimeout:
+          $ref: '#/components/schemas/ChildHref'
+        availableGeneralAnnouncements:
+          $ref: '#/components/schemas/String'
+        availableDestinationsOnTimeout:
+          writeOnly: true
+          type: string
+      type: object
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    ChildHref:
+      type: object
+    SkillMemberData:
+      properties:
+        skillServiceNumber:
+          $ref: '#/components/schemas/Integer'
+        extensionDisplayName:
+          $ref: '#/components/schemas/String'
+        enabled:
+          $ref: '#/components/schemas/Boolean'
+        skillLevel:
+          $ref: '#/components/schemas/Integer'
+        extensionNumber:
+          $ref: '#/components/schemas/String'
+        skillDisplayName:
+          $ref: '#/components/schemas/String'
       type: object
   securitySchemes:
     jwt:

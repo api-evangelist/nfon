@@ -792,12 +792,33 @@ paths:
           description: Internal server error
 components:
   schemas:
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
       type: object
-      description: Collection response envelope
+      description: Link to the last page
+    DeviceIdPOSTData:
+      properties:
+        deviceIds:
+          type: array
+          items:
+            example: '["00:15:65:A1:B2:C3","00:15:65:D4:E5:F6"]'
+            type: string
+          example:
+          - 00:15:65:A1:B2:C3
+          - 00:15:65:D4:E5:F6
+      type: object
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -827,22 +848,6 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    Links:
-      description: Related resource links
-      type: object
-    DeviceIdPOSTData:
-      properties:
-        deviceIds:
-          type: array
-          items:
-            example: '["00:15:65:A1:B2:C3","00:15:65:D4:E5:F6"]'
-            type: string
-          example:
-          - 00:15:65:A1:B2:C3
-          - 00:15:65:D4:E5:F6
-      type: object
-    NoLinks:
-      type: object
     NfonApiResponse:
       properties:
         links:
@@ -856,35 +861,7 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    DeviceIdPOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/DeviceIdPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+    NoLinks:
       type: object
     NfonApiCollectionResponseNonPage:
       properties:
@@ -900,6 +877,12 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
     CollectionLinks:
       properties:
         first:
@@ -912,37 +895,23 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
-    Error:
-      properties:
-        request_id:
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
-        code:
-          type: string
-          example: bad_request
-        details:
-          $ref: '#/components/schemas/ErrorDetail'
-        message:
-          type: string
-          example: Invalid request
+    Links:
+      description: Related resource links
       type: object
-      description: Error represents the standard API error response.
-    DeviceTypeInfo:
+    DeviceIdPOSTRequest:
       properties:
-        ports:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/DeviceIdPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
           type: integer
-          example: '3'
-        device_master_category:
-          type: string
-          example: STANDARD
-        port_type:
-          type: string
-          example: IPEI
-        name:
-          type: string
-          example: Yealink T46S
       type: object
-      description: DeviceTypeInfo contains device type metadata.
     JobError:
       properties:
         row:
@@ -953,31 +922,6 @@ components:
           type: string
       type: object
       description: JobError represents an error that occurred during processing.
-    DeviceImportItem:
-      properties:
-        base_device_id:
-          type: string
-          description: Device ID of the base phone (required for HANDSET devices)
-          example: '001122334400'
-        site_id:
-          type: string
-          description: BSS-provided site identifier. If not provided, the device will be assigned to the customer's mobile site.
-          example: a06D000000kIkHp
-        site_salesforce_id:
-          type: string
-          example: a06D000000kIkHp
-          deprecated: true
-          description: 'Deprecated: use SiteID instead.'
-        device_id:
-          type: string
-          description: Unique device identifier (MAC address, IPEI, etc.)
-          example: '001122334455'
-        device_type:
-          type: string
-          description: Device type identifier
-          example: DEVICE001
-      type: object
-      description: DeviceImportRequest represents a single device for import (API type).
     JobStatusResponse:
       properties:
         status:
@@ -1009,16 +953,73 @@ components:
           description: Original filename
       type: object
       description: JobReport represents the status of an import job. This is named JobStatusResponse in the OpenAPI spec.
-    ErrorDetail:
+    JobDetails:
       properties:
-        message:
+        errors:
+          items:
+            $ref: '#/components/schemas/JobError'
+          type: array
+        rows:
+          type: integer
+          description: Number of rows processed
+      type: object
+      description: JobDetails contains details about a job.
+    DeviceTypeInfo:
+      properties:
+        ports:
+          type: integer
+          example: '3'
+        device_master_category:
           type: string
-          example: Cannot delete license that is currently assigned to a user
+          example: STANDARD
+        port_type:
+          type: string
+          example: IPEI
+        name:
+          type: string
+          example: Yealink T46S
+      type: object
+      description: DeviceTypeInfo contains device type metadata.
+    DeviceImportItem:
+      properties:
+        base_device_id:
+          type: string
+          description: Device ID of the base phone (required for HANDSET devices)
+          example: '001122334400'
+        site_id:
+          type: string
+          description: BSS-provided site identifier. If not provided, the device will be assigned to the customer's mobile site.
+          example: a06D000000kIkHp
+        site_salesforce_id:
+          type: string
+          example: a06D000000kIkHp
+          deprecated: true
+          description: 'Deprecated: use SiteID instead.'
+        device_id:
+          type: string
+          description: Unique device identifier (MAC address, IPEI, etc.)
+          example: '001122334455'
+        device_type:
+          type: string
+          description: Device type identifier
+          example: DEVICE001
+      type: object
+      description: DeviceImportRequest represents a single device for import (API type).
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
         code:
           type: string
-          example: license_assigned
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
       type: object
-      description: ErrorDetail represents error details in the delete response.
+      description: Error represents the standard API error response.
     DeviceValidationItem:
       properties:
         device_type_info:
@@ -1035,26 +1036,6 @@ components:
           example: '001122334455'
       type: object
       description: DeviceValidationItem represents a device in validation response.
-    DeviceValidationResponse:
-      properties:
-        devices:
-          type: array
-          items:
-            $ref: '#/components/schemas/DeviceValidationItem'
-          description: Array of validated devices with enriched information
-      type: object
-      description: DeviceValidationResponse represents the validation response.
-    JobDetails:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/JobError'
-          type: array
-        rows:
-          type: integer
-          description: Number of rows processed
-      type: object
-      description: JobDetails contains details about a job.
     DeviceBulkImportRequest:
       properties:
         devices:
@@ -1064,6 +1045,25 @@ components:
           description: Array of devices to import
       type: object
       description: DeviceBulkImportRequest represents the request body for device bulk import.
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
+    DeviceValidationResponse:
+      properties:
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeviceValidationItem'
+          description: Array of validated devices with enriched information
+      type: object
+      description: DeviceValidationResponse represents the validation response.
   securitySchemes:
     jwt:
       scheme: bearer

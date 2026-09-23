@@ -232,18 +232,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    CreateClipScreenedPrefixRequest:
-      properties:
-        clip_screened_prefix_id:
-          type: string
-          description: External identifier for the CLIP screened prefix
-          example: 550e8400-e29b-41d4-a716-446655440000
-        signaling_prefix:
-          type: string
-          description: Phone number in E.164 format (e.g., +49301234567)
-          example: '+49301234567'
-      type: object
-      description: CreateClipScreenedPrefixRequest represents the request body for creating a CLIP screened prefix.
     Error:
       properties:
         request_id:
@@ -281,6 +269,18 @@ components:
           example: license_assigned
       type: object
       description: ErrorDetail represents error details in the delete response.
+    CreateClipScreenedPrefixRequest:
+      properties:
+        clip_screened_prefix_id:
+          type: string
+          description: External identifier for the CLIP screened prefix
+          example: 550e8400-e29b-41d4-a716-446655440000
+        signaling_prefix:
+          type: string
+          description: Phone number in E.164 format (e.g., +49301234567)
+          example: '+49301234567'
+      type: object
+      description: CreateClipScreenedPrefixRequest represents the request body for creating a CLIP screened prefix.
   securitySchemes:
     jwt:
       scheme: bearer

@@ -76,9 +76,6 @@ paths:
           description: Not found
 components:
   schemas:
-    Links:
-      description: Related resource links
-      type: object
     NfonApiResponse:
       properties:
         links:
@@ -92,6 +89,9 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
+    Links:
+      description: Related resource links
+      type: object
   securitySchemes:
     jwt:
       scheme: bearer

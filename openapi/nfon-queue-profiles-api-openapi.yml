@@ -992,6 +992,59 @@ paths:
       description: Updates an existing queue profile for the specified tenant
 components:
   schemas:
+    QueueProfileList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GetQueueProfilesExtensionResponse'
+      description: QueueProfileList is a list of queue profiles.
+    QueueProfilePatchRequest:
+      properties:
+        queue_service_numbers:
+          type: array
+          items:
+            type: string
+          description: QueueServiceNumbers is the list of queue service numbers (optional, if empty all queues are removed)
+        color:
+          type: string
+          pattern: ^#[0-9A-Fa-f]{6}$
+          description: Color in hex format (e.g., \"#FF5733\", optional)
+          example: '#FF0000'
+        visibilities:
+          $ref: '#/components/schemas/Visibilities'
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Name of the queue profile (1-255 characters, optional)
+      type: object
+      description: QueueProfilePatchRequest represents a partial update request. All fields are optional, but at least one must be provided.
+    QueueProfile:
+      properties:
+        profile_id:
+          type: string
+          description: Unique identifier of the queue profile.
+        queue_service_numbers:
+          type: array
+          items:
+            type: string
+          description: Array of queue service numbers associated with this profile.
+        visibilities:
+          $ref: '#/components/schemas/Visibilities'
+        color:
+          type: string
+          description: Hex color code for the queue profile.
+          example: '#FF0000'
+        name:
+          type: string
+          maxLength: 255
+          description: Display name of the queue profile.
+      type: object
+      description: QueueProfileResponse represents the response when creating/updating a queue profile. This is named QueueProfile in the OpenAPI spec.
+    Visibilities:
+      type: array
+      items:
+        $ref: '#/components/schemas/Visibility'
+      description: Visibilities is a list of visibility entries.
     Error:
       properties:
         request_id:
@@ -1007,6 +1060,9 @@ components:
           example: Invalid request
       type: object
       description: Error represents the standard API error response.
+    Status:
+      type: string
+      description: Status represents an active/inactive status.
     QueueProfileRequest:
       properties:
         queue_service_numbers:
@@ -1031,6 +1087,33 @@ components:
       - name
       - color
       description: QueueProfilesRequest represents the request body for creating a queue profile. Name and Color are required. Visibilities and QueueServiceNumbers are optional.
+    Visibility:
+      properties:
+        extension:
+          type: string
+          minLength: 1
+          maxLength: 50
+          description: Extension associated with this visibility (1-50 characters)
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Name of the visibility entry (1-255 characters)
+      type: object
+      required:
+      - name
+      - extension
+      description: Visibility represents a single visibility entry with name and extension.
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
     GetQueueProfilesExtensionResponse:
       properties:
         profile_id:
@@ -1052,89 +1135,6 @@ components:
           description: Display name of the queue profile.
       type: object
       description: GetQueueProfilesExtensionResponse represents extension queue profiles response.
-    QueueProfilePatchRequest:
-      properties:
-        queue_service_numbers:
-          type: array
-          items:
-            type: string
-          description: QueueServiceNumbers is the list of queue service numbers (optional, if empty all queues are removed)
-        color:
-          type: string
-          pattern: ^#[0-9A-Fa-f]{6}$
-          description: Color in hex format (e.g., \"#FF5733\", optional)
-          example: '#FF0000'
-        visibilities:
-          $ref: '#/components/schemas/Visibilities'
-        name:
-          type: string
-          minLength: 1
-          maxLength: 255
-          description: Name of the queue profile (1-255 characters, optional)
-      type: object
-      description: QueueProfilePatchRequest represents a partial update request. All fields are optional, but at least one must be provided.
-    QueueProfileList:
-      type: array
-      items:
-        $ref: '#/components/schemas/GetQueueProfilesExtensionResponse'
-      description: QueueProfileList is a list of queue profiles.
-    Visibilities:
-      type: array
-      items:
-        $ref: '#/components/schemas/Visibility'
-      description: Visibilities is a list of visibility entries.
-    ErrorDetail:
-      properties:
-        message:
-          type: string
-          example: Cannot delete license that is currently assigned to a user
-        code:
-          type: string
-          example: license_assigned
-      type: object
-      description: ErrorDetail represents error details in the delete response.
-    Visibility:
-      properties:
-        extension:
-          type: string
-          minLength: 1
-          maxLength: 50
-          description: Extension associated with this visibility (1-50 characters)
-        name:
-          type: string
-          minLength: 1
-          maxLength: 255
-          description: Name of the visibility entry (1-255 characters)
-      type: object
-      required:
-      - name
-      - extension
-      description: Visibility represents a single visibility entry with name and extension.
-    QueueProfile:
-      properties:
-        profile_id:
-          type: string
-          description: Unique identifier of the queue profile.
-        queue_service_numbers:
-          type: array
-          items:
-            type: string
-          description: Array of queue service numbers associated with this profile.
-        visibilities:
-          $ref: '#/components/schemas/Visibilities'
-        color:
-          type: string
-          description: Hex color code for the queue profile.
-          example: '#FF0000'
-        name:
-          type: string
-          maxLength: 255
-          description: Display name of the queue profile.
-      type: object
-      description: QueueProfileResponse represents the response when creating/updating a queue profile. This is named QueueProfile in the OpenAPI spec.
-    Status:
-      type: string
-      description: Status represents an active/inactive status.
   securitySchemes:
     jwt:
       scheme: bearer

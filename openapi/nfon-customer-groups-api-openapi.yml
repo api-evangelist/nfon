@@ -39,6 +39,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 176
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/group-services/{serviceNumber}/members:
     get:
       parameters:
@@ -75,6 +77,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 105
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -111,6 +115,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 31
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/group-services/{serviceNumber}/inbound-trunk-numbers:
     get:
       parameters:
@@ -147,6 +153,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: List
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -183,6 +191,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 30
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/group-services/{serviceNumber}:
     put:
       requestBody:
@@ -223,6 +233,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 32
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -255,6 +267,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 28
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -305,6 +319,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 102
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/group-services/{serviceNumber}/timeout:
     put:
       requestBody:
@@ -345,6 +361,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 50
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -377,6 +395,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 50
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -423,6 +443,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 180
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/group-services/{serviceNumber}/members/{extensionNumber}:
     delete:
       parameters:
@@ -460,6 +482,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 30
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -508,6 +532,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 104
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/group-services/{serviceNumber}/inbound-trunk-numbers/{didNumber}:
     delete:
       parameters:
@@ -545,6 +571,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 29
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -585,6 +613,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 103
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/group-services:
     get:
       parameters:
@@ -614,6 +644,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 101
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -645,143 +677,10 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 29
+      x-summary-source: derived
 components:
   schemas:
-    TimeoutRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/TimeoutLinks'
-        data:
-          $ref: '#/components/schemas/Data'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NewGroupMemberRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NewGroupMemberLinks'
-        data:
-          $ref: '#/components/schemas/NoData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    InboundTrunkNumberRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/InboundTrunkNumberLinks'
-        data:
-          $ref: '#/components/schemas/InboundTrunkNumberData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NfonApiCollectionResponseNonPage:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
-      type: object
-      description: Non-paginated collection response envelope
-    NewGroupMemberLinks:
-      properties:
-        phoneExtension:
-          type: string
-      type: object
-    Links:
-      description: Related resource links
-      type: object
-    UpdateGroupRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/PUTLinks'
-        data:
-          $ref: '#/components/schemas/Data'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
-    NewGroupRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/Data'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NoData:
-      type: object
-    NoLinks:
-      type: object
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    InboundTrunkNumberLinks:
-      properties:
-        trunk:
-          type: string
-      type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -811,14 +710,135 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
+    NoData:
+      type: object
+    InboundTrunkNumberData:
+      properties:
+        didExtension:
+          example: '123456'
+          type: string
+      type: object
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
+      type: object
+    TimeoutRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/TimeoutLinks'
+        data:
+          $ref: '#/components/schemas/Data'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    UpdateGroupRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/PUTLinks'
+        data:
+          $ref: '#/components/schemas/Data'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    NoLinks:
+      type: object
+    NewGroupMemberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NewGroupMemberLinks'
+        data:
+          $ref: '#/components/schemas/NoData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    InboundTrunkNumberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/InboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
     TimeoutLinks:
       type: object
-    PUTLinks:
+    NewGroupMemberLinks:
       properties:
-        inboundTrunkNumbers:
-          $ref: '#/components/schemas/String'
-        members:
-          $ref: '#/components/schemas/String'
+        phoneExtension:
+          type: string
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    Links:
+      description: Related resource links
       type: object
     Data:
       properties:
@@ -835,24 +855,38 @@ components:
       - key
       - value
       description: Data represents key-value pair for additional reference metadata.
-    NfonApiResponse:
+    PUTLinks:
+      properties:
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+        members:
+          $ref: '#/components/schemas/String'
+      type: object
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    NewGroupRequest:
       properties:
         links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/NoLinks'
         data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    InboundTrunkNumberData:
-      properties:
-        didExtension:
-          example: '123456'
-          type: string
+          $ref: '#/components/schemas/Data'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
   securitySchemes:
     jwt:

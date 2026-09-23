@@ -38,6 +38,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 26
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/default-system-integrator:
     get:
       parameters:
@@ -75,6 +77,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 11
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -104,6 +108,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 1
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}:
     get:
       summary: Get customer
@@ -211,6 +217,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 31
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -247,6 +255,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 107
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/integrations/{customerIntegrationId}/targets:
     get:
       parameters:
@@ -282,6 +292,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 108
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -319,6 +331,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 33
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/license-status:
     get:
       parameters:
@@ -348,6 +362,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 16
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/monitoring-levels:
     get:
       parameters:
@@ -377,6 +393,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 125
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/nmeeting-options:
     get:
       parameters:
@@ -406,6 +424,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 126
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/operator-details:
     get:
       parameters:
@@ -453,6 +473,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 14
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -482,6 +504,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 2
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/options:
     get:
       parameters:
@@ -627,6 +651,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 127
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -660,6 +686,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 39
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/directcall-numbers:
     get:
       parameters:
@@ -689,6 +717,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 55
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -720,6 +750,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 9
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/directcall-numbers/{number}:
     delete:
       parameters:
@@ -752,6 +784,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 10
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -787,6 +821,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 56
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/emergency-sites:
     get:
       parameters:
@@ -816,6 +852,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 12
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/evn-modes:
     get:
       parameters:
@@ -851,6 +889,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 57
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/feature-status:
     get:
       parameters:
@@ -874,6 +914,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 15
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/forward-destinations/direct-dial/{directDialNumber}:
     get:
       parameters:
@@ -908,6 +950,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get direct dial details
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/options/external-numbers:
     put:
       requestBody:
@@ -942,6 +986,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 30
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/ownVoicemail:
     get:
       parameters:
@@ -973,6 +1019,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 17
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/available-record-start-message-recipients:
     get:
       parameters:
@@ -1004,6 +1052,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 154
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/available-recording-audio-types:
     get:
       parameters:
@@ -1035,6 +1085,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 155
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/basic-data:
     get:
       parameters:
@@ -1066,6 +1118,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 20
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -1099,6 +1153,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 3
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/blacklist-global-profiles:
     get:
       parameters:
@@ -1128,6 +1184,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 8
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/blacklist-global-profiles/{profileName}:
     get:
       parameters:
@@ -1164,6 +1222,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 9
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/blacklist-profiles:
     get:
       parameters:
@@ -1199,6 +1259,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 21
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/call-recording:
     get:
       parameters:
@@ -1242,6 +1304,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 23
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -1275,6 +1339,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 4
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/snom-transfer:
     get:
       parameters:
@@ -1304,6 +1370,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 161
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/category:
     get:
       parameters:
@@ -1337,6 +1405,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 24
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/click-to-dial-states:
     get:
       parameters:
@@ -1372,6 +1442,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 25
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/count-of-trunks:
     get:
       parameters:
@@ -1409,6 +1481,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 33
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/cti-billing-modes:
     get:
       parameters:
@@ -1442,6 +1516,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 34
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/contract-information:
     get:
       parameters:
@@ -1485,6 +1561,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 6
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/subscriptions:
     get:
       parameters:
@@ -1516,6 +1594,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 18
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/uacsta-protocols:
     get:
       parameters:
@@ -1545,6 +1625,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 192
+      x-summary-source: derived
   /tenants:
     get:
       summary: List customers
@@ -1591,6 +1673,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 106
+      x-summary-source: derived
     post:
       tags:
       - Customers
@@ -1670,6 +1754,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 34
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -1708,6 +1794,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 32
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -1750,6 +1838,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 109
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/port-speeds:
     get:
       parameters:
@@ -1779,6 +1869,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 133
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/blacklist-profiles/{blacklistProfileId}:
     get:
       parameters:
@@ -1816,6 +1908,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 22
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/available-pbx-groups:
     get:
       parameters:
@@ -1843,8 +1937,122 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 7
+      x-summary-source: derived
 components:
   schemas:
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    NoData:
+      type: object
+    ExternalNumbersHrefData:
+      properties:
+        allowed:
+          type: boolean
+      type: object
+    CustomerCallRecordingPUTData:
+      properties:
+        callRecordingEnabled:
+          $ref: '#/components/schemas/Boolean'
+        recordingAudioType:
+          $ref: '#/components/schemas/Enum'
+        recordStartMessageRecipients:
+          $ref: '#/components/schemas/Enum'
+      type: object
+    CustomerDefaultSystemIntegratorPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/CustomerDefaultSystemIntegratorPUTLinks'
+        data:
+          $ref: '#/components/schemas/NoData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    IntegrationTargetPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/IntegrationTargetPUTLinks'
+        data:
+          $ref: '#/components/schemas/IntegrationTargetPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    JsonNode:
+      type: object
+    IntegrationTenantPUTLinks:
+      properties:
+        integrationType:
+          $ref: '#/components/schemas/String'
+      type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
     IntegrationTargetPOSTRequest:
       properties:
         links:
@@ -1859,11 +2067,41 @@ components:
           format: int32
           type: integer
       type: object
-    CustomerOperatorDetailsPUTLinks:
+    NfonApiResponse:
       properties:
-        pbxGroup:
-          example: /api/operators/O1234/pbx-groups/pbx-group-01
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
           type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    NoLinks:
+      type: object
+    IntegrationTargetPUTLinks:
+      type: object
+    CustomerDirectcallRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/DirectcallData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CustomerCallRecordingPUTLinks:
+      properties:
+        recordStartAnnouncement:
+          $ref: '#/components/schemas/String'
       type: object
     CustomerBasicDataRequest:
       properties:
@@ -1879,12 +2117,18 @@ components:
           format: int32
           type: integer
       type: object
-    CustomerCallRecordingRequest:
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    CustomerOperatorDetailPUTRequest:
       properties:
         links:
-          $ref: '#/components/schemas/CustomerCallRecordingPUTLinks'
+          $ref: '#/components/schemas/CustomerOperatorDetailsPUTLinks'
         data:
-          $ref: '#/components/schemas/CustomerCallRecordingPUTData'
+          $ref: '#/components/schemas/NoData'
         items:
           items:
             type: object
@@ -1892,6 +2136,179 @@ components:
         itemCount:
           format: int32
           type: integer
+      type: object
+    CustomerOperatorDetailsPUTLinks:
+      properties:
+        pbxGroup:
+          example: /api/operators/O1234/pbx-groups/pbx-group-01
+          type: string
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    IntegrationTenantPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/IntegrationTenantPOSTLinks'
+        data:
+          $ref: '#/components/schemas/IntegrationTenantPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Enum:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: object
+      type: object
+      example: 'OFF'
+    Integer:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
+      type: object
+      description: Subscribers soft limit
+    DirectcallData:
+      properties:
+        number:
+          example: '+4989123456'
+          type: string
+      type: object
+    Links:
+      description: Related resource links
+      type: object
+    IntegrationTenantPUTData:
+      properties:
+        status:
+          $ref: '#/components/schemas/Enum'
+        connectionConfig:
+          $ref: '#/components/schemas/JsonNode'
+        authConfig:
+          $ref: '#/components/schemas/JsonNode'
+        active:
+          $ref: '#/components/schemas/Boolean'
+        context:
+          $ref: '#/components/schemas/String'
+        name:
+          $ref: '#/components/schemas/String'
+      type: object
+    IntegrationTenantPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/IntegrationTenantPUTLinks'
+        data:
+          $ref: '#/components/schemas/IntegrationTenantPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CustomerDefaultSystemIntegratorPUTLinks:
+      properties:
+        defaultSystemIntegrator:
+          example: /api/system-integrators/SI001
+          type: string
+      type: object
+    CustomerBasicDataPUT:
+      properties:
+        maxExtensionsCount:
+          $ref: '#/components/schemas/Integer'
+        mobileNumber:
+          $ref: '#/components/schemas/String'
+        passwordCurrent:
+          $ref: '#/components/schemas/String'
+        category:
+          $ref: '#/components/schemas/Enum'
+        securityQuestion:
+          $ref: '#/components/schemas/String'
+        securityAnswer:
+          $ref: '#/components/schemas/String'
+        password:
+          $ref: '#/components/schemas/String'
+        customCrAnn:
+          $ref: '#/components/schemas/Boolean'
+        supportPin:
+          $ref: '#/components/schemas/String'
+        snomTransfer:
+          $ref: '#/components/schemas/Enum'
+        email:
+          $ref: '#/components/schemas/String'
+        maxeFaxCount:
+          $ref: '#/components/schemas/Integer'
+        name:
+          $ref: '#/components/schemas/String'
+      type: object
+    IntegrationTargetPOSTData:
+      properties:
+        active:
+          type: boolean
+        connectionConfig:
+          $ref: '#/components/schemas/JsonNode'
+        context:
+          type: string
+      type: object
+    ExternalNumbersRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/ExternalNumbersHrefData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    IntegrationTargetPUTData:
+      properties:
+        active:
+          $ref: '#/components/schemas/Boolean'
+        connectionConfig:
+          $ref: '#/components/schemas/JsonNode'
+        context:
+          $ref: '#/components/schemas/String'
       type: object
     CustomerOptionsLinks:
       properties:
@@ -1914,44 +2331,24 @@ components:
         timezone:
           $ref: '#/components/schemas/String'
       type: object
-    IntegrationTargetPUTData:
+    CollectionLinks:
       properties:
-        active:
-          $ref: '#/components/schemas/Boolean'
-        connectionConfig:
-          $ref: '#/components/schemas/JsonNode'
-        context:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
           $ref: '#/components/schemas/String'
       type: object
-    IntegrationTargetPOSTData:
-      properties:
-        active:
-          type: boolean
-        connectionConfig:
-          $ref: '#/components/schemas/JsonNode'
-        context:
-          type: string
-      type: object
-    IntegrationTenantPOSTLinks:
-      properties:
-        integrationType:
-          type: string
-      type: object
-    CustomerCallRecordingPUTData:
-      properties:
-        callRecordingEnabled:
-          $ref: '#/components/schemas/Boolean'
-        recordingAudioType:
-          $ref: '#/components/schemas/Enum'
-        recordStartMessageRecipients:
-          $ref: '#/components/schemas/Enum'
-      type: object
-    IntegrationTenantPOSTRequest:
+      description: Pagination links for collection responses
+    CustomerCallRecordingRequest:
       properties:
         links:
-          $ref: '#/components/schemas/IntegrationTenantPOSTLinks'
+          $ref: '#/components/schemas/CustomerCallRecordingPUTLinks'
         data:
-          $ref: '#/components/schemas/IntegrationTenantPOSTData'
+          $ref: '#/components/schemas/CustomerCallRecordingPUTData'
         items:
           items:
             type: object
@@ -1959,6 +2356,45 @@ components:
         itemCount:
           format: int32
           type: integer
+      type: object
+    IntegrationTenantPOSTLinks:
+      properties:
+        integrationType:
+          type: string
+      type: object
+    IntegrationTenantPOSTData:
+      properties:
+        status:
+          $ref: '#/components/schemas/Enum'
+        connectionConfig:
+          $ref: '#/components/schemas/JsonNode'
+        authConfig:
+          $ref: '#/components/schemas/JsonNode'
+        active:
+          $ref: '#/components/schemas/Boolean'
+        context:
+          $ref: '#/components/schemas/String'
+        name:
+          type: string
+      type: object
+    CustomerOptionsRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/CustomerOptionsLinks'
+        data:
+          $ref: '#/components/schemas/CustomerOptionsPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    IntegrationTargetPOSTLinks:
+      properties:
+        target:
+          type: string
       type: object
     CustomerOptionsPUTData:
       properties:
@@ -2030,346 +2466,6 @@ components:
           $ref: '#/components/schemas/Boolean'
         vlanProvisioning:
           $ref: '#/components/schemas/Boolean'
-      type: object
-    CustomerDefaultSystemIntegratorPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/CustomerDefaultSystemIntegratorPUTLinks'
-        data:
-          $ref: '#/components/schemas/NoData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NfonApiCollectionResponseNonPage:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
-      type: object
-      description: Non-paginated collection response envelope
-    CustomerBasicDataPUT:
-      properties:
-        maxExtensionsCount:
-          $ref: '#/components/schemas/Integer'
-        mobileNumber:
-          $ref: '#/components/schemas/String'
-        passwordCurrent:
-          $ref: '#/components/schemas/String'
-        category:
-          $ref: '#/components/schemas/Enum'
-        securityQuestion:
-          $ref: '#/components/schemas/String'
-        securityAnswer:
-          $ref: '#/components/schemas/String'
-        password:
-          $ref: '#/components/schemas/String'
-        customCrAnn:
-          $ref: '#/components/schemas/Boolean'
-        supportPin:
-          $ref: '#/components/schemas/String'
-        snomTransfer:
-          $ref: '#/components/schemas/Enum'
-        email:
-          $ref: '#/components/schemas/String'
-        maxeFaxCount:
-          $ref: '#/components/schemas/Integer'
-        name:
-          $ref: '#/components/schemas/String'
-      type: object
-    Links:
-      description: Related resource links
-      type: object
-    Integer:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: int32
-          type: integer
-      example: 1000
-      type: object
-      description: Subscribers soft limit
-    IntegrationTenantPUTData:
-      properties:
-        status:
-          $ref: '#/components/schemas/Enum'
-        connectionConfig:
-          $ref: '#/components/schemas/JsonNode'
-        authConfig:
-          $ref: '#/components/schemas/JsonNode'
-        active:
-          $ref: '#/components/schemas/Boolean'
-        context:
-          $ref: '#/components/schemas/String'
-        name:
-          $ref: '#/components/schemas/String'
-      type: object
-    CustomerOperatorDetailPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/CustomerOperatorDetailsPUTLinks'
-        data:
-          $ref: '#/components/schemas/NoData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    DirectcallData:
-      properties:
-        number:
-          example: '+4989123456'
-          type: string
-      type: object
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
-    CustomerCallRecordingPUTLinks:
-      properties:
-        recordStartAnnouncement:
-          $ref: '#/components/schemas/String'
-      type: object
-    CustomerDefaultSystemIntegratorPUTLinks:
-      properties:
-        defaultSystemIntegrator:
-          example: /api/system-integrators/SI001
-          type: string
-      type: object
-    NoData:
-      type: object
-    NoLinks:
-      type: object
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    CustomerDirectcallRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/DirectcallData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    IntegrationTenantPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/IntegrationTenantPUTLinks'
-        data:
-          $ref: '#/components/schemas/IntegrationTenantPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    Boolean:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: boolean
-      type: object
-      example: false
-    JsonNode:
-      type: object
-    IntegrationTargetPUTLinks:
-      type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
-    Enum:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: object
-      type: object
-      example: 'OFF'
-    ExternalNumbersRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/ExternalNumbersHrefData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NfonApiCollectionResponsePage:
-      properties:
-        links:
-          $ref: '#/components/schemas/CollectionLinks'
-        offset:
-          example: 0
-          description: Current page offset
-          format: int64
-          type: integer
-        total:
-          example: 42
-          description: Total number of items in the collection
-          format: int64
-          type: integer
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: Items in this page
-        size:
-          example: 20
-          description: Number of items in this page
-          format: int32
-          type: integer
-        href:
-          description: Self-link to this collection
-          type: string
-      type: object
-      description: Paginated collection response envelope
-    IntegrationTenantPOSTData:
-      properties:
-        status:
-          $ref: '#/components/schemas/Enum'
-        connectionConfig:
-          $ref: '#/components/schemas/JsonNode'
-        authConfig:
-          $ref: '#/components/schemas/JsonNode'
-        active:
-          $ref: '#/components/schemas/Boolean'
-        context:
-          $ref: '#/components/schemas/String'
-        name:
-          type: string
-      type: object
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    ExternalNumbersHrefData:
-      properties:
-        allowed:
-          type: boolean
-      type: object
-    IntegrationTargetPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/IntegrationTargetPUTLinks'
-        data:
-          $ref: '#/components/schemas/IntegrationTargetPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    CustomerOptionsRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/CustomerOptionsLinks'
-        data:
-          $ref: '#/components/schemas/CustomerOptionsPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    IntegrationTargetPOSTLinks:
-      properties:
-        target:
-          type: string
-      type: object
-    IntegrationTenantPUTLinks:
-      properties:
-        integrationType:
-          $ref: '#/components/schemas/String'
       type: object
   securitySchemes:
     jwt:

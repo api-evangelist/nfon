@@ -51,6 +51,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 110
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -82,6 +84,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 34
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/ip-whitelist/{ipWhitelistId}:
     delete:
       parameters:
@@ -114,6 +118,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 33
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -163,40 +169,10 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 111
+      x-summary-source: derived
 components:
   schemas:
-    IpWhitelistPOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/IpWhitelistPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    Links:
-      description: Related resource links
-      type: object
-    NoLinks:
-      type: object
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
     String:
       properties:
         notNull:
@@ -213,6 +189,35 @@ components:
           type: string
       type: object
       description: Link to the last page
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    NoLinks:
+      type: object
+    IpWhitelistPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/IpWhitelistPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
     IpWhitelistPOSTData:
       properties:
         ipAddress:
@@ -226,6 +231,9 @@ components:
           $ref: '#/components/schemas/String'
         description:
           $ref: '#/components/schemas/String'
+      type: object
+    Links:
+      description: Related resource links
       type: object
   securitySchemes:
     jwt:

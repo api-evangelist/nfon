@@ -47,6 +47,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 95
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -83,6 +85,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 26
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/routing-prefix:
     get:
       parameters:
@@ -132,6 +136,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 88
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -157,6 +163,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 23
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/routing-prefix/{extensionNumber}:
     put:
       requestBody:
@@ -196,6 +204,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 27
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -227,6 +237,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 22
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -276,6 +288,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 89
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/routing-prefix/{extensionNumber}/devices:
     get:
       parameters:
@@ -312,6 +326,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 61
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -348,6 +364,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 14
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/routing-prefix/{extensionNumber}/devices/{uniqueIdentifier}:
     delete:
       parameters:
@@ -385,6 +403,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 14
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/routing-prefix/{extensionNumber}/inbound-trunk-numbers/{didNumber}:
     delete:
       parameters:
@@ -422,6 +442,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 23
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -467,6 +489,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 91
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/routing-prefix/{extensionNumber}/outbound-trunk-numbers:
     get:
       parameters:
@@ -503,6 +527,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get outbound trunk numbers with page 1
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -539,6 +565,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post outbound trunk numbers 1
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/routing-prefix/{extensionNumber}/outbound-trunk-numbers/available-trunks:
     get:
       parameters:
@@ -575,6 +603,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get available trunks 1
+      x-summary-source: derived
   ? /tenants/{participantExternalIdentifier}/targets/routing-prefix/{extensionNumber}/outbound-trunk-numbers/{outboundTrunkNumberId}
   : delete:
       parameters:
@@ -612,6 +642,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete outbound trunk number 1
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -652,6 +684,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get outbound trunk numbers 1
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets:
     get:
       parameters:
@@ -681,6 +715,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 174
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/BUSY:
     get:
       parameters:
@@ -712,6 +748,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 166
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/HANGUP:
     get:
       parameters:
@@ -743,6 +781,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 169
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/INTERNAL_SOURCE:
     get:
       parameters:
@@ -774,6 +814,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 170
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/OWN_VOICEMAIL:
     get:
       parameters:
@@ -805,6 +847,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 172
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/REPEAT:
     get:
       parameters:
@@ -836,6 +880,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 173
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/VOICEMAILSERVICE:
     get:
       parameters:
@@ -867,6 +913,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 175
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/virtual-fax-extensions:
     get:
       parameters:
@@ -896,6 +944,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 93
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -927,6 +977,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 25
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/NO_ACTION:
     get:
       parameters:
@@ -958,6 +1010,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 171
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/virtual-fax-extensions/{extensionNumber}:
     put:
       requestBody:
@@ -997,6 +1051,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 29
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -1028,6 +1084,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 24
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -1089,6 +1147,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 94
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/direct-dial/{directDialNumber}:
     get:
       parameters:
@@ -1130,6 +1190,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 167
+      x-summary-source: derived
   ? /tenants/{participantExternalIdentifier}/targets/virtual-fax-extensions/{extensionNumber}/inbound-trunk-numbers/{didNumber}
   : delete:
       parameters:
@@ -1167,6 +1229,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 25
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -1212,6 +1276,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 96
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/routing-prefix/available-devices:
     get:
       parameters:
@@ -1243,6 +1309,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 59
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/virtual-fax-extensions/{extensionNumber}/outbound-trunk-numbers:
     get:
       parameters:
@@ -1279,6 +1347,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get outbound trunk numbers with page 2
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -1315,6 +1385,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post outbound trunk numbers 2
+      x-summary-source: derived
   ? /tenants/{participantExternalIdentifier}/targets/virtual-fax-extensions/{extensionNumber}/outbound-trunk-numbers/available-trunks
   : get:
       parameters:
@@ -1351,6 +1423,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get available trunks 2
+      x-summary-source: derived
   ? /tenants/{participantExternalIdentifier}/targets/virtual-fax-extensions/{extensionNumber}/outbound-trunk-numbers/{outboundTrunkNumberId}
   : delete:
       parameters:
@@ -1388,6 +1462,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete outbound trunk number 2
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -1428,6 +1504,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get outbound trunk numbers 2
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/external/{externalNumber}:
     get:
       parameters:
@@ -1469,6 +1547,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 168
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/routing-prefix/{extensionNumber}/inbound-trunk-numbers:
     get:
       parameters:
@@ -1508,6 +1588,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 90
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -1544,6 +1626,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 24
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/ANY_SOURCE:
     get:
       parameters:
@@ -1575,6 +1659,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 165
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/ANONYMOUS_SOURCE:
     get:
       parameters:
@@ -1606,188 +1692,10 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 164
+      x-summary-source: derived
 components:
   schemas:
-    POSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/RoutingPrefixExtensionLinks'
-        data:
-          $ref: '#/components/schemas/POSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    InboundTrunkNumberRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/InboundTrunkNumberLinks'
-        data:
-          $ref: '#/components/schemas/InboundTrunkNumberData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NfonApiCollectionResponseNonPage:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
-      type: object
-      description: Non-paginated collection response envelope
-    VirtualFaxExtensionRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/VirtualFaxExtensionLinks'
-        data:
-          $ref: '#/components/schemas/VirtualFaxExtensionData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    PUTData:
-      properties:
-        dialPrefix:
-          $ref: '#/components/schemas/String'
-        costCenter:
-          $ref: '#/components/schemas/String'
-        language:
-          $ref: '#/components/schemas/String'
-      type: object
-    OutboundTrunkNumberData:
-      type: object
-    Links:
-      description: Related resource links
-      type: object
-    PUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/PUTLinks'
-        data:
-          $ref: '#/components/schemas/PUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    POSTData:
-      properties:
-        prefixMinimumLength:
-          $ref: '#/components/schemas/Short'
-        costCenter:
-          $ref: '#/components/schemas/String'
-        language:
-          $ref: '#/components/schemas/String'
-        prefixMaximumLength:
-          $ref: '#/components/schemas/Short'
-        dialPrefix:
-          $ref: '#/components/schemas/String'
-        extensionNumber:
-          example: '500'
-          type: string
-        displayName:
-          example: Routing Prefix 1
-          type: string
-      type: object
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
-    VirtualFaxExtensionLinks:
-      properties:
-        inboundTrunkNumbers:
-          $ref: '#/components/schemas/String'
-        preferredOutboundTrunk:
-          $ref: '#/components/schemas/String'
-        blacklistProfile:
-          $ref: '#/components/schemas/String'
-        outboundTrunkNumbers:
-          $ref: '#/components/schemas/String'
-        timezone:
-          $ref: '#/components/schemas/String'
-      type: object
-    RoutingPrefixExtensionLinks:
-      properties:
-        timezone:
-          $ref: '#/components/schemas/String'
-        blacklistProfile:
-          $ref: '#/components/schemas/String'
-      type: object
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    Boolean:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: boolean
-      type: object
-      example: false
-    OutboundTrunkNumberLinks:
-      type: object
-    InboundTrunkNumberLinks:
-      properties:
-        trunk:
-          type: string
-      type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -1817,12 +1725,106 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    PUTLinks:
+    OutboundTrunkNumberLinks:
+      type: object
+    InboundTrunkNumberData:
       properties:
-        inboundTrunkNumbers:
+        didExtension:
+          example: '123456'
+          type: string
+      type: object
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
+      type: object
+    VirtualFaxExtensionRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/VirtualFaxExtensionLinks'
+        data:
+          $ref: '#/components/schemas/VirtualFaxExtensionData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    POSTData:
+      properties:
+        prefixMinimumLength:
+          $ref: '#/components/schemas/Short'
+        costCenter:
           $ref: '#/components/schemas/String'
-        members:
+        language:
           $ref: '#/components/schemas/String'
+        prefixMaximumLength:
+          $ref: '#/components/schemas/Short'
+        dialPrefix:
+          $ref: '#/components/schemas/String'
+        extensionNumber:
+          example: '500'
+          type: string
+        displayName:
+          example: Routing Prefix 1
+          type: string
+      type: object
+    PUTData:
+      properties:
+        dialPrefix:
+          $ref: '#/components/schemas/String'
+        costCenter:
+          $ref: '#/components/schemas/String'
+        language:
+          $ref: '#/components/schemas/String'
+      type: object
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    OutboundTrunkNumberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/OutboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/OutboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
     VirtualFaxExtensionData:
       properties:
@@ -1849,6 +1851,13 @@ components:
         t30CalledSubscriberId:
           $ref: '#/components/schemas/String'
       type: object
+    RoutingPrefixExtensionLinks:
+      properties:
+        timezone:
+          $ref: '#/components/schemas/String'
+        blacklistProfile:
+          $ref: '#/components/schemas/String'
+      type: object
     NfonApiResponse:
       properties:
         links:
@@ -1862,18 +1871,12 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    InboundTrunkNumberData:
-      properties:
-        didExtension:
-          example: '123456'
-          type: string
-      type: object
-    OutboundTrunkNumberRequest:
+    PUTRequest:
       properties:
         links:
-          $ref: '#/components/schemas/OutboundTrunkNumberLinks'
+          $ref: '#/components/schemas/PUTLinks'
         data:
-          $ref: '#/components/schemas/OutboundTrunkNumberData'
+          $ref: '#/components/schemas/PUTData'
         items:
           items:
             type: object
@@ -1882,6 +1885,54 @@ components:
           format: int32
           type: integer
       type: object
+    InboundTrunkNumberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/InboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    POSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/RoutingPrefixExtensionLinks'
+        data:
+          $ref: '#/components/schemas/POSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
     Short:
       properties:
         notNull:
@@ -1899,6 +1950,43 @@ components:
           type: integer
       type: object
       example: 6
+    Links:
+      description: Related resource links
+      type: object
+    VirtualFaxExtensionLinks:
+      properties:
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+        preferredOutboundTrunk:
+          $ref: '#/components/schemas/String'
+        blacklistProfile:
+          $ref: '#/components/schemas/String'
+        outboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+      type: object
+    PUTLinks:
+      properties:
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+        members:
+          $ref: '#/components/schemas/String'
+      type: object
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    OutboundTrunkNumberData:
+      type: object
   securitySchemes:
     jwt:
       scheme: bearer

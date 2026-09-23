@@ -22,7 +22,7 @@ paths:
     get:
       tags:
       - phone extensions
-      summary: Get the data of phone extensions for a specific tenant, constraint by your credentials.
+      summary: Get the data of phone extensions for a specific tenant, constraint by your…
       operationId: getPhoneExtensionData
       responses:
         '200':
@@ -48,8 +48,31 @@ paths:
     get:
       tags:
       - phone extensions
-      summary: Event streams and snapshots of presence and line state changes.
-      description: "## Overview\n\nThis endpoint provides information about the `presence` and `line` states.\n\n## Usage \n\nIt is only allowed to get the `state` of users that belong to your K-Account.\n\n### Accept Header\n\nThe reply depends on the content of the `Accept` request header. There are two options:\n\n* **Event streaming** (default) - the API will send back an SSE event stream if the `Accept` header specifies `text/event-stream` or if it's empty. \nOn connect the API will first bootstrap the client by sending the latest `state` of the users and after that it will continue to stream `state` changes as they happen.\n\n* **Single snapshot** if the `Accept` header specifies `application/json`, the API will return a normal JSON reply with an array of all `state` objects at the time of the request."
+      summary: Event streams and snapshots of presence and line state changes
+      description: '## Overview
+
+
+        This endpoint provides information about the `presence` and `line` states.
+
+
+        ## Usage
+
+
+        It is only allowed to get the `state` of users that belong to your K-Account.
+
+
+        ### Accept Header
+
+
+        The reply depends on the content of the `Accept` request header. There are two options:
+
+
+        * **Event streaming** (default) - the API will send back an SSE event stream if the `Accept` header specifies `text/event-stream` or if it''s empty.
+
+        On connect the API will first bootstrap the client by sending the latest `state` of the users and after that it will continue to stream `state` changes as they happen.
+
+
+        * **Single snapshot** if the `Accept` header specifies `application/json`, the API will return a normal JSON reply with an array of all `state` objects at the time of the request.'
       operationId: getState
       security:
       - bearer_auth: []
@@ -134,7 +157,9 @@ paths:
       tags:
       - phone extensions
       summary: Initiate new call
-      description: "## Overview\nThis endpoint can be used to initiate voice calls.\n\n## Usage\n\nThe reply depends on the content of the `Accept` request header. \nThere are two options:\n\n### Single event (default) \nif the `Accept` header specifies `application/json` or if it's empty, the API will reply with `202 Accepted` and a body, which contains a normal JSON object representing the initial `start` event.\nThe `start` event contains the call `uuid`. \nThis could be useful when the client doesn't care about the progress of the call and doesn't want to keep an event stream open while the PBX processes the call.\nIn this case the client may still need to know the call `uuid`, so it can cancel the request. \n\n### Event streaming\nThe API will send back an SSE event stream if the `Accept` header specifies `text/event-stream`.\nIt will stream events as the request gets processed.\nThe events are intentionally limited to contain only the `uuid` and the `state` of the call, because they are streamed back in the context of the POST request and are only meant to convey the real time changes in the `state` of the call.\nThe stream always starts with a `start` event, which contains the call `uuid` and always ends with an `end` event, which indicates the final result of the call request.\nIn between there are a number of other update events, which are sent to the client to indicate interim status changes as the call progresses.\n\n  An error can happen at any point in the process. A client should be prepared to receive an `end` event at any time and should use the `error` property of the event to identify if the call request was successful or not.\n\n  **Note**: The Server-Sent Event (SSE) stream examples are not a JSON array of objects, even though it is visualized like this! This is a stream JSON objects, where each SSE event contains one `call` object. The OpenAPI specification doesn't have a way to specify this currently (see [this issue](https://github.com/OAI/OpenAPI-Specification/issues/396#issuecomment-492287488))\n\n## Events\n\nThe usual event sequence looks like this:\n\n- `start` contains the call `uuid`, which can be used to cancel the call at any time (see DELETE method). This event is always the first one to be sent. It signals the start of the processing of the HTTP request. It is not necessarily related to any call state event. The event that follow are call state events.\n\n- `caller-dial` indicates when the PBX initiates the call to the `caller` number.\n\n- `caller-ring` indicates that the `caller` number was successfully called and is ringing. This event is **optional**. It may not be present always. Some devices may be configured to auto-answer the call and may not ring at all. Client should be prepared to not receive this event.\n\n- `caller-answer` indicates that the `caller` has accepted the call. At this point the connection to the `caller` is successfully established and the process continues with dialing the `callee` number.\n\n- `dial` indicates that the PBX has initiated the call to the `callee` number (destination).\n\n- `ring` indicates that the `callee` number was successfully called and that the phone is ringing. This event is **optional**.\n\n- `answer` indicates that the `callee` number has accepted the call. At this point the connections to the `caller` and `callee` numbers are successfully established.\n\n- `end` indicates that the processing of the HTTP request has ended. This is *not* a call related event and it is not linked to any call state. On success the `error` parameter will not be present in the event. On error the `error` parameter will be present and will be set to one of the pre-defined errors. The client can use this parameter to differentiate successful from unsuccessful call.\n\n## Phone Number Context\n\nNot all numbers are globally unique. Some are indeed global telephone numbers like the E164 formatted numbers, but many are not. The same number may represent different destinations depending on the context in which it is interpreted. The 112 for example could be an extension number or an emergency number. The number alone doesn't provide enough information to uniquely identify the correct destination, which is why the number `context` is needed.\n\nSee also the `caller_context` and `callee_context` parameter description for a bit more detailed example and for the list of possible context values.\n\n## Extension Override\n\nThe `extension` parameter allows to override the extension on behalf of which the call will be originated.\n\nIf it is set in the request the API will initiate the click-to-dial call on behalf of the extension that is specified in this parameter.\n\nThis is useful in setups where this API is integrated with CRM systems, that need to be able to initiate calls on behalf of any user."
+      description: '## Overview
+
+        This endpoint can be used to initiate voice calls.'
       operationId: originate
       security:
       - bearer_auth: []
@@ -287,7 +312,23 @@ paths:
       tags:
       - phone extensions
       summary: Get call details and state change events in real-time
-      description: "## Overview\nThe API streams in real time  the call state update events for **all** the calls of a particular customer.\n\n## Usage\nThe `Accept: text/event-stream` header is set\n\nThe SSE stream will send events for any call state change that happens **after** the client SSE connection was established.\n\nThe stream will not send any past events, not even for calls that were established prior to the SSE connection and that are still ongoing. \n\nThis means that it is currently possible to get a `hangup` event without any prior matching `answer` or `ring` events."
+      description: '## Overview
+
+        The API streams in real time the call state update events for **all** the calls of a particular customer.
+
+
+        ## Usage
+
+        The `Accept: text/event-stream` header is set
+
+
+        The SSE stream will send events for any call state change that happens **after** the client SSE connection was established.
+
+
+        The stream will not send any past events, not even for calls that were established prior to the SSE connection and that are still ongoing.
+
+
+        This means that it is currently possible to get a `hangup` event without any prior matching `answer` or `ring` events.'
       operationId: stream
       security:
       - bearer_auth: []
@@ -380,70 +421,39 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
-  responses:
-    BadRequest:
-      description: One or more request parameters failed validation
-      headers:
-        X-Request-Id:
-          schema:
-            type: string
-          description: Unique identifier used to track this particular request on the backend
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
-    NotFound:
-      description: Requested object (call) does not exist
-      headers:
-        X-Request-Id:
-          schema:
-            type: string
-          description: Unique identifier used to track this particular request on the backend
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
-    Forbidden:
-      description: Authenticated user is not allowed to perform the action or may not have a license
-      headers:
-        X-Request-Id:
-          schema:
-            type: string
-          description: Unique identifier used to track this particular request on the backend
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
-    NotAcceptable:
-      description: Requested MIME type is not supported
-      headers:
-        X-Request-Id:
-          schema:
-            type: string
-          description: Unique identifier used to track this particular request on the backend
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
-    Unauthorized:
-      description: Unauthorized
-      headers:
-        X-Request-Id:
-          schema:
-            type: string
-          description: Unique identifier used to track this particular request on the backend
-    ServerError:
-      description: Unexpected server error
-      headers:
-        X-Request-Id:
-          schema:
-            type: string
-          description: Unique identifier used to track this particular request on the backend
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
   schemas:
+    state:
+      type: object
+      properties:
+        customer:
+          type: string
+          description: Customer K-Account.
+        extension:
+          type: string
+          description: Extension of the user.
+        line:
+          type: string
+          description: The user telephony line state.
+          enum:
+          - unknown
+          - offline
+          - idle
+          - ringing
+          - in-use
+        presence:
+          type: string
+          description: The user presence state.
+          enum:
+          - offline
+          - available
+          - away
+          - busy
+          - dnd
+          - 'null'
+        updated:
+          type: string
+          format: date-time
+          description: The time of the status change. RFC3339 with nanoseconds and timezone (e.g., 2025-09-23T16:51:22.954969226+02:00)
     call:
       type: object
       properties:
@@ -530,6 +540,13 @@ components:
           - reject
           - unspecified
           description: '`optional` Set in case of error'
+    error:
+      type: object
+      properties:
+        error:
+          type: string
+      example:
+        error: some error message
     extensionData:
       type: object
       properties:
@@ -542,45 +559,69 @@ components:
         name:
           type: string
           example: office
-    state:
-      type: object
-      properties:
-        customer:
-          type: string
-          description: Customer K-Account.
-        extension:
-          type: string
-          description: Extension of the user.
-        line:
-          type: string
-          description: The user telephony line state.
-          enum:
-          - unknown
-          - offline
-          - idle
-          - ringing
-          - in-use
-        presence:
-          type: string
-          description: The user presence state.
-          enum:
-          - offline
-          - available
-          - away
-          - busy
-          - dnd
-          - 'null'
-        updated:
-          type: string
-          format: date-time
-          description: The time of the status change. RFC3339 with nanoseconds and timezone (e.g., 2025-09-23T16:51:22.954969226+02:00)
-    error:
-      type: object
-      properties:
-        error:
-          type: string
-      example:
-        error: some error message
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      headers:
+        X-Request-Id:
+          schema:
+            type: string
+          description: Unique identifier used to track this particular request on the backend
+    ServerError:
+      description: Unexpected server error
+      headers:
+        X-Request-Id:
+          schema:
+            type: string
+          description: Unique identifier used to track this particular request on the backend
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+    Forbidden:
+      description: Authenticated user is not allowed to perform the action or may not have a license
+      headers:
+        X-Request-Id:
+          schema:
+            type: string
+          description: Unique identifier used to track this particular request on the backend
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+    NotAcceptable:
+      description: Requested MIME type is not supported
+      headers:
+        X-Request-Id:
+          schema:
+            type: string
+          description: Unique identifier used to track this particular request on the backend
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+    NotFound:
+      description: Requested object (call) does not exist
+      headers:
+        X-Request-Id:
+          schema:
+            type: string
+          description: Unique identifier used to track this particular request on the backend
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+    BadRequest:
+      description: One or more request parameters failed validation
+      headers:
+        X-Request-Id:
+          schema:
+            type: string
+          description: Unique identifier used to track this particular request on the backend
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
   securitySchemes:
     bearer_auth:
       type: http

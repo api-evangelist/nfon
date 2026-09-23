@@ -15,14 +15,14 @@ servers:
     version:
       default: v1
 tags:
-- name: authentication
+- name: Authentication
   description: Everything about authentication
 paths:
   /login:
     post:
       tags:
-      - authentication
-      summary: Creates a new Token with provided user credentials.
+      - Authentication
+      summary: Creates a new Token with provided user credentials
       operationId: createToken
       requestBody:
         description: The Credentials to authenticate the User.
@@ -51,8 +51,8 @@ paths:
           content: {}
     put:
       tags:
-      - authentication
-      summary: Refreshes the Token.
+      - Authentication
+      summary: Refreshes the Token
       operationId: refreshAccessToken
       responses:
         '200':
@@ -72,7 +72,7 @@ paths:
   /.well-known/jwks.json:
     get:
       tags:
-      - authentication
+      - Authentication
       description: Provides the public keys to validate the signing of the JWTs.
       operationId: publicKeyWellKnown
       responses:
@@ -82,8 +82,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/publicKey'
+      summary: Public key well known
+      x-summary-source: derived
 components:
   schemas:
+    tokens:
+      type: object
+      properties:
+        access-token:
+          type: string
+          format: jwt
+        refresh-token:
+          type: string
+          format: jwt
     jwksData:
       type: object
       properties:
@@ -118,15 +129,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/jwksData'
-    tokens:
-      type: object
-      properties:
-        access-token:
-          type: string
-          format: jwt
-        refresh-token:
-          type: string
-          format: jwt
   securitySchemes:
     bearer_auth:
       type: http

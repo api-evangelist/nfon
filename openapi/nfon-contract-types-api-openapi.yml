@@ -59,12 +59,22 @@ paths:
           description: Not found
 components:
   schemas:
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
       type: object
-      description: Collection response envelope
+      description: Link to the last page
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -94,9 +104,6 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    Links:
-      description: Related resource links
-      type: object
     NfonApiResponse:
       properties:
         links:
@@ -110,22 +117,6 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
     NfonApiCollectionResponseNonPage:
       properties:
         links:
@@ -152,6 +143,15 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
+    Links:
+      description: Related resource links
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
   securitySchemes:
     jwt:
       scheme: bearer

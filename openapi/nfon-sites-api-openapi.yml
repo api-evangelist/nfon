@@ -8,7 +8,7 @@ servers:
 tags:
 - x-displayName: Sites
   description: Site management operations
-  name: sites
+  name: Sites
 paths:
   /sites/{oldID}/replace/{newID}:
     put:
@@ -27,7 +27,7 @@ paths:
         description: ''
         name: newID
       tags:
-      - sites
+      - Sites
       description: Replaces an old site with a new site
       operationId: replaceSite
       security:
@@ -129,7 +129,7 @@ paths:
         description: ''
         name: siteId
       tags:
-      - sites
+      - Sites
       description: Deletes a site by Salesforce ID. The site must have no active dependencies (trunks, phones, virtual faxes, or emergency site references). Mobile sites cannot be deleted via this endpoint.
       operationId: deleteSite
       security:
@@ -279,7 +279,7 @@ paths:
   /sites/{id}:
     put:
       tags:
-      - sites
+      - Sites
       requestBody:
         content:
           application/json:
@@ -393,7 +393,7 @@ paths:
               $ref: '#/components/schemas/CreateSiteRequest'
         required: true
       tags:
-      - sites
+      - Sites
       summary: Create site
       description: Creates a new site configuration
       operationId: createSite
@@ -546,36 +546,64 @@ paths:
           description: Unauthorized
 components:
   schemas:
-    SiteCreated:
+    CreateSiteRequest:
       properties:
-        site_salesforce_id:
-          deprecated: true
+        salesforce_id:
           type: string
-          example: a06D000000kIkHq
+          deprecated: true
           maxLength: 50
-          description: 'Deprecated: use SiteID instead.'
+          description: 'BSS-provided site identifier. Use site_id for new integrations. Deprecated: use SiteID instead.'
         site_id:
           type: string
-          description: BSS-provided site identifier.
           maxLength: 50
-          example: a06D000000kIkHq
+          description: BSS-provided site identifier (preferred over salesforce_id).
+        state:
+          type: string
+          maxLength: 100
+          description: State
+        street:
+          type: string
+          description: Street address
+          maxLength: 100
+          example: Main Street 123
+        city:
+          type: string
+          description: City
+          maxLength: 100
+          example: Berlin
+        country:
+          example: DE
+          type: string
+          minLength: 2
+          maxLength: 2
+          description: ISO 3166-2 country code
+        account_salesforce_id:
+          type: string
+          deprecated: true
+          maxLength: 50
+          description: 'BSS-provided account identifier. Use account_id for new integrations. Deprecated: use AccountID instead.'
+        account_id:
+          type: string
+          maxLength: 50
+          description: BSS-provided account identifier (preferred over account_salesforce_id).
+        zip:
+          type: string
+          description: ZIP code
+          maxLength: 50
+          example: '12345'
+        name:
+          type: string
+          description: Site name
+          maxLength: 100
+          example: NFON HQ
       type: object
-      description: CreateSiteResponse represents the Create Customer Site response structure. This is named SiteCreated in the OpenAPI spec.
-    Error:
-      properties:
-        request_id:
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
-        code:
-          type: string
-          example: bad_request
-        details:
-          $ref: '#/components/schemas/ErrorDetail'
-        message:
-          type: string
-          example: Invalid request
-      type: object
-      description: Error represents the standard API error response.
+      required:
+      - name
+      - street
+      - zip
+      - country
+      - city
+      description: CreateSiteRequest represents the Create Customer Site request structure.
     UpdateSiteRequest:
       properties:
         country:
@@ -638,64 +666,36 @@ components:
           example: license_assigned
       type: object
       description: ErrorDetail represents error details in the delete response.
-    CreateSiteRequest:
+    Error:
       properties:
-        salesforce_id:
+        request_id:
           type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    SiteCreated:
+      properties:
+        site_salesforce_id:
           deprecated: true
+          type: string
+          example: a06D000000kIkHq
           maxLength: 50
-          description: 'BSS-provided site identifier. Use site_id for new integrations. Deprecated: use SiteID instead.'
+          description: 'Deprecated: use SiteID instead.'
         site_id:
           type: string
+          description: BSS-provided site identifier.
           maxLength: 50
-          description: BSS-provided site identifier (preferred over salesforce_id).
-        state:
-          type: string
-          maxLength: 100
-          description: State
-        street:
-          type: string
-          description: Street address
-          maxLength: 100
-          example: Main Street 123
-        city:
-          type: string
-          description: City
-          maxLength: 100
-          example: Berlin
-        country:
-          example: DE
-          type: string
-          minLength: 2
-          maxLength: 2
-          description: ISO 3166-2 country code
-        account_salesforce_id:
-          type: string
-          deprecated: true
-          maxLength: 50
-          description: 'BSS-provided account identifier. Use account_id for new integrations. Deprecated: use AccountID instead.'
-        account_id:
-          type: string
-          maxLength: 50
-          description: BSS-provided account identifier (preferred over account_salesforce_id).
-        zip:
-          type: string
-          description: ZIP code
-          maxLength: 50
-          example: '12345'
-        name:
-          type: string
-          description: Site name
-          maxLength: 100
-          example: NFON HQ
+          example: a06D000000kIkHq
       type: object
-      required:
-      - name
-      - street
-      - zip
-      - country
-      - city
-      description: CreateSiteRequest represents the Create Customer Site request structure.
+      description: CreateSiteResponse represents the Create Customer Site response structure. This is named SiteCreated in the OpenAPI spec.
   securitySchemes:
     jwt:
       scheme: bearer

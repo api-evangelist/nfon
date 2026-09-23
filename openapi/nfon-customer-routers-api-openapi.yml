@@ -47,6 +47,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 156
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -76,6 +78,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 48
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/routers/{routerId}:
     put:
       requestBody:
@@ -114,6 +118,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 47
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -144,6 +150,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 48
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -178,6 +186,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 157
+      x-summary-source: derived
 components:
   schemas:
     RouterCollectionRequest:
@@ -194,7 +204,27 @@ components:
           format: int32
           type: integer
       type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    NoLinks:
+      type: object
     RouterCollectionData:
+      type: object
+    RouterPUTData:
+      type: object
+    Links:
+      description: Related resource links
       type: object
     RouterPUTRequest:
       properties:
@@ -209,26 +239,6 @@ components:
         itemCount:
           format: int32
           type: integer
-      type: object
-    Links:
-      description: Related resource links
-      type: object
-    NoLinks:
-      type: object
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    RouterPUTData:
       type: object
   securitySchemes:
     jwt:

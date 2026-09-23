@@ -37,6 +37,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 158
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/sites/{siteId}:
     get:
       parameters:
@@ -101,6 +103,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 159
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/sites/{siteId}/site-options:
     get:
       parameters:
@@ -189,6 +193,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 160
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -227,8 +233,35 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 48
+      x-summary-source: derived
 components:
   schemas:
+    SiteOptionsPUTLinks:
+      properties:
+        mediaGateway:
+          $ref: '#/components/schemas/String'
+        fmcNumberSet:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+      type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
     SiteOptionsPUTRequest:
       properties:
         links:
@@ -243,6 +276,19 @@ components:
           format: int32
           type: integer
       type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
     Enum:
       properties:
         notNull:
@@ -259,15 +305,24 @@ components:
           type: object
       type: object
       example: 'OFF'
-    SiteOptionsPUTLinks:
+    Integer:
       properties:
-        mediaGateway:
-          $ref: '#/components/schemas/String'
-        fmcNumberSet:
-          $ref: '#/components/schemas/String'
-        timezone:
-          $ref: '#/components/schemas/String'
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
       type: object
+      description: Subscribers soft limit
     Links:
       description: Related resource links
       type: object
@@ -324,53 +379,6 @@ components:
         uacstaProtocol:
           $ref: '#/components/schemas/Enum'
       type: object
-    Integer:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: int32
-          type: integer
-      example: 1000
-      type: object
-      description: Subscribers soft limit
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
     Boolean:
       properties:
         notNull:

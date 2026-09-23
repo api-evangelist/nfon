@@ -48,6 +48,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 40
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -80,6 +82,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 39
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -132,6 +136,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 129
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/phone-books/{phoneBookId}/visibilities:
     post:
       requestBody:
@@ -169,6 +175,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 41
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -200,6 +208,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 40
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -233,6 +243,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 131
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/phone-books/{phoneBookId}/visibilities/available-phone-extensions:
     get:
       parameters:
@@ -269,6 +281,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 130
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/phone-books/{phoneBookId}/visibilities/{extensionNumber}:
     delete:
       parameters:
@@ -306,6 +320,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 41
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -356,6 +372,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 132
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/phone-books:
     post:
       requestBody:
@@ -388,6 +406,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 40
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -414,6 +434,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 38
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -454,16 +476,26 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 128
+      x-summary-source: derived
 components:
   schemas:
-    NoData:
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
       type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
+      description: Link to the last page
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -493,9 +525,34 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    Links:
-      description: Related resource links
+    NoData:
       type: object
+    PhoneBookPOSTData:
+      properties:
+        vpnNumber:
+          $ref: '#/components/schemas/String'
+        vpnProvider:
+          $ref: '#/components/schemas/String'
+        displayName:
+          example: John Smith
+          type: string
+        displayNumber:
+          example: +49 89 123456
+          type: string
+      type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
     NoLinks:
       type: object
     PhoneBookVisibilityPOSTRequest:
@@ -512,78 +569,11 @@ components:
           format: int32
           type: integer
       type: object
-    PhoneBookPOSTData:
-      properties:
-        vpnNumber:
-          $ref: '#/components/schemas/String'
-        vpnProvider:
-          $ref: '#/components/schemas/String'
-        displayName:
-          example: John Smith
-          type: string
-        displayNumber:
-          example: +49 89 123456
-          type: string
-      type: object
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    PhoneBookPUTData:
-      properties:
-        vpnNumber:
-          $ref: '#/components/schemas/String'
-        vpnProvider:
-          $ref: '#/components/schemas/String'
-        displayName:
-          $ref: '#/components/schemas/String'
-        displayNumber:
-          $ref: '#/components/schemas/String'
-      type: object
     PhoneBookVisibilityPOSTLinks:
       properties:
         phoneExtension:
           example: /api/customers/K1234/phone-extensions/100
           type: string
-      type: object
-    PhoneBookPOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/PhoneBookPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
       type: object
     NfonApiCollectionResponseNonPage:
       properties:
@@ -599,6 +589,20 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
+    PhoneBookPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/PhoneBookPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
     CollectionLinks:
       properties:
         first:
@@ -611,6 +615,26 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
+    Links:
+      description: Related resource links
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    PhoneBookPUTData:
+      properties:
+        vpnNumber:
+          $ref: '#/components/schemas/String'
+        vpnProvider:
+          $ref: '#/components/schemas/String'
+        displayName:
+          $ref: '#/components/schemas/String'
+        displayNumber:
+          $ref: '#/components/schemas/String'
+      type: object
     PhoneBookPUTRequest:
       properties:
         links:

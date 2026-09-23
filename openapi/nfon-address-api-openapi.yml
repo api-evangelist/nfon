@@ -6,13 +6,13 @@ info:
 servers:
 - url: /configuration/v1
 tags:
-- name: address
+- name: Address
 paths:
   /address/onkz/{countrycode}/{postalcode}/{city}/{street}:
     get:
       summary: Lookup ONKZ for an address
       tags:
-      - address
+      - Address
       description: Geocodes the given address via OpenStreetMap Nominatim and determines the German ONKZ (Ortsnetzkennzahl / area code). Only German addresses (countrycode=de) are supported.
       operationId: lookupAddressOnkz
       security:
@@ -83,35 +83,6 @@ paths:
           description: Address or ONKZ not found
 components:
   schemas:
-    AddressCoordinates:
-      properties:
-        longitude:
-          type: number
-          description: Longitude in WGS84
-          format: double
-          example: '11.57549'
-        latitude:
-          type: number
-          description: Latitude in WGS84
-          format: double
-          example: '48.137154'
-      type: object
-      description: AddressCoordinates holds latitude and longitude.
-    AddressStatus:
-      properties:
-        detail:
-          type: string
-          description: Human-readable status message
-          example: ONKZ found
-        code:
-          type: integer
-          description: Status code (200=found, 400=validation error, 404=not found, 500=server error)
-          example: '200'
-      type: object
-      required:
-      - code
-      - detail
-      description: AddressStatus holds the status of the lookup.
     AddressOnkzResponse:
       properties:
         status:
@@ -158,6 +129,35 @@ components:
           example: München
       type: object
       description: AddressDetail holds the resolved address fields.
+    AddressCoordinates:
+      properties:
+        longitude:
+          type: number
+          description: Longitude in WGS84
+          format: double
+          example: '11.57549'
+        latitude:
+          type: number
+          description: Latitude in WGS84
+          format: double
+          example: '48.137154'
+      type: object
+      description: AddressCoordinates holds latitude and longitude.
+    AddressStatus:
+      properties:
+        detail:
+          type: string
+          description: Human-readable status message
+          example: ONKZ found
+        code:
+          type: integer
+          description: Status code (200=found, 400=validation error, 404=not found, 500=server error)
+          example: '200'
+      type: object
+      required:
+      - code
+      - detail
+      description: AddressStatus holds the status of the lookup.
   securitySchemes:
     jwt:
       scheme: bearer

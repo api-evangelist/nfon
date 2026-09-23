@@ -159,21 +159,6 @@ paths:
       description: Creates a trial template for a tenant. Only supports PBX contract types. Trial templates are not supported for nconnect_voice contract type.
 components:
   schemas:
-    Error:
-      properties:
-        request_id:
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
-        code:
-          type: string
-          example: bad_request
-        details:
-          $ref: '#/components/schemas/ErrorDetail'
-        message:
-          type: string
-          example: Invalid request
-      type: object
-      description: Error represents the standard API error response.
     CreateTrialTemplateRequest:
       properties:
         device:
@@ -206,6 +191,75 @@ components:
       required:
       - trunk
       description: CreateTrialTemplateRequest wraps needed fields to start a trial for a customer.
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    TrialTemplateDevice:
+      properties:
+        firmware:
+          type: string
+          description: Firmware version.
+          maxLength: 50
+          example: 1.0.0
+        device_type:
+          type: string
+          description: Device type.
+          maxLength: 12
+          example: DEVICE001
+        unique_identifier:
+          example: '001122334455'
+          type: string
+          minLength: 12
+          maxLength: 12
+          description: Device unique identifier (MAC address).
+      type: object
+      required:
+      - device_type
+      - unique_identifier
+      description: DeviceCreateTrialTemplateRequest represents device configuration for trial template. This is named TrialTemplateDevice in the OpenAPI spec.
+    TrialTemplateTrunk:
+      properties:
+        trunk_number:
+          maximum: 9
+          minimum: 0
+          example: '0'
+          type: integer
+          format: int64
+          description: Trunk number.
+        base_number:
+          $ref: '#/components/schemas/BaseNumber'
+        carrier_name:
+          type: string
+          description: Carrier name.
+          maxLength: 100
+          example: Deutsche Telekom
+        softswitch:
+          type: string
+          description: Softswitch.
+          maxLength: 16
+          example: BTNGN1
+        pilot_reachable:
+          type: boolean
+          description: Pilot reachable.
+          example: 'true'
+      type: object
+      required:
+      - carrier_name
+      - softswitch
+      - base_number
+      description: TrunkCreateTrialTemplateRequest represents trunk configuration for trial template. This is named TrialTemplateTrunk in the OpenAPI spec.
     BaseNumber:
       properties:
         extension:
@@ -243,60 +297,6 @@ components:
           example: license_assigned
       type: object
       description: ErrorDetail represents error details in the delete response.
-    TrialTemplateTrunk:
-      properties:
-        trunk_number:
-          maximum: 9
-          minimum: 0
-          example: '0'
-          type: integer
-          format: int64
-          description: Trunk number.
-        base_number:
-          $ref: '#/components/schemas/BaseNumber'
-        carrier_name:
-          type: string
-          description: Carrier name.
-          maxLength: 100
-          example: Deutsche Telekom
-        softswitch:
-          type: string
-          description: Softswitch.
-          maxLength: 16
-          example: BTNGN1
-        pilot_reachable:
-          type: boolean
-          description: Pilot reachable.
-          example: 'true'
-      type: object
-      required:
-      - carrier_name
-      - softswitch
-      - base_number
-      description: TrunkCreateTrialTemplateRequest represents trunk configuration for trial template. This is named TrialTemplateTrunk in the OpenAPI spec.
-    TrialTemplateDevice:
-      properties:
-        firmware:
-          type: string
-          description: Firmware version.
-          maxLength: 50
-          example: 1.0.0
-        device_type:
-          type: string
-          description: Device type.
-          maxLength: 12
-          example: DEVICE001
-        unique_identifier:
-          example: '001122334455'
-          type: string
-          minLength: 12
-          maxLength: 12
-          description: Device unique identifier (MAC address).
-      type: object
-      required:
-      - device_type
-      - unique_identifier
-      description: DeviceCreateTrialTemplateRequest represents device configuration for trial template. This is named TrialTemplateDevice in the OpenAPI spec.
   securitySchemes:
     jwt:
       scheme: bearer

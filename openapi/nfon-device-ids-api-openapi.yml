@@ -37,6 +37,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 195
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -56,14 +58,37 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 52
+      x-summary-source: derived
 components:
   schemas:
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
       type: object
-      description: Collection response envelope
+      description: Link to the last page
+    DeviceIdPOSTData:
+      properties:
+        deviceIds:
+          type: array
+          items:
+            example: '["00:15:65:A1:B2:C3","00:15:65:D4:E5:F6"]'
+            type: string
+          example:
+          - 00:15:65:A1:B2:C3
+          - 00:15:65:D4:E5:F6
+      type: object
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -93,22 +118,6 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    Links:
-      description: Related resource links
-      type: object
-    DeviceIdPOSTData:
-      properties:
-        deviceIds:
-          type: array
-          items:
-            example: '["00:15:65:A1:B2:C3","00:15:65:D4:E5:F6"]'
-            type: string
-          example:
-          - 00:15:65:A1:B2:C3
-          - 00:15:65:D4:E5:F6
-      type: object
-    NoLinks:
-      type: object
     NfonApiResponse:
       properties:
         links:
@@ -122,35 +131,7 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    DeviceIdPOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/DeviceIdPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+    NoLinks:
       type: object
     NfonApiCollectionResponseNonPage:
       properties:
@@ -166,6 +147,12 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
     CollectionLinks:
       properties:
         first:
@@ -178,6 +165,23 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
+    Links:
+      description: Related resource links
+      type: object
+    DeviceIdPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/DeviceIdPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
   securitySchemes:
     jwt:
       scheme: bearer

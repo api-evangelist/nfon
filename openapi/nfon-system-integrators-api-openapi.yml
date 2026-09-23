@@ -35,6 +35,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 223
+      x-summary-source: derived
   /system-integrators/{systemIntegratorId}:
     get:
       summary: Get system integrator
@@ -228,21 +230,22 @@ paths:
           description: Invalid request
 components:
   schemas:
-    UpdateSystemIntegratorRequestLinks:
+    String:
       properties:
-        defaultRatingProfile:
-          $ref: '#/components/schemas/String'
-        timezone:
-          $ref: '#/components/schemas/String'
-        operator:
-          $ref: '#/components/schemas/String'
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
       type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
+      description: Link to the last page
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -272,52 +275,6 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    Links:
-      description: Related resource links
-      type: object
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    UpdateSystemIntegratorRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/UpdateSystemIntegratorRequestLinks'
-        data:
-          $ref: '#/components/schemas/UpdateSystemIntegratorRequestData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
     UpdateSystemIntegratorRequestData:
       properties:
         contactName:
@@ -341,6 +298,77 @@ components:
         name:
           $ref: '#/components/schemas/String'
       type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    UpdateSystemIntegratorRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/UpdateSystemIntegratorRequestLinks'
+        data:
+          $ref: '#/components/schemas/UpdateSystemIntegratorRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    UpdateSystemIntegratorRequestLinks:
+      properties:
+        defaultRatingProfile:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+        operator:
+          $ref: '#/components/schemas/String'
+      type: object
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    Links:
+      description: Related resource links
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
     Boolean:
       properties:
         notNull:
@@ -357,32 +385,62 @@ components:
           type: boolean
       type: object
       example: false
-    NfonApiCollectionResponseNonPage:
+    CreateSystemIntegratorRequest:
       properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
+        operator:
           type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
+          description: Operator external identifier.
+          example: C1000
+        password:
+          example: SecurePass123!
+          type: string
+          minLength: 12
+          maxLength: 50
+          description: System integrator password (min 12 characters).
+        primary_contact:
+          $ref: '#/components/schemas/PrimaryContact'
+        name:
+          type: string
+          description: System integrator name.
+          maxLength: 100
+          example: Partner Solutions GmbH
+        security_question:
+          example: What is your company name?
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Security question.
+        account_id:
+          type: string
+          description: BSS-provided account identifier (preferred over account_sales_force_id).
+          maxLength: 50
+          example: a06D000000kIkHr
+        account_sales_force_id:
+          deprecated: true
+          type: string
+          example: a06D000000kIkHr
+          maxLength: 50
+          description: 'BSS-provided account identifier. Use account_id for new integrations. Deprecated: use AccountID instead.'
+        security_answer:
+          example: Partner Solutions
+          type: string
+          minLength: 2
+          maxLength: 100
+          description: Security answer.
+        rating_profile:
+          type: string
+          description: Rating profile name.
+          maxLength: 50
+          example: standard
       type: object
-      description: Non-paginated collection response envelope
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
+      required:
+      - name
+      - operator
+      - primary_contact
+      - password
+      - security_question
+      - security_answer
+      description: CreateSystemIntegratorRequest represents the request body for creating a system integrator.
     Contact:
       properties:
         email:
@@ -445,6 +503,14 @@ components:
       - street
       - postal_code
       description: Address is the struct that holds the address in a request. nolint:recvcheck // mixed receivers for zerolog/validation compatibility
+    SystemIntegratorCreated:
+      properties:
+        external_identifier:
+          type: string
+          description: System integrator external identifier.
+          example: S0001
+      type: object
+      description: CreateSystemIntegratorResponse represents the response structure for creating a system integrator. This is named SystemIntegratorCreated in the OpenAPI spec.
     Error:
       properties:
         request_id:
@@ -460,70 +526,6 @@ components:
           example: Invalid request
       type: object
       description: Error represents the standard API error response.
-    CreateSystemIntegratorRequest:
-      properties:
-        operator:
-          type: string
-          description: Operator external identifier.
-          example: C1000
-        password:
-          example: SecurePass123!
-          type: string
-          minLength: 12
-          maxLength: 50
-          description: System integrator password (min 12 characters).
-        primary_contact:
-          $ref: '#/components/schemas/PrimaryContact'
-        name:
-          type: string
-          description: System integrator name.
-          maxLength: 100
-          example: Partner Solutions GmbH
-        security_question:
-          example: What is your company name?
-          type: string
-          minLength: 2
-          maxLength: 100
-          description: Security question.
-        account_id:
-          type: string
-          description: BSS-provided account identifier (preferred over account_sales_force_id).
-          maxLength: 50
-          example: a06D000000kIkHr
-        account_sales_force_id:
-          deprecated: true
-          type: string
-          example: a06D000000kIkHr
-          maxLength: 50
-          description: 'BSS-provided account identifier. Use account_id for new integrations. Deprecated: use AccountID instead.'
-        security_answer:
-          example: Partner Solutions
-          type: string
-          minLength: 2
-          maxLength: 100
-          description: Security answer.
-        rating_profile:
-          type: string
-          description: Rating profile name.
-          maxLength: 50
-          example: standard
-      type: object
-      required:
-      - name
-      - operator
-      - primary_contact
-      - password
-      - security_question
-      - security_answer
-      description: CreateSystemIntegratorRequest represents the request body for creating a system integrator.
-    PrimaryContact:
-      description: PrimaryContactParams represents primary contact with address. This is named PrimaryContact in the OpenAPI spec.
-      allOf:
-      - $ref: '#/components/schemas/Contact'
-      - properties:
-          address:
-            $ref: '#/components/schemas/Address'
-        type: object
     ErrorDetail:
       properties:
         message:
@@ -534,14 +536,14 @@ components:
           example: license_assigned
       type: object
       description: ErrorDetail represents error details in the delete response.
-    SystemIntegratorCreated:
-      properties:
-        external_identifier:
-          type: string
-          description: System integrator external identifier.
-          example: S0001
-      type: object
-      description: CreateSystemIntegratorResponse represents the response structure for creating a system integrator. This is named SystemIntegratorCreated in the OpenAPI spec.
+    PrimaryContact:
+      description: PrimaryContactParams represents primary contact with address. This is named PrimaryContact in the OpenAPI spec.
+      allOf:
+      - $ref: '#/components/schemas/Contact'
+      - properties:
+          address:
+            $ref: '#/components/schemas/Address'
+        type: object
   securitySchemes:
     jwt:
       scheme: bearer

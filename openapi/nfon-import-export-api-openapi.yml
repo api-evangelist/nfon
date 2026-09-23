@@ -8,7 +8,7 @@ servers:
 tags:
 - x-displayName: Import Export
   description: Bulk import and export operations
-  name: import-export
+  name: Import Export
 paths:
   /tenants/{tenant}/virtual-fax-extensions/bulk:
     get:
@@ -27,7 +27,7 @@ paths:
         description: ''
         name: sanitize
       tags:
-      - import-export
+      - Import Export
       description: Export all virtual fax extensions for a tenant as CSV or Excel file (synchronous)
       operationId: bulkExportVirtualFaxExtensions
       security:
@@ -179,7 +179,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - import-export
+      - Import Export
       requestBody:
         content:
           application/json:
@@ -357,7 +357,7 @@ paths:
         description: ''
         name: sanitize
       tags:
-      - import-export
+      - Import Export
       description: Export all phone book entries for a tenant as CSV or Excel file (synchronous)
       operationId: bulkExportPhoneBooks
       security:
@@ -505,7 +505,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - import-export
+      - Import Export
       requestBody:
         content:
           application/json:
@@ -691,7 +691,7 @@ paths:
         description: ''
         name: limit
       tags:
-      - import-export
+      - Import Export
       description: List all async jobs for a tenant with optional type and status filtering
       operationId: listJobs
       security:
@@ -820,7 +820,7 @@ paths:
         description: ''
         name: filter
       tags:
-      - import-export
+      - Import Export
       description: Export all phone extensions for a tenant as CSV or Excel file (synchronous)
       operationId: bulkExportPhoneExtensions
       security:
@@ -972,7 +972,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - import-export
+      - Import Export
       requestBody:
         content:
           application/json:
@@ -1150,7 +1150,7 @@ paths:
         description: ''
         name: sanitize
       tags:
-      - import-export
+      - Import Export
       description: Export all speed dials for a tenant as CSV or Excel file (synchronous)
       operationId: bulkExportSpeedDials
       security:
@@ -1302,7 +1302,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - import-export
+      - Import Export
       requestBody:
         content:
           application/json:
@@ -1465,21 +1465,6 @@ paths:
       description: Submit a bulk import job for speed dials (asynchronous)
 components:
   schemas:
-    Error:
-      properties:
-        request_id:
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
-        code:
-          type: string
-          example: bad_request
-        details:
-          $ref: '#/components/schemas/ErrorDetail'
-        message:
-          type: string
-          example: Invalid request
-      type: object
-      description: Error represents the standard API error response.
     SubmitJobResponse:
       properties:
         status:
@@ -1497,6 +1482,37 @@ components:
           example: 550e8400-e29b-41d4-a716-446655440000
       type: object
       description: ImportResponse represents the response after submitting an import job. This is named SubmitJobResponse in the OpenAPI spec.
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    ImportMetadata:
+      properties:
+        delete:
+          type: boolean
+          description: Removes existing records before importing. Only supported for 'contact' and 'speeddial' resource types.
+      type: object
+      description: ImportMetadata represents the optional JSON metadata in a bulk import request.
+    BulkImportRequest:
+      properties:
+        import:
+          $ref: '#/components/schemas/ImportMetadata'
+        file:
+          type: string
+          description: CSV file containing import data (max 10MB)
+      type: object
+      description: BulkImportRequest represents the multipart form data for bulk import operations.
     ErrorDetail:
       properties:
         message:
@@ -1507,22 +1523,6 @@ components:
           example: license_assigned
       type: object
       description: ErrorDetail represents error details in the delete response.
-    BulkImportRequest:
-      properties:
-        import:
-          $ref: '#/components/schemas/ImportMetadata'
-        file:
-          type: string
-          description: CSV file containing import data (max 10MB)
-      type: object
-      description: BulkImportRequest represents the multipart form data for bulk import operations.
-    ImportMetadata:
-      properties:
-        delete:
-          type: boolean
-          description: Removes existing records before importing. Only supported for 'contact' and 'speeddial' resource types.
-      type: object
-      description: ImportMetadata represents the optional JSON metadata in a bulk import request.
   securitySchemes:
     jwt:
       scheme: bearer

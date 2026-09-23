@@ -76,7 +76,8 @@
     "nfon-pbx-configuration-api-openapi.json: tagged paths GET /integration-types/{integrationId} -> Integration Types",
     "nfon-pbx-configuration-api-openapi.json: declared missing tag: Integration Types",
     "nfon-pbx-configuration-api-openapi.json: declared missing tag: address",
-    "nfon-pbx-configuration-api-openapi.json: declared missing tag: queue-profiles"
+    "nfon-pbx-configuration-api-openapi.json: declared missing tag: queue-profiles",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "nfon-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",

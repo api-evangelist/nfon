@@ -47,6 +47,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 31
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -72,6 +74,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 5
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/contracts/{salesForceId}:
     put:
       requestBody:
@@ -105,6 +109,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 6
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -130,6 +136,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 3
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -171,14 +179,40 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 32
+      x-summary-source: derived
 components:
   schemas:
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+    CustomerContractPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/CustomerContractPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
-      description: Collection response envelope
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -208,25 +242,6 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    CustomerContractRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/CustomerContractData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    Links:
-      description: Related resource links
-      type: object
-    NoLinks:
-      type: object
     NfonApiResponse:
       properties:
         links:
@@ -240,35 +255,13 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
+    NoLinks:
       type: object
-      description: Link to the last page
-    CustomerContractPUTRequest:
+    CustomerContractPUTData:
       properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/CustomerContractPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+        name:
+          example: Enterprise Plan
+          type: string
       type: object
     NfonApiCollectionResponseNonPage:
       properties:
@@ -284,11 +277,30 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
-    CustomerContractPUTData:
+    CustomerContractRequest:
       properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/CustomerContractData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CustomerContractData:
+      properties:
+        salesForceId:
+          $ref: '#/components/schemas/String'
+        subId:
+          example: 1
+          format: int32
+          type: integer
         name:
-          example: Enterprise Plan
-          type: string
+          $ref: '#/components/schemas/String'
       type: object
     CollectionLinks:
       properties:
@@ -302,17 +314,15 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
-    CustomerContractData:
-      properties:
-        salesForceId:
-          $ref: '#/components/schemas/String'
-        subId:
-          example: 1
-          format: int32
-          type: integer
-        name:
-          $ref: '#/components/schemas/String'
+    Links:
+      description: Related resource links
       type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
   securitySchemes:
     jwt:
       scheme: bearer

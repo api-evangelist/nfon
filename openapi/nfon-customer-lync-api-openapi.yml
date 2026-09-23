@@ -47,6 +47,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 122
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -80,6 +82,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 37
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/lync/sites:
     get:
       parameters:
@@ -109,6 +113,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 123
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -134,6 +140,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 39
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/lync/sites/{lyncSiteId}:
     put:
       requestBody:
@@ -168,6 +176,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 38
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -194,6 +204,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 37
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -238,6 +250,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 124
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/lync/sites/{lyncSiteId}/used-in:
     get:
       parameters:
@@ -283,6 +297,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get usages
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/lync/gateways:
     get:
       parameters:
@@ -314,6 +330,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 121
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -339,49 +357,31 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 38
+      x-summary-source: derived
 components:
   schemas:
-    LyncGatewayData:
+    LyncSitePOSTLinks:
       properties:
-        gatewayIp:
-          $ref: '#/components/schemas/String'
-        description:
-          $ref: '#/components/schemas/String'
+        gateway:
+          type: string
       type: object
-    LyncGatewayPOSTRequest:
+    String:
       properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/LyncGatewayPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
       type: object
-    LyncSitePOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/LyncSitePOSTLinks'
-        data:
-          $ref: '#/components/schemas/LyncSitePOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
+      description: Link to the last page
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -411,10 +411,33 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    Links:
-      description: Related resource links
+    LyncSitePUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/LyncSitePUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
-    NoLinks:
+    LyncGatewayRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/LyncGatewayData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
     NfonApiResponse:
       properties:
@@ -429,48 +452,21 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    String:
+    LyncSitePOSTData:
       properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    LyncSitePOSTLinks:
-      properties:
-        gateway:
-          type: string
-      type: object
-    LyncGatewayPOSTData:
-      properties:
-        gatewayIp:
-          example: 10.0.0.50
+        domain:
           type: string
         description:
-          $ref: '#/components/schemas/String'
+          type: string
       type: object
-    LyncSitePUTRequest:
+    NoLinks:
+      type: object
+    LyncSitePUTData:
       properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/LyncSitePUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+        domain:
+          $ref: '#/components/schemas/String'
+        description:
+          $ref: '#/components/schemas/String'
       type: object
     NfonApiCollectionResponseNonPage:
       properties:
@@ -486,19 +482,40 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
-    LyncSitePUTData:
+    LyncGatewayPOSTRequest:
       properties:
-        domain:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/LyncGatewayPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    LyncGatewayData:
+      properties:
+        gatewayIp:
           $ref: '#/components/schemas/String'
         description:
           $ref: '#/components/schemas/String'
       type: object
-    LyncSitePOSTData:
+    LyncSitePOSTRequest:
       properties:
-        domain:
-          type: string
-        description:
-          type: string
+        links:
+          $ref: '#/components/schemas/LyncSitePOSTLinks'
+        data:
+          $ref: '#/components/schemas/LyncSitePOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
     CollectionLinks:
       properties:
@@ -512,19 +529,22 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
-    LyncGatewayRequest:
+    Links:
+      description: Related resource links
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    LyncGatewayPOSTData:
       properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/LyncGatewayData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+        gatewayIp:
+          example: 10.0.0.50
+          type: string
+        description:
+          $ref: '#/components/schemas/String'
       type: object
   securitySchemes:
     jwt:

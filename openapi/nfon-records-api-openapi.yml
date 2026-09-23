@@ -18,13 +18,13 @@ info:
 servers:
 - url: https://api.nfon.com/call-history
 tags:
-- name: records
+- name: Records
   description: Call Records Management
 paths:
   /records:
     get:
       tags:
-      - records
+      - Records
       summary: Get, stream, and search call records
       description: 'Get the latest call records. They can be filtered by number, name, time or type.
 
@@ -240,9 +240,11 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/ServerError'
+      operationId: getRecords
+      x-operation-id-source: derived
     delete:
       tags:
-      - records
+      - Records
       summary: Delete multiple call records
       description: Delete some or all call records (depending on the filters)
       security:
@@ -309,10 +311,12 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/ServerError'
+      operationId: deleteRecords
+      x-operation-id-source: derived
   /records/{uuid}:
     get:
       tags:
-      - records
+      - Records
       summary: Get call record details
       description: Return call record details for a given call record uuid
       security:
@@ -350,9 +354,11 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/ServerError'
+      operationId: getRecordsByUuid
+      x-operation-id-source: derived
     delete:
       tags:
-      - records
+      - Records
       summary: Delete single call record
       description: Deletes the call record for the given call record uuid
       security:
@@ -373,10 +379,12 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/ServerError'
+      operationId: deleteRecordsByUuid
+      x-operation-id-source: derived
 components:
   responses:
-    BadRequest:
-      description: One or more request parameters failed validation
+    ServerError:
+      description: Unexpected server error
       headers:
         X-Request-Id:
           schema:
@@ -397,8 +405,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/error'
-    ServerError:
-      description: Unexpected server error
+    BadRequest:
+      description: One or more request parameters failed validation
       headers:
         X-Request-Id:
           schema:
@@ -409,8 +417,8 @@ components:
           schema:
             $ref: '#/components/schemas/error'
   examples:
-    callWithSummaryProcessing:
-      summary: call with summary (processing not done yet)
+    callWithSummaryCompleted:
+      summary: call with summary (completed)
       value:
         uuid: 110e8400-e29b-41d4-a716-446655440011
         duration: 30
@@ -425,17 +433,35 @@ components:
           context: K9999
         status: answered
         created: '2025-06-03T10:22:24Z'
+        updated: '2025-06-03T10:22:29Z'
         transcription:
-          available: false
-    missedGroupCall:
-      summary: missed group call
+          available: true
+          transcript:
+          - time: 1970-07-22 11:13:10+01:00
+            source: caller
+            event: start
+          - time: 1970-07-22 11:13:12+01:00
+            source: caller
+            event: speech
+            text: Hello Bob
+          - time: 1970-07-22 11:13:14+01:00
+            source: callee
+            event: speech
+            text: Hello Alice
+          - time: 1970-07-22 11:13:15+01:00
+            source: caller
+            event: stop
+          summary: Alice called Bob to say hello.
+          language_autodetect: true
+    callForwardingTransferMultiple:
+      summary: call forwarding/transfer (multiple)
       value:
-        uuid: 330e8400-e29b-41d4-a716-446655440033
-        duration: 0
+        uuid: 330e8400-e29b-41d4-a716-446655440034
+        duration: 25
         direction: inbound
         caller:
-          name: Charlie
-          number: '1003'
+          name: Dave
+          number: '1004'
           context: K9999
         callee:
           name: Alice
@@ -443,12 +469,16 @@ components:
           context: K9999
         history:
         - callee:
-            name: Test Group
-            number: '10'
+            name: Bob
+            number: '1002'
             context: K9999
-            destination_type: group
-          updated: '2025-06-03T10:25:26Z'
-        status: cancelled
+          updated: '2025-06-03T10:25:45Z'
+        - caller:
+            name: Charlie
+            number: '1003'
+            context: K9999
+          updated: '2025-06-03T10:25:55Z'
+        status: answered
         created: '2025-06-03T10:25:25Z'
     callWithoutSummary:
       summary: call (without summary)
@@ -488,15 +518,15 @@ components:
           updated: '2025-06-03T10:25:45Z'
         status: answered
         created: '2025-06-03T10:25:25Z'
-    callForwardingTransferMultiple:
-      summary: call forwarding/transfer (multiple)
+    missedGroupCall:
+      summary: missed group call
       value:
-        uuid: 330e8400-e29b-41d4-a716-446655440034
-        duration: 25
+        uuid: 330e8400-e29b-41d4-a716-446655440033
+        duration: 0
         direction: inbound
         caller:
-          name: Dave
-          number: '1004'
+          name: Charlie
+          number: '1003'
           context: K9999
         callee:
           name: Alice
@@ -504,19 +534,15 @@ components:
           context: K9999
         history:
         - callee:
-            name: Bob
-            number: '1002'
+            name: Test Group
+            number: '10'
             context: K9999
-          updated: '2025-06-03T10:25:45Z'
-        - caller:
-            name: Charlie
-            number: '1003'
-            context: K9999
-          updated: '2025-06-03T10:25:55Z'
-        status: answered
+            destination_type: group
+          updated: '2025-06-03T10:25:26Z'
+        status: cancelled
         created: '2025-06-03T10:25:25Z'
-    callWithSummaryCompleted:
-      summary: call with summary (completed)
+    callWithSummaryProcessing:
+      summary: call with summary (processing not done yet)
       value:
         uuid: 110e8400-e29b-41d4-a716-446655440011
         duration: 30
@@ -531,34 +557,9 @@ components:
           context: K9999
         status: answered
         created: '2025-06-03T10:22:24Z'
-        updated: '2025-06-03T10:22:29Z'
         transcription:
-          available: true
-          transcript:
-          - time: 1970-07-22 11:13:10+01:00
-            source: caller
-            event: start
-          - time: 1970-07-22 11:13:12+01:00
-            source: caller
-            event: speech
-            text: Hello Bob
-          - time: 1970-07-22 11:13:14+01:00
-            source: callee
-            event: speech
-            text: Hello Alice
-          - time: 1970-07-22 11:13:15+01:00
-            source: caller
-            event: stop
-          summary: Alice called Bob to say hello.
-          language_autodetect: true
+          available: false
   schemas:
-    error:
-      type: object
-      properties:
-        error:
-          type: string
-      examples:
-      - error: some error message
     record:
       type: object
       properties:
@@ -737,6 +738,13 @@ components:
         crm:
           type: string
           description: '`optional` Additional CRM data related to the call.'
+    error:
+      type: object
+      properties:
+        error:
+          type: string
+      examples:
+      - error: some error message
   securitySchemes:
     bearer_auth:
       type: http

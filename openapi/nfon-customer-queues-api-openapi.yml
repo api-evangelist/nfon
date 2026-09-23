@@ -39,6 +39,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 146
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/queue-services/available-general-announcements:
     get:
       parameters:
@@ -70,6 +72,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 142
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/queue-services/available-music-on-hold-announcements:
     get:
       parameters:
@@ -101,6 +105,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 143
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/queue-services/{serviceNumber}/members:
     get:
       parameters:
@@ -135,6 +141,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 150
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -171,6 +179,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 46
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/queue-services/{serviceNumber}/members/{extensionNumber}:
     put:
       requestBody:
@@ -215,6 +225,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 45
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -251,6 +263,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 46
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -291,6 +305,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 151
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/queue-services/{serviceNumber}/timeout:
     put:
       requestBody:
@@ -331,6 +347,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 52
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -363,6 +381,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 52
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -409,6 +429,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 182
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/queue-services/{serviceNumber}:
     put:
       requestBody:
@@ -449,6 +471,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 41
+      x-summary-source: derived
     delete:
       parameters:
       - schema:
@@ -481,6 +505,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 42
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -540,6 +566,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 135
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/queue-services/{serviceNumber}/inbound-trunk-numbers/{didNumber}:
     delete:
       parameters:
@@ -577,6 +605,8 @@ paths:
           description: Deleted
         '403':
           description: Insufficient permissions
+      summary: Delete 43
+      x-summary-source: derived
     get:
       parameters:
       - schema:
@@ -622,6 +652,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 137
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/queue-services/{serviceNumber}/inbound-trunk-numbers:
     get:
       parameters:
@@ -661,6 +693,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 136
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -697,6 +731,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 43
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/queue-services:
     get:
       parameters:
@@ -751,6 +787,8 @@ paths:
           description: Success
         '403':
           description: Insufficient permissions
+      summary: Get 134
+      x-summary-source: derived
     post:
       requestBody:
         content:
@@ -782,6 +820,8 @@ paths:
           description: Validation error
         '201':
           description: Created
+      summary: Post 42
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/queue-services/{serviceNumber}/destination-on-rejection:
     get:
       parameters:
@@ -819,6 +859,8 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 148
+      x-summary-source: derived
     put:
       requestBody:
         content:
@@ -858,6 +900,8 @@ paths:
           description: Validation error
         '403':
           description: Insufficient permissions
+      summary: Put 43
+      x-summary-source: derived
   /tenants/{participantExternalIdentifier}/targets/queue-services/available-destinations-on-timeout:
     get:
       parameters:
@@ -889,107 +933,10 @@ paths:
           description: Insufficient permissions
         '404':
           description: Not found
+      summary: Get 178
+      x-summary-source: derived
 components:
   schemas:
-    TimeoutRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/TimeoutLinks'
-        data:
-          $ref: '#/components/schemas/Data'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    QueueMemberLinks:
-      properties:
-        phoneExtension:
-          $ref: '#/components/schemas/String'
-      type: object
-    InboundTrunkNumberRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/InboundTrunkNumberLinks'
-        data:
-          $ref: '#/components/schemas/InboundTrunkNumberData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NfonApiCollectionResponseNonPage:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
-      type: object
-      description: Non-paginated collection response envelope
-    Links:
-      description: Related resource links
-      type: object
-    DestinationOnRejectionRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/RequestLinks'
-        data:
-          $ref: '#/components/schemas/Data'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    Integer:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: int32
-          type: integer
-      example: 1000
-      type: object
-      description: Subscribers soft limit
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
-    RequestLinks:
-      properties:
-        destinationOnRejection:
-          type: string
-      type: object
     QueueData:
       properties:
         weight:
@@ -1029,18 +976,7 @@ components:
         direction:
           $ref: '#/components/schemas/Enum'
       type: object
-    QueueMemberData:
-      properties:
-        penalty:
-          $ref: '#/components/schemas/Integer'
-        displayName:
-          $ref: '#/components/schemas/String'
-        extensionNumber:
-          $ref: '#/components/schemas/String'
-      type: object
-    ChildHref:
-      type: object
-    String:
+    Date:
       properties:
         notNull:
           type: boolean
@@ -1053,25 +989,44 @@ components:
         presentNull:
           type: boolean
         value:
+          format: date-time
           type: string
       type: object
-      description: Link to the last page
-    Boolean:
+    NfonApiCollectionResponsePage:
       properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: boolean
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
       type: object
-      example: false
+      description: Paginated collection response envelope
+    InboundTrunkNumberData:
+      properties:
+        didExtension:
+          example: '123456'
+          type: string
+      type: object
     InboundTrunkNumberLinks:
       properties:
         trunk:
@@ -1091,12 +1046,76 @@ components:
           format: int32
           type: integer
       type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+    QueueMemberLinks:
+      properties:
+        phoneExtension:
+          $ref: '#/components/schemas/String'
       type: object
-      description: Collection response envelope
+    DestinationOnRejectionRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/RequestLinks'
+        data:
+          $ref: '#/components/schemas/Data'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    TimeoutRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/TimeoutLinks'
+        data:
+          $ref: '#/components/schemas/Data'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    RequestLinks:
+      properties:
+        destinationOnRejection:
+          type: string
+      type: object
     QueueLinks:
       properties:
         availableMusicOnHoldAnnouncements:
@@ -1128,6 +1147,64 @@ components:
           writeOnly: true
           type: string
       type: object
+    QueueMemberData:
+      properties:
+        penalty:
+          $ref: '#/components/schemas/Integer'
+        displayName:
+          $ref: '#/components/schemas/String'
+        extensionNumber:
+          $ref: '#/components/schemas/String'
+      type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    InboundTrunkNumberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/InboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    TimeoutLinks:
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
     Enum:
       properties:
         notNull:
@@ -1144,38 +1221,7 @@ components:
           type: object
       type: object
       example: 'OFF'
-    NfonApiCollectionResponsePage:
-      properties:
-        links:
-          $ref: '#/components/schemas/CollectionLinks'
-        offset:
-          example: 0
-          description: Current page offset
-          format: int64
-          type: integer
-        total:
-          example: 42
-          description: Total number of items in the collection
-          format: int64
-          type: integer
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: Items in this page
-        size:
-          example: 20
-          description: Number of items in this page
-          format: int32
-          type: integer
-        href:
-          description: Self-link to this collection
-          type: string
-      type: object
-      description: Paginated collection response envelope
-    TimeoutLinks:
-      type: object
-    Date:
+    Integer:
       properties:
         notNull:
           type: boolean
@@ -1188,27 +1234,13 @@ components:
         presentNull:
           type: boolean
         value:
-          format: date-time
-          type: string
+          format: int32
+          type: integer
+      example: 1000
       type: object
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    InboundTrunkNumberData:
-      properties:
-        didExtension:
-          example: '123456'
-          type: string
+      description: Subscribers soft limit
+    Links:
+      description: Related resource links
       type: object
     Data:
       properties:
@@ -1238,6 +1270,20 @@ components:
         itemCount:
           format: int32
           type: integer
+      type: object
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    ChildHref:
       type: object
   securitySchemes:
     jwt:
