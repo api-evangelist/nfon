@@ -190,12 +190,35 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    NoLinks:
+      type: object
+    Links:
+      description: Related resource links
+      type: object
+    RouterCollectionData:
+      type: object
     RouterCollectionRequest:
       properties:
         links:
           $ref: '#/components/schemas/NoLinks'
         data:
           $ref: '#/components/schemas/RouterCollectionData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    RouterPUTData:
+      type: object
+    RouterPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/RouterPUTData'
         items:
           items:
             type: object
@@ -217,29 +240,6 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    NoLinks:
-      type: object
-    RouterCollectionData:
-      type: object
-    RouterPUTData:
-      type: object
-    Links:
-      description: Related resource links
-      type: object
-    RouterPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/RouterPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
   securitySchemes:
     jwt:
       scheme: bearer

@@ -425,6 +425,43 @@ paths:
       description: Creates a new trunk for a tenant
 components:
   schemas:
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
+    BaseNumber:
+      properties:
+        extension:
+          type: string
+          maxLength: 255
+          description: Extension (deprecated, ignored for trunk base numbers)
+        country_code:
+          type: string
+          description: ISO country code (1-3 digits, no leading zeros)
+          maxLength: 255
+          example: '49'
+        national_destination_code:
+          type: string
+          description: National destination code
+          maxLength: 255
+          example: '30'
+        pilot:
+          type: string
+          description: Pilot number
+          maxLength: 255
+          example: '12345'
+      type: object
+      required:
+      - country_code
+      - national_destination_code
+      - pilot
+      description: BaseNumberCreateTrunkRequest represents base number for trunk creation. This is named BaseNumber in the OpenAPI spec.
     CreateTenantTrunkRequest:
       properties:
         drop_extension:
@@ -546,21 +583,6 @@ components:
       - shorten_on_zero
       - softswitch
       description: UpdateTenantTrunkRequest represents the request to update a trunk for a tenant. The tenant identifier is provided in the URL path /tenants/{tenant}/trunks/{trunkSalesforceID}.
-    Error:
-      properties:
-        request_id:
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
-        code:
-          type: string
-          example: bad_request
-        details:
-          $ref: '#/components/schemas/ErrorDetail'
-        message:
-          type: string
-          example: Invalid request
-      type: object
-      description: Error represents the standard API error response.
     TrunkResponse:
       properties:
         trunk_salesforce_id:
@@ -576,43 +598,21 @@ components:
           example: a06D000000kIkHs
       type: object
       description: TrunkResponse represents the configure Trunk response structure.
-    BaseNumber:
+    Error:
       properties:
-        extension:
+        request_id:
           type: string
-          maxLength: 255
-          description: Extension (deprecated, ignored for trunk base numbers)
-        country_code:
-          type: string
-          description: ISO country code (1-3 digits, no leading zeros)
-          maxLength: 255
-          example: '49'
-        national_destination_code:
-          type: string
-          description: National destination code
-          maxLength: 255
-          example: '30'
-        pilot:
-          type: string
-          description: Pilot number
-          maxLength: 255
-          example: '12345'
-      type: object
-      required:
-      - country_code
-      - national_destination_code
-      - pilot
-      description: BaseNumberCreateTrunkRequest represents base number for trunk creation. This is named BaseNumber in the OpenAPI spec.
-    ErrorDetail:
-      properties:
-        message:
-          type: string
-          example: Cannot delete license that is currently assigned to a user
+          example: 550e8400-e29b-41d4-a716-446655440000
         code:
           type: string
-          example: license_assigned
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
       type: object
-      description: ErrorDetail represents error details in the delete response.
+      description: Error represents the standard API error response.
   securitySchemes:
     jwt:
       scheme: bearer

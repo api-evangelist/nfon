@@ -221,6 +221,24 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    Integer:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
+      type: object
+      description: Subscribers soft limit
     String:
       properties:
         notNull:
@@ -237,6 +255,39 @@ components:
           type: string
       type: object
       description: Link to the last page
+    Enum:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: object
+      type: object
+      example: 'OFF'
+    Links:
+      description: Related resource links
+      type: object
+    TrunkPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/TrunkPUTLinks'
+        data:
+          $ref: '#/components/schemas/TrunkPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -266,6 +317,37 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
+    TrunkPUTData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        hairpinCallsEnabled:
+          $ref: '#/components/schemas/Boolean'
+        clipNoScreeningEnabled:
+          $ref: '#/components/schemas/Boolean'
+        salesForceId:
+          $ref: '#/components/schemas/String'
+        trunkNumber:
+          $ref: '#/components/schemas/Integer'
+      type: object
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
     TrunkPUTLinks:
       properties:
         outboundBlacklistGlobalProfile:
@@ -281,32 +363,6 @@ components:
         inboundBlacklistGlobalProfile:
           $ref: '#/components/schemas/String'
       type: object
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    TrunkPUTData:
-      properties:
-        suppressLineno:
-          $ref: '#/components/schemas/Enum'
-        hairpinCallsEnabled:
-          $ref: '#/components/schemas/Boolean'
-        clipNoScreeningEnabled:
-          $ref: '#/components/schemas/Boolean'
-        salesForceId:
-          $ref: '#/components/schemas/String'
-        trunkNumber:
-          $ref: '#/components/schemas/Integer'
-      type: object
     NfonApiCollectionResponseNonPage:
       properties:
         links:
@@ -321,75 +377,6 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
-    Enum:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: object
-      type: object
-      example: 'OFF'
-    TrunkPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/TrunkPUTLinks'
-        data:
-          $ref: '#/components/schemas/TrunkPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    Integer:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: int32
-          type: integer
-      example: 1000
-      type: object
-      description: Subscribers soft limit
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
-    Links:
-      description: Related resource links
-      type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
     Boolean:
       properties:
         notNull:
@@ -406,6 +393,19 @@ components:
           type: boolean
       type: object
       example: false
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
   securitySchemes:
     jwt:
       scheme: bearer

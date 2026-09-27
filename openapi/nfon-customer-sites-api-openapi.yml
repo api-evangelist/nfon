@@ -237,15 +237,24 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SiteOptionsPUTLinks:
+    Integer:
       properties:
-        mediaGateway:
-          $ref: '#/components/schemas/String'
-        fmcNumberSet:
-          $ref: '#/components/schemas/String'
-        timezone:
-          $ref: '#/components/schemas/String'
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
       type: object
+      description: Subscribers soft limit
     String:
       properties:
         notNull:
@@ -276,19 +285,6 @@ components:
           format: int32
           type: integer
       type: object
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
     Enum:
       properties:
         notNull:
@@ -305,27 +301,6 @@ components:
           type: object
       type: object
       example: 'OFF'
-    Integer:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: int32
-          type: integer
-      example: 1000
-      type: object
-      description: Subscribers soft limit
-    Links:
-      description: Related resource links
-      type: object
     SiteOptionsPUTData:
       properties:
         ldapUsername:
@@ -379,6 +354,18 @@ components:
         uacstaProtocol:
           $ref: '#/components/schemas/Enum'
       type: object
+    Links:
+      description: Related resource links
+      type: object
+    SiteOptionsPUTLinks:
+      properties:
+        mediaGateway:
+          $ref: '#/components/schemas/String'
+        fmcNumberSet:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+      type: object
     Boolean:
       properties:
         notNull:
@@ -395,6 +382,19 @@ components:
           type: boolean
       type: object
       example: false
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
   securitySchemes:
     jwt:
       scheme: bearer

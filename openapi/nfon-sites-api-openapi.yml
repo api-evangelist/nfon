@@ -546,6 +546,83 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    SiteCreated:
+      properties:
+        site_salesforce_id:
+          deprecated: true
+          type: string
+          example: a06D000000kIkHq
+          maxLength: 50
+          description: 'Deprecated: use SiteID instead.'
+        site_id:
+          type: string
+          description: BSS-provided site identifier.
+          maxLength: 50
+          example: a06D000000kIkHq
+      type: object
+      description: CreateSiteResponse represents the Create Customer Site response structure. This is named SiteCreated in the OpenAPI spec.
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
+    UpdateSiteRequest:
+      properties:
+        country:
+          example: DE
+          type: string
+          minLength: 2
+          maxLength: 2
+          description: ISO 3166-2 country code
+        zip:
+          type: string
+          description: ZIP code
+          maxLength: 50
+          example: '12345'
+        name:
+          type: string
+          description: Site name
+          maxLength: 100
+          example: NFON HQ
+        account_salesforce_id:
+          deprecated: true
+          type: string
+          example: a06D000000kIkHr
+          maxLength: 50
+          description: 'BSS-provided account identifier. Use account_id for new integrations. Deprecated: use AccountID instead.'
+        account_id:
+          type: string
+          description: BSS-provided account identifier (preferred over account_salesforce_id).
+          maxLength: 50
+          example: a06D000000kIkHr
+        state:
+          type: string
+          description: State
+          maxLength: 100
+          example: Berlin
+        street:
+          type: string
+          description: Street address
+          maxLength: 100
+          example: Main Street 123
+        city:
+          type: string
+          description: City
+          maxLength: 100
+          example: Berlin
+      type: object
+      required:
+      - name
+      - street
+      - zip
+      - country
+      - city
+      description: UpdateSiteRequest represents the update site request.
     CreateSiteRequest:
       properties:
         salesforce_id:
@@ -604,68 +681,6 @@ components:
       - country
       - city
       description: CreateSiteRequest represents the Create Customer Site request structure.
-    UpdateSiteRequest:
-      properties:
-        country:
-          example: DE
-          type: string
-          minLength: 2
-          maxLength: 2
-          description: ISO 3166-2 country code
-        zip:
-          type: string
-          description: ZIP code
-          maxLength: 50
-          example: '12345'
-        name:
-          type: string
-          description: Site name
-          maxLength: 100
-          example: NFON HQ
-        account_salesforce_id:
-          deprecated: true
-          type: string
-          example: a06D000000kIkHr
-          maxLength: 50
-          description: 'BSS-provided account identifier. Use account_id for new integrations. Deprecated: use AccountID instead.'
-        account_id:
-          type: string
-          description: BSS-provided account identifier (preferred over account_salesforce_id).
-          maxLength: 50
-          example: a06D000000kIkHr
-        state:
-          type: string
-          description: State
-          maxLength: 100
-          example: Berlin
-        street:
-          type: string
-          description: Street address
-          maxLength: 100
-          example: Main Street 123
-        city:
-          type: string
-          description: City
-          maxLength: 100
-          example: Berlin
-      type: object
-      required:
-      - name
-      - street
-      - zip
-      - country
-      - city
-      description: UpdateSiteRequest represents the update site request.
-    ErrorDetail:
-      properties:
-        message:
-          type: string
-          example: Cannot delete license that is currently assigned to a user
-        code:
-          type: string
-          example: license_assigned
-      type: object
-      description: ErrorDetail represents error details in the delete response.
     Error:
       properties:
         request_id:
@@ -681,21 +696,6 @@ components:
           example: Invalid request
       type: object
       description: Error represents the standard API error response.
-    SiteCreated:
-      properties:
-        site_salesforce_id:
-          deprecated: true
-          type: string
-          example: a06D000000kIkHq
-          maxLength: 50
-          description: 'Deprecated: use SiteID instead.'
-        site_id:
-          type: string
-          description: BSS-provided site identifier.
-          maxLength: 50
-          example: a06D000000kIkHq
-      type: object
-      description: CreateSiteResponse represents the Create Customer Site response structure. This is named SiteCreated in the OpenAPI spec.
   securitySchemes:
     jwt:
       scheme: bearer

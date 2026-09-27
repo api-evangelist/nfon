@@ -177,99 +177,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    Data:
-      properties:
-        key:
-          type: string
-          description: Metadata key.
-          example: function_key_number
-        value:
-          type: string
-          description: Metadata value.
-          example: '5'
-      type: object
-      required:
-      - key
-      - value
-      description: Data represents key-value pair for additional reference metadata.
-    HierarchicalReferences:
-      properties:
-        identifiers:
-          items:
-            $ref: '#/components/schemas/IdentifierReferences'
-          type: array
-      type: object
-      required:
-      - identifiers
-      description: HierarchicalReferencesResponse represents references grouped by identifier. This is returned when flatten=false.
-    References:
-      oneOf:
-      - $ref: '#/components/schemas/FlatReferences'
-      - $ref: '#/components/schemas/HierarchicalReferences'
-      description: 'FindReferencesResponse represents the response from the findReferences endpoint. The response structure depends on the ''flatten'' parameter: - flatten=true: FlatReferencesResponse (flat array with identifier field on each item) - flatten=false: HierarchicalReferencesResponse (grouped by identifier).'
-    Field:
-      properties:
-        name:
-          type: string
-          description: Translation key or name of the field.
-          example: phoneextension.callforward.busy
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Data'
-          description: Additional metadata about the reference.
-      type: object
-      required:
-      - name
-      description: Field represents a field within an entity that references the identifier.
-    Error:
-      properties:
-        request_id:
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
-        code:
-          type: string
-          example: bad_request
-        details:
-          $ref: '#/components/schemas/ErrorDetail'
-        message:
-          type: string
-          example: Invalid request
-      type: object
-      description: Error represents the standard API error response.
-    FlatReferences:
-      properties:
-        references:
-          items:
-            $ref: '#/components/schemas/ReferenceItem'
-          type: array
-      type: object
-      required:
-      - references
-      description: FlatReferencesResponse represents a flat array of references with identifier field on each item. This is returned when flatten=true (default).
-    IdentifierReferences:
-      properties:
-        references:
-          items:
-            $ref: '#/components/schemas/ReferenceItem'
-          type: array
-        identifier:
-          type: string
-      type: object
-      required:
-      - identifier
-      - references
-      description: IdentifierReferences groups references for a single identifier.
-    ErrorDetail:
-      properties:
-        message:
-          type: string
-          example: Cannot delete license that is currently assigned to a user
-        code:
-          type: string
-          example: license_assigned
-      type: object
-      description: ErrorDetail represents error details in the delete response.
     ReferenceItem:
       properties:
         fields:
@@ -300,9 +207,102 @@ components:
       - type
       - display_name
       description: ReferenceItem represents a single reference to an identifier within the tenant's configuration.
+    Data:
+      properties:
+        key:
+          type: string
+          description: Metadata key.
+          example: function_key_number
+        value:
+          type: string
+          description: Metadata value.
+          example: '5'
+      type: object
+      required:
+      - key
+      - value
+      description: Data represents key-value pair for additional reference metadata.
+    References:
+      oneOf:
+      - $ref: '#/components/schemas/FlatReferences'
+      - $ref: '#/components/schemas/HierarchicalReferences'
+      description: 'FindReferencesResponse represents the response from the findReferences endpoint. The response structure depends on the ''flatten'' parameter: - flatten=true: FlatReferencesResponse (flat array with identifier field on each item) - flatten=false: HierarchicalReferencesResponse (grouped by identifier).'
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
+    FlatReferences:
+      properties:
+        references:
+          items:
+            $ref: '#/components/schemas/ReferenceItem'
+          type: array
+      type: object
+      required:
+      - references
+      description: FlatReferencesResponse represents a flat array of references with identifier field on each item. This is returned when flatten=true (default).
+    Field:
+      properties:
+        name:
+          type: string
+          description: Translation key or name of the field.
+          example: phoneextension.callforward.busy
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Data'
+          description: Additional metadata about the reference.
+      type: object
+      required:
+      - name
+      description: Field represents a field within an entity that references the identifier.
+    HierarchicalReferences:
+      properties:
+        identifiers:
+          items:
+            $ref: '#/components/schemas/IdentifierReferences'
+          type: array
+      type: object
+      required:
+      - identifiers
+      description: HierarchicalReferencesResponse represents references grouped by identifier. This is returned when flatten=false.
     ReferenceType:
       type: string
       description: ReferenceType represents the type of entity that contains the reference.
+    IdentifierReferences:
+      properties:
+        references:
+          items:
+            $ref: '#/components/schemas/ReferenceItem'
+          type: array
+        identifier:
+          type: string
+      type: object
+      required:
+      - identifier
+      - references
+      description: IdentifierReferences groups references for a single identifier.
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
   securitySchemes:
     jwt:
       scheme: bearer

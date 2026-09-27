@@ -226,6 +226,25 @@ components:
           type: string
       type: object
       description: Link to the last page
+    NoLinks:
+      type: object
+    AnnouncementPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/AnnouncementPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Links:
+      description: Related resource links
+      type: object
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -255,23 +274,30 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    NfonApiResponse:
+    CollectionLinks:
       properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
       type: object
-      description: Standard API response envelope for a single resource
-    NoLinks:
+      description: Pagination links for collection responses
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
       type: object
-    Links:
-      description: Related resource links
+      description: Collection response envelope
+    AnnouncementPUTData:
+      properties:
+        type:
+          $ref: '#/components/schemas/String'
+        name:
+          $ref: '#/components/schemas/String'
       type: object
     NfonApiCollectionResponseNonPage:
       properties:
@@ -287,45 +313,19 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
-    AnnouncementPUTRequest:
+    NfonApiResponse:
       properties:
         links:
-          $ref: '#/components/schemas/NoLinks'
+          $ref: '#/components/schemas/Links'
         data:
-          $ref: '#/components/schemas/AnnouncementPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
       type: object
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
-    AnnouncementPUTData:
-      properties:
-        type:
-          $ref: '#/components/schemas/String'
-        name:
-          $ref: '#/components/schemas/String'
-      type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
+      description: Standard API response envelope for a single resource
   securitySchemes:
     jwt:
       scheme: bearer

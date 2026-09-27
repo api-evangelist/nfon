@@ -52,6 +52,19 @@ modified: '2026-07-20'
 image: https://a.storyblok.com/f/290788/2624x1428/c0ccf89b71/homepage-hero-home.png
 tags:
 - Company
+- Telecommunications
+- Cloud Telephony
+- UCaaS
+- CPaaS
+- VoIP
+- CTI
+- Call History
+- PBX
+- Communications
+- SIP
+- Germany
+tags_raw:
+- Company
 - Telecom
 - Cloud Telephony
 - UCaaS
@@ -111,7 +124,7 @@ apis:
   - type: APIReference
     url: https://nfon-ag.github.io/Call-History-API/
 - aid: nfon:nfon-address-api
-  name: Nfon address API
+  name: Nfon Address API
   description: The address API from Nfon — 1 operation(s) for address.
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
@@ -135,7 +148,7 @@ apis:
   - type: APIReference
     url: https://nfon-ag.github.io/Call-History-API/
 - aid: nfon:nfon-authentication-api
-  name: Nfon authentication API
+  name: Nfon Authentication API
   description: Everything about authentication
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
@@ -181,7 +194,7 @@ apis:
   - type: APIReference
     url: https://nfon-ag.github.io/Call-History-API/
 - aid: nfon:nfon-clip-screened-prefixes-api
-  name: Nfon clip-screened-prefixes API
+  name: Nfon Clip Screened Prefixes API
   description: CLIP screened prefix management for SIPTrunk customers
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
@@ -820,7 +833,7 @@ apis:
   - type: APIReference
     url: https://nfon-ag.github.io/Call-History-API/
 - aid: nfon:nfon-import-export-api
-  name: Nfon import-export API
+  name: Nfon Import Export API
   description: Bulk import and export operations
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
@@ -866,7 +879,7 @@ apis:
   - type: APIReference
     url: https://nfon-ag.github.io/Call-History-API/
 - aid: nfon:nfon-licenses-api
-  name: Nfon licenses API
+  name: Nfon Licenses API
   description: Unified license management operations
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
@@ -958,7 +971,7 @@ apis:
   - type: APIReference
     url: https://nfon-ag.github.io/Call-History-API/
 - aid: nfon:nfon-queue-profiles-api
-  name: Nfon queue-profiles API
+  name: Nfon Queue Profiles API
   description: The queue-profiles API from Nfon — 5 operation(s) for queue-profiles.
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
@@ -1002,7 +1015,7 @@ apis:
   - type: APIReference
     url: https://nfon-ag.github.io/Call-History-API/
 - aid: nfon:nfon-records-api
-  name: Nfon records API
+  name: Nfon Records API
   description: Call Records Management
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
@@ -1026,7 +1039,7 @@ apis:
   - type: APIReference
     url: https://nfon-ag.github.io/Call-History-API/
 - aid: nfon:nfon-references-api
-  name: Nfon references API
+  name: Nfon References API
   description: Find references to identifiers (extensions and service codes)
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
@@ -1072,7 +1085,7 @@ apis:
   - type: APIReference
     url: https://nfon-ag.github.io/Call-History-API/
 - aid: nfon:nfon-sites-api
-  name: Nfon sites API
+  name: Nfon Sites API
   description: Site management operations
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
@@ -1186,7 +1199,7 @@ apis:
   - type: APIReference
     url: https://nfon-ag.github.io/Call-History-API/
 - aid: nfon:nfon-trial-templates-api
-  name: Nfon trial-templates API
+  name: Nfon Trial Templates API
   description: Trial template operations
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1
@@ -1208,7 +1221,7 @@ apis:
   - type: APIReference
     url: https://nfon-ag.github.io/Call-History-API/
 - aid: nfon:nfon-trunks-api
-  name: Nfon trunks API
+  name: Nfon Trunks API
   description: Trunk management operations
   humanURL: https://www.nfon.com/en/integrations/api
   baseURL: https://api.nfon.net/configuration/v1

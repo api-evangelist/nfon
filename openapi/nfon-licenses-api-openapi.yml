@@ -1343,6 +1343,139 @@ paths:
           description: Tenant not found
 components:
   schemas:
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
+    LicenseUnassignResponse:
+      properties:
+        total:
+          type: integer
+          description: Total number of licenses requested for unassignment
+          example: '3'
+        failed:
+          type: integer
+          description: Number of licenses that could not be unassigned
+          example: '1'
+        succeeded:
+          type: integer
+          description: Number of licenses successfully unassigned
+          example: '2'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseUnassignResult'
+          description: Detailed result for each license unassignment attempt
+      type: object
+      description: LicenseUnassignResponse represents the response after unassigning licenses.
+    LicenseUsageItem:
+      properties:
+        used:
+          type: integer
+          description: Number of licenses currently assigned to users
+          example: '4'
+        type:
+          maxLength: 100
+          type: string
+        amount:
+          type: integer
+          description: Total number of licenses of this type in the tenant's inventory
+          example: '10'
+        available:
+          type: integer
+          description: Number of unassigned licenses available for assignment (calculated as amount - used)
+          example: '6'
+      type: object
+      description: LicenseUsageItem represents usage statistics for a single license type.
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    LicenseAssignResult:
+      properties:
+        status:
+          type: string
+          description: Status of this individual operation
+          enum:
+          - success
+          - error
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        extension:
+          type: string
+          description: Extension number if provided in the request
+          example: '409'
+        user_id:
+          type: string
+          description: User ID from the request (only present if user was specified)
+          example: e1119380-f895-415a-9c67-ad8b71675cf0
+        type:
+          maxLength: 100
+          type: string
+        license_id:
+          type: string
+          description: Assigned license ID (only present when status is success)
+          example: 53763b37-ac19-4209-b3dc-50ca41d98913
+      type: object
+      description: LicenseAssignResult represents the result of a single license assignment.
+    LicenseOperation:
+      properties:
+        extension:
+          type: string
+          description: Phone extension number. Required for extension-based license types, optional otherwise.
+          example: '409'
+        user_id:
+          type: string
+          description: Cloudya app suite user UUID for the license operation. Optional if only extension is required.
+          example: e1119380-f895-415a-9c67-ad8b71675cf0
+        license_id:
+          type: string
+          description: Specific license UUID to assign. Required for package licenses, optional for single licenses.
+          example: 53763b37-ac19-4209-b3dc-50ca41d98913
+        type:
+          $ref: '#/components/schemas/LicenseType'
+      type: object
+      required:
+      - type
+      description: LicenseOperation represents a single license operation.
+    LicenseOperationsResponse:
+      properties:
+        total:
+          type: integer
+          description: Total number of operations requested in the batch
+          example: '3'
+        failed:
+          type: integer
+          description: Number of operations that failed
+          example: '1'
+        succeeded:
+          type: integer
+          description: Number of operations that completed successfully
+          example: '2'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseAssignResult'
+          description: Detailed result for each individual operation, in the same order as the request
+      type: object
+      description: LicenseAssignResponse represents the response after assigning licenses. This is named LicenseOperationsResponse in the OpenAPI spec.
     DeleteResult:
       properties:
         license_id:
@@ -1359,11 +1492,11 @@ components:
           $ref: '#/components/schemas/ErrorDetail'
       type: object
       description: DeleteResult represents the result of a single license deletion.
-    LicenseCreationRequest:
+    LicensesAvailable:
       type: array
       items:
-        $ref: '#/components/schemas/LicenseElement'
-      description: LicenseCreationRequest is a list of license elements for creating licenses.
+        $ref: '#/components/schemas/LicenseUsageItem'
+      description: LicensesAvailable is an array of license usage statistics.
     LicenseDetail:
       properties:
         user_id:
@@ -1393,48 +1526,39 @@ components:
           description: A note set by the business support system (BSS) to help users identify which order this license belongs to
       type: object
       description: LicenseDetail represents a single license with all its details for the API response. This matches the OpenAPI spec where user_id and extension can be null.
-    LicenseUsageItem:
+    LicenseCreationResponse:
       properties:
-        used:
+        licenses:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseCreationResponseItem'
+          description: Array of created licenses with their final license_id values
+        created:
           type: integer
-          description: Number of licenses currently assigned to users
-          example: '4'
+          description: Total number of licenses successfully created
+          example: '2'
+      type: object
+      description: LicenseCreationResponse represents the response after creating licenses.
+    LicenseCreationResponseItem:
+      properties:
+        product_license_key:
+          $ref: '#/components/schemas/ProductLicenseKey'
         type:
           maxLength: 100
           type: string
-        amount:
-          type: integer
-          description: Total number of licenses of this type in the tenant's inventory
-          example: '10'
-        available:
-          type: integer
-          description: Number of unassigned licenses available for assignment (calculated as amount - used)
-          example: '6'
-      type: object
-      description: LicenseUsageItem represents usage statistics for a single license type.
-    LicenseOperation:
-      properties:
-        extension:
-          type: string
-          description: Phone extension number. Required for extension-based license types, optional otherwise.
-          example: '409'
-        user_id:
-          type: string
-          description: Cloudya app suite user UUID for the license operation. Optional if only extension is required.
-          example: e1119380-f895-415a-9c67-ad8b71675cf0
         license_id:
           type: string
-          description: Specific license UUID to assign. Required for package licenses, optional for single licenses.
-          example: 53763b37-ac19-4209-b3dc-50ca41d98913
-        type:
-          $ref: '#/components/schemas/LicenseType'
+          description: License UUID (either provided by client or generated by server)
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseCreationResponseItem'
+          description: Nested child licenses (present for packages when flatten=false)
+        child_of:
+          type: string
+          description: UUID of parent package license (present when flatten=true or for child licenses)
       type: object
-      required:
-      - type
-      description: LicenseOperation represents a single license operation.
-    LicenseType:
-      type: string
-      description: LicenseTypeValue represents valid license type identifiers.
+      description: LicenseCreationResponseItem represents a single created license in the response.
     LicenseElement:
       properties:
         child_of:
@@ -1467,27 +1591,28 @@ components:
       required:
       - type
       description: LicenseElement represents a single license creation request.
-    LicenseOperationsResponse:
+    LicenseType:
+      type: string
+      description: LicenseTypeValue represents valid license type identifiers.
+    LicenseUnassignResult:
       properties:
-        total:
-          type: integer
-          description: Total number of operations requested in the batch
-          example: '3'
-        failed:
-          type: integer
-          description: Number of operations that failed
-          example: '1'
-        succeeded:
-          type: integer
-          description: Number of operations that completed successfully
-          example: '2'
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/LicenseAssignResult'
-          description: Detailed result for each individual operation, in the same order as the request
+        license_id:
+          type: string
+          description: License UUID from the request
+          example: 53763b37-ac19-4209-b3dc-50ca41d98913
+        status:
+          type: string
+          description: Status of this unassignment operation
+          enum:
+          - success
+          - error
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
       type: object
-      description: LicenseAssignResponse represents the response after assigning licenses. This is named LicenseOperationsResponse in the OpenAPI spec.
+      description: LicenseUnassignResult represents the result of a single license unassignment.
+    ProductLicenseKey:
+      type: string
+      description: ProductLicenseKey represents a commercial license key from a third-party vendor.
     LicenseUnassignRequest:
       properties:
         license_ids:
@@ -1499,26 +1624,16 @@ components:
       required:
       - license_ids
       description: LicenseUnassignRequest represents the request body for unassigning licenses.
-    Error:
-      properties:
-        request_id:
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
-        code:
-          type: string
-          example: bad_request
-        details:
-          $ref: '#/components/schemas/ErrorDetail'
-        message:
-          type: string
-          example: Invalid request
-      type: object
-      description: Error represents the standard API error response.
-    LicenseDetails:
+    LicenseOperations:
       type: array
       items:
-        $ref: '#/components/schemas/LicenseDetail'
-      description: LicenseDetails is an array of license details.
+        $ref: '#/components/schemas/LicenseOperation'
+      description: LicenseOperations is an array of license operations.
+    LicenseCreationRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/LicenseElement'
+      description: LicenseCreationRequest is a list of license elements for creating licenses.
     LicenseDeletionResponse:
       properties:
         total:
@@ -1540,51 +1655,6 @@ components:
           description: Detailed result for each license deletion attempt, in the same order as the request
       type: object
       description: BatchDeleteResponse represents the response after batch deletion. This is named LicenseDeletionResponse in the OpenAPI spec.
-    ErrorDetail:
-      properties:
-        message:
-          type: string
-          example: Cannot delete license that is currently assigned to a user
-        code:
-          type: string
-          example: license_assigned
-      type: object
-      description: ErrorDetail represents error details in the delete response.
-    ProductLicenseKey:
-      type: string
-      description: ProductLicenseKey represents a commercial license key from a third-party vendor.
-    LicensesAvailable:
-      type: array
-      items:
-        $ref: '#/components/schemas/LicenseUsageItem'
-      description: LicensesAvailable is an array of license usage statistics.
-    LicenseAssignResult:
-      properties:
-        status:
-          type: string
-          description: Status of this individual operation
-          enum:
-          - success
-          - error
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-        extension:
-          type: string
-          description: Extension number if provided in the request
-          example: '409'
-        user_id:
-          type: string
-          description: User ID from the request (only present if user was specified)
-          example: e1119380-f895-415a-9c67-ad8b71675cf0
-        type:
-          maxLength: 100
-          type: string
-        license_id:
-          type: string
-          description: Assigned license ID (only present when status is success)
-          example: 53763b37-ac19-4209-b3dc-50ca41d98913
-      type: object
-      description: LicenseAssignResult represents the result of a single license assignment.
     LicenseTypeMetadata:
       properties:
         assignment_requires_extension:
@@ -1612,81 +1682,11 @@ components:
           example: Mobile access for individual users with extension assignment
       type: object
       description: LicenseTypeMetadata represents detailed metadata about a license type.
-    LicenseCreationResponseItem:
-      properties:
-        product_license_key:
-          $ref: '#/components/schemas/ProductLicenseKey'
-        type:
-          maxLength: 100
-          type: string
-        license_id:
-          type: string
-          description: License UUID (either provided by client or generated by server)
-        children:
-          type: array
-          items:
-            $ref: '#/components/schemas/LicenseCreationResponseItem'
-          description: Nested child licenses (present for packages when flatten=false)
-        child_of:
-          type: string
-          description: UUID of parent package license (present when flatten=true or for child licenses)
-      type: object
-      description: LicenseCreationResponseItem represents a single created license in the response.
-    LicenseOperations:
+    LicenseDetails:
       type: array
       items:
-        $ref: '#/components/schemas/LicenseOperation'
-      description: LicenseOperations is an array of license operations.
-    LicenseUnassignResponse:
-      properties:
-        total:
-          type: integer
-          description: Total number of licenses requested for unassignment
-          example: '3'
-        failed:
-          type: integer
-          description: Number of licenses that could not be unassigned
-          example: '1'
-        succeeded:
-          type: integer
-          description: Number of licenses successfully unassigned
-          example: '2'
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/LicenseUnassignResult'
-          description: Detailed result for each license unassignment attempt
-      type: object
-      description: LicenseUnassignResponse represents the response after unassigning licenses.
-    LicenseUnassignResult:
-      properties:
-        license_id:
-          type: string
-          description: License UUID from the request
-          example: 53763b37-ac19-4209-b3dc-50ca41d98913
-        status:
-          type: string
-          description: Status of this unassignment operation
-          enum:
-          - success
-          - error
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-      type: object
-      description: LicenseUnassignResult represents the result of a single license unassignment.
-    LicenseCreationResponse:
-      properties:
-        licenses:
-          type: array
-          items:
-            $ref: '#/components/schemas/LicenseCreationResponseItem'
-          description: Array of created licenses with their final license_id values
-        created:
-          type: integer
-          description: Total number of licenses successfully created
-          example: '2'
-      type: object
-      description: LicenseCreationResponse represents the response after creating licenses.
+        $ref: '#/components/schemas/LicenseDetail'
+      description: LicenseDetails is an array of license details.
   securitySchemes:
     jwt:
       scheme: bearer
