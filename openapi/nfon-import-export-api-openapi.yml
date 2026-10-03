@@ -1465,16 +1465,6 @@ paths:
       description: Submit a bulk import job for speed dials (asynchronous)
 components:
   schemas:
-    ErrorDetail:
-      properties:
-        message:
-          type: string
-          example: Cannot delete license that is currently assigned to a user
-        code:
-          type: string
-          example: license_assigned
-      type: object
-      description: ErrorDetail represents error details in the delete response.
     SubmitJobResponse:
       properties:
         status:
@@ -1492,13 +1482,6 @@ components:
           example: 550e8400-e29b-41d4-a716-446655440000
       type: object
       description: ImportResponse represents the response after submitting an import job. This is named SubmitJobResponse in the OpenAPI spec.
-    ImportMetadata:
-      properties:
-        delete:
-          type: boolean
-          description: Removes existing records before importing. Only supported for 'contact' and 'speeddial' resource types.
-      type: object
-      description: ImportMetadata represents the optional JSON metadata in a bulk import request.
     BulkImportRequest:
       properties:
         import:
@@ -1523,6 +1506,23 @@ components:
           example: Invalid request
       type: object
       description: Error represents the standard API error response.
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
+    ImportMetadata:
+      properties:
+        delete:
+          type: boolean
+          description: Removes existing records before importing. Only supported for 'contact' and 'speeddial' resource types.
+      type: object
+      description: ImportMetadata represents the optional JSON metadata in a bulk import request.
   securitySchemes:
     jwt:
       scheme: bearer

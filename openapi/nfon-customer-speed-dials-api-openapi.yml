@@ -188,6 +188,41 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    Links:
+      description: Related resource links
+      type: object
+    NoLinks:
+      type: object
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
     String:
       properties:
         notNull:
@@ -204,19 +239,6 @@ components:
           type: string
       type: object
       description: Link to the last page
-    SpeedDialItem:
-      properties:
-        code:
-          $ref: '#/components/schemas/String'
-        destination:
-          $ref: '#/components/schemas/String'
-        outwardDialOverwrite:
-          $ref: '#/components/schemas/Boolean'
-        name:
-          $ref: '#/components/schemas/String'
-      type: object
-    NoLinks:
-      type: object
     SpeedDialsPOSTRequest:
       properties:
         links:
@@ -231,9 +253,56 @@ components:
           format: int32
           type: integer
       type: object
-    Links:
-      description: Related resource links
+    SpeedDialItem:
+      properties:
+        code:
+          $ref: '#/components/schemas/String'
+        destination:
+          $ref: '#/components/schemas/String'
+        outwardDialOverwrite:
+          $ref: '#/components/schemas/Boolean'
+        name:
+          $ref: '#/components/schemas/String'
       type: object
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    SpeedDialPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/SpeedDialItem'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -263,81 +332,12 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    SpeedDialPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/SpeedDialItem'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
     NfonApiCollectionResponse:
       oneOf:
       - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
       - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
       type: object
       description: Collection response envelope
-    NfonApiCollectionResponseNonPage:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
-      type: object
-      description: Non-paginated collection response envelope
-    Boolean:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: boolean
-      type: object
-      example: false
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
   securitySchemes:
     jwt:
       scheme: bearer

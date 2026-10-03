@@ -1607,23 +1607,21 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    NoLinks:
-      type: object
-    DeviceSiteOptionsPUTLinks:
+    XCAPIDevicePUTRequest:
       properties:
-        mediaGateway:
-          $ref: '#/components/schemas/String'
-        timezone:
-          $ref: '#/components/schemas/String'
+        links:
+          $ref: '#/components/schemas/XCAPIDevicePUTLinks'
+        data:
+          $ref: '#/components/schemas/XCAPIDevicePUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
-    BaseDevicePUTLinks:
-      properties:
-        firmware:
-          $ref: '#/components/schemas/String'
-        site:
-          $ref: '#/components/schemas/String'
-      type: object
-    XCAPIDevicePOSTRequestData:
+    XCAPIDevicePUTData:
       properties:
         suppressLineno:
           $ref: '#/components/schemas/Enum'
@@ -1633,40 +1631,17 @@ components:
           $ref: '#/components/schemas/Enum'
         note:
           $ref: '#/components/schemas/String'
-        uniqueIdentifier:
-          example: XCAPI-001
-          type: string
         concurrentLines:
           $ref: '#/components/schemas/Integer'
         useSiteOptionsFromSite:
           $ref: '#/components/schemas/Boolean'
       type: object
-    UnprovisionedSipDevicePOSTRequestData:
-      properties:
-        suppressLineno:
-          $ref: '#/components/schemas/Enum'
-        note:
-          $ref: '#/components/schemas/String'
-        cidScreening:
-          $ref: '#/components/schemas/Enum'
-        uniqueIdentifier:
-          $ref: '#/components/schemas/String'
-        useSiteOptionsFromSite:
-          $ref: '#/components/schemas/Boolean'
-      type: object
-    DeviceActivationCredentialsRenewalData:
-      type: object
-    SoftphoneDevicePUTRequestLinks:
-      properties:
-        site:
-          $ref: '#/components/schemas/String'
-      type: object
-    ExternalLineDevicePOSTRequest:
+    BaseLicenseUpdateRequest:
       properties:
         links:
-          $ref: '#/components/schemas/ExternalLineDevicePOSTRequestLinks'
+          $ref: '#/components/schemas/NoLinks'
         data:
-          $ref: '#/components/schemas/ExternalLineDevicePOSTRequestData'
+          $ref: '#/components/schemas/BaseLicenseUpdateData'
         items:
           items:
             type: object
@@ -1675,15 +1650,80 @@ components:
           format: int32
           type: integer
       type: object
-    Links:
-      description: Related resource links
-      type: object
     DeviceActivationRequest:
       properties:
         links:
           $ref: '#/components/schemas/NoLinks'
         data:
           $ref: '#/components/schemas/DeviceActivationData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    BaseLicenseUpdateData:
+      properties:
+        licenseKey:
+          $ref: '#/components/schemas/String'
+        licenseType:
+          $ref: '#/components/schemas/String'
+      type: object
+    StandardDevicePUTRequestData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        note:
+          $ref: '#/components/schemas/String'
+        ringtoneInternal:
+          $ref: '#/components/schemas/Integer'
+        ringtoneExternal:
+          $ref: '#/components/schemas/Integer'
+        groupQueueSkillRingtone:
+          $ref: '#/components/schemas/Integer'
+        webguiHttpsonly:
+          $ref: '#/components/schemas/Boolean'
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    Enum:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: object
+      type: object
+      example: 'OFF'
+    ExternalLineDevicePUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/ExternalLineDevicePUTLinks'
+        data:
+          $ref: '#/components/schemas/ExternalLineDevicePUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    BaseLicenseCreateRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/BaseLicenseCreateData'
         items:
           items:
             type: object
@@ -1706,47 +1746,39 @@ components:
           format: int32
           type: integer
       type: object
-    BaseDevicePUTRequest:
+    UnprovisionedSipDevicePOSTRequestLinks:
       properties:
-        links:
-          $ref: '#/components/schemas/BaseDevicePUTLinks'
-        data:
-          $ref: '#/components/schemas/BaseDevicePUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    MediaGatewayPOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/MediaGatewayPOSTLinks'
-        data:
-          $ref: '#/components/schemas/MediaGatewayPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
+        site:
+          $ref: '#/components/schemas/String'
+        deviceType:
+          example: /api/customers/K1234/device-types/SIP%20Trunk
           type: string
-          description: Self-link to this resource
       type: object
-      description: Standard API response envelope for a single resource
+    ExternalLineDevicePUTData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        note:
+          $ref: '#/components/schemas/String'
+        cidScreening:
+          $ref: '#/components/schemas/Enum'
+        associatedMobilePhoneNumber:
+          $ref: '#/components/schemas/String'
+        setE164DidInTo:
+          $ref: '#/components/schemas/Boolean'
+        concurrentLines:
+          $ref: '#/components/schemas/Integer'
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    SoftphoneDevicePOSTRequestLinks:
+      properties:
+        site:
+          $ref: '#/components/schemas/String'
+        deviceType:
+          example: /api/customers/K1234/device-types/NFON%20Softphone
+          type: string
+      type: object
     Integer:
       properties:
         notNull:
@@ -1765,28 +1797,12 @@ components:
       example: 1000
       type: object
       description: Subscribers soft limit
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    DeviceBypassAuthenticationRequest:
+    UnprovisionedSipDevicePUTRequest:
       properties:
         links:
-          $ref: '#/components/schemas/NoLinks'
+          $ref: '#/components/schemas/UnprovisionedSipDevicePUTLinks'
         data:
-          $ref: '#/components/schemas/DeviceBypassAuthenticationData'
+          $ref: '#/components/schemas/UnprovisionedSipDevicePUTData'
         items:
           items:
             type: object
@@ -1794,6 +1810,424 @@ components:
         itemCount:
           format: int32
           type: integer
+      type: object
+    StandardDevicePOSTRequestLinks:
+      properties:
+        firmware:
+          $ref: '#/components/schemas/String'
+        deviceType:
+          example: /api/customers/K1234/device-types/Yealink%20T46G
+          type: string
+        site:
+          $ref: '#/components/schemas/String'
+      type: object
+    MediaGatewayPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/MediaGatewayPOSTLinks'
+        data:
+          $ref: '#/components/schemas/MediaGatewayPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    UpdateOperatorPanelRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          $ref: '#/components/schemas/Data'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    UnprovisionedSipDevicePUTData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        note:
+          $ref: '#/components/schemas/String'
+        cidScreening:
+          $ref: '#/components/schemas/Enum'
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    HandsetDeviceUpdateRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/HandsetDeviceItem'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    ExternalLineDevicePUTLinks:
+      properties:
+        site:
+          $ref: '#/components/schemas/String'
+      type: object
+    BaseDevicePOSTLinks:
+      properties:
+        firmware:
+          $ref: '#/components/schemas/String'
+        deviceType:
+          example: /api/customers/K1234/device-types/Yealink%20T46G
+          type: string
+        site:
+          $ref: '#/components/schemas/String'
+      type: object
+    BaseDevicePUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/BaseDevicePUTLinks'
+        data:
+          $ref: '#/components/schemas/BaseDevicePUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Data:
+      properties:
+        key:
+          type: string
+          description: Metadata key.
+          example: function_key_number
+        value:
+          type: string
+          description: Metadata value.
+          example: '5'
+      type: object
+      required:
+      - key
+      - value
+      description: Data represents key-value pair for additional reference metadata.
+    DeviceBypassAuthenticationData:
+      type: object
+    XCAPIDevicePOSTRequestData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        setE164DidInTo:
+          $ref: '#/components/schemas/Boolean'
+        cidScreening:
+          $ref: '#/components/schemas/Enum'
+        note:
+          $ref: '#/components/schemas/String'
+        uniqueIdentifier:
+          example: XCAPI-001
+          type: string
+        concurrentLines:
+          $ref: '#/components/schemas/Integer'
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    DeviceResetAuthenticationData:
+      type: object
+    StandardDevicePUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/StandardDevicePUTRequestLinks'
+        data:
+          $ref: '#/components/schemas/StandardDevicePUTRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    XCAPIDevicePUTLinks:
+      properties:
+        site:
+          $ref: '#/components/schemas/String'
+      type: object
+    MediaGatewayPOSTData:
+      properties:
+        uniqueIdentifier:
+          type: string
+        licenseKey:
+          $ref: '#/components/schemas/String'
+        licenseDescription:
+          $ref: '#/components/schemas/String'
+      type: object
+    DeviceActivationData:
+      properties:
+        active:
+          type: boolean
+      type: object
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    StandardDevicePOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/StandardDevicePOSTRequestLinks'
+        data:
+          $ref: '#/components/schemas/StandardDevicePOSTRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Links:
+      description: Related resource links
+      type: object
+    StandardDevicePUTRequestLinks:
+      properties:
+        firmware:
+          $ref: '#/components/schemas/String'
+        site:
+          $ref: '#/components/schemas/String'
+      type: object
+    BaseDevicePUTLinks:
+      properties:
+        firmware:
+          $ref: '#/components/schemas/String'
+        site:
+          $ref: '#/components/schemas/String'
+      type: object
+    DeviceActivationCredentialsRenewalRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/DeviceActivationCredentialsRenewalData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    ExternalLineDevicePOSTRequestData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        note:
+          $ref: '#/components/schemas/String'
+        cidScreening:
+          $ref: '#/components/schemas/Enum'
+        associatedMobilePhoneNumber:
+          example: '+491701234567'
+          type: string
+        setE164DidInTo:
+          $ref: '#/components/schemas/Boolean'
+        uniqueIdentifier:
+          $ref: '#/components/schemas/String'
+        concurrentLines:
+          $ref: '#/components/schemas/Integer'
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    XCAPIDevicePOSTRequestLinks:
+      properties:
+        site:
+          $ref: '#/components/schemas/String'
+        deviceType:
+          example: /api/customers/K1234/device-types/XCAPI
+          type: string
+      type: object
+    XCAPIDevicePOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/XCAPIDevicePOSTRequestLinks'
+        data:
+          $ref: '#/components/schemas/XCAPIDevicePOSTRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    UnprovisionedSipDevicePOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/UnprovisionedSipDevicePOSTRequestLinks'
+        data:
+          $ref: '#/components/schemas/UnprovisionedSipDevicePOSTRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    StandardDevicePOSTRequestData:
+      properties:
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        note:
+          $ref: '#/components/schemas/String'
+        webguiHttpsonly:
+          $ref: '#/components/schemas/Boolean'
+        ringtoneInternal:
+          $ref: '#/components/schemas/Integer'
+        ringtoneExternal:
+          $ref: '#/components/schemas/Integer'
+        groupQueueSkillRingtone:
+          $ref: '#/components/schemas/Integer'
+        uniqueIdentifier:
+          example: 00:1A:2B:3C:4D:5E
+          type: string
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    OperatorPanelDeviceRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/DeviceLinks'
+        data:
+          $ref: '#/components/schemas/Data'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    BaseLicenseCreateData:
+      properties:
+        licenseKey:
+          type: string
+        licenseType:
+          type: string
+      type: object
+    BaseDevicePUTData:
+      properties:
+        ipAddress:
+          $ref: '#/components/schemas/String'
+        netmask:
+          $ref: '#/components/schemas/String'
+        gateway:
+          $ref: '#/components/schemas/String'
+        dns1:
+          $ref: '#/components/schemas/String'
+        useSiteOptionsFromSite:
+          $ref: '#/components/schemas/Boolean'
+        dns2:
+          $ref: '#/components/schemas/String'
+        note:
+          $ref: '#/components/schemas/String'
+        mtu:
+          $ref: '#/components/schemas/String'
+        bitrate:
+          $ref: '#/components/schemas/String'
+        webguiHttpsonly:
+          $ref: '#/components/schemas/Boolean'
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        dhcpEnabled:
+          $ref: '#/components/schemas/Boolean'
+      type: object
+    HandsetDeviceItem:
+      properties:
+        uniqueIdentifier:
+          $ref: '#/components/schemas/String'
+        suppressLineno:
+          $ref: '#/components/schemas/Enum'
+        sipUsername:
+          $ref: '#/components/schemas/String'
+        sipSecret:
+          $ref: '#/components/schemas/String'
+        note:
+          $ref: '#/components/schemas/String'
+        activationPin:
+          $ref: '#/components/schemas/String'
+        baseFamily:
+          $ref: '#/components/schemas/String'
+        deviceCategory:
+          $ref: '#/components/schemas/String'
+        bluetoothPin:
+          $ref: '#/components/schemas/String'
+        ringtoneInternal:
+          $ref: '#/components/schemas/Integer'
+        ringtoneExternal:
+          $ref: '#/components/schemas/Integer'
+        groupQueueSkillRingtone:
+          $ref: '#/components/schemas/Integer'
+        port:
+          $ref: '#/components/schemas/String'
+        deviceMasterCategory:
+          $ref: '#/components/schemas/String'
       type: object
     BaseDevicePOSTData:
       properties:
@@ -1828,74 +2262,24 @@ components:
         dhcpEnabled:
           $ref: '#/components/schemas/Boolean'
       type: object
-    Data:
-      properties:
-        key:
-          type: string
-          description: Metadata key.
-          example: function_key_number
-        value:
-          type: string
-          description: Metadata value.
-          example: '5'
+    DeviceActivationPinRenewalData:
       type: object
-      required:
-      - key
-      - value
-      description: Data represents key-value pair for additional reference metadata.
-    BaseDevicePOSTLinks:
+    ExternalLineDevicePOSTRequestLinks:
       properties:
-        firmware:
-          $ref: '#/components/schemas/String'
-        deviceType:
-          example: /api/customers/K1234/device-types/Yealink%20T46G
-          type: string
         site:
           $ref: '#/components/schemas/String'
-      type: object
-    StandardDevicePOSTRequestData:
-      properties:
-        suppressLineno:
-          $ref: '#/components/schemas/Enum'
-        note:
-          $ref: '#/components/schemas/String'
-        webguiHttpsonly:
-          $ref: '#/components/schemas/Boolean'
-        ringtoneInternal:
-          $ref: '#/components/schemas/Integer'
-        ringtoneExternal:
-          $ref: '#/components/schemas/Integer'
-        groupQueueSkillRingtone:
-          $ref: '#/components/schemas/Integer'
-        uniqueIdentifier:
-          example: 00:1A:2B:3C:4D:5E
+        deviceType:
+          example: /api/customers/K1234/device-types/External%20Line
           type: string
-        useSiteOptionsFromSite:
-          $ref: '#/components/schemas/Boolean'
       type: object
-    StandardDevicePUTRequestData:
-      properties:
-        suppressLineno:
-          $ref: '#/components/schemas/Enum'
-        note:
-          $ref: '#/components/schemas/String'
-        ringtoneInternal:
-          $ref: '#/components/schemas/Integer'
-        ringtoneExternal:
-          $ref: '#/components/schemas/Integer'
-        groupQueueSkillRingtone:
-          $ref: '#/components/schemas/Integer'
-        webguiHttpsonly:
-          $ref: '#/components/schemas/Boolean'
-        useSiteOptionsFromSite:
-          $ref: '#/components/schemas/Boolean'
+    NoLinks:
       type: object
-    ExternalLineDevicePUTRequest:
+    ExternalLineDevicePOSTRequest:
       properties:
         links:
-          $ref: '#/components/schemas/ExternalLineDevicePUTLinks'
+          $ref: '#/components/schemas/ExternalLineDevicePOSTRequestLinks'
         data:
-          $ref: '#/components/schemas/ExternalLineDevicePUTData'
+          $ref: '#/components/schemas/ExternalLineDevicePOSTRequestData'
         items:
           items:
             type: object
@@ -1904,25 +2288,107 @@ components:
           format: int32
           type: integer
       type: object
-    ExternalLineDevicePOSTRequestData:
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    SoftphoneDevicePUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/SoftphoneDevicePUTRequestLinks'
+        data:
+          $ref: '#/components/schemas/SoftphoneDevicePUTRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    SoftphoneDevicePUTRequestLinks:
+      properties:
+        site:
+          $ref: '#/components/schemas/String'
+      type: object
+    SoftphoneDevicePUTRequestData:
       properties:
         suppressLineno:
           $ref: '#/components/schemas/Enum'
         note:
           $ref: '#/components/schemas/String'
-        cidScreening:
-          $ref: '#/components/schemas/Enum'
-        associatedMobilePhoneNumber:
-          example: '+491701234567'
-          type: string
-        setE164DidInTo:
-          $ref: '#/components/schemas/Boolean'
-        uniqueIdentifier:
-          $ref: '#/components/schemas/String'
-        concurrentLines:
-          $ref: '#/components/schemas/Integer'
         useSiteOptionsFromSite:
           $ref: '#/components/schemas/Boolean'
+      type: object
+    DeviceBypassAuthenticationRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/DeviceBypassAuthenticationData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    DeviceResetAuthenticationRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/DeviceResetAuthenticationData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    DeviceSiteOptionsPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/DeviceSiteOptionsPUTLinks'
+        data:
+          $ref: '#/components/schemas/SiteOptionsPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
     SiteOptionsPUTData:
       properties:
@@ -1977,45 +2443,6 @@ components:
         uacstaProtocol:
           $ref: '#/components/schemas/Enum'
       type: object
-    DeviceSiteOptionsPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/DeviceSiteOptionsPUTLinks'
-        data:
-          $ref: '#/components/schemas/SiteOptionsPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    DeviceLinks:
-      type: object
-    OperatorPanelDeviceRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/DeviceLinks'
-        data:
-          $ref: '#/components/schemas/Data'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    MediaGatewayPOSTData:
-      properties:
-        uniqueIdentifier:
-          type: string
-        licenseKey:
-          $ref: '#/components/schemas/String'
-        licenseDescription:
-          $ref: '#/components/schemas/String'
-      type: object
     CollectionLinks:
       properties:
         first:
@@ -2028,121 +2455,7 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
-    DeviceActivationPinRenewalData:
-      type: object
-    DeviceResetAuthenticationData:
-      type: object
-    BaseLicenseUpdateRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/BaseLicenseUpdateData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    ExternalLineDevicePUTLinks:
-      properties:
-        site:
-          $ref: '#/components/schemas/String'
-      type: object
-    NfonApiCollectionResponseNonPage:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
-      type: object
-      description: Non-paginated collection response envelope
-    XCAPIDevicePOSTRequestLinks:
-      properties:
-        site:
-          $ref: '#/components/schemas/String'
-        deviceType:
-          example: /api/customers/K1234/device-types/XCAPI
-          type: string
-      type: object
-    Boolean:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: boolean
-      type: object
-      example: false
-    XCAPIDevicePOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/XCAPIDevicePOSTRequestLinks'
-        data:
-          $ref: '#/components/schemas/XCAPIDevicePOSTRequestData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    HandsetDeviceUpdateRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/HandsetDeviceItem'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    SoftphoneDevicePUTRequestData:
-      properties:
-        suppressLineno:
-          $ref: '#/components/schemas/Enum'
-        note:
-          $ref: '#/components/schemas/String'
-        useSiteOptionsFromSite:
-          $ref: '#/components/schemas/Boolean'
-      type: object
-    BaseLicenseCreateRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/BaseLicenseCreateData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    DeviceBypassAuthenticationData:
-      type: object
-    UnprovisionedSipDevicePUTData:
+    UnprovisionedSipDevicePOSTRequestData:
       properties:
         suppressLineno:
           $ref: '#/components/schemas/Enum'
@@ -2150,144 +2463,10 @@ components:
           $ref: '#/components/schemas/String'
         cidScreening:
           $ref: '#/components/schemas/Enum'
-        useSiteOptionsFromSite:
-          $ref: '#/components/schemas/Boolean'
-      type: object
-    HandsetDeviceItem:
-      properties:
         uniqueIdentifier:
           $ref: '#/components/schemas/String'
-        suppressLineno:
-          $ref: '#/components/schemas/Enum'
-        sipUsername:
-          $ref: '#/components/schemas/String'
-        sipSecret:
-          $ref: '#/components/schemas/String'
-        note:
-          $ref: '#/components/schemas/String'
-        activationPin:
-          $ref: '#/components/schemas/String'
-        baseFamily:
-          $ref: '#/components/schemas/String'
-        deviceCategory:
-          $ref: '#/components/schemas/String'
-        bluetoothPin:
-          $ref: '#/components/schemas/String'
-        ringtoneInternal:
-          $ref: '#/components/schemas/Integer'
-        ringtoneExternal:
-          $ref: '#/components/schemas/Integer'
-        groupQueueSkillRingtone:
-          $ref: '#/components/schemas/Integer'
-        port:
-          $ref: '#/components/schemas/String'
-        deviceMasterCategory:
-          $ref: '#/components/schemas/String'
-      type: object
-    BaseLicenseCreateData:
-      properties:
-        licenseKey:
-          type: string
-        licenseType:
-          type: string
-      type: object
-    BaseLicenseUpdateData:
-      properties:
-        licenseKey:
-          $ref: '#/components/schemas/String'
-        licenseType:
-          $ref: '#/components/schemas/String'
-      type: object
-    ExternalLineDevicePUTData:
-      properties:
-        suppressLineno:
-          $ref: '#/components/schemas/Enum'
-        note:
-          $ref: '#/components/schemas/String'
-        cidScreening:
-          $ref: '#/components/schemas/Enum'
-        associatedMobilePhoneNumber:
-          $ref: '#/components/schemas/String'
-        setE164DidInTo:
-          $ref: '#/components/schemas/Boolean'
-        concurrentLines:
-          $ref: '#/components/schemas/Integer'
         useSiteOptionsFromSite:
           $ref: '#/components/schemas/Boolean'
-      type: object
-    Enum:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: object
-      type: object
-      example: 'OFF'
-    StandardDevicePOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/StandardDevicePOSTRequestLinks'
-        data:
-          $ref: '#/components/schemas/StandardDevicePOSTRequestData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    BaseDevicePUTData:
-      properties:
-        ipAddress:
-          $ref: '#/components/schemas/String'
-        netmask:
-          $ref: '#/components/schemas/String'
-        gateway:
-          $ref: '#/components/schemas/String'
-        dns1:
-          $ref: '#/components/schemas/String'
-        useSiteOptionsFromSite:
-          $ref: '#/components/schemas/Boolean'
-        dns2:
-          $ref: '#/components/schemas/String'
-        note:
-          $ref: '#/components/schemas/String'
-        mtu:
-          $ref: '#/components/schemas/String'
-        bitrate:
-          $ref: '#/components/schemas/String'
-        webguiHttpsonly:
-          $ref: '#/components/schemas/Boolean'
-        suppressLineno:
-          $ref: '#/components/schemas/Enum'
-        dhcpEnabled:
-          $ref: '#/components/schemas/Boolean'
-      type: object
-    ExternalLineDevicePOSTRequestLinks:
-      properties:
-        site:
-          $ref: '#/components/schemas/String'
-        deviceType:
-          example: /api/customers/K1234/device-types/External%20Line
-          type: string
-      type: object
-    MediaGatewayPOSTLinks:
-      properties:
-        firmware:
-          $ref: '#/components/schemas/String'
-        deviceType:
-          type: string
-        site:
-          $ref: '#/components/schemas/String'
       type: object
     DeviceActivationPinRenewalRequest:
       properties:
@@ -2295,70 +2474,6 @@ components:
           $ref: '#/components/schemas/NoLinks'
         data:
           $ref: '#/components/schemas/DeviceActivationPinRenewalData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    StandardDevicePUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/StandardDevicePUTRequestLinks'
-        data:
-          $ref: '#/components/schemas/StandardDevicePUTRequestData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    SoftphoneDevicePUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/SoftphoneDevicePUTRequestLinks'
-        data:
-          $ref: '#/components/schemas/SoftphoneDevicePUTRequestData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    UnprovisionedSipDevicePOSTRequestLinks:
-      properties:
-        site:
-          $ref: '#/components/schemas/String'
-        deviceType:
-          example: /api/customers/K1234/device-types/SIP%20Trunk
-          type: string
-      type: object
-    HandsetDeviceRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/HandsetDeviceItem'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    SoftphoneDevicePOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/SoftphoneDevicePOSTRequestLinks'
-        data:
-          $ref: '#/components/schemas/SoftphoneDevicePOSTRequestData'
         items:
           items:
             type: object
@@ -2379,6 +2494,22 @@ components:
         site:
           $ref: '#/components/schemas/String'
       type: object
+    DeviceActivationCredentialsRenewalData:
+      type: object
+    SoftphoneDevicePOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/SoftphoneDevicePOSTRequestLinks'
+        data:
+          $ref: '#/components/schemas/SoftphoneDevicePOSTRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
     SoftphoneDevicePOSTRequestData:
       properties:
         suppressLineno:
@@ -2389,65 +2520,12 @@ components:
           example: SP-001-ABC
           type: string
       type: object
-    StandardDevicePOSTRequestLinks:
-      properties:
-        firmware:
-          $ref: '#/components/schemas/String'
-        deviceType:
-          example: /api/customers/K1234/device-types/Yealink%20T46G
-          type: string
-        site:
-          $ref: '#/components/schemas/String'
-      type: object
-    XCAPIDevicePUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/XCAPIDevicePUTLinks'
-        data:
-          $ref: '#/components/schemas/XCAPIDevicePUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    UnprovisionedSipDevicePUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/UnprovisionedSipDevicePUTLinks'
-        data:
-          $ref: '#/components/schemas/UnprovisionedSipDevicePUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    XCAPIDevicePUTData:
-      properties:
-        suppressLineno:
-          $ref: '#/components/schemas/Enum'
-        setE164DidInTo:
-          $ref: '#/components/schemas/Boolean'
-        cidScreening:
-          $ref: '#/components/schemas/Enum'
-        note:
-          $ref: '#/components/schemas/String'
-        concurrentLines:
-          $ref: '#/components/schemas/Integer'
-        useSiteOptionsFromSite:
-          $ref: '#/components/schemas/Boolean'
-      type: object
-    DeviceActivationCredentialsRenewalRequest:
+    HandsetDeviceRequest:
       properties:
         links:
           $ref: '#/components/schemas/NoLinks'
         data:
-          $ref: '#/components/schemas/DeviceActivationCredentialsRenewalData'
+          $ref: '#/components/schemas/HandsetDeviceItem'
         items:
           items:
             type: object
@@ -2456,101 +2534,16 @@ components:
           format: int32
           type: integer
       type: object
-    XCAPIDevicePUTLinks:
-      properties:
-        site:
-          $ref: '#/components/schemas/String'
-      type: object
-    UpdateOperatorPanelRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          $ref: '#/components/schemas/Data'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    UnprovisionedSipDevicePOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/UnprovisionedSipDevicePOSTRequestLinks'
-        data:
-          $ref: '#/components/schemas/UnprovisionedSipDevicePOSTRequestData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    SoftphoneDevicePOSTRequestLinks:
-      properties:
-        site:
-          $ref: '#/components/schemas/String'
-        deviceType:
-          example: /api/customers/K1234/device-types/NFON%20Softphone
-          type: string
-      type: object
-    NfonApiCollectionResponsePage:
-      properties:
-        links:
-          $ref: '#/components/schemas/CollectionLinks'
-        offset:
-          example: 0
-          description: Current page offset
-          format: int64
-          type: integer
-        total:
-          example: 42
-          description: Total number of items in the collection
-          format: int64
-          type: integer
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: Items in this page
-        size:
-          example: 20
-          description: Number of items in this page
-          format: int32
-          type: integer
-        href:
-          description: Self-link to this collection
-          type: string
-      type: object
-      description: Paginated collection response envelope
-    DeviceActivationData:
-      properties:
-        active:
-          type: boolean
-      type: object
-    DeviceResetAuthenticationRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/DeviceResetAuthenticationData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    StandardDevicePUTRequestLinks:
+    MediaGatewayPOSTLinks:
       properties:
         firmware:
           $ref: '#/components/schemas/String'
+        deviceType:
+          type: string
         site:
           $ref: '#/components/schemas/String'
+      type: object
+    DeviceLinks:
       type: object
     NfonApiCollectionResponse:
       oneOf:
@@ -2558,6 +2551,13 @@ components:
       - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
       type: object
       description: Collection response envelope
+    DeviceSiteOptionsPUTLinks:
+      properties:
+        mediaGateway:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+      type: object
   securitySchemes:
     jwt:
       scheme: bearer

@@ -438,7 +438,25 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Integer:
+    Links:
+      description: Related resource links
+      type: object
+    NoLinks:
+      type: object
+    OperatorPUTLinks:
+      properties:
+        defaultBlacklistProfile:
+          $ref: '#/components/schemas/String'
+        defaultRatingProfile:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+        defaultPbxGroup:
+          $ref: '#/components/schemas/String'
+        defaultSystemIntegrator:
+          $ref: '#/components/schemas/String'
+      type: object
+    Boolean:
       properties:
         notNull:
           type: boolean
@@ -451,11 +469,37 @@ components:
         presentNull:
           type: boolean
         value:
+          type: boolean
+      type: object
+      example: false
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    OperatorPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/OperatorPUTLinks'
+        data:
+          $ref: '#/components/schemas/OperatorPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
           format: int32
           type: integer
-      example: 1000
       type: object
-      description: Subscribers soft limit
     String:
       properties:
         notNull:
@@ -472,7 +516,11 @@ components:
           type: string
       type: object
       description: Link to the last page
-    NoLinks:
+    RatingProfilePOSTData:
+      properties:
+        name:
+          example: standard-rate
+          type: string
       type: object
     RatingProfilePOSTRequest:
       properties:
@@ -488,44 +536,18 @@ components:
           format: int32
           type: integer
       type: object
-    RatingProfilePOSTData:
+    CollectionLinks:
       properties:
-        name:
-          example: standard-rate
-          type: string
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
       type: object
-    Links:
-      description: Related resource links
-      type: object
-    NfonApiCollectionResponsePage:
-      properties:
-        links:
-          $ref: '#/components/schemas/CollectionLinks'
-        offset:
-          example: 0
-          description: Current page offset
-          format: int64
-          type: integer
-        total:
-          example: 42
-          description: Total number of items in the collection
-          format: int64
-          type: integer
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: Items in this page
-        size:
-          example: 20
-          description: Number of items in this page
-          format: int32
-          type: integer
-        href:
-          description: Self-link to this collection
-          type: string
-      type: object
-      description: Paginated collection response envelope
+      description: Pagination links for collection responses
     OperatorPUTData:
       properties:
         mobileNumber:
@@ -577,66 +599,7 @@ components:
         nqmEnabled:
           $ref: '#/components/schemas/Boolean'
       type: object
-    OperatorPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/OperatorPUTLinks'
-        data:
-          $ref: '#/components/schemas/OperatorPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
-    OperatorPUTLinks:
-      properties:
-        defaultBlacklistProfile:
-          $ref: '#/components/schemas/String'
-        defaultRatingProfile:
-          $ref: '#/components/schemas/String'
-        timezone:
-          $ref: '#/components/schemas/String'
-        defaultPbxGroup:
-          $ref: '#/components/schemas/String'
-        defaultSystemIntegrator:
-          $ref: '#/components/schemas/String'
-      type: object
-    NfonApiCollectionResponseNonPage:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
-      type: object
-      description: Non-paginated collection response envelope
-    Boolean:
+    Integer:
       properties:
         notNull:
           type: boolean
@@ -649,9 +612,11 @@ components:
         presentNull:
           type: boolean
         value:
-          type: boolean
+          format: int32
+          type: integer
+      example: 1000
       type: object
-      example: false
+      description: Subscribers soft limit
     NfonApiResponse:
       properties:
         links:
@@ -665,6 +630,68 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
+    NfonApiCollectionResponsePage:
+      properties:
+        links:
+          $ref: '#/components/schemas/CollectionLinks'
+        offset:
+          example: 0
+          description: Current page offset
+          format: int64
+          type: integer
+        total:
+          example: 42
+          description: Total number of items in the collection
+          format: int64
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: Items in this page
+        size:
+          example: 20
+          description: Number of items in this page
+          format: int32
+          type: integer
+        href:
+          description: Self-link to this collection
+          type: string
+      type: object
+      description: Paginated collection response envelope
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    CreateOperatorRating:
+      properties:
+        rate_description:
+          example: Standard rate plan
+          type: string
+          minLength: 2
+          maxLength: 255
+          description: Rate description.
+        rate_name:
+          maximum: 9999
+          minimum: 1
+          example: '1234'
+          type: integer
+          description: Rate name as a numeric identifier (1-4 digits, 0 not allowed).
+      type: object
+      required:
+      - rate_name
+      - rate_description
+      description: CreateOperatorRating represents rating configuration for operator.
+    PrimaryContact:
+      description: PrimaryContactParams represents primary contact with address. This is named PrimaryContact in the OpenAPI spec.
+      allOf:
+      - $ref: '#/components/schemas/Contact'
+      - properties:
+          address:
+            $ref: '#/components/schemas/Address'
+        type: object
     CreateOperatorRequest:
       properties:
         subsidiary:
@@ -746,16 +773,35 @@ components:
       - security_answer
       - time_zone_id
       description: CreateOperatorRequest represents the request body for creating an operator.
-    ErrorDetail:
+    Address:
       properties:
-        message:
+        country:
           type: string
-          example: Cannot delete license that is currently assigned to a user
-        code:
+          description: Country code
+          maxLength: 100
+          example: DE
+        postal_code:
           type: string
-          example: license_assigned
+          description: Postal code
+          maxLength: 10
+          example: '81379'
+        street:
+          type: string
+          description: Street address
+          maxLength: 100
+          example: Machtlfinger Str. 7
+        city:
+          type: string
+          description: City name
+          maxLength: 100
+          example: München
       type: object
-      description: ErrorDetail represents error details in the delete response.
+      required:
+      - country
+      - city
+      - street
+      - postal_code
+      description: Address is the struct that holds the address in a request. nolint:recvcheck // mixed receivers for zerolog/validation compatibility
     PrimaryContactOperator:
       description: PrimaryContactOperator represents primary contact for operator.
       allOf:
@@ -770,25 +816,31 @@ components:
         type: object
         required:
         - phone_number
-    CreateOperatorRating:
+    Error:
       properties:
-        rate_description:
-          example: Standard rate plan
+        request_id:
           type: string
-          minLength: 2
-          maxLength: 255
-          description: Rate description.
-        rate_name:
-          maximum: 9999
-          minimum: 1
-          example: '1234'
-          type: integer
-          description: Rate name as a numeric identifier (1-4 digits, 0 not allowed).
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
       type: object
-      required:
-      - rate_name
-      - rate_description
-      description: CreateOperatorRating represents rating configuration for operator.
+      description: Error represents the standard API error response.
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
     Contact:
       properties:
         email:
@@ -822,14 +874,6 @@ components:
       - name
       - email
       description: Contact is the struct that holds the contact in a request.
-    PrimaryContact:
-      description: PrimaryContactParams represents primary contact with address. This is named PrimaryContact in the OpenAPI spec.
-      allOf:
-      - $ref: '#/components/schemas/Contact'
-      - properties:
-          address:
-            $ref: '#/components/schemas/Address'
-        type: object
     OperatorCreated:
       properties:
         password:
@@ -842,50 +886,6 @@ components:
           example: S0001
       type: object
       description: CreateOperatorResponse represents the response structure for creating an operator. This is named OperatorCreated in the OpenAPI spec.
-    Error:
-      properties:
-        request_id:
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
-        code:
-          type: string
-          example: bad_request
-        details:
-          $ref: '#/components/schemas/ErrorDetail'
-        message:
-          type: string
-          example: Invalid request
-      type: object
-      description: Error represents the standard API error response.
-    Address:
-      properties:
-        country:
-          type: string
-          description: Country code
-          maxLength: 100
-          example: DE
-        postal_code:
-          type: string
-          description: Postal code
-          maxLength: 10
-          example: '81379'
-        street:
-          type: string
-          description: Street address
-          maxLength: 100
-          example: Machtlfinger Str. 7
-        city:
-          type: string
-          description: City name
-          maxLength: 100
-          example: München
-      type: object
-      required:
-      - country
-      - city
-      - street
-      - postal_code
-      description: Address is the struct that holds the address in a request. nolint:recvcheck // mixed receivers for zerolog/validation compatibility
   securitySchemes:
     jwt:
       scheme: bearer

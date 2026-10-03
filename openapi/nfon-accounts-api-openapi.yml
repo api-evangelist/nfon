@@ -224,6 +224,53 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    Links:
+      description: Related resource links
+      type: object
+    UpdateAccountSiteRequestLinks:
+      properties:
+        siteB:
+          $ref: '#/components/schemas/String'
+        siteA:
+          $ref: '#/components/schemas/String'
+      type: object
+    NoLinks:
+      type: object
+    NewAccountSiteRequestJson:
+      properties:
+        links:
+          $ref: '#/components/schemas/NewAccountSiteLinks'
+        data:
+          $ref: '#/components/schemas/NewAccountSiteData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NewAccountSiteLinks:
+      properties:
+        siteB:
+          $ref: '#/components/schemas/String'
+        siteA:
+          $ref: '#/components/schemas/String'
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
     String:
       properties:
         notNull:
@@ -240,8 +287,61 @@ components:
           type: string
       type: object
       description: Link to the last page
-    NoLinks:
+    NewAccountData:
       type: object
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    NewAccountRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/NewAccountData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    UpdateAccountSiteRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/UpdateAccountSiteRequestLinks'
+        data:
+          $ref: '#/components/schemas/UpdateAccountSiteRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
     UpdateAccountSiteRequestData:
       properties:
         country:
@@ -260,73 +360,6 @@ components:
           $ref: '#/components/schemas/String'
         name:
           $ref: '#/components/schemas/String'
-      type: object
-    NewAccountSiteRequestJson:
-      properties:
-        links:
-          $ref: '#/components/schemas/NewAccountSiteLinks'
-        data:
-          $ref: '#/components/schemas/NewAccountSiteData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NewAccountData:
-      type: object
-    NewAccountSiteData:
-      properties:
-        ndc:
-          $ref: '#/components/schemas/String'
-        state:
-          $ref: '#/components/schemas/String'
-        street:
-          example: Friedrichstraße 100
-          type: string
-        city:
-          example: Berlin
-          type: string
-        country:
-          example: DE
-          type: string
-        zip:
-          example: '10117'
-          type: string
-        salesForceId:
-          example: SF-001234
-          type: string
-        azc:
-          $ref: '#/components/schemas/String'
-        name:
-          example: Berlin Office
-          type: string
-      type: object
-    UpdateAccountSiteRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/UpdateAccountSiteRequestLinks'
-        data:
-          $ref: '#/components/schemas/UpdateAccountSiteRequestData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    UpdateAccountSiteRequestLinks:
-      properties:
-        siteB:
-          $ref: '#/components/schemas/String'
-        siteA:
-          $ref: '#/components/schemas/String'
-      type: object
-    Links:
-      description: Related resource links
       type: object
     NfonApiCollectionResponsePage:
       properties:
@@ -357,72 +390,39 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
     NfonApiCollectionResponse:
       oneOf:
       - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
       - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
       type: object
       description: Collection response envelope
-    NewAccountRequest:
+    NewAccountSiteData:
       properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/NewAccountData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NewAccountSiteLinks:
-      properties:
-        siteB:
+        ndc:
           $ref: '#/components/schemas/String'
-        siteA:
+        state:
           $ref: '#/components/schemas/String'
-      type: object
-    NfonApiCollectionResponseNonPage:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
+        street:
+          example: Friedrichstraße 100
           type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
-      type: object
-      description: Non-paginated collection response envelope
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
+        city:
+          example: Berlin
           type: string
-          description: Self-link to this resource
+        country:
+          example: DE
+          type: string
+        zip:
+          example: '10117'
+          type: string
+        salesForceId:
+          example: SF-001234
+          type: string
+        azc:
+          $ref: '#/components/schemas/String'
+        name:
+          example: Berlin Office
+          type: string
       type: object
-      description: Standard API response envelope for a single resource
   securitySchemes:
     jwt:
       scheme: bearer

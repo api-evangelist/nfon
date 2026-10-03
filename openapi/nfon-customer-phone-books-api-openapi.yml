@@ -480,8 +480,53 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    NoData:
+    Links:
+      description: Related resource links
       type: object
+    NoLinks:
+      type: object
+    PhoneBookPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/PhoneBookPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    PhoneBookVisibilityPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/PhoneBookVisibilityPOSTLinks'
+        data:
+          $ref: '#/components/schemas/NoData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
     String:
       properties:
         notNull:
@@ -498,20 +543,50 @@ components:
           type: string
       type: object
       description: Link to the last page
-    NoLinks:
-      type: object
-    PhoneBookVisibilityPOSTLinks:
+    CollectionLinks:
       properties:
-        phoneExtension:
-          example: /api/customers/K1234/phone-extensions/100
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    PhoneBookPOSTData:
+      properties:
+        vpnNumber:
+          $ref: '#/components/schemas/String'
+        vpnProvider:
+          $ref: '#/components/schemas/String'
+        displayName:
+          example: John Smith
+          type: string
+        displayNumber:
+          example: +49 89 123456
           type: string
       type: object
-    PhoneBookVisibilityPOSTRequest:
+    NfonApiResponse:
       properties:
         links:
-          $ref: '#/components/schemas/PhoneBookVisibilityPOSTLinks'
+          $ref: '#/components/schemas/Links'
         data:
-          $ref: '#/components/schemas/NoData'
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    PhoneBookPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/PhoneBookPOSTData'
         items:
           items:
             type: object
@@ -531,22 +606,13 @@ components:
         displayNumber:
           $ref: '#/components/schemas/String'
       type: object
-    Links:
-      description: Related resource links
-      type: object
-    PhoneBookPOSTRequest:
+    PhoneBookVisibilityPOSTLinks:
       properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/PhoneBookPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+        phoneExtension:
+          example: /api/customers/K1234/phone-extensions/100
+          type: string
+      type: object
+    NoData:
       type: object
     NfonApiCollectionResponsePage:
       properties:
@@ -577,78 +643,12 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    PhoneBookPOSTData:
-      properties:
-        vpnNumber:
-          $ref: '#/components/schemas/String'
-        vpnProvider:
-          $ref: '#/components/schemas/String'
-        displayName:
-          example: John Smith
-          type: string
-        displayNumber:
-          example: +49 89 123456
-          type: string
-      type: object
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
     NfonApiCollectionResponse:
       oneOf:
       - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
       - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
       type: object
       description: Collection response envelope
-    PhoneBookPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/PhoneBookPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NfonApiCollectionResponseNonPage:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
-      type: object
-      description: Non-paginated collection response envelope
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
   securitySchemes:
     jwt:
       scheme: bearer

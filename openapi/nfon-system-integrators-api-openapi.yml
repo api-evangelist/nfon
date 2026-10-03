@@ -230,6 +230,39 @@ paths:
           description: Invalid request
 components:
   schemas:
+    Links:
+      description: Related resource links
+      type: object
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
     String:
       properties:
         notNull:
@@ -246,20 +279,27 @@ components:
           type: string
       type: object
       description: Link to the last page
-    UpdateSystemIntegratorRequest:
+    UpdateSystemIntegratorRequestLinks:
       properties:
-        links:
-          $ref: '#/components/schemas/UpdateSystemIntegratorRequestLinks'
-        data:
-          $ref: '#/components/schemas/UpdateSystemIntegratorRequestData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+        defaultRatingProfile:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+        operator:
+          $ref: '#/components/schemas/String'
       type: object
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
     UpdateSystemIntegratorRequestData:
       properties:
         contactName:
@@ -283,17 +323,32 @@ components:
         name:
           $ref: '#/components/schemas/String'
       type: object
-    UpdateSystemIntegratorRequestLinks:
+    NfonApiResponse:
       properties:
-        defaultRatingProfile:
-          $ref: '#/components/schemas/String'
-        timezone:
-          $ref: '#/components/schemas/String'
-        operator:
-          $ref: '#/components/schemas/String'
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
       type: object
-    Links:
-      description: Related resource links
+      description: Standard API response envelope for a single resource
+    UpdateSystemIntegratorRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/UpdateSystemIntegratorRequestLinks'
+        data:
+          $ref: '#/components/schemas/UpdateSystemIntegratorRequestData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
     NfonApiCollectionResponsePage:
       properties:
@@ -324,67 +379,57 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
     NfonApiCollectionResponse:
       oneOf:
       - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
       - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
       type: object
       description: Collection response envelope
-    NfonApiCollectionResponseNonPage:
+    PrimaryContact:
+      description: PrimaryContactParams represents primary contact with address. This is named PrimaryContact in the OpenAPI spec.
+      allOf:
+      - $ref: '#/components/schemas/Contact'
+      - properties:
+          address:
+            $ref: '#/components/schemas/Address'
+        type: object
+    Address:
       properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
+        country:
           type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
-      type: object
-      description: Non-paginated collection response envelope
-    Boolean:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: boolean
-      type: object
-      example: false
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
+          description: Country code
+          maxLength: 100
+          example: DE
+        postal_code:
           type: string
-          description: Self-link to this resource
+          description: Postal code
+          maxLength: 10
+          example: '81379'
+        street:
+          type: string
+          description: Street address
+          maxLength: 100
+          example: Machtlfinger Str. 7
+        city:
+          type: string
+          description: City name
+          maxLength: 100
+          example: München
       type: object
-      description: Standard API response envelope for a single resource
+      required:
+      - country
+      - city
+      - street
+      - postal_code
+      description: Address is the struct that holds the address in a request. nolint:recvcheck // mixed receivers for zerolog/validation compatibility
+    SystemIntegratorCreated:
+      properties:
+        external_identifier:
+          type: string
+          description: System integrator external identifier.
+          example: S0001
+      type: object
+      description: CreateSystemIntegratorResponse represents the response structure for creating a system integrator. This is named SystemIntegratorCreated in the OpenAPI spec.
     Error:
       properties:
         request_id:
@@ -499,51 +544,6 @@ components:
       - security_question
       - security_answer
       description: CreateSystemIntegratorRequest represents the request body for creating a system integrator.
-    SystemIntegratorCreated:
-      properties:
-        external_identifier:
-          type: string
-          description: System integrator external identifier.
-          example: S0001
-      type: object
-      description: CreateSystemIntegratorResponse represents the response structure for creating a system integrator. This is named SystemIntegratorCreated in the OpenAPI spec.
-    PrimaryContact:
-      description: PrimaryContactParams represents primary contact with address. This is named PrimaryContact in the OpenAPI spec.
-      allOf:
-      - $ref: '#/components/schemas/Contact'
-      - properties:
-          address:
-            $ref: '#/components/schemas/Address'
-        type: object
-    Address:
-      properties:
-        country:
-          type: string
-          description: Country code
-          maxLength: 100
-          example: DE
-        postal_code:
-          type: string
-          description: Postal code
-          maxLength: 10
-          example: '81379'
-        street:
-          type: string
-          description: Street address
-          maxLength: 100
-          example: Machtlfinger Str. 7
-        city:
-          type: string
-          description: City name
-          maxLength: 100
-          example: München
-      type: object
-      required:
-      - country
-      - city
-      - street
-      - postal_code
-      description: Address is the struct that holds the address in a request. nolint:recvcheck // mixed receivers for zerolog/validation compatibility
   securitySchemes:
     jwt:
       scheme: bearer

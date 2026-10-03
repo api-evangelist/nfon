@@ -173,6 +173,11 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    Links:
+      description: Related resource links
+      type: object
+    NoLinks:
+      type: object
     String:
       properties:
         notNull:
@@ -189,6 +194,19 @@ components:
           type: string
       type: object
       description: Link to the last page
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
     IpWhitelistPOSTRequest:
       properties:
         links:
@@ -202,8 +220,6 @@ components:
         itemCount:
           format: int32
           type: integer
-      type: object
-    NoLinks:
       type: object
     IpWhitelistPOSTData:
       properties:
@@ -219,22 +235,6 @@ components:
         description:
           $ref: '#/components/schemas/String'
       type: object
-    Links:
-      description: Related resource links
-      type: object
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
   securitySchemes:
     jwt:
       scheme: bearer

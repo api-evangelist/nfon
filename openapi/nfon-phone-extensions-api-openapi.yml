@@ -422,25 +422,6 @@ paths:
           $ref: '#/components/responses/ServerError'
 components:
   schemas:
-    error:
-      type: object
-      properties:
-        error:
-          type: string
-      example:
-        error: some error message
-    extensionData:
-      type: object
-      properties:
-        uuid:
-          type: string
-          example: 100@KLMN0
-        extension_number:
-          type: string
-          example: '100'
-        name:
-          type: string
-          example: office
     state:
       type: object
       properties:
@@ -473,6 +454,13 @@ components:
           type: string
           format: date-time
           description: The time of the status change. RFC3339 with nanoseconds and timezone (e.g., 2025-09-23T16:51:22.954969226+02:00)
+    error:
+      type: object
+      properties:
+        error:
+          type: string
+      example:
+        error: some error message
     call:
       type: object
       properties:
@@ -559,18 +547,19 @@ components:
           - reject
           - unspecified
           description: '`optional` Set in case of error'
+    extensionData:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 100@KLMN0
+        extension_number:
+          type: string
+          example: '100'
+        name:
+          type: string
+          example: office
   responses:
-    BadRequest:
-      description: One or more request parameters failed validation
-      headers:
-        X-Request-Id:
-          schema:
-            type: string
-          description: Unique identifier used to track this particular request on the backend
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
     NotFound:
       description: Requested object (call) does not exist
       headers:
@@ -582,8 +571,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/error'
-    ServerError:
-      description: Unexpected server error
+    Forbidden:
+      description: Authenticated user is not allowed to perform the action or may not have a license
       headers:
         X-Request-Id:
           schema:
@@ -600,8 +589,8 @@ components:
           schema:
             type: string
           description: Unique identifier used to track this particular request on the backend
-    Forbidden:
-      description: Authenticated user is not allowed to perform the action or may not have a license
+    ServerError:
+      description: Unexpected server error
       headers:
         X-Request-Id:
           schema:
@@ -613,6 +602,17 @@ components:
             $ref: '#/components/schemas/error'
     NotAcceptable:
       description: Requested MIME type is not supported
+      headers:
+        X-Request-Id:
+          schema:
+            type: string
+          description: Unique identifier used to track this particular request on the backend
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+    BadRequest:
+      description: One or more request parameters failed validation
       headers:
         X-Request-Id:
           schema:

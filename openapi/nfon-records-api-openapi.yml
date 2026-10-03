@@ -382,6 +382,40 @@ paths:
       operationId: deleteRecordsByUuid
       x-operation-id-source: derived
 components:
+  responses:
+    NotFound:
+      description: Resource was not found
+      headers:
+        X-Request-Id:
+          schema:
+            type: string
+          description: Unique identifier used to track this particular request on the backend.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+    ServerError:
+      description: Unexpected server error
+      headers:
+        X-Request-Id:
+          schema:
+            type: string
+          description: Unique identifier used to track this particular request on the backend.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+    BadRequest:
+      description: One or more request parameters failed validation
+      headers:
+        X-Request-Id:
+          schema:
+            type: string
+          description: Unique identifier used to track this particular request on the backend.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
   schemas:
     error:
       type: object
@@ -568,41 +602,86 @@ components:
         crm:
           type: string
           description: '`optional` Additional CRM data related to the call.'
-  responses:
-    BadRequest:
-      description: One or more request parameters failed validation
-      headers:
-        X-Request-Id:
-          schema:
-            type: string
-          description: Unique identifier used to track this particular request on the backend.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
-    NotFound:
-      description: Resource was not found
-      headers:
-        X-Request-Id:
-          schema:
-            type: string
-          description: Unique identifier used to track this particular request on the backend.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
-    ServerError:
-      description: Unexpected server error
-      headers:
-        X-Request-Id:
-          schema:
-            type: string
-          description: Unique identifier used to track this particular request on the backend.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
   examples:
+    missedGroupCall:
+      summary: missed group call
+      value:
+        uuid: 330e8400-e29b-41d4-a716-446655440033
+        duration: 0
+        direction: inbound
+        caller:
+          name: Charlie
+          number: '1003'
+          context: K9999
+        callee:
+          name: Alice
+          number: '1001'
+          context: K9999
+        history:
+        - callee:
+            name: Test Group
+            number: '10'
+            context: K9999
+            destination_type: group
+          updated: '2025-06-03T10:25:26Z'
+        status: cancelled
+        created: '2025-06-03T10:25:25Z'
+    callForwardingTransfer:
+      summary: call forwarding/transfer
+      value:
+        uuid: 330e8400-e29b-41d4-a716-446655440034
+        duration: 25
+        direction: inbound
+        caller:
+          name: Charlie
+          number: '1003'
+          context: K9999
+        callee:
+          name: Alice
+          number: '1001'
+          context: K9999
+        history:
+        - callee:
+            name: Bob
+            number: '1002'
+            context: K9999
+          updated: '2025-06-03T10:25:45Z'
+        status: answered
+        created: '2025-06-03T10:25:25Z'
+    callWithoutSummary:
+      summary: call (without summary)
+      value:
+        uuid: 000e8400-e29b-41d4-a716-446655440000
+        duration: 30
+        direction: inbound
+        caller:
+          name: Charlie
+          number: '1003'
+          context: K9999
+        callee:
+          name: Alice
+          number: '1001'
+          context: K9999
+        status: answered
+        created: '2025-06-03T10:22:24Z'
+    callWithSummaryProcessing:
+      summary: call with summary (processing not done yet)
+      value:
+        uuid: 110e8400-e29b-41d4-a716-446655440011
+        duration: 30
+        direction: inbound
+        caller:
+          name: Charlie
+          number: '1003'
+          context: K9999
+        callee:
+          name: Alice
+          number: '1001'
+          context: K9999
+        status: answered
+        created: '2025-06-03T10:22:24Z'
+        transcription:
+          available: false
     callWithSummaryCompleted:
       summary: call with summary (completed)
       value:
@@ -639,85 +718,6 @@ components:
             event: stop
           summary: Alice called Bob to say hello.
           language_autodetect: true
-    missedGroupCall:
-      summary: missed group call
-      value:
-        uuid: 330e8400-e29b-41d4-a716-446655440033
-        duration: 0
-        direction: inbound
-        caller:
-          name: Charlie
-          number: '1003'
-          context: K9999
-        callee:
-          name: Alice
-          number: '1001'
-          context: K9999
-        history:
-        - callee:
-            name: Test Group
-            number: '10'
-            context: K9999
-            destination_type: group
-          updated: '2025-06-03T10:25:26Z'
-        status: cancelled
-        created: '2025-06-03T10:25:25Z'
-    callWithoutSummary:
-      summary: call (without summary)
-      value:
-        uuid: 000e8400-e29b-41d4-a716-446655440000
-        duration: 30
-        direction: inbound
-        caller:
-          name: Charlie
-          number: '1003'
-          context: K9999
-        callee:
-          name: Alice
-          number: '1001'
-          context: K9999
-        status: answered
-        created: '2025-06-03T10:22:24Z'
-    callWithSummaryProcessing:
-      summary: call with summary (processing not done yet)
-      value:
-        uuid: 110e8400-e29b-41d4-a716-446655440011
-        duration: 30
-        direction: inbound
-        caller:
-          name: Charlie
-          number: '1003'
-          context: K9999
-        callee:
-          name: Alice
-          number: '1001'
-          context: K9999
-        status: answered
-        created: '2025-06-03T10:22:24Z'
-        transcription:
-          available: false
-    callForwardingTransfer:
-      summary: call forwarding/transfer
-      value:
-        uuid: 330e8400-e29b-41d4-a716-446655440034
-        duration: 25
-        direction: inbound
-        caller:
-          name: Charlie
-          number: '1003'
-          context: K9999
-        callee:
-          name: Alice
-          number: '1001'
-          context: K9999
-        history:
-        - callee:
-            name: Bob
-            number: '1002'
-            context: K9999
-          updated: '2025-06-03T10:25:45Z'
-        status: answered
-        created: '2025-06-03T10:25:25Z'
     callForwardingTransferMultiple:
       summary: call forwarding/transfer (multiple)
       value:

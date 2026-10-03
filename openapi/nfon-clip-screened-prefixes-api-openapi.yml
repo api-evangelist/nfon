@@ -232,18 +232,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    ClipScreenedPrefixResponse:
-      properties:
-        clip_screened_prefix_id:
-          type: string
-          description: External identifier for the CLIP screened prefix (auto-generated UUID if not provided)
-          example: 550e8400-e29b-41d4-a716-446655440000
-        signaling_prefix:
-          type: string
-          description: Phone number in E.164 format
-          example: '+49301234567'
-      type: object
-      description: ClipScreenedPrefixResponse represents a CLIP screened prefix in the API response.
     CreateClipScreenedPrefixRequest:
       properties:
         clip_screened_prefix_id:
@@ -256,6 +244,18 @@ components:
           example: '+49301234567'
       type: object
       description: CreateClipScreenedPrefixRequest represents the request body for creating a CLIP screened prefix.
+    ClipScreenedPrefixResponse:
+      properties:
+        clip_screened_prefix_id:
+          type: string
+          description: External identifier for the CLIP screened prefix (auto-generated UUID if not provided)
+          example: 550e8400-e29b-41d4-a716-446655440000
+        signaling_prefix:
+          type: string
+          description: Phone number in E.164 format
+          example: '+49301234567'
+      type: object
+      description: ClipScreenedPrefixResponse represents a CLIP screened prefix in the API response.
     Error:
       properties:
         request_id:
