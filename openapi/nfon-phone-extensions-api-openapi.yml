@@ -422,6 +422,13 @@ paths:
           $ref: '#/components/responses/ServerError'
 components:
   schemas:
+    error:
+      type: object
+      properties:
+        error:
+          type: string
+      example:
+        error: some error message
     state:
       type: object
       properties:
@@ -454,13 +461,6 @@ components:
           type: string
           format: date-time
           description: The time of the status change. RFC3339 with nanoseconds and timezone (e.g., 2025-09-23T16:51:22.954969226+02:00)
-    error:
-      type: object
-      properties:
-        error:
-          type: string
-      example:
-        error: some error message
     call:
       type: object
       properties:
@@ -571,6 +571,28 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/error'
+    NotAcceptable:
+      description: Requested MIME type is not supported
+      headers:
+        X-Request-Id:
+          schema:
+            type: string
+          description: Unique identifier used to track this particular request on the backend
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+    ServerError:
+      description: Unexpected server error
+      headers:
+        X-Request-Id:
+          schema:
+            type: string
+          description: Unique identifier used to track this particular request on the backend
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
     Forbidden:
       description: Authenticated user is not allowed to perform the action or may not have a license
       headers:
@@ -589,28 +611,6 @@ components:
           schema:
             type: string
           description: Unique identifier used to track this particular request on the backend
-    ServerError:
-      description: Unexpected server error
-      headers:
-        X-Request-Id:
-          schema:
-            type: string
-          description: Unique identifier used to track this particular request on the backend
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
-    NotAcceptable:
-      description: Requested MIME type is not supported
-      headers:
-        X-Request-Id:
-          schema:
-            type: string
-          description: Unique identifier used to track this particular request on the backend
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
     BadRequest:
       description: One or more request parameters failed validation
       headers:

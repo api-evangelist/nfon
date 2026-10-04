@@ -83,20 +83,24 @@ paths:
           description: Address or ONKZ not found
 components:
   schemas:
-    AddressCoordinates:
+    AddressOnkzResponse:
       properties:
-        longitude:
-          type: number
-          description: Longitude in WGS84
-          format: double
-          example: '11.57549'
-        latitude:
-          type: number
-          description: Latitude in WGS84
-          format: double
-          example: '48.137154'
+        status:
+          $ref: '#/components/schemas/AddressStatus'
+        address:
+          $ref: '#/components/schemas/AddressDetail'
+        onkz:
+          type:
+          - string
+          - 'null'
+          description: German area code (Ortsnetzkennzahl), null if not found
+          example: 089
+        coordinates:
+          $ref: '#/components/schemas/AddressCoordinates'
       type: object
-      description: AddressCoordinates holds latitude and longitude.
+      required:
+      - status
+      description: AddressOnkzResponse represents the response for an address ONKZ lookup.
     AddressDetail:
       properties:
         country:
@@ -125,24 +129,20 @@ components:
           example: München
       type: object
       description: AddressDetail holds the resolved address fields.
-    AddressOnkzResponse:
+    AddressCoordinates:
       properties:
-        status:
-          $ref: '#/components/schemas/AddressStatus'
-        address:
-          $ref: '#/components/schemas/AddressDetail'
-        onkz:
-          type:
-          - string
-          - 'null'
-          description: German area code (Ortsnetzkennzahl), null if not found
-          example: 089
-        coordinates:
-          $ref: '#/components/schemas/AddressCoordinates'
+        longitude:
+          type: number
+          description: Longitude in WGS84
+          format: double
+          example: '11.57549'
+        latitude:
+          type: number
+          description: Latitude in WGS84
+          format: double
+          example: '48.137154'
       type: object
-      required:
-      - status
-      description: AddressOnkzResponse represents the response for an address ONKZ lookup.
+      description: AddressCoordinates holds latitude and longitude.
     AddressStatus:
       properties:
         detail:

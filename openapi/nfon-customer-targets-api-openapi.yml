@@ -1702,62 +1702,26 @@ components:
           example: '123456'
           type: string
       type: object
-    PUTLinks:
-      properties:
-        inboundTrunkNumbers:
-          $ref: '#/components/schemas/String'
-        members:
-          $ref: '#/components/schemas/String'
-      type: object
-    OutboundTrunkNumberData:
-      type: object
-    PUTData:
-      properties:
-        dialPrefix:
-          $ref: '#/components/schemas/String'
-        costCenter:
-          $ref: '#/components/schemas/String'
-        language:
-          $ref: '#/components/schemas/String'
-      type: object
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    POSTData:
-      properties:
-        prefixMinimumLength:
-          $ref: '#/components/schemas/Short'
-        costCenter:
-          $ref: '#/components/schemas/String'
-        language:
-          $ref: '#/components/schemas/String'
-        prefixMaximumLength:
-          $ref: '#/components/schemas/Short'
-        dialPrefix:
-          $ref: '#/components/schemas/String'
-        extensionNumber:
-          example: '500'
-          type: string
-        displayName:
-          example: Routing Prefix 1
-          type: string
-      type: object
     POSTRequest:
       properties:
         links:
           $ref: '#/components/schemas/RoutingPrefixExtensionLinks'
         data:
           $ref: '#/components/schemas/POSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    InboundTrunkNumberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/InboundTrunkNumberData'
         items:
           items:
             type: object
@@ -1795,73 +1759,6 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    Links:
-      description: Related resource links
-      type: object
-    NfonApiCollectionResponseNonPage:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
-      type: object
-      description: Non-paginated collection response envelope
-    InboundTrunkNumberRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/InboundTrunkNumberLinks'
-        data:
-          $ref: '#/components/schemas/InboundTrunkNumberData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    OutboundTrunkNumberLinks:
-      type: object
-    InboundTrunkNumberLinks:
-      properties:
-        trunk:
-          type: string
-      type: object
-    VirtualFaxExtensionLinks:
-      properties:
-        inboundTrunkNumbers:
-          $ref: '#/components/schemas/String'
-        preferredOutboundTrunk:
-          $ref: '#/components/schemas/String'
-        blacklistProfile:
-          $ref: '#/components/schemas/String'
-        outboundTrunkNumbers:
-          $ref: '#/components/schemas/String'
-        timezone:
-          $ref: '#/components/schemas/String'
-      type: object
-    Boolean:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: boolean
-      type: object
-      example: false
     OutboundTrunkNumberRequest:
       properties:
         links:
@@ -1876,12 +1773,40 @@ components:
           format: int32
           type: integer
       type: object
-    VirtualFaxExtensionRequest:
+    PUTData:
+      properties:
+        dialPrefix:
+          $ref: '#/components/schemas/String'
+        costCenter:
+          $ref: '#/components/schemas/String'
+        language:
+          $ref: '#/components/schemas/String'
+      type: object
+    POSTData:
+      properties:
+        prefixMinimumLength:
+          $ref: '#/components/schemas/Short'
+        costCenter:
+          $ref: '#/components/schemas/String'
+        language:
+          $ref: '#/components/schemas/String'
+        prefixMaximumLength:
+          $ref: '#/components/schemas/Short'
+        dialPrefix:
+          $ref: '#/components/schemas/String'
+        extensionNumber:
+          example: '500'
+          type: string
+        displayName:
+          example: Routing Prefix 1
+          type: string
+      type: object
+    PUTRequest:
       properties:
         links:
-          $ref: '#/components/schemas/VirtualFaxExtensionLinks'
+          $ref: '#/components/schemas/PUTLinks'
         data:
-          $ref: '#/components/schemas/VirtualFaxExtensionData'
+          $ref: '#/components/schemas/PUTData'
         items:
           items:
             type: object
@@ -1889,6 +1814,11 @@ components:
         itemCount:
           format: int32
           type: integer
+      type: object
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
       type: object
     String:
       properties:
@@ -1906,24 +1836,12 @@ components:
           type: string
       type: object
       description: Link to the last page
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
-    PUTRequest:
+    VirtualFaxExtensionRequest:
       properties:
         links:
-          $ref: '#/components/schemas/PUTLinks'
+          $ref: '#/components/schemas/VirtualFaxExtensionLinks'
         data:
-          $ref: '#/components/schemas/PUTData'
+          $ref: '#/components/schemas/VirtualFaxExtensionData'
         items:
           items:
             type: object
@@ -1931,6 +1849,43 @@ components:
         itemCount:
           format: int32
           type: integer
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    OutboundTrunkNumberData:
+      type: object
+    RoutingPrefixExtensionLinks:
+      properties:
+        timezone:
+          $ref: '#/components/schemas/String'
+        blacklistProfile:
+          $ref: '#/components/schemas/String'
+      type: object
+    OutboundTrunkNumberLinks:
+      type: object
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    PUTLinks:
+      properties:
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+        members:
+          $ref: '#/components/schemas/String'
       type: object
     Short:
       properties:
@@ -1949,13 +1904,39 @@ components:
           type: integer
       type: object
       example: 6
-    RoutingPrefixExtensionLinks:
-      properties:
-        timezone:
-          $ref: '#/components/schemas/String'
-        blacklistProfile:
-          $ref: '#/components/schemas/String'
+    Links:
+      description: Related resource links
       type: object
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
     VirtualFaxExtensionData:
       properties:
         email:
@@ -1981,12 +1962,31 @@ components:
         t30CalledSubscriberId:
           $ref: '#/components/schemas/String'
       type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
       type: object
-      description: Collection response envelope
+      description: Pagination links for collection responses
+    VirtualFaxExtensionLinks:
+      properties:
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+        preferredOutboundTrunk:
+          $ref: '#/components/schemas/String'
+        blacklistProfile:
+          $ref: '#/components/schemas/String'
+        outboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+      type: object
   securitySchemes:
     jwt:
       scheme: bearer

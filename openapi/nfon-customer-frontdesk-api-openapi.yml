@@ -597,12 +597,12 @@ components:
           example: '123456'
           type: string
       type: object
-    FrontdeskTargetDto:
+    InboundTrunkNumberRequest:
       properties:
         links:
-          $ref: '#/components/schemas/FrontdeskTargetLinks'
+          $ref: '#/components/schemas/InboundTrunkNumberLinks'
         data:
-          $ref: '#/components/schemas/FrontdeskTargetData'
+          $ref: '#/components/schemas/InboundTrunkNumberData'
         items:
           items:
             type: object
@@ -611,37 +611,6 @@ components:
           format: int32
           type: integer
       type: object
-    Integer:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: int32
-          type: integer
-      example: 1000
-      type: object
-      description: Subscribers soft limit
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -671,23 +640,36 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    Links:
-      description: Related resource links
-      type: object
-    NfonApiCollectionResponseNonPage:
+    FrontdeskServiceLinks:
       properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+        fallbackTarget:
+          $ref: '#/components/schemas/String'
       type: object
-      description: Non-paginated collection response envelope
+    Integer:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
+      type: object
+      description: Subscribers soft limit
+    FrontdeskTargetLinks:
+      properties:
+        targetService:
+          $ref: '#/components/schemas/String'
+      type: object
     Date:
       properties:
         notNull:
@@ -703,6 +685,54 @@ components:
         value:
           format: date-time
           type: string
+      type: object
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
+      type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    FrontdeskTargetData:
+      properties:
+        context:
+          $ref: '#/components/schemas/String'
+      type: object
+    Links:
+      description: Related resource links
       type: object
     FrontdeskServiceData:
       properties:
@@ -733,12 +763,12 @@ components:
         name:
           $ref: '#/components/schemas/String'
       type: object
-    InboundTrunkNumberRequest:
+    FrontdeskServiceRequest:
       properties:
         links:
-          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+          $ref: '#/components/schemas/FrontdeskServiceLinks'
         data:
-          $ref: '#/components/schemas/InboundTrunkNumberData'
+          $ref: '#/components/schemas/FrontdeskServiceData'
         items:
           items:
             type: object
@@ -746,16 +776,6 @@ components:
         itemCount:
           format: int32
           type: integer
-      type: object
-    FrontdeskTargetData:
-      properties:
-        context:
-          $ref: '#/components/schemas/String'
-      type: object
-    InboundTrunkNumberLinks:
-      properties:
-        trunk:
-          type: string
       type: object
     Boolean:
       properties:
@@ -773,12 +793,26 @@ components:
           type: boolean
       type: object
       example: false
-    FrontdeskServiceRequest:
+    NfonApiCollectionResponseNonPage:
       properties:
         links:
-          $ref: '#/components/schemas/FrontdeskServiceLinks'
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    FrontdeskTargetDto:
+      properties:
+        links:
+          $ref: '#/components/schemas/FrontdeskTargetLinks'
         data:
-          $ref: '#/components/schemas/FrontdeskServiceData'
+          $ref: '#/components/schemas/FrontdeskTargetData'
         items:
           items:
             type: object
@@ -787,34 +821,6 @@ components:
           format: int32
           type: integer
       type: object
-    FrontdeskServiceLinks:
-      properties:
-        inboundTrunkNumbers:
-          $ref: '#/components/schemas/String'
-        fallbackTarget:
-          $ref: '#/components/schemas/String'
-      type: object
-    FrontdeskTargetLinks:
-      properties:
-        targetService:
-          $ref: '#/components/schemas/String'
-      type: object
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
     CollectionLinks:
       properties:
         first:
@@ -827,12 +833,6 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
   securitySchemes:
     jwt:
       scheme: bearer

@@ -159,60 +159,33 @@ paths:
       description: Creates a trial template for a tenant. Only supports PBX contract types. Trial templates are not supported for nconnect_voice contract type.
 components:
   schemas:
-    TrialTemplateTrunk:
+    BaseNumber:
       properties:
-        trunk_number:
-          maximum: 9
-          minimum: 0
-          example: '0'
-          type: integer
-          format: int64
-          description: Trunk number.
-        base_number:
-          $ref: '#/components/schemas/BaseNumber'
-        carrier_name:
+        extension:
           type: string
-          description: Carrier name.
-          maxLength: 100
-          example: Deutsche Telekom
-        softswitch:
+          maxLength: 255
+          description: Extension (deprecated, ignored for trunk base numbers)
+        country_code:
           type: string
-          description: Softswitch.
-          maxLength: 16
-          example: BTNGN1
-        pilot_reachable:
-          type: boolean
-          description: Pilot reachable.
-          example: 'true'
+          description: ISO country code (1-3 digits, no leading zeros)
+          maxLength: 255
+          example: '49'
+        national_destination_code:
+          type: string
+          description: National destination code
+          maxLength: 255
+          example: '30'
+        pilot:
+          type: string
+          description: Pilot number
+          maxLength: 255
+          example: '12345'
       type: object
       required:
-      - carrier_name
-      - softswitch
-      - base_number
-      description: TrunkCreateTrialTemplateRequest represents trunk configuration for trial template. This is named TrialTemplateTrunk in the OpenAPI spec.
-    TrialTemplateDevice:
-      properties:
-        firmware:
-          type: string
-          description: Firmware version.
-          maxLength: 50
-          example: 1.0.0
-        device_type:
-          type: string
-          description: Device type.
-          maxLength: 12
-          example: DEVICE001
-        unique_identifier:
-          example: '001122334455'
-          type: string
-          minLength: 12
-          maxLength: 12
-          description: Device unique identifier (MAC address).
-      type: object
-      required:
-      - device_type
-      - unique_identifier
-      description: DeviceCreateTrialTemplateRequest represents device configuration for trial template. This is named TrialTemplateDevice in the OpenAPI spec.
+      - country_code
+      - national_destination_code
+      - pilot
+      description: BaseNumberCreateTrunkRequest represents base number for trunk creation. This is named BaseNumber in the OpenAPI spec.
     Error:
       properties:
         request_id:
@@ -238,6 +211,29 @@ components:
           example: license_assigned
       type: object
       description: ErrorDetail represents error details in the delete response.
+    TrialTemplateDevice:
+      properties:
+        firmware:
+          type: string
+          description: Firmware version.
+          maxLength: 50
+          example: 1.0.0
+        device_type:
+          type: string
+          description: Device type.
+          maxLength: 12
+          example: DEVICE001
+        unique_identifier:
+          example: '001122334455'
+          type: string
+          minLength: 12
+          maxLength: 12
+          description: Device unique identifier (MAC address).
+      type: object
+      required:
+      - device_type
+      - unique_identifier
+      description: DeviceCreateTrialTemplateRequest represents device configuration for trial template. This is named TrialTemplateDevice in the OpenAPI spec.
     CreateTrialTemplateRequest:
       properties:
         device:
@@ -270,33 +266,37 @@ components:
       required:
       - trunk
       description: CreateTrialTemplateRequest wraps needed fields to start a trial for a customer.
-    BaseNumber:
+    TrialTemplateTrunk:
       properties:
-        extension:
+        trunk_number:
+          maximum: 9
+          minimum: 0
+          example: '0'
+          type: integer
+          format: int64
+          description: Trunk number.
+        base_number:
+          $ref: '#/components/schemas/BaseNumber'
+        carrier_name:
           type: string
-          maxLength: 255
-          description: Extension (deprecated, ignored for trunk base numbers)
-        country_code:
+          description: Carrier name.
+          maxLength: 100
+          example: Deutsche Telekom
+        softswitch:
           type: string
-          description: ISO country code (1-3 digits, no leading zeros)
-          maxLength: 255
-          example: '49'
-        national_destination_code:
-          type: string
-          description: National destination code
-          maxLength: 255
-          example: '30'
-        pilot:
-          type: string
-          description: Pilot number
-          maxLength: 255
-          example: '12345'
+          description: Softswitch.
+          maxLength: 16
+          example: BTNGN1
+        pilot_reachable:
+          type: boolean
+          description: Pilot reachable.
+          example: 'true'
       type: object
       required:
-      - country_code
-      - national_destination_code
-      - pilot
-      description: BaseNumberCreateTrunkRequest represents base number for trunk creation. This is named BaseNumber in the OpenAPI spec.
+      - carrier_name
+      - softswitch
+      - base_number
+      description: TrunkCreateTrialTemplateRequest represents trunk configuration for trial template. This is named TrialTemplateTrunk in the OpenAPI spec.
   securitySchemes:
     jwt:
       scheme: bearer

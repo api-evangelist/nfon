@@ -190,12 +190,21 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Links:
-      description: Related resource links
+    RouterCollectionRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/RouterCollectionData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
     NoLinks:
-      type: object
-    RouterPUTData:
       type: object
     RouterPUTRequest:
       properties:
@@ -211,6 +220,8 @@ components:
           format: int32
           type: integer
       type: object
+    RouterCollectionData:
+      type: object
     NfonApiResponse:
       properties:
         links:
@@ -224,21 +235,10 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    RouterCollectionData:
+    RouterPUTData:
       type: object
-    RouterCollectionRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/RouterCollectionData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+    Links:
+      description: Related resource links
       type: object
   securitySchemes:
     jwt:

@@ -792,8 +792,16 @@ paths:
           description: Internal server error
 components:
   schemas:
-    Links:
-      description: Related resource links
+    DeviceIdPOSTData:
+      properties:
+        deviceIds:
+          type: array
+          items:
+            example: '["00:15:65:A1:B2:C3","00:15:65:D4:E5:F6"]'
+            type: string
+          example:
+          - 00:15:65:A1:B2:C3
+          - 00:15:65:D4:E5:F6
       type: object
     NoLinks:
       type: object
@@ -811,72 +819,6 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    DeviceIdPOSTData:
-      properties:
-        deviceIds:
-          type: array
-          items:
-            example: '["00:15:65:A1:B2:C3","00:15:65:D4:E5:F6"]'
-            type: string
-          example:
-          - 00:15:65:A1:B2:C3
-          - 00:15:65:D4:E5:F6
-      type: object
-    DeviceIdPOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/DeviceIdPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -906,37 +848,70 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
+    DeviceIdPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/DeviceIdPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
     NfonApiCollectionResponse:
       oneOf:
       - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
       - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
       type: object
       description: Collection response envelope
-    DeviceImportItem:
-      properties:
-        base_device_id:
-          type: string
-          description: Device ID of the base phone (required for HANDSET devices)
-          example: '001122334400'
-        site_id:
-          type: string
-          description: BSS-provided site identifier. If not provided, the device will be assigned to the customer's mobile site.
-          example: a06D000000kIkHp
-        site_salesforce_id:
-          type: string
-          example: a06D000000kIkHp
-          deprecated: true
-          description: 'Deprecated: use SiteID instead.'
-        device_id:
-          type: string
-          description: Unique device identifier (MAC address, IPEI, etc.)
-          example: '001122334455'
-        device_type:
-          type: string
-          description: Device type identifier
-          example: DEVICE001
+    Links:
+      description: Related resource links
       type: object
-      description: DeviceImportRequest represents a single device for import (API type).
     DeviceValidationResponse:
       properties:
         devices:
@@ -946,57 +921,6 @@ components:
           description: Array of validated devices with enriched information
       type: object
       description: DeviceValidationResponse represents the validation response.
-    Error:
-      properties:
-        request_id:
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
-        code:
-          type: string
-          example: bad_request
-        details:
-          $ref: '#/components/schemas/ErrorDetail'
-        message:
-          type: string
-          example: Invalid request
-      type: object
-      description: Error represents the standard API error response.
-    JobError:
-      properties:
-        row:
-          type: integer
-        message:
-          type: string
-        type:
-          type: string
-      type: object
-      description: JobError represents an error that occurred during processing.
-    ErrorDetail:
-      properties:
-        message:
-          type: string
-          example: Cannot delete license that is currently assigned to a user
-        code:
-          type: string
-          example: license_assigned
-      type: object
-      description: ErrorDetail represents error details in the delete response.
-    DeviceTypeInfo:
-      properties:
-        ports:
-          type: integer
-          example: '3'
-        device_master_category:
-          type: string
-          example: STANDARD
-        port_type:
-          type: string
-          example: IPEI
-        name:
-          type: string
-          example: Yealink T46S
-      type: object
-      description: DeviceTypeInfo contains device type metadata.
     JobStatusResponse:
       properties:
         status:
@@ -1028,17 +952,6 @@ components:
           description: Original filename
       type: object
       description: JobReport represents the status of an import job. This is named JobStatusResponse in the OpenAPI spec.
-    JobDetails:
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/JobError'
-          type: array
-        rows:
-          type: integer
-          description: Number of rows processed
-      type: object
-      description: JobDetails contains details about a job.
     DeviceValidationItem:
       properties:
         device_type_info:
@@ -1055,6 +968,62 @@ components:
           example: '001122334455'
       type: object
       description: DeviceValidationItem represents a device in validation response.
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    DeviceImportItem:
+      properties:
+        base_device_id:
+          type: string
+          description: Device ID of the base phone (required for HANDSET devices)
+          example: '001122334400'
+        site_id:
+          type: string
+          description: BSS-provided site identifier. If not provided, the device will be assigned to the customer's mobile site.
+          example: a06D000000kIkHp
+        site_salesforce_id:
+          type: string
+          example: a06D000000kIkHp
+          deprecated: true
+          description: 'Deprecated: use SiteID instead.'
+        device_id:
+          type: string
+          description: Unique device identifier (MAC address, IPEI, etc.)
+          example: '001122334455'
+        device_type:
+          type: string
+          description: Device type identifier
+          example: DEVICE001
+      type: object
+      description: DeviceImportRequest represents a single device for import (API type).
+    DeviceTypeInfo:
+      properties:
+        ports:
+          type: integer
+          example: '3'
+        device_master_category:
+          type: string
+          example: STANDARD
+        port_type:
+          type: string
+          example: IPEI
+        name:
+          type: string
+          example: Yealink T46S
+      type: object
+      description: DeviceTypeInfo contains device type metadata.
     DeviceBulkImportRequest:
       properties:
         devices:
@@ -1064,6 +1033,37 @@ components:
           description: Array of devices to import
       type: object
       description: DeviceBulkImportRequest represents the request body for device bulk import.
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
+    JobError:
+      properties:
+        row:
+          type: integer
+        message:
+          type: string
+        type:
+          type: string
+      type: object
+      description: JobError represents an error that occurred during processing.
+    JobDetails:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/JobError'
+          type: array
+        rows:
+          type: integer
+          description: Number of rows processed
+      type: object
+      description: JobDetails contains details about a job.
   securitySchemes:
     jwt:
       scheme: bearer

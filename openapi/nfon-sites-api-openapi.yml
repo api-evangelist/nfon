@@ -546,6 +546,36 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    SiteCreated:
+      properties:
+        site_salesforce_id:
+          deprecated: true
+          type: string
+          example: a06D000000kIkHq
+          maxLength: 50
+          description: 'Deprecated: use SiteID instead.'
+        site_id:
+          type: string
+          description: BSS-provided site identifier.
+          maxLength: 50
+          example: a06D000000kIkHq
+      type: object
+      description: CreateSiteResponse represents the Create Customer Site response structure. This is named SiteCreated in the OpenAPI spec.
     CreateSiteRequest:
       properties:
         salesforce_id:
@@ -604,6 +634,16 @@ components:
       - country
       - city
       description: CreateSiteRequest represents the Create Customer Site request structure.
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
     UpdateSiteRequest:
       properties:
         country:
@@ -656,46 +696,6 @@ components:
       - country
       - city
       description: UpdateSiteRequest represents the update site request.
-    Error:
-      properties:
-        request_id:
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
-        code:
-          type: string
-          example: bad_request
-        details:
-          $ref: '#/components/schemas/ErrorDetail'
-        message:
-          type: string
-          example: Invalid request
-      type: object
-      description: Error represents the standard API error response.
-    ErrorDetail:
-      properties:
-        message:
-          type: string
-          example: Cannot delete license that is currently assigned to a user
-        code:
-          type: string
-          example: license_assigned
-      type: object
-      description: ErrorDetail represents error details in the delete response.
-    SiteCreated:
-      properties:
-        site_salesforce_id:
-          deprecated: true
-          type: string
-          example: a06D000000kIkHq
-          maxLength: 50
-          description: 'Deprecated: use SiteID instead.'
-        site_id:
-          type: string
-          description: BSS-provided site identifier.
-          maxLength: 50
-          example: a06D000000kIkHq
-      type: object
-      description: CreateSiteResponse represents the Create Customer Site response structure. This is named SiteCreated in the OpenAPI spec.
   securitySchemes:
     jwt:
       scheme: bearer

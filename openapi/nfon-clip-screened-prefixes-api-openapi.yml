@@ -232,18 +232,16 @@ paths:
           description: Internal server error
 components:
   schemas:
-    CreateClipScreenedPrefixRequest:
+    ErrorDetail:
       properties:
-        clip_screened_prefix_id:
+        message:
           type: string
-          description: External identifier for the CLIP screened prefix
-          example: 550e8400-e29b-41d4-a716-446655440000
-        signaling_prefix:
+          example: Cannot delete license that is currently assigned to a user
+        code:
           type: string
-          description: Phone number in E.164 format (e.g., +49301234567)
-          example: '+49301234567'
+          example: license_assigned
       type: object
-      description: CreateClipScreenedPrefixRequest represents the request body for creating a CLIP screened prefix.
+      description: ErrorDetail represents error details in the delete response.
     ClipScreenedPrefixResponse:
       properties:
         clip_screened_prefix_id:
@@ -256,6 +254,18 @@ components:
           example: '+49301234567'
       type: object
       description: ClipScreenedPrefixResponse represents a CLIP screened prefix in the API response.
+    CreateClipScreenedPrefixRequest:
+      properties:
+        clip_screened_prefix_id:
+          type: string
+          description: External identifier for the CLIP screened prefix
+          example: 550e8400-e29b-41d4-a716-446655440000
+        signaling_prefix:
+          type: string
+          description: Phone number in E.164 format (e.g., +49301234567)
+          example: '+49301234567'
+      type: object
+      description: CreateClipScreenedPrefixRequest represents the request body for creating a CLIP screened prefix.
     Error:
       properties:
         request_id:
@@ -271,16 +281,6 @@ components:
           example: Invalid request
       type: object
       description: Error represents the standard API error response.
-    ErrorDetail:
-      properties:
-        message:
-          type: string
-          example: Cannot delete license that is currently assigned to a user
-        code:
-          type: string
-          example: license_assigned
-      type: object
-      description: ErrorDetail represents error details in the delete response.
   securitySchemes:
     jwt:
       scheme: bearer

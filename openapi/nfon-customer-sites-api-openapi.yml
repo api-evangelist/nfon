@@ -237,9 +237,40 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Links:
-      description: Related resource links
+    Integer:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
       type: object
+      description: Subscribers soft limit
+    Enum:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: object
+      type: object
+      example: 'OFF'
     Boolean:
       properties:
         notNull:
@@ -256,6 +287,36 @@ components:
           type: boolean
       type: object
       example: false
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    SiteOptionsPUTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/SiteOptionsPUTLinks'
+        data:
+          $ref: '#/components/schemas/SiteOptionsPUTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
     SiteOptionsPUTData:
       properties:
         ldapUsername:
@@ -309,61 +370,6 @@ components:
         uacstaProtocol:
           $ref: '#/components/schemas/Enum'
       type: object
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    SiteOptionsPUTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/SiteOptionsPUTLinks'
-        data:
-          $ref: '#/components/schemas/SiteOptionsPUTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    SiteOptionsPUTLinks:
-      properties:
-        mediaGateway:
-          $ref: '#/components/schemas/String'
-        fmcNumberSet:
-          $ref: '#/components/schemas/String'
-        timezone:
-          $ref: '#/components/schemas/String'
-      type: object
-    Enum:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: object
-      type: object
-      example: 'OFF'
     NfonApiResponse:
       properties:
         links:
@@ -377,24 +383,18 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    Integer:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: int32
-          type: integer
-      example: 1000
+    Links:
+      description: Related resource links
       type: object
-      description: Subscribers soft limit
+    SiteOptionsPUTLinks:
+      properties:
+        mediaGateway:
+          $ref: '#/components/schemas/String'
+        fmcNumberSet:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+      type: object
   securitySchemes:
     jwt:
       scheme: bearer

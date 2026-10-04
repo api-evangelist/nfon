@@ -821,9 +821,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    Links:
-      description: Related resource links
-      type: object
     NfonApiCollectionResponseNonPage:
       properties:
         links:
@@ -838,47 +835,6 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -908,134 +864,56 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
     NfonApiCollectionResponse:
       oneOf:
       - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
       - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
       type: object
       description: Collection response envelope
-    PrimaryContact:
-      description: PrimaryContactParams represents primary contact with address. This is named PrimaryContact in the OpenAPI spec.
-      allOf:
-      - $ref: '#/components/schemas/Contact'
-      - properties:
-          address:
-            $ref: '#/components/schemas/Address'
-        type: object
-    Address:
-      properties:
-        country:
-          type: string
-          description: Country code
-          maxLength: 100
-          example: DE
-        postal_code:
-          type: string
-          description: Postal code
-          maxLength: 10
-          example: '81379'
-        street:
-          type: string
-          description: Street address
-          maxLength: 100
-          example: Machtlfinger Str. 7
-        city:
-          type: string
-          description: City name
-          maxLength: 100
-          example: München
+    Links:
+      description: Related resource links
       type: object
-      required:
-      - country
-      - city
-      - street
-      - postal_code
-      description: Address is the struct that holds the address in a request. nolint:recvcheck // mixed receivers for zerolog/validation compatibility
-    CreateBillingExtensionsRequest:
-      properties:
-        quantity:
-          type: integer
-          minimum: 1
-          description: Number of billing extensions to create
-          example: '3'
-      type: object
-      required:
-      - quantity
-      description: CreateBillingExtensionsRequest represents the request to create billing extensions.
-    TenantOptions:
-      properties:
-        element_creation_popup:
-          type: boolean
-          example: 'true'
-        port_lock:
-          type: boolean
-          example: 'true'
-        project_number_length:
-          maximum: 6
-          minimum: 0
-          example: '4'
-          format: int32
-          type: integer
-        queuemetrics_enabled:
-          type: boolean
-          example: 'false'
-        speed_dial_length:
-          maximum: 4
-          minimum: 0
-          example: '3'
-          format: int64
-          type: integer
-        acureus_billing:
-          type: boolean
-          example: 'false'
-      type: object
-      required:
-      - project_number_length
-      description: OptionsRequestParams represents tenant options. This is named TenantOptions in the OpenAPI spec.
-    TenantCreated:
-      properties:
-        external_identifier:
-          type: string
-          example: K1234
-      type: object
-      description: CreateCustomerResponse represents the Create Customer response structure. This is named TenantCreated in the OpenAPI spec.
-    Error:
-      properties:
-        request_id:
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
-        code:
-          type: string
-          example: bad_request
-        details:
-          $ref: '#/components/schemas/ErrorDetail'
-        message:
-          type: string
-          example: Invalid request
-      type: object
-      description: Error represents the standard API error response.
-    BillingExtensionsCreated:
-      properties:
-        extension_numbers:
-          type: array
-          description: The extension numbers that were created
-          items:
-            type: string
-          example: '["999999","999998","999997"]'
-      type: object
-      required:
-      - extension_numbers
-      description: BillingExtensionsCreated represents the response after creating billing extensions.
-    ErrorDetail:
-      properties:
-        message:
-          type: string
-          example: Cannot delete license that is currently assigned to a user
-        code:
-          type: string
-          example: license_assigned
-      type: object
-      description: ErrorDetail represents error details in the delete response.
     Contact:
       properties:
         email:
@@ -1069,6 +947,82 @@ components:
       - name
       - email
       description: Contact is the struct that holds the contact in a request.
+    TenantOptions:
+      properties:
+        element_creation_popup:
+          type: boolean
+          example: 'true'
+        port_lock:
+          type: boolean
+          example: 'true'
+        project_number_length:
+          maximum: 6
+          minimum: 0
+          example: '4'
+          format: int32
+          type: integer
+        queuemetrics_enabled:
+          type: boolean
+          example: 'false'
+        speed_dial_length:
+          maximum: 4
+          minimum: 0
+          example: '3'
+          format: int64
+          type: integer
+        acureus_billing:
+          type: boolean
+          example: 'false'
+      type: object
+      required:
+      - project_number_length
+      description: OptionsRequestParams represents tenant options. This is named TenantOptions in the OpenAPI spec.
+    BillingExtensionsCreated:
+      properties:
+        extension_numbers:
+          type: array
+          description: The extension numbers that were created
+          items:
+            type: string
+          example: '["999999","999998","999997"]'
+      type: object
+      required:
+      - extension_numbers
+      description: BillingExtensionsCreated represents the response after creating billing extensions.
+    UpdateTenantRequest:
+      properties:
+        contract_duration_months:
+          type: integer
+          minimum: 0
+          format: int64
+          example: '24'
+        system_integrator:
+          type: string
+          example: S0001
+        contract_type:
+          type: string
+          example: pbx
+        primary_contact:
+          $ref: '#/components/schemas/UpdateContact'
+        partner_ref_number:
+          type: string
+          maxLength: 100
+          example: REF-2024-001
+        commission_non_recurring:
+          type: number
+          minimum: 0
+          format: double
+          example: '100.50'
+        options:
+          $ref: '#/components/schemas/TenantOptionsUpdate'
+      type: object
+      description: PartialUpdateRequest represents tenant partial update request. This is named UpdateTenantRequest in the OpenAPI spec.
+    TenantOptionsUpdate:
+      properties:
+        acureus_billing:
+          type: boolean
+      type: object
+      description: OptionsUpdateParams represents tenant options update. This is named TenantOptionsUpdate in the OpenAPI spec.
     ErrorResponse:
       properties:
         request_id:
@@ -1082,6 +1036,88 @@ components:
           example: bad_request
       type: object
       description: ErrorResponse represents the standard error response format.
+    Address:
+      properties:
+        country:
+          type: string
+          description: Country code
+          maxLength: 100
+          example: DE
+        postal_code:
+          type: string
+          description: Postal code
+          maxLength: 10
+          example: '81379'
+        street:
+          type: string
+          description: Street address
+          maxLength: 100
+          example: Machtlfinger Str. 7
+        city:
+          type: string
+          description: City name
+          maxLength: 100
+          example: München
+      type: object
+      required:
+      - country
+      - city
+      - street
+      - postal_code
+      description: Address is the struct that holds the address in a request. nolint:recvcheck // mixed receivers for zerolog/validation compatibility
+    Error:
+      properties:
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    UpdateContact:
+      properties:
+        phone_number:
+          type: string
+          minLength: 3
+          maxLength: 100
+          example: +49 89 45300400
+        mobile_number:
+          type: string
+          maxLength: 32
+          example: +49 170 1234567
+        name:
+          type: string
+          maxLength: 100
+          example: Max Mustermann
+      type: object
+      description: UpdateContact represents partial update for contact information.
+    CreateBillingExtensionsRequest:
+      properties:
+        quantity:
+          type: integer
+          minimum: 1
+          description: Number of billing extensions to create
+          example: '3'
+      type: object
+      required:
+      - quantity
+      description: CreateBillingExtensionsRequest represents the request to create billing extensions.
+    ErrorDetail:
+      properties:
+        message:
+          type: string
+          example: Cannot delete license that is currently assigned to a user
+        code:
+          type: string
+          example: license_assigned
+      type: object
+      description: ErrorDetail represents error details in the delete response.
     CreateTenantRequest:
       properties:
         partner_ref_number:
@@ -1162,57 +1198,21 @@ components:
       - security_answer
       - contract_type
       description: CreateCustomerParams wraps needed fields to create a customer. This is named CreateTenantRequest in the OpenAPI spec.
-    UpdateContact:
+    PrimaryContact:
+      description: PrimaryContactParams represents primary contact with address. This is named PrimaryContact in the OpenAPI spec.
+      allOf:
+      - $ref: '#/components/schemas/Contact'
+      - properties:
+          address:
+            $ref: '#/components/schemas/Address'
+        type: object
+    TenantCreated:
       properties:
-        phone_number:
+        external_identifier:
           type: string
-          minLength: 3
-          maxLength: 100
-          example: +49 89 45300400
-        mobile_number:
-          type: string
-          maxLength: 32
-          example: +49 170 1234567
-        name:
-          type: string
-          maxLength: 100
-          example: Max Mustermann
+          example: K1234
       type: object
-      description: UpdateContact represents partial update for contact information.
-    TenantOptionsUpdate:
-      properties:
-        acureus_billing:
-          type: boolean
-      type: object
-      description: OptionsUpdateParams represents tenant options update. This is named TenantOptionsUpdate in the OpenAPI spec.
-    UpdateTenantRequest:
-      properties:
-        contract_duration_months:
-          type: integer
-          minimum: 0
-          format: int64
-          example: '24'
-        system_integrator:
-          type: string
-          example: S0001
-        contract_type:
-          type: string
-          example: pbx
-        primary_contact:
-          $ref: '#/components/schemas/UpdateContact'
-        partner_ref_number:
-          type: string
-          maxLength: 100
-          example: REF-2024-001
-        commission_non_recurring:
-          type: number
-          minimum: 0
-          format: double
-          example: '100.50'
-        options:
-          $ref: '#/components/schemas/TenantOptionsUpdate'
-      type: object
-      description: PartialUpdateRequest represents tenant partial update request. This is named UpdateTenantRequest in the OpenAPI spec.
+      description: CreateCustomerResponse represents the Create Customer response structure. This is named TenantCreated in the OpenAPI spec.
   securitySchemes:
     jwt:
       scheme: bearer

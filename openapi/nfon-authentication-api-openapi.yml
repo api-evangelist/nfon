@@ -93,15 +93,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/jwksData'
-    tokens:
-      type: object
-      properties:
-        access-token:
-          type: string
-          format: jwt
-        refresh-token:
-          type: string
-          format: jwt
     jwksData:
       type: object
       properties:
@@ -129,6 +120,15 @@ components:
           type: string
           description: Public key use
           example: sig
+    tokens:
+      type: object
+      properties:
+        access-token:
+          type: string
+          format: jwt
+        refresh-token:
+          type: string
+          format: jwt
   securitySchemes:
     bearer_auth:
       type: http

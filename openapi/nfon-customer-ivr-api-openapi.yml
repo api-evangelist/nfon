@@ -848,57 +848,34 @@ components:
           example: '123456'
           type: string
       type: object
-    IVRServiceKeyAssignmentLinks:
-      properties:
-        target:
-          $ref: '#/components/schemas/String'
-      type: object
-    Integer:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: int32
-          type: integer
-      example: 1000
-      type: object
-      description: Subscribers soft limit
-    Data:
-      properties:
-        key:
-          type: string
-          description: Metadata key.
-          example: function_key_number
-        value:
-          type: string
-          description: Metadata value.
-          example: '5'
-      type: object
-      required:
-      - key
-      - value
-      description: Data represents key-value pair for additional reference metadata.
-    NfonApiResponse:
+    IVRServiceRequest:
       properties:
         links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/IVRServiceLinks'
         data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
+          $ref: '#/components/schemas/IVRServiceData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
-      description: Standard API response envelope for a single resource
+    InboundTrunkNumberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/InboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -928,15 +905,12 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    Links:
-      description: Related resource links
-      type: object
-    IVRServiceRequest:
+    IVRServiceKeyAssignmentRequest:
       properties:
         links:
-          $ref: '#/components/schemas/IVRServiceLinks'
+          $ref: '#/components/schemas/IVRServiceKeyAssignmentLinks'
         data:
-          $ref: '#/components/schemas/IVRServiceData'
+          $ref: '#/components/schemas/IVRServiceKeyAssignmentData'
         items:
           items:
             type: object
@@ -945,26 +919,45 @@ components:
           format: int32
           type: integer
       type: object
-    NfonApiCollectionResponseNonPage:
+    Integer:
       properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          format: int32
+          type: integer
+      example: 1000
       type: object
-      description: Non-paginated collection response envelope
-    IVRServiceKeyAssignmentData:
-      properties:
-        number:
-          $ref: '#/components/schemas/String'
-      type: object
+      description: Subscribers soft limit
     TimeoutLinks:
+      type: object
+    Data:
+      properties:
+        key:
+          type: string
+          description: Metadata key.
+          example: function_key_number
+        value:
+          type: string
+          description: Metadata value.
+          example: '5'
+      type: object
+      required:
+      - key
+      - value
+      description: Data represents key-value pair for additional reference metadata.
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
       type: object
     Date:
       properties:
@@ -982,12 +975,34 @@ components:
           format: date-time
           type: string
       type: object
-    InboundTrunkNumberRequest:
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    TimeoutRequest:
       properties:
         links:
-          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+          $ref: '#/components/schemas/TimeoutLinks'
         data:
-          $ref: '#/components/schemas/InboundTrunkNumberData'
+          $ref: '#/components/schemas/Data'
         items:
           items:
             type: object
@@ -995,6 +1010,11 @@ components:
         itemCount:
           format: int32
           type: integer
+      type: object
+    IVRServiceKeyAssignmentData:
+      properties:
+        number:
+          $ref: '#/components/schemas/String'
       type: object
     IVRServiceData:
       properties:
@@ -1019,10 +1039,21 @@ components:
         name:
           $ref: '#/components/schemas/String'
       type: object
-    InboundTrunkNumberLinks:
+    NfonApiResponse:
       properties:
-        trunk:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
           type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
+    Links:
+      description: Related resource links
       type: object
     IVRServiceLinks:
       properties:
@@ -1051,22 +1082,20 @@ components:
           type: boolean
       type: object
       example: false
-    String:
+    NfonApiCollectionResponseNonPage:
       properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
           type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
       type: object
-      description: Link to the last page
+      description: Non-paginated collection response envelope
     CollectionLinks:
       properties:
         first:
@@ -1079,39 +1108,10 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
-    TimeoutRequest:
+    IVRServiceKeyAssignmentLinks:
       properties:
-        links:
-          $ref: '#/components/schemas/TimeoutLinks'
-        data:
-          $ref: '#/components/schemas/Data'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
-    IVRServiceKeyAssignmentRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/IVRServiceKeyAssignmentLinks'
-        data:
-          $ref: '#/components/schemas/IVRServiceKeyAssignmentData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+        target:
+          $ref: '#/components/schemas/String'
       type: object
   securitySchemes:
     jwt:

@@ -1482,15 +1482,13 @@ components:
           example: 550e8400-e29b-41d4-a716-446655440000
       type: object
       description: ImportResponse represents the response after submitting an import job. This is named SubmitJobResponse in the OpenAPI spec.
-    BulkImportRequest:
+    ImportMetadata:
       properties:
-        import:
-          $ref: '#/components/schemas/ImportMetadata'
-        file:
-          type: string
-          description: CSV file containing import data (max 10MB)
+        delete:
+          type: boolean
+          description: Removes existing records before importing. Only supported for 'contact' and 'speeddial' resource types.
       type: object
-      description: BulkImportRequest represents the multipart form data for bulk import operations.
+      description: ImportMetadata represents the optional JSON metadata in a bulk import request.
     Error:
       properties:
         request_id:
@@ -1516,13 +1514,15 @@ components:
           example: license_assigned
       type: object
       description: ErrorDetail represents error details in the delete response.
-    ImportMetadata:
+    BulkImportRequest:
       properties:
-        delete:
-          type: boolean
-          description: Removes existing records before importing. Only supported for 'contact' and 'speeddial' resource types.
+        import:
+          $ref: '#/components/schemas/ImportMetadata'
+        file:
+          type: string
+          description: CSV file containing import data (max 10MB)
       type: object
-      description: ImportMetadata represents the optional JSON metadata in a bulk import request.
+      description: BulkImportRequest represents the multipart form data for bulk import operations.
   securitySchemes:
     jwt:
       scheme: bearer
