@@ -48,7 +48,7 @@ accessModel:
   method: derived
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-10-06'
 image: https://a.storyblok.com/f/290788/2624x1428/c0ccf89b71/homepage-hero-home.png
 tags:
 - Company
@@ -1245,6 +1245,8 @@ apis:
   - type: APIReference
     url: https://nfon-ag.github.io/Call-History-API/
 common:
+- url: https://www.nfon.com/blog/
+  type: Blog
 - type: Website
   url: https://www.nfon.com/
 - type: CapabilityMap
