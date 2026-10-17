@@ -131,20 +131,15 @@ paths:
           description: Service temporarily unavailable
 components:
   schemas:
-    NfonApiCollectionResponseNonPage:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
       type: object
-      description: Non-paginated collection response envelope
+      description: Collection response envelope
+    Links:
+      description: Related resource links
+      type: object
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -174,18 +169,6 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
     String:
       properties:
         notNull:
@@ -202,6 +185,32 @@ components:
           type: string
       type: object
       description: Link to the last page
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
     NfonApiResponse:
       properties:
         links:
@@ -215,15 +224,6 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
-    Links:
-      description: Related resource links
-      type: object
     ErrorDetail:
       properties:
         message:
@@ -234,14 +234,6 @@ components:
           example: license_assigned
       type: object
       description: ErrorDetail represents error details in the delete response.
-    SoftswitchResponse:
-      properties:
-        softswitch:
-          type: string
-          description: Softswitch name.
-          example: BTNGN1
-      type: object
-      description: SoftswitchResponse represents a softswitch entry.
     Error:
       properties:
         request_id:
@@ -257,6 +249,14 @@ components:
           example: Invalid request
       type: object
       description: Error represents the standard API error response.
+    SoftswitchResponse:
+      properties:
+        softswitch:
+          type: string
+          description: Softswitch name.
+          example: BTNGN1
+      type: object
+      description: SoftswitchResponse represents a softswitch entry.
   securitySchemes:
     jwt:
       scheme: bearer

@@ -83,24 +83,6 @@ paths:
           description: Address or ONKZ not found
 components:
   schemas:
-    AddressOnkzResponse:
-      properties:
-        status:
-          $ref: '#/components/schemas/AddressStatus'
-        address:
-          $ref: '#/components/schemas/AddressDetail'
-        onkz:
-          type:
-          - string
-          - 'null'
-          description: German area code (Ortsnetzkennzahl), null if not found
-          example: 089
-        coordinates:
-          $ref: '#/components/schemas/AddressCoordinates'
-      type: object
-      required:
-      - status
-      description: AddressOnkzResponse represents the response for an address ONKZ lookup.
     AddressDetail:
       properties:
         country:
@@ -129,6 +111,24 @@ components:
           example: München
       type: object
       description: AddressDetail holds the resolved address fields.
+    AddressOnkzResponse:
+      properties:
+        status:
+          $ref: '#/components/schemas/AddressStatus'
+        address:
+          $ref: '#/components/schemas/AddressDetail'
+        onkz:
+          type:
+          - string
+          - 'null'
+          description: German area code (Ortsnetzkennzahl), null if not found
+          example: 089
+        coordinates:
+          $ref: '#/components/schemas/AddressCoordinates'
+      type: object
+      required:
+      - status
+      description: AddressOnkzResponse represents the response for an address ONKZ lookup.
     AddressCoordinates:
       properties:
         longitude:

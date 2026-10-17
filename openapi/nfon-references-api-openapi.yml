@@ -177,54 +177,31 @@ paths:
           description: Internal server error
 components:
   schemas:
-    Data:
+    HierarchicalReferences:
       properties:
-        key:
-          type: string
-          description: Metadata key.
-          example: function_key_number
-        value:
-          type: string
-          description: Metadata value.
-          example: '5'
-      type: object
-      required:
-      - key
-      - value
-      description: Data represents key-value pair for additional reference metadata.
-    Error:
-      properties:
-        request_id:
-          type: string
-          example: 550e8400-e29b-41d4-a716-446655440000
-        code:
-          type: string
-          example: bad_request
-        details:
-          $ref: '#/components/schemas/ErrorDetail'
-        message:
-          type: string
-          example: Invalid request
-      type: object
-      description: Error represents the standard API error response.
-    Field:
-      properties:
-        name:
-          type: string
-          description: Translation key or name of the field.
-          example: phoneextension.callforward.busy
-        data:
-          type: array
+        identifiers:
           items:
-            $ref: '#/components/schemas/Data'
-          description: Additional metadata about the reference.
+            $ref: '#/components/schemas/IdentifierReferences'
+          type: array
       type: object
       required:
-      - name
-      description: Field represents a field within an entity that references the identifier.
-    ReferenceType:
-      type: string
-      description: ReferenceType represents the type of entity that contains the reference.
+      - identifiers
+      description: HierarchicalReferencesResponse represents references grouped by identifier. This is returned when flatten=false.
+    References:
+      oneOf:
+      - $ref: '#/components/schemas/FlatReferences'
+      - $ref: '#/components/schemas/HierarchicalReferences'
+      description: 'FindReferencesResponse represents the response from the findReferences endpoint. The response structure depends on the ''flatten'' parameter: - flatten=true: FlatReferencesResponse (flat array with identifier field on each item) - flatten=false: HierarchicalReferencesResponse (grouped by identifier).'
+    FlatReferences:
+      properties:
+        references:
+          items:
+            $ref: '#/components/schemas/ReferenceItem'
+          type: array
+      type: object
+      required:
+      - references
+      description: FlatReferencesResponse represents a flat array of references with identifier field on each item. This is returned when flatten=true (default).
     ReferenceItem:
       properties:
         fields:
@@ -265,31 +242,54 @@ components:
           example: license_assigned
       type: object
       description: ErrorDetail represents error details in the delete response.
-    HierarchicalReferences:
+    ReferenceType:
+      type: string
+      description: ReferenceType represents the type of entity that contains the reference.
+    Error:
       properties:
-        identifiers:
-          items:
-            $ref: '#/components/schemas/IdentifierReferences'
+        request_id:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        code:
+          type: string
+          example: bad_request
+        details:
+          $ref: '#/components/schemas/ErrorDetail'
+        message:
+          type: string
+          example: Invalid request
+      type: object
+      description: Error represents the standard API error response.
+    Field:
+      properties:
+        name:
+          type: string
+          description: Translation key or name of the field.
+          example: phoneextension.callforward.busy
+        data:
           type: array
+          items:
+            $ref: '#/components/schemas/Data'
+          description: Additional metadata about the reference.
       type: object
       required:
-      - identifiers
-      description: HierarchicalReferencesResponse represents references grouped by identifier. This is returned when flatten=false.
-    References:
-      oneOf:
-      - $ref: '#/components/schemas/FlatReferences'
-      - $ref: '#/components/schemas/HierarchicalReferences'
-      description: 'FindReferencesResponse represents the response from the findReferences endpoint. The response structure depends on the ''flatten'' parameter: - flatten=true: FlatReferencesResponse (flat array with identifier field on each item) - flatten=false: HierarchicalReferencesResponse (grouped by identifier).'
-    FlatReferences:
+      - name
+      description: Field represents a field within an entity that references the identifier.
+    Data:
       properties:
-        references:
-          items:
-            $ref: '#/components/schemas/ReferenceItem'
-          type: array
+        key:
+          type: string
+          description: Metadata key.
+          example: function_key_number
+        value:
+          type: string
+          description: Metadata value.
+          example: '5'
       type: object
       required:
-      - references
-      description: FlatReferencesResponse represents a flat array of references with identifier field on each item. This is returned when flatten=true (default).
+      - key
+      - value
+      description: Data represents key-value pair for additional reference metadata.
     IdentifierReferences:
       properties:
         references:

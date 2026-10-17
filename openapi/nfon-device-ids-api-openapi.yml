@@ -62,19 +62,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    DeviceIdPOSTData:
-      properties:
-        deviceIds:
-          type: array
-          items:
-            example: '["00:15:65:A1:B2:C3","00:15:65:D4:E5:F6"]'
-            type: string
-          example:
-          - 00:15:65:A1:B2:C3
-          - 00:15:65:D4:E5:F6
-      type: object
-    NoLinks:
-      type: object
     NfonApiCollectionResponseNonPage:
       properties:
         links:
@@ -89,6 +76,15 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    Links:
+      description: Related resource links
+      type: object
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -118,32 +114,6 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    DeviceIdPOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/DeviceIdPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    CollectionLinks:
-      properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
-      type: object
-      description: Pagination links for collection responses
     String:
       properties:
         notNull:
@@ -160,6 +130,45 @@ components:
           type: string
       type: object
       description: Link to the last page
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    NoLinks:
+      type: object
+    DeviceIdPOSTData:
+      properties:
+        deviceIds:
+          type: array
+          items:
+            example: '["00:15:65:A1:B2:C3","00:15:65:D4:E5:F6"]'
+            type: string
+          example:
+          - 00:15:65:A1:B2:C3
+          - 00:15:65:D4:E5:F6
+      type: object
+    DeviceIdPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/DeviceIdPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
     NfonApiResponse:
       properties:
         links:
@@ -173,15 +182,6 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
-    Links:
-      description: Related resource links
-      type: object
   securitySchemes:
     jwt:
       scheme: bearer

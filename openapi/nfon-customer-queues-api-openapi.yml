@@ -937,18 +937,54 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    Data:
+      properties:
+        key:
+          type: string
+          description: Metadata key.
+          example: function_key_number
+        value:
+          type: string
+          description: Metadata value.
+          example: '5'
+      type: object
+      required:
+      - key
+      - value
+      description: Data represents key-value pair for additional reference metadata.
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
+      type: object
     InboundTrunkNumberData:
       properties:
         didExtension:
           example: '123456'
           type: string
       type: object
-    InboundTrunkNumberRequest:
+    Boolean:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: boolean
+      type: object
+      example: false
+    DestinationOnRejectionRequest:
       properties:
         links:
-          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+          $ref: '#/components/schemas/RequestLinks'
         data:
-          $ref: '#/components/schemas/InboundTrunkNumberData'
+          $ref: '#/components/schemas/Data'
         items:
           items:
             type: object
@@ -986,6 +1022,67 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    CollectionLinks:
+      properties:
+        first:
+          $ref: '#/components/schemas/String'
+        prev:
+          $ref: '#/components/schemas/String'
+        next:
+          $ref: '#/components/schemas/String'
+        last:
+          $ref: '#/components/schemas/String'
+      type: object
+      description: Pagination links for collection responses
+    TimeoutLinks:
+      type: object
+    QueueRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/QueueLinks'
+        data:
+          $ref: '#/components/schemas/QueueData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    Links:
+      description: Related resource links
+      type: object
+    InboundTrunkNumberRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/InboundTrunkNumberLinks'
+        data:
+          $ref: '#/components/schemas/InboundTrunkNumberData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
     QueueLinks:
       properties:
         availableMusicOnHoldAnnouncements:
@@ -1017,57 +1114,6 @@ components:
           writeOnly: true
           type: string
       type: object
-    Integer:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          format: int32
-          type: integer
-      example: 1000
-      type: object
-      description: Subscribers soft limit
-    Enum:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: object
-      type: object
-      example: 'OFF'
-    TimeoutLinks:
-      type: object
-    Data:
-      properties:
-        key:
-          type: string
-          description: Metadata key.
-          example: function_key_number
-        value:
-          type: string
-          description: Metadata value.
-          example: '5'
-      type: object
-      required:
-      - key
-      - value
-      description: Data represents key-value pair for additional reference metadata.
     QueueMemberRequest:
       properties:
         links:
@@ -1082,6 +1128,17 @@ components:
           format: int32
           type: integer
       type: object
+    RequestLinks:
+      properties:
+        destinationOnRejection:
+          type: string
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
     QueueData:
       properties:
         weight:
@@ -1137,85 +1194,23 @@ components:
           format: date-time
           type: string
       type: object
-    String:
+    ChildHref:
+      type: object
+    QueueMemberData:
       properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    InboundTrunkNumberLinks:
-      properties:
-        trunk:
-          type: string
-      type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
-    TimeoutRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/TimeoutLinks'
-        data:
-          $ref: '#/components/schemas/Data'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    QueueRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/QueueLinks'
-        data:
-          $ref: '#/components/schemas/QueueData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    Links:
-      description: Related resource links
+        penalty:
+          $ref: '#/components/schemas/Integer'
+        displayName:
+          $ref: '#/components/schemas/String'
+        extensionNumber:
+          $ref: '#/components/schemas/String'
       type: object
     QueueMemberLinks:
       properties:
         phoneExtension:
           $ref: '#/components/schemas/String'
       type: object
-    ChildHref:
-      type: object
-    Boolean:
+    Integer:
       properties:
         notNull:
           type: boolean
@@ -1228,13 +1223,15 @@ components:
         presentNull:
           type: boolean
         value:
-          type: boolean
+          format: int32
+          type: integer
+      example: 1000
       type: object
-      example: false
-    DestinationOnRejectionRequest:
+      description: Subscribers soft limit
+    TimeoutRequest:
       properties:
         links:
-          $ref: '#/components/schemas/RequestLinks'
+          $ref: '#/components/schemas/TimeoutLinks'
         data:
           $ref: '#/components/schemas/Data'
         items:
@@ -1259,32 +1256,35 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
-    CollectionLinks:
+    Enum:
       properties:
-        first:
-          $ref: '#/components/schemas/String'
-        prev:
-          $ref: '#/components/schemas/String'
-        next:
-          $ref: '#/components/schemas/String'
-        last:
-          $ref: '#/components/schemas/String'
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: object
       type: object
-      description: Pagination links for collection responses
-    RequestLinks:
+      example: 'OFF'
+    NfonApiResponse:
       properties:
-        destinationOnRejection:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
           type: string
+          description: Self-link to this resource
       type: object
-    QueueMemberData:
-      properties:
-        penalty:
-          $ref: '#/components/schemas/Integer'
-        displayName:
-          $ref: '#/components/schemas/String'
-        extensionNumber:
-          $ref: '#/components/schemas/String'
-      type: object
+      description: Standard API response envelope for a single resource
   securitySchemes:
     jwt:
       scheme: bearer

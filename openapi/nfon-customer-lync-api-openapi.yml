@@ -361,32 +361,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    NoLinks:
-      type: object
-    LyncSitePOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/LyncSitePOSTLinks'
-        data:
-          $ref: '#/components/schemas/LyncSitePOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    LyncSitePOSTData:
-      properties:
-        domain:
-          type: string
-        description:
-          type: string
-      type: object
-    Links:
-      description: Related resource links
-      type: object
     NfonApiCollectionResponseNonPage:
       properties:
         links:
@@ -401,6 +375,37 @@ components:
           description: All items in the collection
       type: object
       description: Non-paginated collection response envelope
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    Links:
+      description: Related resource links
+      type: object
+    LyncGatewayPOSTData:
+      properties:
+        gatewayIp:
+          example: 10.0.0.50
+          type: string
+        description:
+          $ref: '#/components/schemas/String'
+      type: object
+    LyncGatewayPOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/NoLinks'
+        data:
+          $ref: '#/components/schemas/LyncGatewayPOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -430,19 +435,28 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    LyncGatewayRequest:
+    String:
       properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/LyncGatewayData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
+    LyncSitePUTData:
+      properties:
+        domain:
+          $ref: '#/components/schemas/String'
+        description:
+          $ref: '#/components/schemas/String'
       type: object
     LyncSitePOSTLinks:
       properties:
@@ -461,35 +475,43 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
+    NoLinks:
       type: object
-      description: Link to the last page
-    NfonApiResponse:
+    LyncGatewayData:
+      properties:
+        gatewayIp:
+          $ref: '#/components/schemas/String'
+        description:
+          $ref: '#/components/schemas/String'
+      type: object
+    LyncGatewayRequest:
       properties:
         links:
-          $ref: '#/components/schemas/Links'
+          $ref: '#/components/schemas/NoLinks'
         data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
+          $ref: '#/components/schemas/LyncGatewayData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
       type: object
-      description: Standard API response envelope for a single resource
+    LyncSitePOSTRequest:
+      properties:
+        links:
+          $ref: '#/components/schemas/LyncSitePOSTLinks'
+        data:
+          $ref: '#/components/schemas/LyncSitePOSTData'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
     LyncSitePUTRequest:
       properties:
         links:
@@ -504,48 +526,26 @@ components:
           format: int32
           type: integer
       type: object
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
-    LyncGatewayPOSTData:
-      properties:
-        gatewayIp:
-          example: 10.0.0.50
-          type: string
-        description:
-          $ref: '#/components/schemas/String'
-      type: object
-    LyncGatewayPOSTRequest:
-      properties:
-        links:
-          $ref: '#/components/schemas/NoLinks'
-        data:
-          $ref: '#/components/schemas/LyncGatewayPOSTData'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    LyncSitePUTData:
+    LyncSitePOSTData:
       properties:
         domain:
-          $ref: '#/components/schemas/String'
+          type: string
         description:
-          $ref: '#/components/schemas/String'
+          type: string
       type: object
-    LyncGatewayData:
+    NfonApiResponse:
       properties:
-        gatewayIp:
-          $ref: '#/components/schemas/String'
-        description:
-          $ref: '#/components/schemas/String'
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
       type: object
+      description: Standard API response envelope for a single resource
   securitySchemes:
     jwt:
       scheme: bearer

@@ -173,7 +173,8 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    NoLinks:
+    Links:
+      description: Related resource links
       type: object
     String:
       properties:
@@ -191,21 +192,21 @@ components:
           type: string
       type: object
       description: Link to the last page
-    NfonApiResponse:
+    IpWhitelistPOSTData:
       properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
+        ipAddress:
+          example: 192.168.1.100
           type: string
-          description: Self-link to this resource
+        type:
+          $ref: '#/components/schemas/String'
+        validUntil:
+          $ref: '#/components/schemas/String'
+        usage:
+          $ref: '#/components/schemas/String'
+        description:
+          $ref: '#/components/schemas/String'
       type: object
-      description: Standard API response envelope for a single resource
-    Links:
-      description: Related resource links
+    NoLinks:
       type: object
     IpWhitelistPOSTRequest:
       properties:
@@ -221,20 +222,19 @@ components:
           format: int32
           type: integer
       type: object
-    IpWhitelistPOSTData:
+    NfonApiResponse:
       properties:
-        ipAddress:
-          example: 192.168.1.100
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
           type: string
-        type:
-          $ref: '#/components/schemas/String'
-        validUntil:
-          $ref: '#/components/schemas/String'
-        usage:
-          $ref: '#/components/schemas/String'
-        description:
-          $ref: '#/components/schemas/String'
+          description: Self-link to this resource
       type: object
+      description: Standard API response envelope for a single resource
   securitySchemes:
     jwt:
       scheme: bearer

@@ -412,12 +412,67 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
+      type: object
     InboundTrunkNumberData:
       properties:
         didExtension:
           example: '123456'
           type: string
       type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    Links:
+      description: Related resource links
+      type: object
+    Request:
+      properties:
+        links:
+          $ref: '#/components/schemas/TimeControlServiceLinks'
+        data:
+          $ref: '#/components/schemas/Data'
+        items:
+          items:
+            type: object
+          type: array
+        itemCount:
+          format: int32
+          type: integer
+      type: object
+    TimeControlServiceLinks:
+      properties:
+        destinationIfDenied:
+          $ref: '#/components/schemas/String'
+        timezone:
+          $ref: '#/components/schemas/String'
+        destinationIfAllowed:
+          $ref: '#/components/schemas/String'
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
+      type: object
+    String:
+      properties:
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
+        value:
+          type: string
+      type: object
+      description: Link to the last page
     InboundTrunkNumberRequest:
       properties:
         links:
@@ -432,46 +487,6 @@ components:
           format: int32
           type: integer
       type: object
-    Data:
-      properties:
-        key:
-          type: string
-          description: Metadata key.
-          example: function_key_number
-        value:
-          type: string
-          description: Metadata value.
-          example: '5'
-      type: object
-      required:
-      - key
-      - value
-      description: Data represents key-value pair for additional reference metadata.
-    TimeControlServiceLinks:
-      properties:
-        destinationIfDenied:
-          $ref: '#/components/schemas/String'
-        timezone:
-          $ref: '#/components/schemas/String'
-        destinationIfAllowed:
-          $ref: '#/components/schemas/String'
-        inboundTrunkNumbers:
-          $ref: '#/components/schemas/String'
-      type: object
-    NfonApiCollectionResponseNonPage:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
-      type: object
-      description: Non-paginated collection response envelope
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -501,25 +516,6 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    Request:
-      properties:
-        links:
-          $ref: '#/components/schemas/TimeControlServiceLinks'
-        data:
-          $ref: '#/components/schemas/Data'
-        items:
-          items:
-            type: object
-          type: array
-        itemCount:
-          format: int32
-          type: integer
-      type: object
-    InboundTrunkNumberLinks:
-      properties:
-        trunk:
-          type: string
-      type: object
     CollectionLinks:
       properties:
         first:
@@ -532,22 +528,35 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
-    String:
+    NfonApiCollectionResponseNonPage:
       properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    Data:
+      properties:
+        key:
+          type: string
+          description: Metadata key.
+          example: function_key_number
         value:
           type: string
+          description: Metadata value.
+          example: '5'
       type: object
-      description: Link to the last page
+      required:
+      - key
+      - value
+      description: Data represents key-value pair for additional reference metadata.
     NfonApiResponse:
       properties:
         links:
@@ -561,15 +570,6 @@ components:
           description: Self-link to this resource
       type: object
       description: Standard API response envelope for a single resource
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
-    Links:
-      description: Related resource links
-      type: object
   securitySchemes:
     jwt:
       scheme: bearer

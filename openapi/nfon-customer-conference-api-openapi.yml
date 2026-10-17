@@ -385,11 +385,30 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    InboundTrunkNumberLinks:
+      properties:
+        trunk:
+          type: string
+      type: object
     InboundTrunkNumberData:
       properties:
         didExtension:
           example: '123456'
           type: string
+      type: object
+    NfonApiCollectionResponse:
+      oneOf:
+      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
+      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
+      type: object
+      description: Collection response envelope
+    Links:
+      description: Related resource links
+      type: object
+    ConferenceServiceLinks:
+      properties:
+        inboundTrunkNumbers:
+          $ref: '#/components/schemas/String'
       type: object
     InboundTrunkNumberRequest:
       properties:
@@ -405,35 +424,22 @@ components:
           format: int32
           type: integer
       type: object
-    Data:
+    String:
       properties:
-        key:
-          type: string
-          description: Metadata key.
-          example: function_key_number
+        notNull:
+          type: boolean
+        notPresent:
+          type: boolean
+        present:
+          type: boolean
+        presentNotNull:
+          type: boolean
+        presentNull:
+          type: boolean
         value:
           type: string
-          description: Metadata value.
-          example: '5'
       type: object
-      required:
-      - key
-      - value
-      description: Data represents key-value pair for additional reference metadata.
-    NfonApiCollectionResponseNonPage:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        href:
-          description: Self-link to this collection
-          type: string
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/NfonApiResponse'
-          description: All items in the collection
-      type: object
-      description: Non-paginated collection response envelope
+      description: Link to the last page
     NfonApiCollectionResponsePage:
       properties:
         links:
@@ -463,16 +469,6 @@ components:
           type: string
       type: object
       description: Paginated collection response envelope
-    ConferenceServiceLinks:
-      properties:
-        inboundTrunkNumbers:
-          $ref: '#/components/schemas/String'
-      type: object
-    InboundTrunkNumberLinks:
-      properties:
-        trunk:
-          type: string
-      type: object
     CollectionLinks:
       properties:
         first:
@@ -485,44 +481,6 @@ components:
           $ref: '#/components/schemas/String'
       type: object
       description: Pagination links for collection responses
-    String:
-      properties:
-        notNull:
-          type: boolean
-        notPresent:
-          type: boolean
-        present:
-          type: boolean
-        presentNotNull:
-          type: boolean
-        presentNull:
-          type: boolean
-        value:
-          type: string
-      type: object
-      description: Link to the last page
-    NfonApiResponse:
-      properties:
-        links:
-          $ref: '#/components/schemas/Links'
-        data:
-          description: Resource data (name/value pairs or structured object)
-          type: object
-        href:
-          example: /api/sip-servers/100
-          type: string
-          description: Self-link to this resource
-      type: object
-      description: Standard API response envelope for a single resource
-    NfonApiCollectionResponse:
-      oneOf:
-      - $ref: '#/components/schemas/NfonApiCollectionResponsePage'
-      - $ref: '#/components/schemas/NfonApiCollectionResponseNonPage'
-      type: object
-      description: Collection response envelope
-    Links:
-      description: Related resource links
-      type: object
     ConferenceServiceRequest:
       properties:
         links:
@@ -537,6 +495,48 @@ components:
           format: int32
           type: integer
       type: object
+    NfonApiCollectionResponseNonPage:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        href:
+          description: Self-link to this collection
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/NfonApiResponse'
+          description: All items in the collection
+      type: object
+      description: Non-paginated collection response envelope
+    Data:
+      properties:
+        key:
+          type: string
+          description: Metadata key.
+          example: function_key_number
+        value:
+          type: string
+          description: Metadata value.
+          example: '5'
+      type: object
+      required:
+      - key
+      - value
+      description: Data represents key-value pair for additional reference metadata.
+    NfonApiResponse:
+      properties:
+        links:
+          $ref: '#/components/schemas/Links'
+        data:
+          description: Resource data (name/value pairs or structured object)
+          type: object
+        href:
+          example: /api/sip-servers/100
+          type: string
+          description: Self-link to this resource
+      type: object
+      description: Standard API response envelope for a single resource
   securitySchemes:
     jwt:
       scheme: bearer
